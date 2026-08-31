@@ -40,6 +40,11 @@
     <a class="navcta" href="#method" style="text-decoration:none">
       Log your swara
     </a>
+
+<button class="burger" aria-label="Open navigation" aria-expanded="false">
+  ☰
+</button>
+    
   </div>
 </header>
 
@@ -545,6 +550,23 @@ if (wb) {
   });
 }
 </script>
+<script>
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav');
 
+if (burger && nav) {
+  burger.addEventListener('click', function () {
+    nav.classList.toggle('mobile-open');
+
+    const isOpen = nav.classList.contains('mobile-open');
+
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    burger.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation' : 'Open navigation'
+    );
+  });
+}
+</script>
 </body>
 </html>
