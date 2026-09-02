@@ -248,54 +248,63 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
     border-radius:10px;
   }
 /* =========================================
-   MY MIND AND ME — SIDE BY SIDE INTRO
+   MY MIND AND ME — INTRO LAYOUT
    ========================================= */
 
 .intro-grid {
-  display: grid !important;
-  grid-template-columns: 40% 60% !important;
-  gap: 45px;
-  align-items: center;
-  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 45px !important;
+  width: 100% !important;
 }
 
 .intro-image {
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  border-radius: 16px;
+  flex: 0 0 38% !important;
+  width: 38% !important;
+  min-width: 0 !important;
 }
 
 .intro-image img {
-  display: block;
-  width: 100%;
-  height: 460px;
-  object-fit: cover;
-  border-radius: 16px;
+  display: block !important;
+  width: 100% !important;
+  height: 460px !important;
+  object-fit: cover !important;
+  border-radius: 16px !important;
 }
 
 .intro-text {
-  width: 100%;
-  min-width: 0;
+  flex: 1 1 62% !important;
+  width: auto !important;
+  min-width: 0 !important;
 }
 
-/* Keep side-by-side on desktop/tablet */
-@media (min-width: 769px) {
-  .intro-grid {
-    display: grid !important;
-    grid-template-columns: 40% 60% !important;
-  }
-}
 
-/* Stack only on phones */
+/* MOBILE */
 @media (max-width: 768px) {
+
   .intro-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 30px;
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  .intro-image {
+    width: 100% !important;
+    flex: none !important;
   }
 
   .intro-image img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 500px !important;
+  }
+
+  .intro-text {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+}
     height: auto;
     max-height: 500px;
   }
