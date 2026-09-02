@@ -248,47 +248,55 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
     border-radius:10px;
   }
 /* =========================================
-   MY MIND AND ME — INTRO PHOTO + TEXT
+   MY MIND AND ME — SIDE BY SIDE INTRO
    ========================================= */
 
 .intro-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
+  display: grid !important;
+  grid-template-columns: 40% 60% !important;
   gap: 45px;
   align-items: center;
+  width: 100%;
 }
 
 .intro-image {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   border-radius: 16px;
 }
 
 .intro-image img {
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
-  object-fit: cover;
   display: block;
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
 .intro-text {
+  width: 100%;
   min-width: 0;
 }
 
-/* Mobile */
+/* Keep side-by-side on desktop/tablet */
+@media (min-width: 769px) {
+  .intro-grid {
+    display: grid !important;
+    grid-template-columns: 40% 60% !important;
+  }
+}
+
+/* Stack only on phones */
 @media (max-width: 768px) {
   .intro-grid {
-    grid-template-columns: 1fr;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
     gap: 30px;
   }
 
   .intro-image img {
-    min-height: 0;
+    height: auto;
     max-height: 500px;
-  }
-}
-  .navcta{
-    display:none;
   }
 }
