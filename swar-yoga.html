@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Swar Yoga — Science of Yoga</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="svara-tool.css">
 </head>
 
 <body>
@@ -34,8 +35,8 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <a class="navcta" href="#method" style="text-decoration:none">
-      Log your swara
+    <a class="navcta" href="#svara" style="text-decoration:none">
+      Observe your svara
     </a>
 
 <button class="burger" aria-label="Open navigation" aria-expanded="false">
@@ -70,12 +71,12 @@
         </p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn p" href="#method" style="text-decoration:none">
-            Read the method
+          <a class="btn p" href="#svara" style="text-decoration:none">
+            Observe your svara
           </a>
 
-          <a class="btn s" href="courses-books.html" style="text-decoration:none">
-            Take the course
+          <a class="btn s" href="#method" style="text-decoration:none">
+            Read the method
           </a>
         </div>
       </div>
@@ -158,136 +159,285 @@
 </section>
 
 
-<section class="sec" id="diagnostic">
+<!-- ==========================================================================
+     SVARA OBSERVATION AND ASSESSMENT TOOL
+     Requires svara-tool.css, svara-engine.js, svara-ui.js
+     ========================================================================== -->
+
+<section class="sec dim" id="svara">
   <div class="wrap">
 
-    <div class="eyebrow">Traditional Svara diagnostic</div>
-    <h2>Check your swara against the tradition's own timing</h2>
+    <div class="eyebrow">Observation tool</div>
+
+    <h2>Observe your svara, then check it against the rule</h2>
+
     <p class="sub">
-      This checks what you observe against a transparent, source-traced set of
-      Svarodaya rules — not a medical reading. Three different things are shown
-      separately below: what you observe, what the tradition expects, and what
-      would require real physiological measurement.
+      Sit for a moment, notice which nostril is more open, and tell the tool what you
+      found. It works out your sunrise and lunar day, applies the Svarodaya timing
+      rules, and shows you where the two agree and where they don't — with the rule
+      behind every line.
     </p>
 
-    <div class="svd-modes" role="tablist">
-      <button type="button" class="svd-mode on" data-mode="self">Self observation</button>
-      <button type="button" class="svd-mode" data-mode="sensor" disabled title="A bilateral nasal airflow sensor could eventually provide a physiological reading instead of self-report.">
-        Sensor mode — coming later
+    <div class="sv-modes" role="tablist" aria-label="Source of the svara reading">
+      <button class="sv-mode" role="tab" aria-selected="true" data-mode="self-report">
+        Self observation
+      </button>
+      <button class="sv-mode" role="tab" aria-selected="false" data-mode="sensor" disabled
+              title="A bilateral nasal airflow sensor can eventually provide physiological measurements rather than self-reported observation.">
+        Sensor mode — later
       </button>
     </div>
 
-    <div class="svd-card" data-svd>
+    <div class="sv-shell">
 
-      <!-- STEP 1: camera (guidance only) -->
-      <div class="svd-step" data-step="camera">
-        <h4>Observe your svara</h4>
-        <p class="svd-note">
-          Your camera is used only to guide your posture and observation —
-          no physiological diagnosis is made from the camera image, nothing
-          is uploaded, and nothing is saved. Processing stays in your browser.
-        </p>
-        <div class="svd-camera-wrap">
-          <video class="svd-video" data-video autoplay playsinline muted hidden></video>
-          <div class="svd-camera-off" data-camera-off>Camera is off — this step is optional.</div>
+      <!-- ============ main column: the flow ============ -->
+      <div>
+
+        <!-- ---------- step 1: observe ---------- -->
+        <div class="sv-panel sv-step on" data-step="observe">
+
+          <h2 class="sv-h">Observe your svara</h2>
+          <p class="sv-p">Find which nostril is currently more active.</p>
+
+          <div class="sv-cam">
+            <video playsinline muted aria-label="Camera preview"></video>
+            <div class="sv-camoff">
+              The camera is optional. It helps you sit square and look, and it
+              measures nothing.
+            </div>
+            <svg class="sv-guide" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice"
+                 aria-hidden="true">
+              <ellipse cx="50" cy="36" rx="20" ry="26"
+                       fill="none" stroke="rgba(244,240,226,.35)" stroke-width=".6"/>
+              <line x1="50" y1="16" x2="50" y2="58"
+                    stroke="rgba(244,240,226,.25)" stroke-width=".4"/>
+              <circle cx="45" cy="42" r="1.6" fill="none"
+                      stroke="rgba(46,127,168,.8)" stroke-width=".6"/>
+              <circle cx="55" cy="42" r="1.6" fill="none"
+                      stroke="rgba(228,116,79,.8)" stroke-width=".6"/>
+            </svg>
+          </div>
+
+          <p class="sv-fine" style="margin:12px 0 16px">
+            Your camera is used only to guide your observation. No physiological
+            diagnosis is made from the camera image. Camera processing stays in your
+            browser — this tool reads no frames, saves no images, uploads nothing,
+            and identifies nobody.
+          </p>
+
+          <div class="sv-row">
+            <button class="sv-btn quiet" data-cam-toggle aria-pressed="false">
+              Turn on camera
+            </button>
+          </div>
+
+          <div class="sv-orb-wrap">
+            <div class="sv-orb" data-orb><i></i><b>in</b></div>
+            <p class="sv-count" data-cue>Sit comfortably and breathe normally.</p>
+            <p class="sv-count" data-count>15 seconds</p>
+          </div>
+
+          <div class="sv-row">
+            <button class="sv-btn primary" data-observe-done disabled>
+              I'm ready to report
+            </button>
+          </div>
+
         </div>
-        <div class="svd-actions">
-          <button type="button" class="btn p" data-camera-start>Start camera</button>
-          <button type="button" class="btn s" data-camera-stop hidden>Stop camera</button>
-          <button type="button" class="btn s" data-skip-camera>Continue without camera</button>
+
+
+        <!-- ---------- step 2: report ---------- -->
+        <div class="sv-panel sv-step" data-step="report">
+
+          <h2 class="sv-h">Which svara is active?</h2>
+          <p class="sv-p">
+            Go by what you actually feel, not by what you expect. You can change your
+            answer before continuing.
+          </p>
+
+          <div class="sv-choices" role="group" aria-label="Which svara is active">
+            <button class="sv-choice" data-s="ida" aria-pressed="false">
+              <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 14.2A8.4 8.4 0 1 1 10.4 4a6.6 6.6 0 0 0 9.6 10.2Z"
+                      stroke="#2E7FA8" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+              <b>Left</b><span>Ida · Chandra</span>
+            </button>
+
+            <button class="sv-choice" data-s="pingala" aria-pressed="false">
+              <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.4" stroke="#E4744F" stroke-width="1.6"/>
+                <g stroke="#E4744F" stroke-width="1.6" stroke-linecap="round">
+                  <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2"/>
+                  <path d="M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/>
+                </g>
+              </svg>
+              <b>Right</b><span>Pingala · Surya</span>
+            </button>
+
+            <button class="sv-choice" data-s="sushumna" aria-pressed="false">
+              <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.4" stroke="#C6A15B" stroke-width="1.6"/>
+                <path d="M12 3.6a8.4 8.4 0 0 1 0 16.8Z" fill="#C6A15B" opacity=".55"/>
+              </svg>
+              <b>Both, or changing</b><span>Sushumna</span>
+            </button>
+          </div>
+
+          <div class="sv-row">
+            <button class="sv-btn primary" data-report-done disabled>Continue</button>
+          </div>
+
         </div>
-        <p class="svd-note" data-camera-status style="margin-top:14px"></p>
-      </div>
 
-      <!-- STEP 2: breathing observation -->
-      <div class="svd-step" data-step="observe" hidden>
-        <h4>Sit comfortably and breathe normally</h4>
-        <p class="svd-note">
-          Bring your attention to the flow through your nostrils. Notice which
-          side feels more open. Take your time — there's no need to answer
-          right away.
-        </p>
-        <div class="svd-breathe-ring" data-breathe-ring aria-hidden="true"></div>
-        <div class="svd-timer" data-observe-timer>20</div>
-        <button type="button" class="btn p" data-to-report>I've noticed something</button>
-      </div>
 
-      <!-- STEP 3: report -->
-      <div class="svd-step" data-step="report" hidden>
-        <h4>Which svara is active?</h4>
-        <p class="svd-note">This is your own observation. You can change it before continuing.</p>
-        <div class="svd-report-grid">
-          <button type="button" class="svd-report-btn" data-report="ida">
-            <span class="svd-glyph ida"></span>Left<br><small>Ida / Chandra</small>
-          </button>
-          <button type="button" class="svd-report-btn" data-report="pingala">
-            <span class="svd-glyph pingala"></span>Right<br><small>Pingala / Surya</small>
-          </button>
-          <button type="button" class="svd-report-btn" data-report="sushumna">
-            <span class="svd-glyph sushumna"></span>Both / changing<br><small>Sushumna</small>
-          </button>
+        <!-- ---------- step 3: context ---------- -->
+        <div class="sv-panel sv-step" data-step="context">
+
+          <h2 class="sv-h">When and where</h2>
+          <p class="sv-p">
+            The svara cycle is counted from sunrise, and the rule depends on the lunar
+            day — so the tool needs your date, time and rough position. Correct
+            anything that looks wrong.
+          </p>
+
+          <div class="sv-fields">
+            <div class="sv-field">
+              <label for="sv-date">Date</label>
+              <input id="sv-date" data-f-date type="date">
+            </div>
+            <div class="sv-field">
+              <label for="sv-time">Time</label>
+              <input id="sv-time" data-f-time type="time">
+            </div>
+            <div class="sv-field">
+              <label for="sv-tz">Timezone</label>
+              <input id="sv-tz" data-f-tz type="text" readonly>
+            </div>
+            <div class="sv-field">
+              <label for="sv-loc">Latitude, longitude</label>
+              <input id="sv-loc" data-f-loc type="text" placeholder="28.61, 77.21"
+                     inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="sv-row" style="margin-bottom:10px">
+            <button class="sv-btn quiet" data-locate>Use my location</button>
+          </div>
+
+          <p class="sv-fine" data-loc-note style="margin-bottom:18px">
+            Your position is used in this browser to work out sunrise. It is not sent
+            anywhere and is not stored.
+          </p>
+
+          <div class="sv-row">
+            <button class="sv-btn primary" data-context-done disabled>See the assessment</button>
+            <button class="sv-btn quiet" data-context-skip>Skip — record the observation only</button>
+          </div>
+
         </div>
-      </div>
 
-      <!-- STEP 4: date / time / sunrise -->
-      <div class="svd-step" data-step="context" hidden>
-        <h4>Confirm date, time &amp; sunrise</h4>
-        <p class="svd-note">
-          Filled in automatically from your device clock. Sunrise defaults to
-          6:00am until you either enter it yourself or share your location.
-        </p>
-        <div class="svd-context-grid">
-          <label>Date <input type="date" data-ctx-date></label>
-          <label>Time <input type="time" data-ctx-time></label>
-          <label>Sunrise (local) <input type="time" data-ctx-sunrise></label>
+
+        <!-- ---------- step 4: result ---------- -->
+        <div class="sv-panel sv-step" data-step="result">
+
+          <h2 class="sv-h" style="font-size:15px;font-weight:600;color:#5E6F68;margin-bottom:14px">
+            Traditional svara assessment
+          </h2>
+
+          <div class="sv-trail" data-trail></div>
+
+          <div data-result></div>
+
+          <div class="sv-row" style="margin-top:20px" data-result-actions></div>
+
         </div>
-        <div class="svd-actions" style="margin-bottom:14px">
-          <button type="button" class="btn s" data-use-location>Use my location for sunrise</button>
+
+
+        <!-- ---------- step 5: guided practice ---------- -->
+        <div class="sv-panel sv-step" data-step="practice">
+
+          <h2 class="sv-h">Guided adjustment</h2>
+
+          <div data-practice-body></div>
+
+          <div class="sv-orb-wrap">
+            <div class="sv-orb" data-p-orb><i></i><b>ready</b></div>
+            <p class="sv-count" data-p-cue>Guided visualisation — not a sensor measurement.</p>
+            <p class="sv-count" data-p-count>Press start when you are settled.</p>
+          </div>
+
+          <div class="sv-row">
+            <button class="sv-btn primary" data-p-run>Start the practice</button>
+            <button class="sv-btn quiet" data-practice-done disabled>Observe again</button>
+          </div>
+
+          <div class="sv-safety">
+            <strong>Stop if you feel dizzy, uncomfortable, breathless, or unwell.</strong>
+            Breathe only as gently as is easy — there is no holding, no forcing and no
+            fast breathing anywhere in this practice. This is a traditional
+            contemplative practice, not medical diagnosis or treatment.
+          </div>
+
         </div>
-        <p class="svd-note" data-location-status></p>
-        <button type="button" class="btn p" data-run-assessment>Check against tradition</button>
+
       </div>
 
-      <!-- STEP 5: result -->
-      <div class="svd-step" data-step="result" hidden>
-        <div class="svd-result" data-result></div>
 
-        <details class="svd-why" data-why>
-          <summary>Why am I seeing this?</summary>
-          <div data-why-body></div>
-        </details>
+      <!-- ============ side column ============ -->
+      <div>
 
-        <div class="svd-actions">
-          <button type="button" class="btn p" data-begin-correction hidden>Begin guided adjustment</button>
-          <button type="button" class="btn s" data-observe-again>Observe again</button>
+        <div class="sv-panel">
+          <h2 class="sv-h" style="font-size:18px">What this tool does and doesn't do</h2>
+          <p class="sv-p" style="margin-bottom:14px">
+            Three different kinds of statement get mixed together in most breath apps.
+            We keep them apart.
+          </p>
+
+          <div class="sv-kinds" style="margin:0">
+            <div class="sv-kind">
+              <h6>Your observation</h6>
+              <p>What you personally report after sitting and noticing.</p>
+            </div>
+            <div class="sv-kind">
+              <h6>Traditional expectation</h6>
+              <p>What the Svarodaya rules say should be flowing, with the rule shown.</p>
+            </div>
+            <div class="sv-kind void">
+              <h6>Physiological measurement</h6>
+              <p>Nothing here. A webcam cannot measure nasal airflow, and this tool
+                 does not pretend otherwise.</p>
+            </div>
+          </div>
+
+          <p class="sv-fine" style="margin-top:16px">
+            Sensor mode is reserved for later. A bilateral nasal airflow sensor could
+            eventually provide a physiological measurement instead of a self-reported
+            observation. Until one is connected, no sensor values are shown — real or
+            simulated.
+          </p>
         </div>
+
+        <div class="sv-panel">
+          <h2 class="sv-h" style="font-size:18px">Your swara log</h2>
+
+          <p class="sv-p" style="margin-bottom:12px">
+            <label style="display:flex;gap:9px;align-items:flex-start;cursor:pointer">
+              <input type="checkbox" data-log-opt checked style="margin-top:3px">
+              <span>Keep a log in this browser. Nothing is sent to a server, and no
+                    account is involved.</span>
+            </label>
+          </p>
+
+          <ul class="sv-log" data-log></ul>
+
+          <div class="sv-row" style="margin-top:16px">
+            <button class="sv-btn quiet" data-log-clear>Clear my log</button>
+          </div>
+        </div>
+
       </div>
 
-      <!-- STEP 6: guided correction -->
-      <div class="svd-step" data-step="correction" hidden>
-        <h4>Guided visualization — not a sensor measurement</h4>
-        <p class="svd-note" data-correction-target></p>
-        <div class="svd-breathe-ring big" data-correction-ring aria-hidden="true"></div>
-        <div class="svd-breathe-label" data-correction-phase>Inhale</div>
-        <p class="svd-note">
-          This is a gentle, contemporary breathing pattern offered as a modern
-          instructional adaptation — it is not presented as a documented
-          classical technique from the source text. Stop if you feel dizzy,
-          uncomfortable, breathless, or unwell. This is a traditional
-          contemplative practice, not medical diagnosis or treatment.
-        </p>
-        <button type="button" class="btn s" data-end-correction>Observe again</button>
-      </div>
-
-    </div>
-
-    <div class="svd-log">
-      <div class="svd-log-head">
-        <h5>Your Svara log</h5>
-        <button type="button" class="btn s" data-clear-log>Clear my log</button>
-      </div>
-      <p class="svd-note" style="margin:0">Stored only in this browser, on this device. Nothing is sent to a server.</p>
-      <div data-log-list class="svd-log-list"></div>
     </div>
 
   </div>
@@ -685,8 +835,6 @@ if (wb) {
   });
 }
 </script>
-<script src="svara-engine.js"></script>
-<script src="svara-ui.js"></script>
 <script>
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav');
@@ -705,6 +853,11 @@ if (burger && nav) {
   });
 }
 </script>
+
+<!-- Svara tool -->
+<script src="svara-engine.js"></script>
+<script src="svara-ui.js"></script>
+
 <a
   href="contact.html"
   aria-label="Contact"
