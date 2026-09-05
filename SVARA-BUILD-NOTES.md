@@ -1,0 +1,134 @@
+# Swar Yoga tool — build notes
+
+Seven files go in the repo root next to `style.css`. `swar-yoga.html` replaces
+yours; the rest are new.
+
+| File | Size | Loaded |
+|---|---|---|
+| `swar-yoga.html` | 30 KB | replaces yours |
+| `svara-tool.css` | 24 KB | on page load |
+| `svara-engine.js` | 44 KB | on page load |
+| `svara-knowledge.js` | 33 KB | on page load |
+| `svara-ui.js` | 44 KB | on page load |
+| `svara-corpus.js` | 209 KB | **lazily**, on the first question only |
+
+The corpus is not in a `<script src>` tag. It is injected on the first search so
+the page stays light for people who never open the Ask tab.
+
+---
+
+## The four tabs
+
+**Svara.** Camera guidance, a settling period, self-report, then the assessment.
+Sunrise and lunar day are computed in-browser; the expected channel comes from
+verse 65 and the tattva from verses 71–72. If observation and expectation
+disagree, the correction step offers the four reversal methods of verses 66–67
+and 50, each with its own grade, and then sends you back to observe again.
+
+**Tattva.** The eightfold scheme of verses 145–147, split into four dimensions
+you can measure and three you can only report. **Only the measured ones score.**
+The reported ones are recorded and shown in the support list marked "not
+scored". This is the source's own instruction — it warns that mixing verifiable
+and unverifiable items into one composite lets the good items lend credibility
+to the bad, and that the correct treatment is to disaggregate.
+
+The measurable four:
+- **Reach of the exhalation** (v158) — back of the hand, moved away until the
+  breath is no longer felt, in finger-breadths. The only quantitative protocol
+  in the entire treatise, and effectively a crude peak-expiratory-flow reading.
+- **Direction of the jet** (v155) — centre, down, up, oblique.
+- **Which side is open** (v153) — the mirror test.
+- **Junctures of the breath** (v146) — rate and pause length, countable.
+
+The reported three — taste (v157), body location (v156), colour under ṣaṇmukhī
+(v151–152) — are captured but never allowed to decide the answer.
+
+**Practice.** Ten practices, all from the text, filterable by what you want:
+settle, cool, warm, switch sides, observe. Each carries its verse, its grade, its
+steps, and a timer. Ujjayi and humming get a pacer because the text supports
+lengthened exhalation; the rest run at natural rate with the circle as a timer
+only, because verse 50's own instruction is "at a natural rate".
+
+**Ask the text.** BM25 retrieval over all 51 commentary sections, with
+transliteration folding (so "sushumna" reaches *suṣumnā*) and a curated concept
+map so intent questions land on the right verse. Answers are passages from the
+book with verse number and grade attached. Nothing is generated. If nothing
+matches, it says so rather than inventing.
+
+---
+
+## Why there is no AI-generated answering
+
+A generative Q&A needs an API key, and a key in client-side JavaScript on a
+static GitHub Pages site is a key you have published. The retrieval approach
+needs no key, no server, no per-query cost, and cannot hallucinate — every
+sentence shown is one you can find in your own document. If you later want
+generated answers, that requires a small serverless proxy (Cloudflare Worker or
+Netlify Function) holding the key, and the corpus file already there becomes the
+retrieval layer feeding it.
+
+---
+
+## What the tool refuses to do, and why
+
+**Verse 64's abstention rule is never applied.** The text says that when
+observation contradicts expectation you should refrain from acting. That rule is
+unfalsifiable by construction: contrary observation is reinterpreted as an
+inauspicious condition rather than as evidence against the scheme, and outcomes
+are only tested when conditions are favourable, which censors the sample. It is
+shown in the result panel, labelled, and never acted on.
+
+**Verses 69–70 and 73–74 do not drive anything.** The weekday and zodiac
+assignments are graded E-negative — the source states plainly that nothing in
+them should be applied. They are displayed with the reason.
+
+**No breath retention.** The source is direct that forceful retention with
+abdominal or pelvic pressure reproduces Valsalva haemodynamics, that adverse
+events are not rare enough to ignore, and that supervision was sound risk
+management rather than gatekeeping. A web page is not supervision, so retention
+practices are named and not taught. Ṣaṇmukhī is included but with the eyeball
+pressure removed and its contraindications stated.
+
+**No shape-reading from the mirror.** Comparing the two condensation patches for
+size is graded E. Reading an element from the shape of the patch is graded X —
+square, crescent, triangle and circle are yantra forms imported from
+iconography, and a condensation patch is exactly the ambiguous stimulus where
+expectation writes the answer.
+
+---
+
+## The one thing to decide before launch
+
+**Verse 65 is graded E-negative, and it is the only rule that predicts a channel
+from a date.** So the entire expected-svara calculation rests on a claim the
+source says the evidence contradicts. This is not a flaw in the build; it is the
+finding, and it lines up exactly with what your page already promises — that
+you'll publish what the record shows, including where it disagrees with the
+texts.
+
+The tool handles it with a single compact line above the comparison, and the
+full reasoning inside the "Why am I seeing this?" panel rather than plastered
+across the page. If you would rather it read differently, that one string is in
+`svara-ui.js`, in `renderResult`, under the comment "one compact line".
+
+## The period is unresolved and it matters
+
+The recension gives three different figures and reconciles none: 60 minutes
+(v72, five phases in two and a half ghaṭikās), 150 minutes (v72 read the other
+way, which other passages do), and 120 minutes (v73–74, twelve transits per day
+and night). All three are in the dropdown with their verse and grade. **They
+give different answers** — on the test date, 60 and 120 minutes report
+misaligned while 150 reports aligned. Default is 60; 120 is closest to the
+measured nasal cycle, which the source notes runs two to four hours with large
+variance.
+
+## Astronomy
+
+Sunrise uses the full NOAA algorithm, verified within a minute against Delhi,
+London at solstice and New York in December; polar day and night return null and
+are handled. Tithi uses an abbreviated lunar series checked against known
+syzygies — the 18 Jan 2026 new moon computes to 359.99° elongation, the 3 Mar
+full moon to 180.00°. Within about 20 minutes of a tithi boundary the result
+carries a caution that the lunar day may be off by one. The svarodaya day is
+counted from sunrise, so an observation at 03:00 correctly belongs to the
+previous day's cycle.
