@@ -179,6 +179,27 @@
       strength of the evidence behind it.
     </p>
 
+    <div class="sv-voicebar" data-voicebar hidden>
+      <button class="sv-vtoggle" data-voice-toggle aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" aria-hidden="true">
+          <path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path data-wave d="M15.8 9.2a4 4 0 0 1 0 5.6M18.4 6.8a7.6 7.6 0 0 1 0 10.4"
+                stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path data-mute d="M16 9.5l5 5m0-5l-5 5" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span data-voice-label>Spoken guidance off</span>
+      </button>
+
+      <div class="sv-vopts" data-voice-opts hidden>
+        <label class="sv-vh" for="sv-voice">Voice</label>
+        <select id="sv-voice" data-voice-pick></select>
+        <label for="sv-rate">Pace</label>
+        <input id="sv-rate" data-voice-rate type="range" min="0.6" max="1.4" step="0.02">
+        <button class="sv-btn quiet sv-vtest" data-voice-test>Test</button>
+      </div>
+    </div>
+
     <div class="sv-tabs" role="tablist" aria-label="Sections">
       <button class="sv-tab" role="tab" aria-selected="true"  data-tab="observe">Svara</button>
       <button class="sv-tab" role="tab" aria-selected="false" data-tab="tattva">Tattva</button>
@@ -388,6 +409,24 @@
           from the verifiable will tell you what you already expected.
         </p>
         <p class="sv-sans">prathame tattvasaṅkhyānaṃ dvitīye śvāsasandhayaḥ</p>
+
+        <div class="sv-row" style="margin:18px 0 22px">
+          <button class="sv-btn quiet" data-tattva-guide>Talk me through the measurements</button>
+        </div>
+
+        <div class="sv-guided" data-guided hidden>
+          <div class="sv-guided-head">
+            <span data-guided-step></span>
+            <button class="sv-guided-x" data-guided-stop aria-label="End walkthrough">×</button>
+          </div>
+          <h3 data-guided-title></h3>
+          <p data-guided-how></p>
+          <div class="sv-row">
+            <button class="sv-btn quiet" data-guided-back>Back</button>
+            <button class="sv-btn quiet" data-guided-again>Say it again</button>
+            <button class="sv-btn primary" data-guided-next>Next</button>
+          </div>
+        </div>
 
         <div data-tattva-form></div>
 
@@ -909,6 +948,7 @@ if (burger && nav) {
 <!-- Svara tool -->
 <script src="svara-engine.js"></script>
 <script src="svara-knowledge.js"></script>
+<script src="svara-voice.js"></script>
 <script src="svara-ui.js"></script>
 
 <a
