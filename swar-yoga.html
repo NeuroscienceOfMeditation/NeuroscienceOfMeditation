@@ -160,75 +160,58 @@
 
 
 <!-- ==========================================================================
-     SVARA OBSERVATION AND ASSESSMENT TOOL
-     Requires svara-tool.css, svara-engine.js, svara-ui.js
+     SVARA OBSERVATION, TATTVA, PRANAYAMA AND ENQUIRY
+     Requires svara-tool.css, svara-engine.js, svara-knowledge.js, svara-ui.js
+     svara-corpus.js is loaded lazily on the first question.
      ========================================================================== -->
 
 <section class="sec dim" id="svara">
   <div class="wrap">
 
-    <div class="eyebrow">Observation tool</div>
+    <div class="eyebrow">Practice tool</div>
 
-    <h2>Observe your svara, then check it against the rule</h2>
+    <h2>Observe, diagnose, correct</h2>
 
     <p class="sub">
-      Sit for a moment, notice which nostril is more open, and tell the tool what you
-      found. It works out your sunrise and lunar day, applies the Svarodaya timing
-      rules, and shows you where the two agree and where they don't — with the rule
-      behind every line.
+      Find which channel is flowing and which tattva is running, check both
+      against the Svarodaya rules, and shift them with the practices the text
+      actually contains. Every instruction below carries its verse and the
+      strength of the evidence behind it.
     </p>
 
-    <div class="sv-modes" role="tablist" aria-label="Source of the svara reading">
-      <button class="sv-mode" role="tab" aria-selected="true" data-mode="self-report">
-        Self observation
-      </button>
-      <button class="sv-mode" role="tab" aria-selected="false" data-mode="sensor" disabled
-              title="A bilateral nasal airflow sensor can eventually provide physiological measurements rather than self-reported observation.">
-        Sensor mode — later
-      </button>
+    <div class="sv-tabs" role="tablist" aria-label="Sections">
+      <button class="sv-tab" role="tab" aria-selected="true"  data-tab="observe">Svara</button>
+      <button class="sv-tab" role="tab" aria-selected="false" data-tab="tattva">Tattva</button>
+      <button class="sv-tab" role="tab" aria-selected="false" data-tab="practice">Practice</button>
+      <button class="sv-tab" role="tab" aria-selected="false" data-tab="ask">Ask the text</button>
     </div>
 
+    <!-- ================= SVARA ================= -->
+    <div class="sv-pane on" data-pane="observe">
     <div class="sv-shell">
-
-      <!-- ============ main column: the flow ============ -->
       <div>
 
-        <!-- ---------- step 1: observe ---------- -->
+        <!-- step 1: observe -->
         <div class="sv-panel sv-step on" data-step="observe">
-
-          <h2 class="sv-h">Observe your svara</h2>
-          <p class="sv-p">Find which nostril is currently more active.</p>
+          <h2 class="sv-h">Which channel is flowing?</h2>
+          <p class="sv-p">Sit for a moment and let the breath settle before you answer.</p>
 
           <div class="sv-cam">
             <video playsinline muted aria-label="Camera preview"></video>
             <div class="sv-camoff">
-              The camera is optional. It helps you sit square and look, and it
-              measures nothing.
+              Optional. The camera helps you sit square and look — it measures nothing.
             </div>
-            <svg class="sv-guide" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice"
-                 aria-hidden="true">
-              <ellipse cx="50" cy="36" rx="20" ry="26"
-                       fill="none" stroke="rgba(244,240,226,.35)" stroke-width=".6"/>
-              <line x1="50" y1="16" x2="50" y2="58"
-                    stroke="rgba(244,240,226,.25)" stroke-width=".4"/>
-              <circle cx="45" cy="42" r="1.6" fill="none"
-                      stroke="rgba(46,127,168,.8)" stroke-width=".6"/>
-              <circle cx="55" cy="42" r="1.6" fill="none"
-                      stroke="rgba(228,116,79,.8)" stroke-width=".6"/>
+            <svg class="sv-guide" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <ellipse cx="50" cy="36" rx="20" ry="26" fill="none" stroke="rgba(244,240,226,.35)" stroke-width=".6"/>
+              <line x1="50" y1="16" x2="50" y2="58" stroke="rgba(244,240,226,.25)" stroke-width=".4"/>
+              <circle cx="45" cy="42" r="1.6" fill="none" stroke="rgba(46,127,168,.8)" stroke-width=".6"/>
+              <circle cx="55" cy="42" r="1.6" fill="none" stroke="rgba(228,116,79,.8)" stroke-width=".6"/>
             </svg>
           </div>
 
-          <p class="sv-fine" style="margin:12px 0 16px">
-            Your camera is used only to guide your observation. No physiological
-            diagnosis is made from the camera image. Camera processing stays in your
-            browser — this tool reads no frames, saves no images, uploads nothing,
-            and identifies nobody.
-          </p>
-
-          <div class="sv-row">
-            <button class="sv-btn quiet" data-cam-toggle aria-pressed="false">
-              Turn on camera
-            </button>
+          <div class="sv-row" style="margin-top:14px">
+            <button class="sv-btn quiet" data-cam-toggle aria-pressed="false">Turn on camera</button>
+            <span class="sv-fine">Nothing leaves your browser.</span>
           </div>
 
           <div class="sv-orb-wrap">
@@ -237,33 +220,36 @@
             <p class="sv-count" data-count>15 seconds</p>
           </div>
 
-          <div class="sv-row">
-            <button class="sv-btn primary" data-observe-done disabled>
-              I'm ready to report
-            </button>
-          </div>
+          <details class="sv-why" style="border-top:0">
+            <summary>Not sure? Check it against a mirror</summary>
+            <p class="sv-p" style="margin-bottom:8px">
+              Breathe out onto a cool mirror, or the back of your hand, held just
+              below the nostrils. Compare the two patches of condensation — the
+              larger one marks the open side. Exhaled air is saturated at body
+              temperature and condenses in a pattern set by the geometry of the
+              nasal jet, which changes with congestion.
+            </p>
+            <p class="sv-sans">darpaṇena samālokya tatra śvāsaṃ vinikṣipet</p>
+            <p class="sv-fine">Verse 153 — the only external instrument in the treatise.</p>
+          </details>
 
+          <div class="sv-row" style="margin-top:16px">
+            <button class="sv-btn primary" data-observe-done disabled>I'm ready to report</button>
+          </div>
         </div>
 
-
-        <!-- ---------- step 2: report ---------- -->
+        <!-- step 2: report -->
         <div class="sv-panel sv-step" data-step="report">
-
           <h2 class="sv-h">Which svara is active?</h2>
-          <p class="sv-p">
-            Go by what you actually feel, not by what you expect. You can change your
-            answer before continuing.
-          </p>
+          <p class="sv-p">Go by what you feel, not by what you expect.</p>
 
           <div class="sv-choices" role="group" aria-label="Which svara is active">
             <button class="sv-choice" data-s="ida" aria-pressed="false">
               <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M20 14.2A8.4 8.4 0 1 1 10.4 4a6.6 6.6 0 0 0 9.6 10.2Z"
-                      stroke="#2E7FA8" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M20 14.2A8.4 8.4 0 1 1 10.4 4a6.6 6.6 0 0 0 9.6 10.2Z" stroke="#2E7FA8" stroke-width="1.6" stroke-linejoin="round"/>
               </svg>
               <b>Left</b><span>Ida · Chandra</span>
             </button>
-
             <button class="sv-choice" data-s="pingala" aria-pressed="false">
               <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="4.4" stroke="#E4744F" stroke-width="1.6"/>
@@ -274,7 +260,6 @@
               </svg>
               <b>Right</b><span>Pingala · Surya</span>
             </button>
-
             <button class="sv-choice" data-s="sushumna" aria-pressed="false">
               <svg class="sv-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <circle cx="12" cy="12" r="8.4" stroke="#C6A15B" stroke-width="1.6"/>
@@ -287,158 +272,225 @@
           <div class="sv-row">
             <button class="sv-btn primary" data-report-done disabled>Continue</button>
           </div>
-
         </div>
 
-
-        <!-- ---------- step 3: context ---------- -->
+        <!-- step 3: context -->
         <div class="sv-panel sv-step" data-step="context">
-
           <h2 class="sv-h">When and where</h2>
           <p class="sv-p">
-            The svara cycle is counted from sunrise, and the rule depends on the lunar
-            day — so the tool needs your date, time and rough position. Correct
-            anything that looks wrong.
+            The cycle is counted from sunrise and the rule turns on the lunar day.
+            Correct anything that looks wrong.
           </p>
 
           <div class="sv-fields">
-            <div class="sv-field">
-              <label for="sv-date">Date</label>
-              <input id="sv-date" data-f-date type="date">
-            </div>
-            <div class="sv-field">
-              <label for="sv-time">Time</label>
-              <input id="sv-time" data-f-time type="time">
-            </div>
-            <div class="sv-field">
-              <label for="sv-tz">Timezone</label>
-              <input id="sv-tz" data-f-tz type="text" readonly>
-            </div>
-            <div class="sv-field">
-              <label for="sv-loc">Latitude, longitude</label>
-              <input id="sv-loc" data-f-loc type="text" placeholder="28.61, 77.21"
-                     inputmode="decimal">
-            </div>
+            <div class="sv-field"><label for="sv-date">Date</label>
+              <input id="sv-date" data-f-date type="date"></div>
+            <div class="sv-field"><label for="sv-time">Time</label>
+              <input id="sv-time" data-f-time type="time"></div>
+            <div class="sv-field"><label for="sv-tz">Timezone</label>
+              <input id="sv-tz" data-f-tz type="text" readonly></div>
+            <div class="sv-field"><label for="sv-loc">Latitude, longitude</label>
+              <input id="sv-loc" data-f-loc type="text" placeholder="28.61, 77.21" inputmode="decimal"></div>
+          </div>
+
+          <div class="sv-field" style="margin-bottom:14px">
+            <label for="sv-period">How long does one channel hold?</label>
+            <select id="sv-period" data-f-period></select>
+            <p class="sv-fine" style="margin-top:7px" data-period-note></p>
           </div>
 
           <div class="sv-row" style="margin-bottom:10px">
             <button class="sv-btn quiet" data-locate>Use my location</button>
           </div>
-
           <p class="sv-fine" data-loc-note style="margin-bottom:18px">
-            Your position is used in this browser to work out sunrise. It is not sent
-            anywhere and is not stored.
+            Used in this browser to work out your sunrise. Not sent anywhere.
           </p>
 
           <div class="sv-row">
             <button class="sv-btn primary" data-context-done disabled>See the assessment</button>
-            <button class="sv-btn quiet" data-context-skip>Skip — record the observation only</button>
+            <button class="sv-btn quiet" data-context-skip>Skip</button>
           </div>
-
         </div>
 
-
-        <!-- ---------- step 4: result ---------- -->
+        <!-- step 4: result -->
         <div class="sv-panel sv-step" data-step="result">
-
-          <h2 class="sv-h" style="font-size:15px;font-weight:600;color:#5E6F68;margin-bottom:14px">
-            Traditional svara assessment
-          </h2>
-
           <div class="sv-trail" data-trail></div>
-
           <div data-result></div>
-
           <div class="sv-row" style="margin-top:20px" data-result-actions></div>
-
         </div>
 
-
-        <!-- ---------- step 5: guided practice ---------- -->
+        <!-- step 5: correction -->
         <div class="sv-panel sv-step" data-step="practice">
-
-          <h2 class="sv-h">Guided adjustment</h2>
-
+          <h2 class="sv-h">Guided correction</h2>
           <div data-practice-body></div>
-
           <div class="sv-orb-wrap">
-            <div class="sv-orb" data-p-orb><i></i><b>ready</b></div>
-            <p class="sv-count" data-p-cue>Guided visualisation — not a sensor measurement.</p>
-            <p class="sv-count" data-p-count>Press start when you are settled.</p>
+            <div class="sv-orb" data-p-orb><i></i><b>—</b></div>
+            <p class="sv-count" data-p-cue></p>
+            <p class="sv-count" data-p-count></p>
           </div>
-
           <div class="sv-row">
-            <button class="sv-btn primary" data-p-run>Start the practice</button>
+            <button class="sv-btn primary" data-p-run>Start</button>
             <button class="sv-btn quiet" data-practice-done disabled>Observe again</button>
           </div>
-
-          <div class="sv-safety">
-            <strong>Stop if you feel dizzy, uncomfortable, breathless, or unwell.</strong>
-            Breathe only as gently as is easy — there is no holding, no forcing and no
-            fast breathing anywhere in this practice. This is a traditional
-            contemplative practice, not medical diagnosis or treatment.
-          </div>
-
+          <p class="sv-fine" style="margin-top:14px">
+            Stop if you feel dizzy, breathless or unwell. No holding, no forcing,
+            no fast breathing in any of these.
+          </p>
         </div>
 
       </div>
 
-
-      <!-- ============ side column ============ -->
+      <!-- side column -->
       <div>
-
         <div class="sv-panel">
-          <h2 class="sv-h" style="font-size:18px">What this tool does and doesn't do</h2>
-          <p class="sv-p" style="margin-bottom:14px">
-            Three different kinds of statement get mixed together in most breath apps.
-            We keep them apart.
+          <h2 class="sv-h" style="font-size:18px">Do it at waking</h2>
+          <p class="sv-sans">nirīkṣitavyaṃ yatnena sadā pratyūṣakālataḥ</p>
+          <p class="sv-p" style="margin-bottom:10px">
+            It should be examined carefully every day from daybreak. Verse 149 —
+            the one instruction the source calls the most important practical
+            content in the book, and it is graded E. Waking is the day's largest
+            routine autonomic transition, and a habit anchored to an unavoidable
+            daily event is the only kind that lasts.
           </p>
-
-          <div class="sv-kinds" style="margin:0">
-            <div class="sv-kind">
-              <h6>Your observation</h6>
-              <p>What you personally report after sitting and noticing.</p>
-            </div>
-            <div class="sv-kind">
-              <h6>Traditional expectation</h6>
-              <p>What the Svarodaya rules say should be flowing, with the rule shown.</p>
-            </div>
-            <div class="sv-kind void">
-              <h6>Physiological measurement</h6>
-              <p>Nothing here. A webcam cannot measure nasal airflow, and this tool
-                 does not pretend otherwise.</p>
-            </div>
-          </div>
-
-          <p class="sv-fine" style="margin-top:16px">
-            Sensor mode is reserved for later. A bilateral nasal airflow sensor could
-            eventually provide a physiological measurement instead of a self-reported
-            observation. Until one is connected, no sensor values are shown — real or
-            simulated.
+          <p class="sv-fine">
+            One minute, before rising, before any device. Which side is flowing,
+            the rough rate and depth of the breath, one word for the state.
+            Thirty mornings establish a baseline; sixty reveal structure.
           </p>
         </div>
 
         <div class="sv-panel">
-          <h2 class="sv-h" style="font-size:18px">Your swara log</h2>
-
+          <h2 class="sv-h" style="font-size:18px">Your log</h2>
           <p class="sv-p" style="margin-bottom:12px">
             <label style="display:flex;gap:9px;align-items:flex-start;cursor:pointer">
               <input type="checkbox" data-log-opt checked style="margin-top:3px">
-              <span>Keep a log in this browser. Nothing is sent to a server, and no
-                    account is involved.</span>
+              <span>Keep a log in this browser. Nothing is sent to a server.</span>
             </label>
           </p>
-
           <ul class="sv-log" data-log></ul>
-
           <div class="sv-row" style="margin-top:16px">
             <button class="sv-btn quiet" data-log-clear>Clear my log</button>
           </div>
         </div>
+      </div>
+    </div>
+    </div>
 
+    <!-- ================= TATTVA ================= -->
+    <div class="sv-pane" data-pane="tattva">
+      <div class="sv-panel">
+        <h2 class="sv-h">Read your tattva by observation</h2>
+        <p class="sv-p">
+          Verses 145 to 147 set out eight dimensions and require every phase to
+          take a value on each. Four of them you can measure. Three you can only
+          report. They are kept apart here, and only the measured ones decide the
+          answer — because a scheme that lets the unverifiable borrow credibility
+          from the verifiable will tell you what you already expected.
+        </p>
+        <p class="sv-sans">prathame tattvasaṅkhyānaṃ dvitīye śvāsasandhayaḥ</p>
+
+        <div data-tattva-form></div>
+
+        <div class="sv-row" style="margin-top:6px">
+          <button class="sv-btn primary" data-tattva-run>Read the phase</button>
+          <button class="sv-btn quiet" data-tattva-reset>Clear</button>
+        </div>
+
+        <div data-tattva-result></div>
+      </div>
+    </div>
+
+    <!-- ================= PRACTICE ================= -->
+    <div class="sv-pane" data-pane="practice">
+      <div class="sv-panel">
+        <h2 class="sv-h">Pranayama from the text</h2>
+        <p class="sv-p">
+          Every practice here appears in the Svarodaya, with the verse and the
+          strength of evidence beside it. Pick what you need.
+        </p>
+
+        <div class="sv-filters" role="group" aria-label="Filter practices">
+          <button class="sv-filter" data-purpose="all" aria-pressed="true">All</button>
+          <button class="sv-filter" data-purpose="settle" aria-pressed="false">Settle</button>
+          <button class="sv-filter" data-purpose="cool" aria-pressed="false">Cool</button>
+          <button class="sv-filter" data-purpose="warm" aria-pressed="false">Warm</button>
+          <button class="sv-filter" data-purpose="switch" aria-pressed="false">Switch sides</button>
+          <button class="sv-filter" data-purpose="observe" aria-pressed="false">Observe</button>
+        </div>
+
+        <div data-pranayama-list></div>
+
+        <details class="sv-why">
+          <summary>Why there is no breath retention here</summary>
+          <div data-retention-note></div>
+        </details>
       </div>
 
+      <div class="sv-panel sv-runner" data-runner hidden>
+        <h2 class="sv-h" data-runner-title></h2>
+        <div data-runner-body></div>
+        <div class="sv-orb-wrap">
+          <div class="sv-orb" data-r-orb><i></i><b>—</b></div>
+          <p class="sv-count" data-r-cue></p>
+          <p class="sv-count" data-r-count></p>
+        </div>
+        <div class="sv-row">
+          <button class="sv-btn primary" data-r-run>Start</button>
+          <button class="sv-btn quiet" data-r-stop>Close</button>
+        </div>
+      </div>
     </div>
+
+    <!-- ================= ASK ================= -->
+    <div class="sv-pane" data-pane="ask">
+      <div class="sv-panel">
+        <h2 class="sv-h">Ask the text</h2>
+        <p class="sv-p">
+          Answers are passages retrieved from the commentary on all 313 verses,
+          with the verse number and evidential grade attached. Nothing is
+          invented — if the book does not address something, you will be told so.
+        </p>
+
+        <div class="sv-ask">
+          <label class="sv-vh" for="sv-q">Your question</label>
+          <input id="sv-q" data-ask-input type="text" autocomplete="off"
+                 placeholder="How do I switch which nostril is flowing?">
+          <button class="sv-btn primary" data-ask-go>Ask</button>
+        </div>
+
+        <div class="sv-suggests" data-ask-suggests></div>
+        <div data-ask-result></div>
+      </div>
+    </div>
+
+    <details class="sv-why sv-foot">
+      <summary>How this tool works, and what it will not tell you</summary>
+      <div class="sv-kinds" style="margin-top:6px">
+        <div class="sv-kind">
+          <h6>Your observation</h6>
+          <p>What you report after sitting and noticing, plus anything you measure
+             with a mirror or the back of your hand.</p>
+        </div>
+        <div class="sv-kind">
+          <h6>Traditional expectation</h6>
+          <p>What the Svarodaya rules predict, with the verse and grade shown for
+             each rule used.</p>
+        </div>
+        <div class="sv-kind void">
+          <h6>Physiological measurement</h6>
+          <p>None from the camera. A webcam cannot measure nasal airflow, so this
+             tool does not claim to. Sensor mode is reserved for real hardware.</p>
+        </div>
+      </div>
+      <p class="sv-fine" style="margin-top:14px">
+        The tool will not tell you to refrain from acting. Verse 64 instructs
+        abstention when observation contradicts expectation, and that rule is
+        unfalsifiable by construction — it reinterprets its own failures as
+        inauspicious conditions, so it can never be wrong. It is shown in the
+        result panel and never acted on. This is a contemplative practice, not
+        medical diagnosis or treatment.
+      </p>
+    </details>
 
   </div>
 </section>
@@ -856,6 +908,7 @@ if (burger && nav) {
 
 <!-- Svara tool -->
 <script src="svara-engine.js"></script>
+<script src="svara-knowledge.js"></script>
 <script src="svara-ui.js"></script>
 
 <a
