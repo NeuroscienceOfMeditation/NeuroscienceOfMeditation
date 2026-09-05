@@ -411,3 +411,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
     margin-top: 24px;
   }
 }
+.ph {
+  overflow: hidden;
+  position: relative;
+}
