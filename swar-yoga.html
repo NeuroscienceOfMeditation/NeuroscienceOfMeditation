@@ -148,7 +148,7 @@
         </div>
 
         <div class="thanks" data-thanks>
-          Logged. Thank you — that's one more data point.
+          Noted. To add it to the open record, use the tool below.
         </div>
 
       </div>
@@ -170,7 +170,7 @@
 
     <div class="eyebrow">Practice tool</div>
 
-    <h2>Observe, diagnose, correct</h2>
+    <h2>Observe, assess, adjust</h2>
 
     <p class="sub">
       Find which channel is flowing and which tattva is running, check both
@@ -380,12 +380,17 @@
           </p>
         </div>
 
+        <div class="sv-panel" id="record" data-record>
+          <h2 class="sv-h" style="font-size:18px">The open record</h2>
+          <p class="sv-fine">Loading…</p>
+        </div>
+
         <div class="sv-panel">
-          <h2 class="sv-h" style="font-size:18px">Your log</h2>
+          <h2 class="sv-h" style="font-size:18px">Your private browser log</h2>
           <p class="sv-p" style="margin-bottom:12px">
             <label style="display:flex;gap:9px;align-items:flex-start;cursor:pointer">
               <input type="checkbox" data-log-opt checked style="margin-top:3px">
-              <span>Keep a log in this browser. Nothing is sent to a server.</span>
+              <span>Keep a private copy in this browser too. This list is never sent anywhere.</span>
             </label>
           </p>
           <ul class="sv-log" data-log></ul>
@@ -545,30 +550,30 @@
         One tap, four times a day
       </h4>
       <p style="font-size:13.5px;line-height:1.7;color:rgba(244,240,226,.68);margin:0">
-        No wearable, no subscription, no account needed to try it. Sign in only when
-        you want your own history kept.
+        No wearable, no subscription, no email needed. Join the open record with
+        two ticks, and download or delete everything whenever you like.
       </p>
     </div>
 
     <div>
-      <div class="num">2,431</div>
+      <div class="num" data-rec-week>—</div>
       <h4 style="font-size:20px;margin-bottom:8px">
         Logs this week
       </h4>
       <p style="font-size:13.5px;line-height:1.7;color:rgba(244,240,226,.68);margin:0">
-        From practitioners across 19 cities. The counter is live — people come back
-        to watch the record grow.
+        Counted live from the open record. It started at zero, and every real
+        observation adds one.
       </p>
     </div>
 
     <div>
-      <div class="num">01</div>
+      <div class="num" data-rec-total>—</div>
       <h4 style="font-size:20px;margin-bottom:8px">
-        Published in Aṇūṭṭara
+        Logs in the record so far
       </h4>
       <p style="font-size:13.5px;line-height:1.7;color:rgba(244,240,226,.68);margin:0">
-        Every issue carries what the data showed that quarter, written plainly.
-        Contributors credited if they want to be.
+        Once there's enough data to mean something, what it shows will be written
+        up plainly in Aṇūṭṭara, including where it disagrees with the texts.
       </p>
     </div>
 
@@ -641,9 +646,10 @@
     <h2>What the data shows so far</h2>
 
     <p class="sub">
-      Aggregate only, updated nightly. No individual's logs are ever shown here,
-      and no one's account is identifiable from this chart. Contributing is opt-in,
-      off by default, and you can withdraw and delete at any time.
+      Aggregate only, calculated live. No individual's logs are ever shown here:
+      the chart stays hidden until at least five people have contributed, and any
+      hour with fewer than five logs is left out. Contributing is opt-in, off by
+      default, and you can download or delete your data at any time.
     </p>
 
     <div class="two" style="grid-template-columns:1.35fr 1fr">
@@ -653,7 +659,7 @@
         <h5>Dominant swara by hour since sunrise</h5>
 
         <p class="cap">
-          All contributors, last 30 days, n = 41,208 logs
+          <span data-rec-cap>Loading the record…</span>
         </p>
 
         <div class="wbars" id="wbars"></div>
@@ -693,8 +699,8 @@
           </li>
 
           <li>
-            <b>Does regular practice change the pattern?</b>
-            Comparing course students with everyone else.
+            <b>Do the text's correction practices actually switch the side?</b>
+            Recorded when you observe again after a practice.
           </li>
 
         </ol>
@@ -721,14 +727,14 @@
       <h2>What we collect, and what we never will</h2>
 
       <p class="sub">
-        We ask for the least that makes the research possible. You can download
-        everything we hold on you, or delete all of it, from your account page —
+        We ask for the least that makes the record possible. You can download
+        everything we hold on you, or delete all of it, from the tool above —
         no email required, no reason needed.
       </p>
 
-      <button class="btn n">
+      <a class="btn n" href="privacy.html" style="text-decoration:none">
         Read the full privacy notice
-      </button>
+      </a>
 
     </div>
 
@@ -739,8 +745,8 @@
            style="background:rgba(244,240,226,.06);border-color:rgba(244,240,226,.16);color:var(--cream)">
         <h4 style="font-size:18px">We collect</h4>
         <p style="color:rgba(244,240,226,.7);font-size:13px">
-          Nostril side, timestamp, city-level location, and — only if you choose —
-          a mood and energy score.
+          Nostril side, time, location rounded to about 11 km, and, only if you
+          choose, mood, energy and calm scores.
         </p>
       </div>
 
@@ -810,11 +816,13 @@
   <h6>About</h6>
 
   <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy notice</a>
   <a href="https://www.instagram.com/neuroscienceofmeditation/" target="_blank" rel="noopener noreferrer">
     Instagram
   </a>
 </div>
 
+    </div>
 
     <div class="legal">
       <span>© 2026 Neuroscience of Meditation · Delhi, India</span>
@@ -902,33 +910,7 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 });
 
 
-const wb = document.getElementById('wbars');
-
-if (wb) {
-
-  const prop = [
-    .78,.72,.44,.30,.36,.58,.71,.62,.41,
-    .33,.45,.66,.74,.55,.38,.34,.52,.69
-  ];
-
-  prop.forEach(function(p) {
-
-    const c = document.createElement('i');
-
-    c.style.height = '100%';
-
-    c.style.background =
-      'linear-gradient(to top,' +
-      '#2E7FA8 0%,' +
-      '#2E7FA8 ' + (p * 100) + '%,' +
-      '#C6A15B ' + (p * 100) + '%,' +
-      '#C6A15B ' + (p * 100 + 2.5) + '%,' +
-      '#E4744F ' + (p * 100 + 2.5) + '%,' +
-      '#E4744F 100%)';
-
-    wb.appendChild(c);
-  });
-}
+// The open record chart is drawn from live data by svara-record.js.
 </script>
 <script>
 const burger = document.querySelector('.burger');
@@ -950,10 +932,12 @@ if (burger && nav) {
 </script>
 
 <!-- Svara tool -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
 <script src="svara-engine.js"></script>
 <script src="svara-knowledge.js"></script>
 <script src="svara-voice.js"></script>
 <script src="svara-ui.js"></script>
+<script src="svara-record.js"></script>
 
 <a
   href="contact.html"

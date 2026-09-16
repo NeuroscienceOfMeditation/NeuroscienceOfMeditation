@@ -1,12 +1,10 @@
----
-# Front matter lets Jekyll list posts automatically. Leave these two lines in place.
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Words of Yoga — Neuroscience of Meditation</title>
+  <title>Privacy notice — Neuroscience of Meditation</title>
+  <meta name="description" content="What Neuroscience of Meditation collects, why, where it is stored, and how to download or delete it.">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,7 +31,7 @@
       <a href="swar-yoga.html">Swar Yoga</a>
       <a href="my-mind-and-me.html">My Mind and Me</a>
       <a href="courses-books.html">Courses &amp; Books</a>
-      <a href="words-of-yoga.html" class="on">Words of Yoga</a>
+      <a href="words-of-yoga.html">Words of Yoga</a>
       <a href="anuttara.html">Aṇūṭṭara</a>
       <a href="contact.html">Contact</a>
     </nav>
@@ -49,118 +47,65 @@
 
 
 <section class="sec tight">
-
   <div class="wrap">
-
-    <div class="eyebrow">Words of Yoga</div>
-
-    <h2 style="font-size:clamp(34px,4.6vw,52px)">
-      The blog
-    </h2>
-
-    <p class="sub">
-      Longer pieces on the texts, the practice, and what the research is finding.
-      New post most weeks.
+    <div class="eyebrow">Your data, plainly</div>
+    <h1 style="font-size:clamp(34px,5vw,56px);line-height:1.04;max-width:820px">Privacy notice</h1>
+    <p class="lede" style="max-width:720px;margin-top:20px">
+      What this site collects, why, where it's kept, and how to download or delete it.
+      Written to be read, not skimmed past.
     </p>
-
+    <p style="margin-top:14px;font-size:13px;opacity:.7">Version 1 · 17 September 2026</p>
   </div>
-
 </section>
 
-
 <section class="sec" style="padding-top:0">
-
   <div class="wrap">
+    <article class="privacy">
 
-    {% comment %} New posts from the _posts folder appear here automatically, newest first. {% endcomment %}
-    {% for post in site.posts %}
-    <article class="post">
+      <h2>Who we are</h2>
+      <p>Neuroscience of Meditation is run by Aditi, a doctoral fellow in the science of yoga, based in Delhi, India. For any question about your data, use the <a href="contact.html">contact page</a>.</p>
 
-      <div class="ph {{ post.card_class | default: 'ph-forest' }}"></div>
+      <h2>1. The newsletter</h2>
+      <p><b>What we collect:</b> your email address, and only if you subscribe.</p>
+      <p><b>Why:</b> to send you evidence-checked articles and practices. That's all it is used for.</p>
+      <p><b>Where it's kept:</b> with Kit (kit.com), the service that sends our emails.</p>
+      <p><b>Your choices:</b> every email has an unsubscribe link. Unsubscribing stops all emails straight away.</p>
 
-      <div>
-        {% assign words = post.content | strip_html | number_of_words %}
-        <div class="k">{{ post.pillar | default: 'Article' }} · {{ words | divided_by: 220 | plus: 1 }} min</div>
+      <h2>2. The Swara open record</h2>
+      <p>Only if you tick both boxes and choose <b>Join the open record</b> on the <a href="swar-yoga.html">Swar Yoga page</a>. The tool works fully without joining.</p>
+      <p><b>What we collect for each observation:</b></p>
+      <ul>
+        <li>which side you report is flowing, and what the Svarodaya rules predicted;</li>
+        <li>the time of the observation, and minutes since sunrise;</li>
+        <li>your location rounded to about 11 km (never your exact position), and only if you share a location;</li>
+        <li>the lunar day and cycle length used for the comparison;</li>
+        <li>if you choose: mood, energy and calm on a 1 to 5 scale;</li>
+        <li>if you did one: the name of the practice done before observing again.</li>
+      </ul>
+      <p><b>We also store:</b> a random account ID linked to your browser, the date you gave consent, and your confirmation that you're 18 or older. We do not ask for your name or email to join.</p>
+      <p><b>Why:</b> to publish aggregate statistics testing what the Svarodaya texts claim about the breath against real observations, and to show you your own history.</p>
+      <p><b>What's public:</b> only totals and percentages. Nothing is shown until at least five people have contributed, and any hour with fewer than five logs is hidden, so no individual's pattern can be picked out. Your individual logs are never published.</p>
+      <p><b>Where it's kept:</b> in a database hosted by Supabase (supabase.com). Only you can read your own logs through the site.</p>
+      <p><b>How long:</b> until you delete it. If the project ever closes, the individual logs will be deleted.</p>
 
-        <h4>
-          <a href="{{ post.url | relative_url }}" style="color:inherit;text-decoration:none">{{ post.title }}</a>
-        </h4>
+      <h2>3. Your rights</h2>
+      <ul>
+        <li><b>See and download:</b> on the Swar Yoga page, choose <b>Download my data</b> to get everything held for your browser's record.</li>
+        <li><b>Delete:</b> choose <b>Delete all my data</b>. It removes your observations, your consent and your account ID, immediately. This also withdraws your consent.</li>
+        <li><b>Can't reach your record?</b> If you've cleared your browser or changed device, your old record can't be linked back to you, because we never asked who you are. Contact us and we'll help where we can.</li>
+      </ul>
 
-        <p>{{ post.description }}</p>
-      </div>
+      <h2>What we never do</h2>
+      <p>Sell your data, share it with advertisers, track you across other websites, or knowingly collect anything from anyone under 18.</p>
 
-    </article>
+      <h2>This is not medical advice</h2>
+      <p>The Swar Yoga tool records what you observe and compares it with traditional texts. It does not diagnose, treat or assess any health condition. If you feel unwell, speak to a doctor.</p>
 
-    {% endfor %}
-    <article class="post">
-
-      <div class="ph ph-water"></div>
-
-      <div>
-        <div class="k">Swar Yoga · 8 min</div>
-
-        <h4>
-  <a href="what-shiva-swarodaya-claims.html" style="color:inherit;text-decoration:none">
-    What Shiva Swarodaya actually claims about the hour
-  </a>
-</h4>
-
-        <p>
-          The text is more specific than most summaries admit — and specificity is
-          what makes it testable. A close reading of the passages on timing, and
-          what would count as evidence either way.
-        </p>
-      </div>
-
-    </article>
-
-
-
-
-
-    <article class="post">
-
-      <div class="ph ph-rock"></div>
-
-      <div>
-        <div class="k">Reading · 11 min</div>
-
-        <h4>
-          <a href="why-we-are-not-the-solution.html" style="color:inherit;text-decoration:none">Why we say we are not the solution</a>
-        </h4>
-
-        <p>
-          On the difference between a platform that sells relief and one that
-          hands you a method. Written after a month of questions we couldn't
-          answer honestly.
-        </p>
-      </div>
+      <h2>Changes</h2>
+      <p>If this notice changes in a way that affects what we collect, the version and date above will change, and we'll ask for your consent again before collecting anything new.</p>
 
     </article>
-
-
-    <article class="post">
-
-      <div class="ph ph-canopy"></div>
-
-      <div>
-        <div class="k">Research · 9 min</div>
-
-        <h4>
-          The nasal cycle, as physiology understands it
-        </h4>
-
-        <p>
-          What has actually been published: the range of reported periods, the
-          autonomic correlations, and the size of the studies. Short version —
-          smaller than you'd hope.
-        </p>
-      </div>
-
-    </article>
-
   </div>
-
 </section>
 
 

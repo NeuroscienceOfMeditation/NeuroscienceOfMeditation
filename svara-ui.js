@@ -1,6 +1,6 @@
 /* ============================================================================
    svara-ui.js
-   Presentation layer for the svara diagnostic tool.
+   Presentation layer for the svara observation tool.
    Depends on svara-engine.js. All state is local; nothing is transmitted.
    ============================================================================ */
 
@@ -341,6 +341,8 @@
     renderResult(state.result);
     saveLog(state.result);
     go('result');
+    // Let svara-record.js (the open record) know an observation was completed.
+    try { window.dispatchEvent(new CustomEvent('svara:assessed', { detail: state.result })); } catch (e) {}
   }
 
   function svaraGlyph(s) { return s ? GLYPH[s.glyph] : ''; }
@@ -640,6 +642,9 @@
   // This button is static markup, so it is bound once. Binding it inside
   // bindActions() would stack a new listener on every render.
   $('[data-practice-done]').addEventListener('click', function () {
+    // Tell the open record which practice (if any) came before this re-observation.
+    try { window.dispatchEvent(new CustomEvent('svara:practice-done', { detail: { practice: state.practiced || null } })); } catch (e) {}
+    state.practiced = null;
     state.round = 2;
     state.observed = null;
     state.manualTime = null;
@@ -717,6 +722,7 @@
     runBtn.onclick = function () {
       if (!chosenMethod) return;
       runBtn.disabled = true;
+      state.practiced = chosenMethod.name;
       var left = chosenMethod.minutes * 60;
       var wide = false;
       var spokenHalf = false, spokenLast = false;

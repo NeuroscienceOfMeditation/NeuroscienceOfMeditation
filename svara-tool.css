@@ -937,3 +937,43 @@
   #svara .sv-vopts { width: 100%; }
   #svara .sv-vopts select { max-width: 100%; flex: 1 1 140px; }
 }
+
+
+/* ==========================================================================
+   OPEN RECORD (svara-record.js)
+   ========================================================================== */
+.rec-tick{display:flex;gap:10px;align-items:flex-start;margin:10px 0;font-size:14px;line-height:1.55;cursor:pointer}
+.rec-tick input{margin-top:4px;flex:none;width:16px;height:16px;accent-color:#1B4332}
+.rec-tick a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.rec-status{min-height:1.2em;margin-top:10px}
+.rec-ok{color:#2F7D4F}
+.rec-sub{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin:18px 0 8px}
+.rec-history{list-style:none;margin:0;padding:0}
+.rec-history li{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:9px 0;border-top:1px solid rgba(20,24,15,.1);font-size:14px;line-height:1.45}
+.rec-history li:first-child{border-top:0}
+.rec-history time{opacity:.65;font-size:13px}
+.rec-history .rec-empty{display:block;opacity:.7}
+.rec-dim{opacity:.65;font-size:13px}
+.rec-toast{margin:16px 0 0;padding:10px 14px;border-radius:10px;font-size:14px;line-height:1.5}
+.rec-toast a{color:inherit;text-decoration:underline}
+.rec-toast.ok{background:#E6F2EA;color:#1B4332}
+.rec-toast.off{background:#FBE9E2;color:#8A2F12}
+.rec-toast.neutral{background:rgba(20,24,15,.06)}
+.rec-checkin{margin:6px 0 18px;padding:14px 16px;border-radius:12px;background:rgba(20,24,15,.04)}
+.rec-checkin-title{margin:0 0 10px;font-size:15px;font-weight:600}
+.rec-checkin-title span{display:block;font-weight:400;font-size:12.5px;opacity:.7;margin-top:2px}
+.rec-scale{display:flex;align-items:center;gap:6px;margin:8px 0;flex-wrap:wrap}
+.rec-scale-name{width:58px;font-size:14px;font-weight:600}
+.rec-scale-end{font-size:12px;opacity:.6;min-width:48px}
+.rec-scale-end:last-child{text-align:left}
+.rec-dot{width:34px;height:34px;border-radius:50%;border:1px solid rgba(20,24,15,.2);background:#fff;font:600 13px/1 inherit;cursor:pointer;color:inherit}
+.rec-dot[aria-pressed="true"]{background:#1B4332;border-color:#1B4332;color:#fff}
+.rec-dot:focus-visible{outline:2px solid #1B4332;outline-offset:2px}
+.rec-bars-empty{display:flex;align-items:center;justify-content:center;border:1px dashed rgba(20,24,15,.2);border-radius:10px;padding:18px;text-align:center}
+.rec-bars-empty p{margin:0;font-size:14px;line-height:1.6;opacity:.75;max-width:420px}
+.wbars .rec-bar-gap{background:rgba(20,24,15,.06)}
+@media (max-width:640px){
+  .rec-scale-end{display:none}
+  .rec-scale-name{width:64px}
+  .rec-history li{grid-template-columns:1fr}
+}

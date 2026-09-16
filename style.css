@@ -516,3 +516,16 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .latest-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,24,15,.12)}
 .latest-card .k{margin-bottom:6px}
 @media (max-width:640px){.about-grid{gap:28px;grid-template-columns:1fr}.about-photo img{max-width:none}}
+
+
+/* =========================================
+   PRIVACY NOTICE
+   ========================================= */
+.privacy{max-width:760px;margin:0 auto}
+.privacy h2{font-size:clamp(24px,3vw,30px);margin:44px 0 12px}
+.privacy h2:first-child{margin-top:0}
+.privacy p,.privacy li{font-size:16.5px;line-height:1.8;color:var(--ink-60)}
+.privacy p{margin:0 0 14px}
+.privacy ul{padding-left:22px;margin:0 0 16px}
+.privacy b{color:var(--ink)}
+.privacy a{color:var(--forest);text-decoration:underline;text-underline-offset:3px}
