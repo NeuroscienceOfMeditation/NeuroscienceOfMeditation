@@ -504,3 +504,15 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .signup-dialog .kit-card{box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .signup-close{position:absolute;top:22px;right:22px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 .signup-close:hover{background:#fff}
+
+
+/* =========================================
+   HOMEPAGE: ABOUT + LATEST ARTICLES (Sept 2026)
+   ========================================= */
+.about-grid{align-items:center;gap:56px;grid-template-columns:minmax(0,440px) minmax(0,1fr)}
+.about-photo img{display:block;width:100%;max-width:460px;aspect-ratio:4/5;object-fit:cover;border-radius:22px}
+.latest{margin-top:30px}
+.latest-card{display:block;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
+.latest-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,24,15,.12)}
+.latest-card .k{margin-bottom:6px}
+@media (max-width:640px){.about-grid{gap:28px;grid-template-columns:1fr}.about-photo img{max-width:none}}

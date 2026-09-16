@@ -1,9 +1,18 @@
+---
+# Front matter lets the homepage list the latest articles. Leave these lines in place.
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Neuroscience Of Meditation</title>
+  <title>Neuroscience of Meditation | What yoga claims, what the research shows</title>
+  <meta name="description" content="Evidence-checked yoga, breathwork and meditation by Aditi, a doctoral fellow in the science of yoga. Traditional practices, held up against what research can measure.">
+  <meta property="og:title" content="Neuroscience of Meditation">
+  <meta property="og:description" content="What yoga claims. What the research shows.">
+  <meta property="og:image" content="https://neuroscienceofmeditation.in/myphoto.jpg">
+  <meta property="og:url" content="https://neuroscienceofmeditation.in/">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -55,26 +64,26 @@
 
       <div>
         <div class="eyebrow">
-          A yoga spiritual and scientific platform
+          Yoga &amp; meditation, checked against the research
         </div>
 
         <h1>
-          Science of Yoga:<br>
-          <em>Elevate your yoga practice with us</em>
+          What yoga claims.<br>
+          <em>What the research shows.</em>
         </h1>
 
         <p class="lede">
-          Creating awareness about yogic sciences — the practice, the theory behind it,
-          and what happens when you hold the two up against each other.
+          I'm Aditi, a doctoral fellow in the science of yoga. Here, the practices and
+          texts you've heard about are held up against what studies can actually measure.
         </p>
 
         <div class="btns">
-          <a class="btn p" href="courses-books.html" style="text-decoration:none">
-            See the classes
+          <a class="btn p" href="words-of-yoga.html" style="text-decoration:none">
+            Start with the evidence
           </a>
 
-          <a class="btn s" href="swar-yoga.html" style="text-decoration:none">
-            Try Swar Yoga
+          <a class="btn s" href="#newsletter" data-open-signup style="text-decoration:none">
+            Get the newsletter
           </a>
         </div>
       </div>
@@ -82,8 +91,8 @@
 
       <div class="hero-image">
   <img
-    src="myphoto.png"
-    alt="Science of Yoga"
+    src="myphoto.jpg"
+    alt="Aditi meditating"
   >
 </div>
 
@@ -124,6 +133,73 @@
 <div class="bandgreen"></div>
 
 
+<!-- ============ ABOUT ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="two about-grid">
+      <div class="about-photo">
+        <img src="aditimeditating.jpg" alt="Portrait of Aditi" loading="lazy">
+      </div>
+      <div>
+        <div class="eyebrow">Who's behind this</div>
+        <h2>Hi, I'm Aditi</h2>
+        <p class="sub">
+          I'm a doctoral fellow dedicated to the art and science of yoga. Neuroscience of
+          Meditation is where tradition and research meet: the practices taken seriously,
+          and an honest account of what the evidence does and doesn't show.
+        </p>
+        <p class="sub" style="margin-bottom:24px">
+          I'm building a community where teachers and students learn together, and a
+          place for genuine inquiry into yoga research.
+        </p>
+        <a class="btn p" href="my-mind-and-me.html" style="text-decoration:none">Read my story</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ LATEST ARTICLES (updates automatically) ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="eyebrow">Words of Yoga</div>
+    <h2>Latest articles</h2>
+    <p class="sub">Each one takes a claim you've probably heard and checks it against the research.</p>
+
+    <div class="three latest">
+      {% for post in site.posts limit:3 %}
+      <a class="card latest-card" href="{{ post.url | relative_url }}">
+        <div class="ph {{ post.card_class | default: 'ph-forest' }}"></div>
+        <div class="k">{{ post.pillar | default: 'Article' }}</div>
+        <h4>{{ post.title }}</h4>
+        <p>{{ post.description }}</p>
+      </a>
+      {% endfor %}
+      {% if site.posts.size < 3 %}
+      <a class="card latest-card" href="what-shiva-swarodaya-claims.html">
+        <div class="ph ph-water"></div>
+        <div class="k">Swar Yoga</div>
+        <h4>What Shiva Swarodaya actually claims about the hour</h4>
+        <p>The text is more specific than most summaries admit, and specificity is what makes it testable.</p>
+      </a>
+      {% endif %}
+      {% if site.posts.size < 2 %}
+      <a class="card latest-card" href="why-we-are-not-the-solution.html">
+        <div class="ph ph-forest"></div>
+        <div class="k">Reading</div>
+        <h4>Why we say we are not the solution</h4>
+        <p>On the difference between a platform that sells relief and one that hands you a method.</p>
+      </a>
+      {% endif %}
+    </div>
+
+    <div style="margin-top:30px">
+      <a class="btn s" href="words-of-yoga.html" style="text-decoration:none">All articles</a>
+    </div>
+  </div>
+</section>
+
+
 <!-- ============ SERVICES ============ -->
 <section class="sec">
 
@@ -135,7 +211,7 @@
 
     <p class="sub">
       Whether you want to practice yoga or learn more about the theory behind it,
-      Neuroscience Of Meditation offers a variety of classes that cater to both physical
+      Neuroscience of Meditation offers a variety of classes that cater to both physical
       and theoretical aspects of yoga and meditation.
     </p>
 
@@ -156,7 +232,7 @@
   <div class="card">
     <div class="ph ph-mist">
       <a href="words-of-yoga.html" style="display:block;width:100%;height:100%">
-        <img src="theoryclass.png" alt="Theory classes" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
+        <img src="theoryclass.jpg" alt="Theory classes" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
       </a>
     </div>
     <h4>Theory classes</h4>
@@ -168,7 +244,7 @@
   <div class="card">
     <div class="ph ph-water">
       <a href="swar-yoga.html" style="display:block;width:100%;height:100%">
-        <img src="swaryoga.png" alt="Swar Yoga" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
+        <img src="swaryoga.jpg" alt="Swar Yoga" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">
       </a>
     </div>
     <h4>Swar Yoga</h4>
@@ -181,132 +257,56 @@
 </section>
 
 
-<!-- ============ BOOKS ============ -->
+<!-- ============ COURSES & BOOKS ============ -->
 <section class="sec dim">
-
   <div class="wrap">
-
     <div class="two" style="align-items:center;gap:52px">
-
       <div>
-
-        <div class="eyebrow">
-          Try learning with our books
-        </div>
-
-        <h2>Order your copy now</h2>
-
+        <div class="eyebrow">Courses &amp; books</div>
+        <h2>Go deeper</h2>
         <p class="sub" style="margin-bottom:24px">
-          We have different digital copies of books available for various appetites
-          that will enrich knowledge about yoga sciences. We authenticate the proud
-          knowledge of our ancestors in a more scientific way.
+          Classes and reading on the science of yoga, meditation and the breath,
+          for practitioners and teachers who want to understand what they practise.
         </p>
-
         <a class="btn p" href="courses-books.html" style="text-decoration:none">
-          Browse the books
+          See courses and books
         </a>
-
       </div>
-
-
       <div class="two" style="gap:14px">
-
         <div class="ph ph-lamp" style="height:250px"></div>
         <div class="ph ph-sand" style="height:250px"></div>
-
       </div>
-
     </div>
-
   </div>
-
 </section>
 
-
-<!-- ============ REVIEWS ============ -->
+<!-- ============ OUR STANDARD ============ -->
 <section class="sec green">
-
   <div class="wrap">
-
-    <div class="eyebrow" style="color:var(--neon)">
-      Reviews
-    </div>
-
-    <h2 style="margin-bottom:34px">
-      What practitioners say
-    </h2>
-
+    <div class="eyebrow" style="color:var(--neon)">Our standard</div>
+    <h2 style="margin-bottom:34px">How articles are checked</h2>
     <div class="three">
-
-      <div class="card"
-           style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
-
-        <div style="color:var(--gold);letter-spacing:2px;margin-bottom:10px">
-          ★★★★★
-        </div>
-
-        <h4>Excellent Service</h4>
-
-        <p style="color:rgba(244,240,226,.68)">
-          Their service is brilliant! I really hope some of them are now using your service.
-        </p>
-
-        <p style="margin-top:16px;font-weight:600;color:var(--cream);font-size:13px">
-          Fiona · 5/5
-        </p>
-
+      <div class="card" style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
+        <div style="color:var(--neon);font-weight:700;font-size:13px;letter-spacing:.12em;margin-bottom:10px">01</div>
+        <h4>Sources you can click</h4>
+        <p style="color:rgba(244,240,226,.72)">Every study cited links to its PubMed record, and each one is checked against the source before an article is published.</p>
       </div>
-
-
-      <div class="card"
-           style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
-
-        <div style="color:var(--gold);letter-spacing:2px;margin-bottom:10px">
-          ★★★★★
-        </div>
-
-        <h4>Love the flexibility</h4>
-
-        <p style="color:rgba(244,240,226,.68)">
-          We are very happy with the service and we value that has added meaning to my life.
-        </p>
-
-        <p style="margin-top:16px;font-weight:600;color:var(--cream);font-size:13px">
-          Joseph · 5/5
-        </p>
-
+      <div class="card" style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
+        <div style="color:var(--neon);font-weight:700;font-size:13px;letter-spacing:.12em;margin-bottom:10px">02</div>
+        <h4>Tradition and evidence, kept apart</h4>
+        <p style="color:rgba(244,240,226,.72)">What the texts claim and what researchers have measured are described separately, so you can see where they meet and where they don't.</p>
       </div>
-
-
-      <div class="card"
-           style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
-
-        <div style="color:var(--gold);letter-spacing:2px;margin-bottom:10px">
-          ★★★★<span style="opacity:.3">★</span>
-        </div>
-
-        <h4>Fantastic quality</h4>
-
-        <p style="color:rgba(244,240,226,.68)">
-          I'm really appreciating the quality and presentation. The flavour and quality
-          of content is unparalleled.
-        </p>
-
-        <p style="margin-top:16px;font-weight:600;color:var(--cream);font-size:13px">
-          Michelle · 4/5
-        </p>
-
+      <div class="card" style="background:var(--forest-deep);border-color:rgba(244,240,226,.14);color:var(--cream)">
+        <div style="color:var(--neon);font-weight:700;font-size:13px;letter-spacing:.12em;margin-bottom:10px">03</div>
+        <h4>No miracle claims</h4>
+        <p style="color:rgba(244,240,226,.72)">Practices are shared as education, not treatment. Where the evidence is weak or missing, the article says so plainly.</p>
       </div>
-
     </div>
-
   </div>
-
 </section>
-
 
 <!-- ============ FOOTER ============ -->
-<footer>
+<footer id="newsletter">
 
   <div class="wrap">
 
@@ -314,10 +314,10 @@
 
       <div>
 
-        <h6>Science of Yoga</h6>
+        <h6>Neuroscience of Meditation</h6>
 
         <p>
-          A yoga spiritual and scientific platform for creating awareness about yogic sciences.
+          Evidence-checked yoga, breathwork and meditation.
         </p>
 
         <form action="https://app.kit.com/forms/9927031/subscriptions" class="seva-form formkit-form nom-signup" method="post" data-sv-form="9927031" data-uid="1e1c9bcc9e" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Almost done. Check your inbox and click the confirmation link to join.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}">
@@ -368,9 +368,6 @@
   <a href="https://www.instagram.com/neuroscienceofmeditation/" target="_blank" rel="noopener noreferrer">
     Instagram
   </a>
-  <a href="#">Privacy notice</a>
-  <a href="#">Your data rights</a>
-  <a href="#">Terms</a>
 
 </div>
 
@@ -380,7 +377,7 @@
     <div class="legal">
 
       <span>
-        © 2026 Science of Yoga · Delhi, India
+        © 2026 Neuroscience of Meditation · Delhi, India
       </span>
 
       <span>
