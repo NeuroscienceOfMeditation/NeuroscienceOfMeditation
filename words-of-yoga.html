@@ -1,3 +1,6 @@
+---
+# Front matter lets Jekyll list posts automatically. Leave these two lines in place.
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,6 +72,26 @@
 
   <div class="wrap">
 
+    {% comment %} New posts from the _posts folder appear here automatically, newest first. {% endcomment %}
+    {% for post in site.posts %}
+    <article class="post">
+
+      <div class="ph {{ post.card_class | default: 'ph-forest' }}"></div>
+
+      <div>
+        {% assign words = post.content | strip_html | number_of_words %}
+        <div class="k">{{ post.pillar | default: 'Article' }} · {{ words | divided_by: 220 | plus: 1 }} min</div>
+
+        <h4>
+          <a href="{{ post.url | relative_url }}" style="color:inherit;text-decoration:none">{{ post.title }}</a>
+        </h4>
+
+        <p>{{ post.description }}</p>
+      </div>
+
+    </article>
+
+    {% endfor %}
     <article class="post">
 
       <div class="ph ph-water"></div>
@@ -92,25 +115,7 @@
     </article>
 
 
-    <article class="post">
 
-      <div class="ph ph-mist"></div>
-
-      <div>
-        <div class="k">Practice · 6 min</div>
-
-        <h4>
-          Nadi Shodhana without the mythology
-        </h4>
-
-        <p>
-          Alternate nostril breathing does something measurable. It also gets
-          credited with a great deal it has never been shown to do. Here is the
-          line between the two.
-        </p>
-      </div>
-
-    </article>
 
 
     <article class="post">
@@ -121,7 +126,7 @@
         <div class="k">Reading · 11 min</div>
 
         <h4>
-          Why we say we are not the solution
+          <a href="why-we-are-not-the-solution.html" style="color:inherit;text-decoration:none">Why we say we are not the solution</a>
         </h4>
 
         <p>

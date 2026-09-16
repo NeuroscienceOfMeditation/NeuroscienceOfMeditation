@@ -1,0 +1,54 @@
+<footer>
+  <div class="wrap">
+    <div class="cols">
+
+      <div>
+        <h6>Neuroscience of Meditation</h6>
+        <p>Evidence-checked yoga, breathwork and meditation.</p>
+        <div class="sub-form">
+          <input type="email" placeholder="Type your email…">
+          <button class="btn n" style="padding:13px 22px;font-size:13px">Subscribe</button>
+        </div>
+      </div>
+
+      <div>
+        <h6>Learn</h6>
+        <a href="{{ '/courses-books.html' | relative_url }}">Courses</a>
+        <a href="{{ '/courses-books.html' | relative_url }}">Books</a>
+        <a href="{{ '/swar-yoga.html' | relative_url }}">Swar Yoga</a>
+        <a href="{{ '/words-of-yoga.html' | relative_url }}">Words of Yoga</a>
+      </div>
+
+      <div>
+        <h6>Read</h6>
+        <a href="{{ '/my-mind-and-me.html' | relative_url }}">My Mind and Me</a>
+        <a href="{{ '/anuttara.html' | relative_url }}">Aṇūṭṭara</a>
+        <a href="{{ '/swar-yoga.html' | relative_url }}">The open record</a>
+      </div>
+
+      <div>
+        <h6>About</h6>
+        <a href="{{ '/contact.html' | relative_url }}">Contact</a>
+      </div>
+
+    </div>
+
+    <div class="legal">
+      <span>© {{ site.time | date: '%Y' }} Neuroscience of Meditation · Delhi, India</span>
+      <span>Educational content, not medical advice.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav');
+if (burger && nav) {
+  burger.addEventListener('click', function () {
+    nav.classList.toggle('mobile-open');
+    const isOpen = nav.classList.contains('mobile-open');
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    burger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
+}
+</script>

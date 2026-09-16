@@ -1,0 +1,35 @@
+# Site settings for Jekyll (GitHub Pages builds this automatically)
+title: Neuroscience of Meditation
+tagline: Science, practice & consciousness
+description: >-
+  Evidence-checked yoga, breathwork and meditation. What traditional practices
+  claim, what research can measure, and what the studies actually show.
+url: "https://neuroscienceofmeditation.in"
+baseurl: ""
+lang: en_IN
+author: Neuroscience of Meditation
+timezone: Asia/Kolkata
+
+markdown: kramdown
+kramdown:
+  auto_ids: true
+
+# Keep URLs flat like the rest of the site, e.g. /nadi-shodhana-without-mythology.html
+permalink: /:title.html
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Files that should never be published
+exclude:
+  - SVARA-BUILD-NOTES.md
+  - README.md
+  - _drafts/README.md

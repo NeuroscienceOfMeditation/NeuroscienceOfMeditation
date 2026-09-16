@@ -415,3 +415,27 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   overflow: hidden;
   position: relative;
 }
+
+/* =========================================
+   MOBILE NAV FIX (Sept 2026)
+   The menu now collapses behind the ☰ button on
+   tablets and phones instead of overflowing the page.
+   ========================================= */
+@media (max-width:1040px){
+  .nav{display:none}
+  .nav.mobile-open{display:flex}
+}
+@media (max-width:640px){
+  footer .cols{grid-template-columns:1fr 1fr;gap:28px}
+  footer .cols > div:first-child{grid-column:1 / -1}
+  .post{grid-template-columns:1fr;gap:14px}
+  .three,.two,.trip,.guidecols{grid-template-columns:1fr}
+  .helix{max-width:100%}
+  .navcta{display:none}
+  .topbar .wrap{padding:0 18px}
+  .wrap{padding:0 20px}
+}
+@media (max-width:420px){
+  .brand b{font-size:16px}
+  .brand small{display:none}
+}
