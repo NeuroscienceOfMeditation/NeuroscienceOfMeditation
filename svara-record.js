@@ -1,8 +1,9 @@
 /* ==========================================================================
    svara-record.js — the Swara open record
-   Saves observations to Supabase (only after consent), shows each person
-   their own history, lets them download or delete everything, and draws the
-   public aggregate chart from real data.
+   Asks for consent in a pop-up before the first observation continues,
+   saves observations to Supabase (only after consent), gives each person a
+   record code for emailed data requests, and draws the public aggregate
+   chart from real data. Individual logs are never shown on screen.
 
    Load order: supabase.js → svara-engine → svara-knowledge → svara-voice →
    svara-ui → svara-record.
@@ -17,6 +18,8 @@
   var SUPABASE_URL = 'https://neinmntlyiszfmkeeyoo.supabase.co';
   var SUPABASE_KEY = 'sb_publishable_xqK97lVzGEzvTEItzC9REQ_QIp9U-Nl';
   var CONSENT_VERSION = 'v1-2026-09';
+  var DATA_EMAIL = 'adiyogistudios@gmail.com';     // where data requests go
+  var DECLINED_KEY = 'nom.svara.record.declined';  // per visit: "continue without saving"
   var PRACTICE_WINDOW_MS = 45 * 60 * 1000; // a practice counts for the next observation within 45 min
 
   var $ = function (s, r) { return (r || document).querySelector(s); };
@@ -37,6 +40,7 @@
     practice: null,        // { name, at }
     busy: false
   };
+  var consent = { dlg: null, then: null };   // the consent pop-up
 
   /* ---------------------------------------------------------------- setup */
   var panel = $('[data-record]');
@@ -57,6 +61,8 @@
   var db = state.client;
 
   injectCheckin();
+  buildConsent();
+  interceptContinue();
   bindEvents();
   loadStats();
   restore();
@@ -64,24 +70,21 @@
   /* ------------------------------------------------------ session + consent */
   function restore() {
     db.auth.getSession().then(function (res) {
+      state.ready = true;
       var session = res && res.data && res.data.session;
       if (!session) { state.user = null; state.joined = false; render(); return; }
       state.user = session.user;
       return db.from('svara_consents').select('consented_at').limit(1).then(function (r) {
         state.joined = !r.error && r.data && r.data.length > 0;
         render();
-        if (state.joined) loadHistory();
       });
-    }).catch(function () { render(); });
+    }).catch(function () { state.ready = true; render(); });
   }
 
-  function join() {
+  function join(then) {
     if (state.busy) return;
-    var adult = $('[data-rec-adult]'), agree = $('[data-rec-agree]');
-    if (!adult.checked || !agree.checked) return;
     state.busy = true;
-    setStatus('Joining…');
-
+    consentStatus('Joining…');
     var signIn = state.user ? Promise.resolve({ data: { user: state.user } })
                             : db.auth.signInAnonymously();
     signIn.then(function (res) {
@@ -89,30 +92,99 @@
       state.user = res.data.user || (res.data.session && res.data.session.user);
       return db.from('svara_consents').insert({ consent_version: CONSENT_VERSION, is_adult: true });
     }).then(function (res) {
-      if (res.error && res.error.code !== '23505') throw res.error; // 23505 = already consented
+      if (res.error && res.error.code !== '23505') throw res.error;   // 23505 = already consented
       state.joined = true;
       state.busy = false;
+      closeConsent();
       render();
-      loadHistory();
-      toast('You\'ve joined the open record. Your next observation will be added.');
+      if (then) then();
     }).catch(function (err) {
       state.busy = false;
       var msg = (err && err.message) || '';
-      if (/anonymous/i.test(msg) && /disabled|not enabled/i.test(msg)) {
-        setStatus('Contributions aren\'t switched on yet. Please try again later.');
-      } else if (/rate limit/i.test(msg)) {
-        setStatus('Too many people joined from this network in the last hour. Please try again later.');
-      } else {
-        setStatus('Something went wrong joining. Please try again in a moment.');
-      }
+      if (/anonymous/i.test(msg) && /disabled|not enabled/i.test(msg)) consentStatus('Contributions aren’t switched on yet. You can continue without saving.');
+      else if (/rate limit/i.test(msg)) consentStatus('Too many people joined from this network recently. You can continue without saving and join later.');
+      else consentStatus('We couldn’t connect just now. You can continue without saving and try again later.');
     });
+  }
+
+  /* ------------------------------------------------------- consent dialog */
+  function buildConsent() {
+    var d = document.createElement('dialog');
+    d.className = 'rc-dialog';
+    d.setAttribute('aria-labelledby', 'rc-title');
+    d.setAttribute('aria-describedby', 'rc-desc');
+    d.innerHTML =
+      '<form method="dialog" class="rc-card" novalidate>' +
+        '<p class="rc-kicker">Before you continue</p>' +
+        '<h2 id="rc-title">Add this observation to the open record?</h2>' +
+        '<p id="rc-desc">The open record is a shared, anonymous dataset testing what the Svarodaya texts say about the breath. No name or email is needed.</p>' +
+        '<ul class="rc-list" aria-label="What is saved">' +
+          '<li>Which side is flowing, and the time</li>' +
+          '<li>Your location rounded to about 11 km, only if you share one</li>' +
+          '<li>Any mood, energy or calm score you choose to add</li>' +
+        '</ul>' +
+        '<label class="rc-tick"><input type="checkbox" data-rc-adult> <span>I am 18 or older.</span></label>' +
+        '<label class="rc-tick"><input type="checkbox" data-rc-agree> <span>I agree to my observations being stored and included in public <b>aggregate</b> statistics, as set out in the <a href="privacy.html" target="_blank" rel="noopener">privacy notice</a>.</span></label>' +
+        '<div class="rc-actions">' +
+          '<button type="button" class="rc-btn primary" data-rc-join disabled>Agree and continue</button>' +
+          '<button type="button" class="rc-btn" data-rc-skip>Continue without saving</button>' +
+        '</div>' +
+        '<p class="rc-status" data-rc-status role="status" aria-live="polite"></p>' +
+        '<p class="rc-fine">Under 18? Choose “Continue without saving”. The tool works exactly the same. To see or delete your data later, email ' + esc(DATA_EMAIL) + ' with the record code you’ll be shown.</p>' +
+      '</form>';
+    document.body.appendChild(d);
+    consent.dlg = d;
+    var adult = d.querySelector('[data-rc-adult]'), agree = d.querySelector('[data-rc-agree]'), btn = d.querySelector('[data-rc-join]');
+    function sync() { btn.disabled = !(adult.checked && agree.checked); }
+    adult.addEventListener('change', sync);
+    agree.addEventListener('change', sync);
+    btn.addEventListener('click', function () { if (!btn.disabled) join(consent.then); });
+    d.querySelector('[data-rc-skip]').addEventListener('click', function () {
+      try { sessionStorage.setItem(DECLINED_KEY, '1'); } catch (e) {}
+      var then = consent.then;
+      closeConsent();
+      render();
+      if (then) then();
+    });
+    d.addEventListener('cancel', function (e) { e.preventDefault(); d.querySelector('[data-rc-skip]').click(); });
+  }
+
+  function openConsent(then) {
+    var d = consent.dlg;
+    consent.then = then || null;
+    d.querySelector('[data-rc-adult]').checked = false;
+    d.querySelector('[data-rc-agree]').checked = false;
+    d.querySelector('[data-rc-join]').disabled = true;
+    consentStatus('');
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+    d.querySelector('[data-rc-adult]').focus();
+  }
+  function closeConsent() {
+    var d = consent.dlg; consent.then = null;
+    if (d && d.open) { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); }
+  }
+  function consentStatus(t) { var e = consent.dlg && consent.dlg.querySelector('[data-rc-status]'); if (e) e.textContent = t; }
+
+  function declined() { try { return sessionStorage.getItem(DECLINED_KEY) === '1'; } catch (e) { return false; } }
+
+  /** Ask once per visit, at the moment someone first tries to continue. */
+  function interceptContinue() {
+    var bypass = false;
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('[data-observe-done]');
+      if (!btn || bypass || btn.disabled) return;
+      if (state.joined || declined() || !state.ready) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openConsent(function () { bypass = true; btn.click(); bypass = false; });
+    }, true);
   }
 
   /* -------------------------------------------------------------- saving */
   function onAssessed(e) {
     var r = e.detail;
     if (!r || !r.observedSvara) return;
-    if (!state.joined) { toastResult('Not added to the open record. <a href="#record">Join below</a> to contribute.', 'neutral'); return; }
+    if (!state.joined) { toastResult('Not added to the open record. <a href="#record">Join the open record</a> to contribute.', 'neutral'); return; }
 
     var ctx = r.context || {};
     var mins = ctx.minutesSinceSunrise;
@@ -151,106 +223,61 @@
       toastResult('Added to the open record' + (practice ? ', noted as after “' + esc(practice) + '”' : '') + '. Thank you.', 'ok');
       state.practice = null;
       resetCheckin();
-      loadHistory();
       loadStats();
     });
   }
 
-  /* ------------------------------------------------------ history + rights */
-  function loadHistory() {
-    if (!state.joined) return;
-    db.from('svara_logs')
-      .select('observed_at, observed_svara, expected_svara, alignment, mood, energy, calm, practice_key')
-      .order('observed_at', { ascending: false }).limit(12)
-      .then(function (res) {
-        var list = $('[data-rec-history]');
-        if (!list) return;
-        if (res.error) { list.innerHTML = '<li class="rec-empty">Couldn\'t load your history just now.</li>'; return; }
-        if (!res.data.length) {
-          list.innerHTML = '<li class="rec-empty">Nothing yet. Complete an observation above and it will appear here.</li>';
-          return;
-        }
-        list.innerHTML = res.data.map(function (e) {
-          var d = new Date(e.observed_at);
-          var when = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short' }) + ' · ' +
-                     d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-          var extra = [];
-          if (e.practice_key) extra.push('after ' + esc(e.practice_key));
-          if (e.mood || e.energy || e.calm) extra.push('check-in ' + [e.mood, e.energy, e.calm].map(function (x) { return x || '–'; }).join('/'));
-          return '<li><time>' + esc(when) + '</time><div><b>' + esc(NAMES[e.observed_svara] || e.observed_svara) + '</b>' +
-            (e.expected_svara ? ' <span class="rec-dim">· ' + esc(ALIGN[e.alignment] || '') + '</span>' : '') +
-            (extra.length ? '<div class="rec-dim">' + extra.join(' · ') + '</div>' : '') + '</div></li>';
-        }).join('');
-      });
-  }
-
-  function download() {
-    Promise.all([
-      db.from('svara_consents').select('*'),
-      db.from('svara_logs').select('*').order('observed_at', { ascending: true })
-    ]).then(function (res) {
-      var data = {
-        exported_at: new Date().toISOString(),
-        note: 'Everything the Neuroscience of Meditation open record holds for this browser\'s anonymous account.',
-        consent: res[0].data || [],
-        observations: res[1].data || []
-      };
-      var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'my-svara-record.json';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
-    });
-  }
-
-  function removeAll() {
-    if (!window.confirm('Delete all your observations and your consent from the open record? This cannot be undone.')) return;
-    setStatus('Deleting…');
-    db.rpc('delete_my_data').then(function (res) {
-      if (res.error) { setStatus('Deletion failed. Please try again, or contact us and we\'ll do it for you.'); return; }
-      return db.auth.signOut().catch(function () {}).then(function () {
-        state.user = null; state.joined = false;
-        render();
-        loadStats();
-        toast('Deleted. Nothing from this browser remains in the open record.');
-      });
-    });
-  }
-
   /* ------------------------------------------------------------ rendering */
+  function recordCode() {
+    return state.user && state.user.id ? state.user.id.replace(/-/g, '').slice(0, 8).toUpperCase() : '';
+  }
+
+  function mailto(code) {
+    var subject = 'Swara open record: data request (' + code + ')';
+    var body = 'Hello,\n\nMy record code is: ' + code + '\n\nI would like to:\n[ ] receive a copy of my data\n[ ] have all my data deleted\n\nThank you.';
+    return 'mailto:' + DATA_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
   function render() {
     if (!panel) return;
     if (!state.joined) {
       panel.innerHTML =
-        '<h2 class="sv-h" style="font-size:18px">Add your observations to the open record</h2>' +
-        '<p class="sv-p">Each observation you complete above (which side is flowing, when, roughly where, and an optional check-in) ' +
-        'joins a shared record that tests the Svarodaya rules against real breath. No name or email needed.</p>' +
-        '<label class="rec-tick"><input type="checkbox" data-rec-adult> <span>I am 18 or older.</span></label>' +
-        '<label class="rec-tick"><input type="checkbox" data-rec-agree> <span>I agree that my observations are stored and included in public ' +
-        '<b>aggregate</b> statistics, as described in the <a href="privacy.html" target="_blank" rel="noopener">privacy notice</a>. ' +
-        'I can download or delete everything at any time.</span></label>' +
-        '<div class="sv-row" style="margin-top:14px"><button class="sv-btn primary" data-rec-join disabled>Join the open record</button></div>' +
+        '<h2 class="sv-h" style="font-size:18px">The open record</h2>' +
+        '<p class="sv-p">Add your observations to a shared, anonymous record that tests the Svarodaya rules against real breath. No name or email needed.</p>' +
+        '<div class="rec-actions"><button class="sv-btn primary" data-rec-open>Join the open record</button></div>' +
         '<p class="sv-fine rec-status" data-rec-status aria-live="polite"></p>';
-      var adult = $('[data-rec-adult]'), agree = $('[data-rec-agree]'), btn = $('[data-rec-join]');
-      var sync = function () { btn.disabled = !(adult.checked && agree.checked); };
-      adult.addEventListener('change', sync); agree.addEventListener('change', sync);
-      btn.addEventListener('click', join);
+      panel.querySelector('[data-rec-open]').addEventListener('click', function () {
+        try { sessionStorage.removeItem(DECLINED_KEY); } catch (e) {}
+        openConsent(null);
+      });
       return;
     }
+    var code = recordCode();
     panel.innerHTML =
-      '<h2 class="sv-h" style="font-size:18px">You\'re contributing <span class="rec-ok">✓</span></h2>' +
-      '<p class="sv-p">Each observation you complete is added to the open record. Your record is linked to this browser: ' +
-      'clearing your browser data or using another device starts a new one.</p>' +
-      '<h3 class="rec-sub">Your recent observations</h3>' +
-      '<ul class="rec-history" data-rec-history><li class="rec-empty">Loading…</li></ul>' +
-      '<div class="sv-row" style="margin-top:14px">' +
-        '<button class="sv-btn quiet" data-rec-download>Download my data</button>' +
-        '<button class="sv-btn quiet" data-rec-delete>Delete all my data</button>' +
+      '<h2 class="sv-h" style="font-size:18px">You’re contributing <span class="rec-ok" aria-hidden="true">✓</span></h2>' +
+      '<p class="sv-p">Each observation you complete is added to the open record, anonymously.</p>' +
+      '<div class="rec-code"><div><small id="rec-code-label">Your record code</small><b aria-labelledby="rec-code-label">' + esc(code) + '</b></div>' +
+        '<button class="sv-btn quiet" data-rec-copy>Copy</button></div>' +
+      '<p class="sv-p" style="margin-bottom:0">Want a copy of your data, or to have it deleted? Email us with this code and we’ll take care of it.</p>' +
+      '<div class="rec-actions">' +
+        '<a class="sv-btn primary" href="' + esc(mailto(code)) + '" style="text-decoration:none">Email a data request</a>' +
+        '<button class="sv-btn quiet" data-rec-stop>Stop contributing</button>' +
       '</div>' +
       '<p class="sv-fine rec-status" data-rec-status aria-live="polite"></p>';
-    $('[data-rec-download]').addEventListener('click', download);
-    $('[data-rec-delete]').addEventListener('click', removeAll);
+    panel.querySelector('[data-rec-copy]').addEventListener('click', function () {
+      var done = function () { setStatus('Code copied.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, function () { setStatus('Your code is ' + code + '.'); });
+      else setStatus('Your code is ' + code + '.');
+    });
+    panel.querySelector('[data-rec-stop]').addEventListener('click', function () {
+      if (!window.confirm('Stop adding observations from this browser? Anything already saved stays in the record unless you email us to delete it, so note your code first: ' + code)) return;
+      db.auth.signOut().catch(function () {}).then(function () {
+        state.user = null; state.joined = false;
+        try { sessionStorage.setItem(DECLINED_KEY, '1'); } catch (e) {}
+        render();
+        setStatus('Stopped. New observations from this browser won’t be saved.');
+      });
+    });
   }
 
   function setStatus(t) { var s = $('[data-rec-status]'); if (s) s.textContent = t; }

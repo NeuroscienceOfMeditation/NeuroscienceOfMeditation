@@ -162,6 +162,14 @@
     'Notice which nostril feels more open.'
   ];
 
+  // What the voice says: warmer and more natural than the on-screen cues.
+  var SPOKEN_CUES = [
+    'Let’s begin. Sit comfortably, let your shoulders soften, and breathe normally through your nose.',
+    'Bring your attention to the tip of your nose. Just notice the air moving in, and moving out.',
+    'Now notice which side feels more open. Don’t change anything. Simply observe.',
+    'Whenever you’re ready, tell me which side is flowing.'
+  ];
+
   function startObservation() {
     var orb = $('[data-orb]');
     var cue = $('[data-cue]');
@@ -173,7 +181,7 @@
     var i = 0;
 
     cue.textContent = CUES[0];
-    say(CUES[0]);
+    sayLines(SPOKEN_CUES, { gap: 1800 });
     count.textContent = seconds + ' seconds — there is no rush, take longer if you like.';
     next.disabled = true;
 
@@ -191,14 +199,14 @@
     every(function () {
       seconds--;
       if (seconds % 5 === 0 && i < CUES.length - 1) {
-        i++; cue.textContent = CUES[i]; say(CUES[i]);
+        i++; cue.textContent = CUES[i];
       }
       if (seconds > 0) {
         count.textContent = seconds + ' seconds — there is no rush, take longer if you like.';
       } else {
         count.textContent = 'Take as long as you need.';
         if (!next.disabled) { /* already announced */ } else {
-          say('When you are ready, tell me which side is flowing.');
+          /* the spoken cues already end with this prompt */
         }
         next.disabled = false;
       }
@@ -721,8 +729,18 @@
 
     runBtn.onclick = function () {
       if (!chosenMethod) return;
-      runBtn.disabled = true;
       state.practiced = chosenMethod.name;
+      // Full-screen guided practice: written steps, voice, subtitles, camera mirror.
+      if (window.SvaraPracticeView) {
+        hush();
+        window.SvaraPracticeView.open({
+          method: chosenMethod,
+          target: target,
+          onObserveAgain: function () { $('[data-practice-done]').click(); }
+        });
+        return;
+      }
+      runBtn.disabled = true;
       var left = chosenMethod.minutes * 60;
       var wide = false;
       var spokenHalf = false, spokenLast = false;
@@ -786,7 +804,8 @@
   }
 
   function saveLog(r) {
-    if (!$('[data-log-opt]').checked) return;
+    var opt = $('[data-log-opt]');
+    if (!opt || !opt.checked) return;   // browser log panel removed: nothing stored locally
     var entries = readLog();
     entries.unshift({
       t: (r.context.date || new Date()).toISOString(),
@@ -802,6 +821,7 @@
 
   function renderLog() {
     var list = $('[data-log]');
+    if (!list) return;
     var entries = readLog();
     if (!entries.length) {
       list.innerHTML = '<li style="grid-template-columns:1fr"><div class="sv-empty">' +
@@ -830,7 +850,7 @@
     }).join('');
   }
 
-  $('[data-log-clear]').addEventListener('click', function () {
+  if ($('[data-log-clear]')) $('[data-log-clear]').addEventListener('click', function () {
     try { localStorage.removeItem(LOG_KEY); } catch (e) {}
     renderLog();
   });
