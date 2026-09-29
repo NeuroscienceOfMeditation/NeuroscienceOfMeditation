@@ -84,19 +84,36 @@
 
   /* --- step routing -------------------------------------------------------- */
 
-  function go(step) {
+  // opts.boot: the first render on page load. Focus stays where the visitor
+  // is, and the settling timer waits until the tool is actually on screen.
+  function go(step, opts) {
+    var boot = opts && opts.boot;
     clearTimers();
+    stopSeenWatch();
     state.step = step;
     $$('.sv-step').forEach(function (el) {
       el.classList.toggle('on', el.dataset.step === step);
     });
+    showProgress(step);
     var panel = $('.sv-step.on');
-    if (panel) {
+    if (panel && !boot) {
       var h = panel.querySelector('.sv-h');
       if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
     }
-    if (step === 'observe') startObservation();
+    if (step === 'observe') { if (boot) startWhenSeen(); else startObservation(); }
     if (step === 'practice') startPractice();
+  }
+
+  // Step 1-4 indicator above the panels. The correction step counts as part of
+  // the result, since it always leads back to observing again.
+  var PROGRESS = { observe: 0, report: 1, context: 2, result: 3, practice: 3 };
+  function showProgress(step) {
+    var at = PROGRESS[step];
+    $$('[data-progress] li').forEach(function (li, i) {
+      li.classList.toggle('done', i < at);
+      if (i === at) li.setAttribute('aria-current', 'step');
+      else li.removeAttribute('aria-current');
+    });
   }
 
   /* ==========================================================================
@@ -123,7 +140,7 @@
 
   function startCamera() {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      $('.sv-camoff').textContent =
+      $('[data-cam-note]').textContent =
         'This browser does not offer camera access. You can continue without it — ' +
         'the camera only helps you sit and look, it measures nothing.';
       return;
@@ -138,7 +155,7 @@
         camBtn.setAttribute('aria-pressed', 'true');
       })
       .catch(function () {
-        $('.sv-camoff').textContent =
+        $('[data-cam-note]').textContent =
           'No problem. You can continue without the camera — everything below ' +
           'works the same way.';
       });
@@ -213,6 +230,23 @@
     }, 1000);
   }
 
+  // On page load the tool is usually below the fold. Starting the fifteen
+  // seconds then meant they had run out before anyone scrolled down to sit.
+  var seenWatch = null;
+  function startWhenSeen() {
+    var orb = $('[data-orb]');
+    if (!orb || !('IntersectionObserver' in window)) { startObservation(); return; }
+    seenWatch = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting) return;
+      stopSeenWatch();
+      if (state.step === 'observe') startObservation();
+    }, { threshold: 0.6 });
+    seenWatch.observe(orb);
+  }
+  function stopSeenWatch() {
+    if (seenWatch) { seenWatch.disconnect(); seenWatch = null; }
+  }
+
   $$('[data-observe-done]').forEach(function (b) {
     b.addEventListener('click', function () { go('report'); });
   });
@@ -270,7 +304,16 @@
     $('[data-f-date]').value = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
     $('[data-f-time]').value = pad(d.getHours()) + ':' + pad(d.getMinutes());
     $('[data-f-tz]').value = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown';
+    if (state.lat == null) {
+      var saved = savedPlace();
+      if (saved) {
+        state.lat = saved.lat; state.lon = saved.lon;
+        $('[data-f-city]').value = saved.city || '';
+        $('[data-loc-note]').textContent = 'Using your place from last time. Change it any time.';
+      }
+    }
     updateLocField();
+    placeReady();
   }
 
   function updateLocField() {
@@ -280,11 +323,54 @@
       : state.lat.toFixed(3) + ', ' + state.lon.toFixed(3);
   }
 
+  /* --- where: a city, the browser's location, or typed coordinates.
+     Remembered in this browser (to about 1 km), since the practice is daily. */
+  var PLACE_KEY = 'svara-place';
+
+  function savedPlace() {
+    try {
+      var v = JSON.parse(localStorage.getItem(PLACE_KEY));
+      return v && typeof v.lat === 'number' && typeof v.lon === 'number' ? v : null;
+    } catch (e) { return null; }
+  }
+
+  function rememberPlace(city) {
+    try {
+      localStorage.setItem(PLACE_KEY, JSON.stringify({
+        lat: Math.round(state.lat * 100) / 100,
+        lon: Math.round(state.lon * 100) / 100,
+        city: city || ''
+      }));
+    } catch (e) {}
+  }
+
+  function forgetPlace() {
+    try { localStorage.removeItem(PLACE_KEY); } catch (e) {}
+  }
+
+  // The assessment button waits for a place; the hint says why.
+  function placeReady() {
+    var ok = state.lat != null;
+    $('[data-context-done]').disabled = !ok;
+    $('[data-context-hint]').hidden = ok;
+  }
+
+  $('[data-f-city]').addEventListener('change', function () {
+    if (!this.value) return;
+    var m = this.value.split(',');
+    state.lat = parseFloat(m[0]); state.lon = parseFloat(m[1]);
+    updateLocField();
+    placeReady();
+    rememberPlace(this.value);
+    $('[data-loc-note]').textContent = 'Set to ' + this.options[this.selectedIndex].text +
+      '. Remembered in this browser for next time.';
+  });
+
   $('[data-locate]').addEventListener('click', function () {
     var btn = this;
     var note = $('[data-loc-note]');
     if (!navigator.geolocation) {
-      note.textContent = 'This browser cannot share a location. Enter coordinates by hand instead.';
+      note.textContent = 'This browser cannot share a location. Choose the nearest city instead.';
       return;
     }
     btn.disabled = true;
@@ -294,13 +380,15 @@
         state.lat = p.coords.latitude;
         state.lon = p.coords.longitude;
         updateLocField();
-        note.textContent = 'Location set. It stays in this browser and is used only to work out your sunrise.';
+        placeReady();
+        $('[data-f-city]').value = '';
+        rememberPlace('');
+        note.textContent = 'Location set, and remembered in this browser for next time.';
         btn.disabled = false;
-        $('[data-context-done]').disabled = false;
       },
       function () {
-        note.textContent = 'Location was not shared. Type your coordinates below, or the tool ' +
-                           'can still show your observation without the traditional comparison.';
+        note.textContent = 'Location was not shared. Choose the nearest city instead, ' +
+                           'or skip the comparison.';
         btn.disabled = false;
       },
       { timeout: 10000, maximumAge: 600000 }
@@ -312,11 +400,14 @@
     var la = parseFloat(m[0]), lo = parseFloat(m[1]);
     if (isFinite(la) && isFinite(lo) && Math.abs(la) <= 90 && Math.abs(lo) <= 180) {
       state.lat = la; state.lon = lo;
-      $('[data-context-done]').disabled = false;
+      $('[data-f-city]').value = '';
+      rememberPlace('');
       $('[data-loc-note]').textContent = 'Coordinates accepted.';
     } else {
-      $('[data-context-done]').disabled = true;
+      state.lat = state.lon = null;
+      if (!this.value.trim()) forgetPlace();
     }
+    placeReady();
   });
 
   $('[data-context-done]').addEventListener('click', function () {
@@ -1055,7 +1146,7 @@
     }).join('');
 
     $$('[data-run-prac]').forEach(function (b) {
-      b.addEventListener('click', function () { openRunner(b.dataset.runPrac); });
+      b.addEventListener('click', function () { openRunner(b.dataset.runPrac, b); });
     });
 
     var rn = $('[data-retention-note]');
@@ -1077,10 +1168,15 @@
 
   /* --- the runner: a timer, with an optional pacer where the text warrants it */
 
-  function openRunner(id) {
+  // The runner sits below the whole list; remember which practice opened it
+  // so Close can take the visitor back there.
+  var runnerOpener = null;
+
+  function openRunner(id, opener) {
     var p = K.PRANAYAMA.filter(function (x) { return x.id === id; })[0];
     if (!p) return;
     clearTimers();
+    runnerOpener = opener || null;
 
     var box = $('[data-runner]');
     box.hidden = false;
@@ -1156,6 +1252,10 @@
     clearTimers();
     hush();
     $('[data-runner]').hidden = true;
+    if (runnerOpener && document.body.contains(runnerOpener)) {
+      scrollTo(runnerOpener, 'center');
+      runnerOpener.focus({ preventScroll: true });
+    }
   });
 
   /* ==========================================================================
@@ -1463,7 +1563,7 @@
   /* ========================================================================== */
 
   renderLog();
-  go('observe');
+  go('observe', { boot: true });
   openTabFromHash();
 
 }());
