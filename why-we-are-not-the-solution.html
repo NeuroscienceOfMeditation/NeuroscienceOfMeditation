@@ -1,49 +1,21 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Why We Say We Are Not the Solution — Neuroscience of Meditation</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="On the difference between a platform that sells relief and one that hands you a method.">
+  {% include head.html %}
 </head>
 
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-
-    <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
-      <img src="logo.png" alt="Neuroscience of Meditation logo"
-           style="width:48px;height:48px;object-fit:contain;border-radius:8px">
-      <span>
-        <b>Neuroscience of Meditation</b>
-        <small>Science, practice &amp; consciousness</small>
-      </span>
-    </a>
-
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="swar-yoga.html">Swar Yoga</a>
-      <a href="my-mind-and-me.html">My Mind and Me</a>
-      <a href="courses-books.html">Courses &amp; Books</a>
-      <a href="words-of-yoga.html" class="on">Words of Yoga</a>
-      <a href="anuttara.html">Aṇūṭṭara</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-
-    <a class="navcta" href="swar-yoga.html" style="text-decoration:none">
-      Log your swara
-    </a>
-
-    <button class="burger" aria-label="Open navigation" aria-expanded="false">
-      ☰
-    </button>
-
-  </div>
-</header>
+{% include header.html active="words" %}
 
 
-<main>
+<main id="main">
 
   <section class="sec tight">
     <div class="wrap">
@@ -54,7 +26,7 @@
       </a>
 
       <div class="eyebrow">
-        Reading · 11 min
+        Reading · 2 min
       </div>
 
       <h1 style="font-size:clamp(38px,5vw,64px);line-height:1;max-width:900px">
@@ -140,14 +112,11 @@
           the individual to observe, question, reflect and choose.
         </p>
 
-        <div class="card" style="margin-top:48px">
-          <h4>Author's note</h4>
-          <p>
-            This draft is a starting structure for the full article. Your final
-            version can include your personal reflections, references to classical
-            texts and research citations.
-          </p>
-        </div>
+        {% comment %}
+          Author's note (hidden from readers): this draft is a starting structure
+          for the full article. The final version can include personal reflections,
+          references to classical texts and research citations.
+        {% endcomment %}
 
       </article>
 
@@ -176,176 +145,7 @@
 </main>
 
 
-<footer>
+{% include footer.html %}
 
-  <div class="wrap">
-
-    <div class="cols">
-
-      <div>
-
-        <h6>Neuroscience of Meditation</h6>
-
-        <p>
-          Evidence-checked yoga, breathwork and meditation.
-        </p>
-
-        <form action="https://app.kit.com/forms/9927031/subscriptions" class="seva-form formkit-form nom-signup" method="post" data-sv-form="9927031" data-uid="1e1c9bcc9e" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Almost done. Check your inbox and click the confirmation link to join.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}">
-          <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-          <div data-element="fields" class="seva-fields formkit-fields sub-form">
-            <div class="formkit-field">
-              <input class="formkit-input" name="email_address" aria-label="Email address" placeholder="Type your email…" required type="email" autocomplete="email">
-            </div>
-            <button data-element="submit" class="formkit-submit btn n" type="submit" style="padding:13px 22px;font-size:13px">
-              <div class="formkit-spinner"><div></div><div></div><div></div></div>
-              <span>Subscribe</span>
-            </button>
-          </div>
-          <p class="signup-note">Evidence-checked articles and practices by email. Unsubscribe anytime. <a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" target="_blank" rel="nofollow noopener">Built with Kit</a></p>
-        </form>
-
-      </div>
-
-
-      <div>
-
-        <h6>Learn</h6>
-
-        <a href="courses-books.html">Courses</a>
-        <a href="courses-books.html">Books</a>
-        <a href="swar-yoga.html">Swar Yoga</a>
-        <a href="words-of-yoga.html">Words of Yoga</a>
-
-      </div>
-
-
-      <div>
-
-        <h6>Read</h6>
-
-        <a href="my-mind-and-me.html">My Mind and Me</a>
-        <a href="anuttara.html">Aṇūṭṭara</a>
-        <a href="swar-yoga.html">The open record</a>
-
-      </div>
-
-
-      <div>
-
-        <h6>About</h6>
-
-        <a href="contact.html">Contact</a>
-        <a href="privacy.html">Privacy notice</a>
-
-      </div>
-
-    </div>
-
-
-    <div class="legal">
-
-      <span>
-        © 2026 Neuroscience of Meditation · Delhi, India
-      </span>
-
-      <span>
-        Swar Yoga guidance is traditional practice, not medical advice.
-      </span>
-
-    </div>
-
-  </div>
-
-</footer>
-
-
-<script>
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav');
-
-if (burger && nav) {
-  burger.addEventListener('click', function () {
-
-    nav.classList.toggle('mobile-open');
-
-    const isOpen = nav.classList.contains('mobile-open');
-
-    burger.setAttribute(
-      'aria-expanded',
-      isOpen ? 'true' : 'false'
-    );
-
-    burger.setAttribute(
-      'aria-label',
-      isOpen ? 'Close navigation' : 'Open navigation'
-    );
-
-  });
-}
-</script>
-
-<a
-  href="contact.html"
-  data-open-signup
-  aria-label="Subscribe for evidence-checked articles"
-  style="
-    position:fixed;
-    right:24px;
-    bottom:24px;
-    width:62px;
-    height:62px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:var(--cream);
-    border-radius:50%;
-    box-shadow:0 8px 24px rgba(0,0,0,.18);
-    z-index:1000;
-    text-decoration:none;
-  "
->
-  <img
-    src="logo.png"
-    alt="Subscribe"
-    style="width:46px;height:46px;object-fit:contain;border-radius:50%"
-  >
-</a>
-
-<!-- Newsletter popup: opened by the floating logo -->
-<dialog class="signup-dialog" id="signup-dialog" aria-label="Subscribe to Neuroscience of Meditation">
-  <button type="button" class="signup-close" aria-label="Close">×</button>
-  <form action="https://app.kit.com/forms/9927031/subscriptions" class="seva-form formkit-form kit-card" method="post" data-sv-form="9927031" data-uid="1e1c9bcc9e" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Almost done. Check your inbox and click the confirmation link to join.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" aria-labelledby="kit-title-popup">
-  <div class="kit-card-inner">
-    <div class="kit-card-copy">
-      <h2 class="kit-card-title" id="kit-title-popup">Evidence-checked yoga and meditation, in your inbox</h2>
-      <p class="kit-card-text">One claim, checked against the research, most weeks.</p>
-      <ul class="formkit-alert formkit-alert-error" data-element="errors" data-group="alert"></ul>
-      <div data-element="fields" class="seva-fields formkit-fields kit-card-fields">
-        <div class="formkit-field"><input class="formkit-input" name="email_address" aria-label="Email address" placeholder="Email address" required type="email" autocomplete="email"></div>
-        <button data-element="submit" class="formkit-submit" type="submit"><div class="formkit-spinner"><div></div><div></div><div></div></div><span>Subscribe</span></button>
-      </div>
-      <p class="kit-card-disclaimer">We respect your privacy. Unsubscribe at any time. <a href="https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic" data-element="powered-by" class="formkit-powered-by-convertkit" target="_blank" rel="nofollow noopener">Built with Kit</a></p>
-    </div>
-    <div class="kit-card-image" role="img" aria-label="Neuroscience of Meditation logo"></div>
-  </div>
-</form>
-</dialog>
-<script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
-<script>
-(function () {
-  var dlg = document.getElementById('signup-dialog');
-  document.querySelectorAll('[data-open-signup]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      if (!dlg || typeof dlg.showModal !== 'function') return; // old browsers: follow the link
-      e.preventDefault();
-      dlg.showModal();
-    });
-  });
-  if (dlg) {
-    dlg.querySelector('.signup-close').addEventListener('click', function () { dlg.close(); });
-    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-  }
-})();
-</script>
 </body>
 </html>

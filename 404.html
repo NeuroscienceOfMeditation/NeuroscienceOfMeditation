@@ -1,0 +1,48 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found — Neuroscience of Meditation</title>
+  <meta name="robots" content="noindex">
+  {% include head.html %}
+</head>
+
+<body>
+
+{% include header.html %}
+
+<main id="main">
+
+<section class="sec">
+  <div class="wrap" style="max-width:760px">
+
+    <div class="eyebrow">Page not found</div>
+
+    <h1 style="font-size:clamp(34px,5vw,54px);line-height:1.04">
+      This page has moved, or never existed
+    </h1>
+
+    <p class="lede" style="margin:20px 0 30px">
+      The link may be old, or there may be a typo in the address.
+      Here are the places most people are looking for.
+    </p>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn p" href="{{ '/' | relative_url }}" style="text-decoration:none">Go to the homepage</a>
+      <a class="btn s" href="{{ '/words-of-yoga.html' | relative_url }}" style="text-decoration:none">Read the articles</a>
+      <a class="btn s" href="{{ '/swar-yoga.html' | relative_url }}#svara" style="text-decoration:none">Try the Swar Yoga tool</a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>
