@@ -1,0 +1,44 @@
+{
+  "exam": "UGC NET (NTA), Paper II",
+  "syllabus_note": "Unit titles follow the NTA syllabi for Yoga (subject code 100) and Indian Knowledge System (subject code 103) as published by exam portals. Check them against the official PDFs at ugcnet.nta.ac.in before relying on the exact wording.",
+  "subjects": [
+    {
+      "id": "yoga",
+      "name": "Yoga",
+      "short": "Yoga",
+      "code": "100",
+      "question_files": ["yoga.json"],
+      "units": [
+        { "no": 1, "title": "Fundamentals of Yoga" },
+        { "no": 2, "title": "Yoga Texts I: Principal Upanishads, Bhagavad Gita and Yoga Vasishtha" },
+        { "no": 3, "title": "Yoga Texts II: Yoga Upanishads" },
+        { "no": 4, "title": "Patanjala Yoga Sutra" },
+        { "no": 5, "title": "Hatha Yoga Texts" },
+        { "no": 6, "title": "Allied Sciences: Psychology, Human Biology, Diet and Nutrition" },
+        { "no": 7, "title": "Yoga and Health" },
+        { "no": 8, "title": "Therapeutic Yoga" },
+        { "no": 9, "title": "Applications of Yoga" },
+        { "no": 10, "title": "Practical Yoga: Shatkarma, Asana, Pranayama, Mudra, Bandha, Dhyana" }
+      ]
+    },
+    {
+      "id": "iks",
+      "name": "Indian Knowledge System",
+      "short": "IKS",
+      "code": "103",
+      "question_files": ["iks.json"],
+      "units": [
+        { "no": 1, "title": "Indian Philosophical Systems (Part A)" },
+        { "no": 2, "title": "Indian Philosophical Systems (Part B)" },
+        { "no": 3, "title": "Astronomy" },
+        { "no": 4, "title": "Health and Well-being" },
+        { "no": 5, "title": "Architecture" },
+        { "no": 6, "title": "Mathematics" },
+        { "no": 7, "title": "Chemistry and Metallurgy" },
+        { "no": 8, "title": "Life Sciences, Agriculture and Ecology" },
+        { "no": 9, "title": "Kala (Arts)" },
+        { "no": 10, "title": "Ancient India and World History" }
+      ]
+    }
+  ]
+}
