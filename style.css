@@ -799,3 +799,32 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   img{filter:brightness(.94)}
   .topbar img,.signup-fab img{filter:none}
 }
+
+/* Aṇūṭṭara issues (_layouts/anuttara-issue.html, anuttara-piece.html) */
+.mag-draft{background:#F6E7B8;color:#4A3B10;font-size:14px;line-height:1.6;padding:12px 20px;text-align:center}
+.mag-draft code{background:rgba(0,0,0,.08);padding:1px 6px;border-radius:5px}
+.mag-toc{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:4px;counter-reset:mag}
+.mag-toc li{counter-increment:mag}
+.mag-toc a{display:grid;grid-template-columns:34px 1fr;column-gap:10px;padding:14px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.mag-toc a::before{content:counter(mag,decimal-leading-zero);grid-row:span 3;font-family:var(--serif);font-weight:700;font-size:18px;color:var(--sage)}
+.mag-toc .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:600}
+.mag-toc b{font-family:var(--serif);font-size:20px;line-height:1.25;margin:3px 0}
+.mag-toc a > span:last-child{font-size:14px;line-height:1.6;color:var(--ink-60)}
+.mag-toc a:hover b{text-decoration:underline;text-underline-offset:3px}
+.mag-next{max-width:720px;margin:56px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.mag-next a:only-child{grid-column:2}
+.mag-next h3{font-size:19px;margin:0}
+.prose .verse{margin:28px 0;padding:18px 22px;border-radius:14px;background:var(--cream-2)}
+.prose .verse p{margin:0 0 8px;color:var(--ink)}
+.prose .verse .dev{font-size:19px;line-height:1.7}
+.prose .verse .iast{font-style:italic;color:var(--ink-60)}
+.prose .verse .tr{font-family:var(--serif);font-size:19px;margin:0}
+.prose .study{margin:0 0 28px;padding:20px 22px;border-radius:14px;border:1px solid var(--line)}
+.prose .study h3{margin:0 0 8px}
+.prose .study p{margin:0 0 10px}
+.prose .study .ref{font-size:13.5px;line-height:1.6;color:var(--ink-60);margin:0}
+@media (max-width:640px){.mag-next{grid-template-columns:1fr}.mag-next a:only-child{grid-column:auto}}
+@media (prefers-color-scheme:dark){.mag-draft{background:#4A3B10;color:#F6E7B8}}
+.grade.g-en{background:rgba(228,116,79,.15);color:#8A3C1E}
+.prose .verse .ref{font-family:var(--sans);font-size:13px;color:var(--ink-60);white-space:nowrap}
+@media (prefers-color-scheme:dark){.grade.g-en{color:#F0A386}}

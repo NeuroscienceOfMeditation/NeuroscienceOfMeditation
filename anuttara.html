@@ -2,6 +2,13 @@
 title: "Aṇūṭṭara: a yoga research magazine"
 description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Meditation."
 ---
+{% comment %}
+  Issue 01 goes live when the files in _anuttara/issue-01/ say published: true.
+  Until then this page says it is in preparation; afterwards it links to it.
+{% endcomment %}
+{% assign issue1 = site.anuttara | where: "issue", 1 | sort: "order" %}
+{% assign issue1_home = issue1 | where: "order", 0 | first %}
+{% assign issue1_pieces = issue1 | where_exp: "d", "d.order > 0" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +32,7 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
     <div class="cover">
 
       <div class="top">
-        <span>January 2026</span>
+        <span>2026</span>
         <span>Issue 01</span>
       </div>
 
@@ -79,43 +86,38 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px">
 
-        <a class="btn p" href="contact.html?reason=anuttara&amp;item=A%E1%B9%87%C5%AB%E1%B9%AD%E1%B9%ADara%20Issue%2001"
-           style="text-decoration:none">
-          Request Issue 01, free
+        {% if issue1_home %}
+        <a class="btn p" href="{{ issue1_home.url | relative_url }}" style="text-decoration:none">
+          Read Issue 01, free
         </a>
 
         <a class="btn s" href="#newsletter" data-open-signup style="text-decoration:none">
           Get the next issues by email
         </a>
+        {% else %}
+        <a class="btn p" href="#newsletter" data-open-signup style="text-decoration:none">
+          Get Issue 01 by email when it's out
+        </a>
+        {% endif %}
 
       </div>
 
 
       <h2 style="font-size:19px;margin-bottom:14px;line-height:normal">
-        In this issue
+        {% if issue1_home %}In this issue{% else %}Coming in Issue 01{% endif %}
       </h2>
 
       <ol class="qlist">
-
-        <li>
-          <b>The swara record, first quarter.</b>
-          What the logs showed about the hour.
-        </li>
-
-        <li>
-          <b>A close reading of the timing passages.</b>
-          With the Sanskrit alongside.
-        </li>
-
-        <li>
-          <b>Interview: teaching theory to people who came for the stretch.</b>
-        </li>
-
-        <li>
-          <b>Contributors' page.</b>
-          Everyone who logged, credited by choice.
-        </li>
-
+        {% if issue1_home %}
+        {% for p in issue1_pieces %}
+        <li><a href="{{ p.url | relative_url }}"><b>{{ p.title }}.</b></a> {{ p.section }}.</li>
+        {% endfor %}
+        {% else %}
+        <li><b>The breath's clock.</b> What the Śiva Svarodaya got right about the rhythm of the breath, with the Sanskrit alongside.</li>
+        <li><b>Six studies worth knowing about.</b> Recent research on breathing, yoga, meditation and the nasal cycle.</li>
+        <li><b>Clarity is not comfort.</b> An essay on conscience and the quiet test yoga offers.</li>
+        <li><b>Two practices for this week.</b> One minute at waking, five minutes of slower breath.</li>
+        {% endif %}
       </ol>
 
     </div>
@@ -137,14 +139,15 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
 
     <div class="issue">
 
-      <div class="it">
+      {% if issue1_home %}
+      <a class="it" href="{{ issue1_home.url | relative_url }}" style="text-decoration:none;color:inherit">
         <div class="c">
           Issue 01
         </div>
         <small>
-          Jan 2026 · Free
+          2026 · Free
         </small>
-      </div>
+      </a>
 
       <div class="it it-next">
         <div class="c">
@@ -154,6 +157,16 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
           In preparation
         </small>
       </div>
+      {% else %}
+      <div class="it it-next">
+        <div class="c">
+          Issue 01
+        </div>
+        <small>
+          In preparation
+        </small>
+      </div>
+      {% endif %}
 
     </div>
 
