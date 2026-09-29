@@ -6,10 +6,21 @@
   {% endcomment %}
   {% seo %}
   {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  {% comment %} Fonts load in parallel with style.css; an @import inside it used to make them wait. {% endcomment %}
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
+  {% comment %}
+    Fonts are served from /fonts on this site: no extra connection to Google
+    before text can render, and no visitor IP sent to a third party. Both are
+    variable fonts, so one file covers every weight. The latin files are
+    preloaded; latin-ext (ā, ś, ṣ, ṇ in Sanskrit transliteration) downloads
+    only on pages that use those letters.
+  {% endcomment %}
+  <link rel="preload" href="{{ '/fonts/fraunces-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/fonts/archivo-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face{font-family:'Fraunces';font-style:normal;font-weight:400 900;font-display:swap;src:url({{ '/fonts/fraunces-latin-ext.woff2' | relative_url }}) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:'Fraunces';font-style:normal;font-weight:400 900;font-display:swap;src:url({{ '/fonts/fraunces-latin.woff2' | relative_url }}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:400 700;font-display:swap;src:url({{ '/fonts/archivo-latin-ext.woff2' | relative_url }}) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+    @font-face{font-family:'Archivo';font-style:normal;font-weight:400 700;font-display:swap;src:url({{ '/fonts/archivo-latin.woff2' | relative_url }}) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  </style>
   <link rel="icon" type="image/png" sizes="32x32" href="{{ '/img/favicon-32.png' | relative_url }}">
   <link rel="apple-touch-icon" href="{{ '/img/apple-touch-icon.png' | relative_url }}">
   <link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">

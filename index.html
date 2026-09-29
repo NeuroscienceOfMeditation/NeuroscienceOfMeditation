@@ -223,9 +223,22 @@ description: "Evidence-checked yoga, breathwork and meditation by Aditi, a docto
           See courses and books
         </a>
       </div>
-      <div class="two deco-pair" style="gap:14px" aria-hidden="true">
-        <div class="ph ph-lamp" style="height:250px"></div>
-        <div class="ph ph-sand" style="height:250px"></div>
+      {% comment %} Anything marked home: true in _data/catalog.yml appears here. {% endcomment %}
+      <div class="deeper">
+        {% for c in site.data.catalog.courses %}{% if c.home %}
+        <a class="card latest-card deeper-card" href="{{ c.page | default: '/courses-books.html#courses' | relative_url }}">
+          <div class="k">Course · {{ c.length }} · {{ c.price }}</div>
+          <h3>{{ c.title }}</h3>
+          <p>{{ c.blurb }}</p>
+        </a>
+        {% endif %}{% endfor %}
+        {% for bk in site.data.catalog.books %}{% if bk.home %}
+        <a class="card latest-card deeper-card" href="{{ bk.page | default: '/courses-books.html#books' | relative_url }}">
+          <div class="k">Book · {{ bk.price }}</div>
+          <h3>{{ bk.title }}</h3>
+          <p>{{ bk.blurb }}</p>
+        </a>
+        {% endif %}{% endfor %}
       </div>
     </div>
   </div>

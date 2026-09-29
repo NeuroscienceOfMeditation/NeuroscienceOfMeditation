@@ -1,0 +1,289 @@
+---
+title: "Swar Yoga, properly — a four-week course"
+description: "Learn to read your swara, change it on purpose, and tell which of Shiva Swarodaya's claims survive testing. Four weeks, for beginners, taught from The Respiratory Codex."
+image: /img/og-swar-yoga.jpg
+---
+{% comment %}
+  Price, length, level and the enrol link come from _data/catalog.yml (the
+  course whose page is /swar-yoga-course.html), so they only need changing there.
+{% endcomment %}
+{% assign c = site.data.catalog.courses | where: "page", "/swar-yoga-course.html" | first %}
+{% capture enrol %}contact.html?reason=course&amp;item={{ c.title | url_encode }}{% endcapture %}
+{% assign price_num = c.price | remove: '₹' | remove: ',' | strip %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": {{ c.title | jsonify }},
+    "description": {{ page.description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "inLanguage": "en",
+    "educationalLevel": {{ c.level | jsonify }},
+    "timeRequired": "P4W",
+    "provider": { "@type": "Organization", "name": {{ site.title | jsonify }}, "sameAs": {{ '/' | absolute_url | jsonify }} },
+    "isBasedOn": { "@type": "Book", "name": "The Respiratory Codex", "url": {{ '/respiratory-codex.html' | absolute_url | jsonify }} },
+    "teaches": [
+      "Observing nasal dominance (the swara) reliably",
+      "A one-minute daily morning observation and log",
+      "Changing nasal dominance deliberately",
+      "Slow breathing and alternate-nostril breathing without retention",
+      "Matching tasks to physiological state",
+      "Judging traditional claims against evidence"
+    ],
+    "offers": [{
+      "@type": "Offer",
+      "category": "Paid",
+      "price": {{ price_num | jsonify }},
+      "priceCurrency": "INR",
+      "url": {{ page.url | absolute_url | jsonify }}
+    }]
+  }
+  </script>
+</head>
+
+<body>
+
+{% include header.html active="courses" %}
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="sec tight">
+  <div class="wrap">
+    <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Course</p>
+
+    <div class="eyebrow">{{ c.tag | default: 'Course' }}</div>
+
+    <h1 style="font-size:clamp(36px,5vw,58px)">Swar Yoga, properly</h1>
+
+    <p class="sub">
+      Four weeks on the <i>Śiva Svarodaya</i>, the old text on which nostril the
+      breath is flowing through. You will learn to read your own swara, change it
+      on purpose, and sort the text's claims into what physiology supports, what it
+      doesn't, and what is still worth doing every day.
+    </p>
+
+    <div class="bk-buy">
+      <span class="price">{{ c.price }}</span>
+      <a class="btn p" href="{{ enrol }}" style="text-decoration:none">Enrol</a>
+      <a class="btn s" href="#weeks" style="text-decoration:none">See the four weeks</a>
+    </div>
+
+    <ul class="bk-facts">
+      <li><b>{{ c.length }}</b></li>
+      <li><b>{{ c.level }}</b>, no Sanskrit needed</li>
+      <li>Taught from <a href="respiratory-codex.html"><b>The Respiratory Codex</b></a></li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============ OUTCOMES ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="eyebrow">By the end</div>
+    <h2>What you'll be able to do</h2>
+
+    <div class="three" style="margin-top:28px">
+      <div class="card">
+        <h3>Read your swara in seconds</h3>
+        <p>Tell which nostril is dominant with the back of your hand or a cold
+          mirror, and recognise the short changeover when both run evenly.</p>
+      </div>
+      <div class="card">
+        <h3>Change it on purpose</h3>
+        <p>Use the techniques that actually shift the cycle — lying on one side,
+          pressure under the arm — and know how reliable each one is.</p>
+      </div>
+      <div class="card">
+        <h3>Calm yourself on demand</h3>
+        <p>Slow breathing with a longer out-breath, and alternate-nostril breathing
+          without breath-holding: the best-supported practices in the text.</p>
+      </div>
+      <div class="card">
+        <h3>Keep a record that tells you something</h3>
+        <p>A one-minute morning observation (verse 149), logged before you
+          interpret it, so after a month you can see your own pattern.</p>
+      </div>
+      <div class="card">
+        <h3>Plan your day by state</h3>
+        <p>Put precise, careful work where you are settled and effortful work where
+          you are mobilised — the sound idea underneath the text's rules.</p>
+      </div>
+      <div class="card">
+        <h3>Judge a claim, any claim</h3>
+        <p>Grade what you are told as established, suggestive or speculative, and
+          spot the kinds of claim — the moon, the weekday, the omen — that never
+          hold up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ WEEKS ============ -->
+<section class="sec" id="weeks">
+  <div class="wrap">
+    <div class="eyebrow">Week by week</div>
+    <h2>The four weeks</h2>
+    <p class="sub">Each week pairs a part of the text with a practice you do every
+      day. The verse numbers are there so you can follow along in the book.</p>
+
+    <ol class="cw-weeks">
+      <li class="cw-week">
+        <div class="cw-n">Week 1</div>
+        <div>
+          <h3>The instrument: reading your swara</h3>
+          <p>What the nasal cycle is and how it was documented in 1895; the three
+            principal channels and the left–right polarity the whole text rests on
+            (verses 38–41, 50); the mirror test (verse 153).</p>
+          <p class="cw-do"><b>Daily practice:</b> the one-minute morning check —
+            which side, how fast and deep, one word for your state. Written down,
+            not interpreted.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 2</div>
+        <div>
+          <h3>The clock, and where the evidence stops</h3>
+          <p>How long each side lasts and why the text is inconsistent about it
+            (verses 71–72); the changeover state, suṣumnā (verses 124–130); the five
+            phases and which of their signs you can check (verses 141–158). Then the
+            claims that fail: the moon's phase and the day of the week
+            (verses 65, 68–70).</p>
+          <p class="cw-do"><b>Daily practice:</b> keep the morning log and add a few
+            checks through the day, to find your own rhythm rather than the text's.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 3</div>
+        <div>
+          <h3>Steering the breath</h3>
+          <p>Deliberate reversal of dominance (verses 66–67) and how well it works;
+            left-side sleeping and reflux, the text's best clinical observation
+            (verses 122–123); the reduction ladder that becomes slow breathing
+            (verses 224–225); the breathing practice of verses 375–387.</p>
+          <p class="cw-do"><b>Daily practice:</b> five to ten minutes of
+            alternate-nostril breathing — in for about four seconds, out for about
+            six — with no breath-holding.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 4</div>
+        <div>
+          <h3>What survives, and using it</h3>
+          <p>The ledger of actions — which tasks the text assigns to which state and
+            the real distinction underneath (verses 96–123); a short routine before
+            demanding tasks; attention to the breath without suppressing thought
+            (verses 267–269 and 384). Finally the book's verdict: what the text got right,
+            what it got wrong, what is harmful, and how to test any inherited claim.</p>
+          <p class="cw-do"><b>Daily practice:</b> ten to fifteen minutes of attention
+            to the breath, noticing each lapse and coming back — and your own plan
+            for keeping what worked.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ============ WHO ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="two cw-who">
+      <div class="card">
+        <h2>Who it's for</h2>
+        <ul>
+          <li>Beginners curious about swar yoga who want to know what is real
+            before building a habit on it</li>
+          <li>Yoga teachers who teach breathwork and want to explain it accurately</li>
+          <li>Anyone who has met contradictory "which nostril when" rules and wants
+            to know where they come from</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Who it isn't for</h2>
+        <ul>
+          <li>If you want auspicious timings or predictions — the course explains
+            why those don't work</li>
+          <li>If you are looking for treatment. This is education, not medical care</li>
+          <li>If you want breath-retention (kumbhaka) training. Retention is left
+            out on purpose; it is unsafe with high blood pressure, heart rhythm
+            problems, glaucoma or pregnancy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FAQ ============ -->
+<section class="sec">
+  <div class="wrap bk-faq">
+    <div class="eyebrow">Questions</div>
+    <h2>Before you enrol</h2>
+
+    <details>
+      <summary>When does it start, and how are sessions run?</summary>
+      <p>Use <a href="{{ enrol }}">the enrol form</a> and you will get a reply with
+        the next start date, how the sessions run and how to pay.</p>
+    </details>
+    <details>
+      <summary>Do I need any experience or equipment?</summary>
+      <p>No experience. A small mirror for the mirror test, and something to keep a
+        log in — a notebook, or the free log on the
+        <a href="swar-yoga.html#svara">Swar Yoga page</a>, which stays on your phone.</p>
+    </details>
+    <details>
+      <summary>How much time does it take each day?</summary>
+      <p>The morning check takes about a minute. The breathing practices run from
+        three to fifteen minutes; the longest is the week-four attention practice.</p>
+    </details>
+    <details>
+      <summary>Do I need the book?</summary>
+      <p>No, but it helps. The course follows <a href="respiratory-codex.html">The
+        Respiratory Codex</a>, and each week lists the verses it covers if you want
+        to read the full commentary.</p>
+    </details>
+    <details>
+      <summary>Is it safe?</summary>
+      <p>Everything taught is gentle, and breath-holding is left out. If you feel
+        dizzy or breathless, stop and breathe normally. If one side of your nose is
+        blocked most of the time, see an ENT doctor — it is not something to read.</p>
+    </details>
+    <details>
+      <summary>Can I try something first?</summary>
+      <p>Yes. The <a href="swar-yoga.html">Swar Yoga page</a> has the morning check,
+        the log and guided practices for free, and <b>Ask the text</b> answers
+        questions from the book's commentary.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ============ CTA ============ -->
+<section class="sec dim">
+  <div class="wrap bk-cta">
+    <div>
+      <h2>Swar Yoga, properly</h2>
+      <p class="sub" style="margin:0">{{ c.length }} · {{ c.level }} · {{ c.price }}</p>
+    </div>
+    <div class="bk-buy" style="margin:0">
+      <a class="btn p" href="{{ enrol }}" style="text-decoration:none">Enrol</a>
+      <a class="btn s" href="swar-yoga.html" style="text-decoration:none">Try the free tool</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

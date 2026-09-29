@@ -1,0 +1,73 @@
+# Courses and books — the one place to edit them.
+#
+# The Courses & Books page lists everything here, in this order. Anything with
+# `home: true` also appears in "Go deeper" on the homepage (keep it to two:
+# one course and one book fit side by side).
+#
+# Fields
+#   title    shown as the heading
+#   tag      small label above the title, e.g. "New · 4 weeks"
+#   blurb    one or two sentences
+#   length / level   courses only, shown under the blurb
+#   price    as it should appear, e.g. "₹1,800" or "Free"
+#   page     optional: a page with the full details (adds a "Details" link)
+#   link     optional: where the main button goes instead of the order form
+#   button   optional: the main button's words (default "Join" / "Order copy")
+#   cover    books only: the words printed on the cover tile
+#   home     true to feature it on the homepage
+#
+# To add a course or book, copy a block (from the dash down to the next one),
+# paste it where it should appear, and change the words. Indentation matters:
+# keep the two spaces.
+
+courses:
+
+  - title: "Asana & the Nervous System"
+    tag: "Foundation · Live"
+    blurb: "Eight weeks of physical practice taught alongside what each posture does to the body."
+    length: "8 weeks"
+    level: "Beginner"
+    price: "₹3,400"
+
+  - title: "Neuroscience of Meditation"
+    tag: "Theory · Self-paced"
+    blurb: "What centuries of sitting practice look like under a scanner, module by module."
+    length: "12 lessons"
+    level: "All levels"
+    price: "₹2,100"
+
+  - title: "Swar Yoga, properly"
+    tag: "New · 4 weeks"
+    blurb: "Read your swara, change it on purpose, and learn which of Shiva Swarodaya's claims survive testing — taught from The Respiratory Codex."
+    length: "4 weeks"
+    level: "Beginner"
+    price: "₹1,800"
+    page: /swar-yoga-course.html
+    home: true
+
+books:
+
+  - title: "The Respiratory Codex"
+    cover: "The Respiratory Codex"
+    tag: "New · Complete edition"
+    blurb: "All 313 verses of the Śiva Svarodaya, each translated and graded against current physiology: what the text got right, what it got wrong, and what is still worth doing."
+    price: "₹549"
+    page: /respiratory-codex.html
+    home: true
+
+  - title: "Breath & Brain"
+    cover: "Breath & Brain"
+    blurb: "Pranayama read through respiratory physiology. 148 pages, PDF + EPUB."
+    price: "₹499"
+
+  - title: "The Ancestral Mind"
+    cover: "The Ancestral Mind"
+    blurb: "Where the old texts and current research agree — and where they don't."
+    price: "₹649"
+
+  - title: "Aṇūṭṭara · Issue 01"
+    cover: "Aṇūṭṭara<br>Issue 01"
+    blurb: "January 2026 research edition. Where you find your answers."
+    price: "Free"
+    link: /anuttara.html
+    button: "Read now"

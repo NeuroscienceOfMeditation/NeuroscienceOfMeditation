@@ -11,7 +11,7 @@ yours; the rest are new.
 | `svara-knowledge.js` | 33 KB | on page load |
 | `svara-voice.js` | 8 KB | on page load |
 | `svara-ui.js` | 52 KB | on page load |
-| `svara-corpus.js` | 209 KB | **lazily**, on the first question only |
+| `svara-corpus.js` | 347 KB | **lazily**, on the first question only |
 
 Script order matters: engine → knowledge → voice → ui. The corpus is not in a
 `<script src>` tag; it is injected on the first search so the page stays light
@@ -35,6 +35,14 @@ answer lives. Answers are quoted from your commentary, never generated.
 Four things were wrong in the first version and are worth recording so they
 don't creep back:
 
+- **Only verses 5–225 were indexed**, although the page promised all 313. The
+  corpus now runs to verse 395 and also holds the conclusion (`CONCL-ledger`,
+  `CONCL-transmission`, `CONCL-works`, `CONCL-limit`) and the cautions appendix
+  (`APPX-cautions`); the UI labels those "Conclusion" and "Appendix A". Three
+  sections use `### Critical Analysis` / `### Why No Application Is Offered`
+  instead of the usual headings, so extraction has to accept both. Answers are
+  drawn from the analysis, never from the verse's own claim, so questions about
+  death timetables or sex prediction get the book's verdict, not the prophecy.
 - **The introduction was never indexed.** Extraction only matched `## Verse N —`
   headings, so the ten front-matter and introduction sections — the ones that
   actually define what Svara Yoga *is* — were absent from the corpus entirely.
