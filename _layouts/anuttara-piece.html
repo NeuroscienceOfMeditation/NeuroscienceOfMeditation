@@ -48,6 +48,8 @@
         {{ content }}
       </article>
 
+      {% include author-card.html %}
+
       {% comment %} Previous and next piece in this issue. {% endcomment %}
       {% for p in pieces %}{% if p.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
       <nav class="mag-next" aria-label="In this issue">

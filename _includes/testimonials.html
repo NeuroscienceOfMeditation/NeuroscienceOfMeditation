@@ -1,0 +1,18 @@
+{% comment %} Student quotes from _data/testimonials.yml. Shows nothing until there is one. {% endcomment %}
+{% assign quotes = site.data.testimonials %}
+{% if quotes and quotes.size > 0 %}
+<section class="sec{% if include.dim %} dim{% endif %}" aria-labelledby="quotes-h">
+  <div class="wrap">
+    <div class="eyebrow">Students</div>
+    <h2 id="quotes-h">{{ include.title | default: 'What students say' }}</h2>
+    <div class="quotes">
+      {% for q in quotes limit: 3 %}
+      <figure class="quote-card">
+        <blockquote><p>“{{ q.quote }}”</p></blockquote>
+        <figcaption><b>{{ q.name }}</b>{% if q.detail %}<span>{{ q.detail }}</span>{% endif %}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

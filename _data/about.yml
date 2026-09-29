@@ -1,0 +1,18 @@
+# About Aditi: used on the homepage and the course pages.
+#
+# Only fill in what is true and you're happy to show publicly. Anything left
+# empty simply doesn't appear. Keep the two spaces before each dash.
+
+name: "Aditi"
+role: "Doctoral fellow in the science of yoga"
+
+# Your qualifications and affiliations, one per line, e.g.
+#   - "PhD research in yoga science, [University name]"
+#   - "Certified yoga teacher, [school], [year]"
+#   - "Published in [journal]"
+credentials: []
+
+# Optional one-line numbers that are true today, e.g.
+#   - "12 years of practice"
+#   - "300+ students taught"
+facts: []

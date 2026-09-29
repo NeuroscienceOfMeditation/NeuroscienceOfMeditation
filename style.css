@@ -828,3 +828,76 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .grade.g-en{background:rgba(228,116,79,.15);color:#8A3C1E}
 .prose .verse .ref{font-family:var(--sans);font-size:13px;color:var(--ink-60);white-space:nowrap}
 @media (prefers-color-scheme:dark){.grade.g-en{color:#F0A386}}
+
+/* =========================================
+   RESEARCH-LED HOMEPAGE AND TRUST ELEMENTS
+   ========================================= */
+/* Proof row under the hero: four facts, each true today */
+.proof{padding:46px 0 10px}
+.proof-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.proof-row > div{padding:4px 26px 6px;border-left:1px solid var(--line)}
+.proof-row > div:first-child{padding-left:0;border-left:0}
+.proof-row b{display:block;font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.1;color:var(--forest-ink);margin-bottom:6px}
+.proof-row span{display:block;font-size:13.5px;line-height:1.55;color:var(--ink-60)}
+.proof-row a{color:inherit;text-underline-offset:2px}
+/* Three ways in */
+.paths{margin-top:6px}
+.path-card{display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
+.path-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,24,15,.12)}
+.path-card .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:6px}
+.path-card p{flex:1;margin-bottom:14px}
+.path-card .more{font-size:13px;font-weight:600;color:var(--forest-ink)}
+/* Evidence grades in the standard section */
+.grades-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 30px}
+.grades-row > div{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start;padding:16px 18px;border-radius:16px;background:rgba(244,240,226,.06);border:1px solid rgba(244,240,226,.14)}
+.grades-row .grade{grid-row:span 2;margin-top:2px}
+.grades-row b{font-family:var(--serif);font-size:18px;color:var(--paper)}
+.grades-row span:not(.grade){font-size:13.5px;line-height:1.55;color:rgba(244,240,226,.72)}
+.sec.green .grade.g-e{background:rgba(142,198,228,.18);color:#BFE3F5}
+.sec.green .grade.g-s{background:rgba(227,201,140,.2);color:#F1DDA8}
+.sec.green .grade.g-x{background:rgba(244,240,226,.14);color:var(--paper)}
+/* Role line and credentials */
+.role{margin:-4px 0 16px;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--forest-ink)}
+.creds{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:8px}
+.creds li{position:relative;padding-left:24px;font-size:14.5px;line-height:1.55;color:var(--ink)}
+.creds li::before{content:"";position:absolute;left:0;top:6px;width:12px;height:7px;border-left:2px solid var(--forest-ink);border-bottom:2px solid var(--forest-ink);transform:rotate(-45deg)}
+/* Student quotes */
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:26px}
+.quote-card{margin:0;padding:24px 26px;border-radius:20px;background:var(--surface);border:1px solid var(--line)}
+.quote-card blockquote{margin:0 0 16px}
+.quote-card p{margin:0;font-family:var(--serif);font-size:18px;line-height:1.5;color:var(--ink)}
+.quote-card figcaption b{display:block;font-size:14px}
+.quote-card figcaption span{font-size:13px;color:var(--ink-60)}
+/* "Your teacher" on course pages */
+.teacher{display:grid;grid-template-columns:260px minmax(0,1fr);gap:40px;align-items:center}
+.teacher img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:20px}
+.teacher h2{margin-bottom:8px}
+/* How ordering works */
+.steps{list-style:none;padding:0;margin:0;counter-reset:st;display:grid;gap:14px}
+.steps li{counter-increment:st;position:relative;padding:22px 24px 22px 76px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+.steps li::before{content:counter(st);position:absolute;left:22px;top:20px;width:36px;height:36px;border-radius:50%;background:var(--forest);color:var(--paper);display:grid;place-items:center;font-family:var(--serif);font-weight:700}
+.steps h2{font-size:20px;margin:0 0 6px}
+.steps p{margin:0;font-size:15px;line-height:1.7;color:var(--ink-60)}
+.steps a,.orders-notes a{color:var(--forest-ink);text-underline-offset:2px}
+.orders-notes{margin-top:22px}
+.orders-notes h2{font-size:21px;margin-bottom:10px}
+.orders-notes ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:15px;line-height:1.65;color:var(--ink-60)}
+.card .note-link{color:var(--forest-ink)}
+@media (max-width:900px){.proof-row{grid-template-columns:1fr 1fr;row-gap:22px}.proof-row > div:nth-child(3){padding-left:0;border-left:0}}
+@media (max-width:640px){
+  .grades-row{grid-template-columns:1fr}
+  .teacher{grid-template-columns:1fr;gap:22px}
+  .teacher img{max-width:240px}
+  .steps li{padding:20px 20px 20px 66px}
+  .steps li::before{left:16px}
+}
+
+/* "About the author" at the end of articles */
+.author-card{max-width:720px;margin:48px auto 0;display:grid;grid-template-columns:84px minmax(0,1fr);gap:20px;align-items:start;padding:22px 24px;border-radius:18px;background:var(--surface);border:1px solid var(--line)}
+.author-card img{width:84px;height:84px;object-fit:cover;border-radius:50%}
+.author-card .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:4px}
+.author-card .author-name{font-family:var(--serif);font-weight:700;font-size:21px;margin:0 0 2px;color:var(--ink)}
+.author-card .role{margin:0 0 10px}
+.author-card .creds{margin-bottom:12px}
+.author-card a{font-size:14px;font-weight:600;color:var(--forest-ink);text-underline-offset:3px}
+@media (max-width:640px){.author-card{grid-template-columns:60px minmax(0,1fr);gap:14px;padding:18px}.author-card img{width:60px;height:60px}}
