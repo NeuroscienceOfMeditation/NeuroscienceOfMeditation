@@ -9,6 +9,18 @@ image: /aditimeditating.jpg
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Aditi",
+    "jobTitle": "Doctoral fellow in the science of yoga",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "Delhi Technological University" },
+    "award": "Neuromatch Impact Scholar",
+    "url": {{ page.url | absolute_url | jsonify }},
+    "worksFor": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ '/' | absolute_url | jsonify }} }
+  }
+  </script>
 </head>
 
 <body>
@@ -49,6 +61,8 @@ image: /aditimeditating.jpg
       <h2 class="e-h sm">
         Hello, I’m Aditi
       </h2>
+      <p class="role">{{ site.data.about.role }}</p>
+      {% include credentials.html %}
 
       <p class="e-body" style="text-transform:none;font-size:15px;letter-spacing:.02em;line-height:1.8">
         <strong>I’m a doctoral fellow dedicated to the art and science of yoga.</strong>
