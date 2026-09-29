@@ -18,16 +18,16 @@
 
     <nav class="nav" id="site-nav" aria-label="Main">
       <a href="{{ '/' | relative_url }}"{% if include.active == 'home' %} class="on" aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/words-of-yoga.html' | relative_url }}"{% if include.active == 'words' %} class="on" aria-current="page"{% endif %}>Articles</a>
       <a href="{{ '/swar-yoga.html' | relative_url }}"{% if include.active == 'swar' %} class="on" aria-current="page"{% endif %}>Swar Yoga</a>
-      <a href="{{ '/my-mind-and-me.html' | relative_url }}"{% if include.active == 'mind' %} class="on" aria-current="page"{% endif %}>My Mind and Me</a>
       <a href="{{ '/courses-books.html' | relative_url }}"{% if include.active == 'courses' %} class="on" aria-current="page"{% endif %}>Courses &amp; Books</a>
-      <a href="{{ '/words-of-yoga.html' | relative_url }}"{% if include.active == 'words' %} class="on" aria-current="page"{% endif %}>Words of Yoga</a>
-      <a href="{{ '/anuttara.html' | relative_url }}"{% if include.active == 'anuttara' %} class="on" aria-current="page"{% endif %}>Aṇūṭṭara</a>
+      <a href="{{ '/anuttara.html' | relative_url }}"{% if include.active == 'anuttara' %} class="on" aria-current="page"{% endif %}>Magazine</a>
+      <a href="{{ '/my-mind-and-me.html' | relative_url }}"{% if include.active == 'mind' %} class="on" aria-current="page"{% endif %}>About</a>
       <a href="{{ '/contact.html' | relative_url }}"{% if include.active == 'contact' %} class="on" aria-current="page"{% endif %}>Contact</a>
-      <a class="nav-cta" href="{{ '/swar-yoga.html' | relative_url }}#svara">Log your swara</a>
+      <a class="nav-cta" href="{{ '/swar-yoga.html' | relative_url }}#svara">Try the free tool</a>
     </nav>
 
-    <a class="navcta" href="{{ '/swar-yoga.html' | relative_url }}#svara">Log your swara</a>
+    <a class="navcta" href="{{ '/swar-yoga.html' | relative_url }}#svara">Try the free tool</a>
 
     <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
       <span class="burger-lines" aria-hidden="true"></span>

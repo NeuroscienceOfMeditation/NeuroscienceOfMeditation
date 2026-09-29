@@ -1,0 +1,12 @@
+{% comment %} "About the author" box at the end of articles and Aṇūṭṭara pieces, from _data/about.yml. {% endcomment %}
+{% assign a = site.data.about %}
+<aside class="author-card" aria-label="About the author">
+  <img src="{{ '/img/aditi-600.webp' | relative_url }}" width="600" height="643" alt="" loading="lazy" decoding="async">
+  <div>
+    <div class="k">About the author</div>
+    <p class="author-name">{{ a.name }}</p>
+    <p class="role">{{ a.role }}</p>
+    {% include credentials.html %}
+    <a href="{{ '/my-mind-and-me.html' | relative_url }}">More about Aditi</a>
+  </div>
+</aside>
