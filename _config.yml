@@ -64,3 +64,11 @@ exclude:
   - SVARA-BUILD-NOTES.md
   - README.md
   - _drafts/README.md
+  # UGC NET dashboard: only index.html, assets/, data/ and js/ are published
+  - ugc-net-pyq/README.md
+  - ugc-net-pyq/package.json
+  - ugc-net-pyq/package-lock.json
+  - ugc-net-pyq/tailwind.config.js
+  - ugc-net-pyq/src
+  - ugc-net-pyq/tests
+  - ugc-net-pyq/node_modules

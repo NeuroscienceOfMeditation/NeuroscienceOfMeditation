@@ -1,0 +1,16 @@
+{
+  "name": "ugc-net-pyq-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static UGC NET PYQ analytics dashboard for Yoga (100) and Indian Knowledge System (103).",
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --watch",
+    "test": "node --test tests/logic.test.js",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19"
+  }
+}
