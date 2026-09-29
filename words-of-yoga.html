@@ -1,13 +1,13 @@
 ---
 # Front matter lets Jekyll list posts automatically. Leave these two lines in place.
+title: "Words of Yoga"
+description: "Words of Yoga: longer pieces on the texts, the practice, and what the research is finding."
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Words of Yoga — Neuroscience of Meditation</title>
-  <meta name="description" content="Words of Yoga: longer pieces on the texts, the practice, and what the research is finding.">
   {% include head.html %}
 </head>
 
@@ -17,16 +17,15 @@
 
 <main id="main">
 
-
 <section class="sec tight">
 
   <div class="wrap">
 
     <div class="eyebrow">Words of Yoga</div>
 
-    <h2 style="font-size:clamp(34px,4.6vw,52px)">
+    <h1 style="font-size:clamp(34px,4.6vw,52px)">
       The blog
-    </h2>
+    </h1>
 
     <p class="sub">
       Longer pieces on the texts, the practice, and what the research is finding.
@@ -40,7 +39,6 @@
   </div>
 
 </section>
-
 
 <section class="sec" style="padding-top:0">
 
@@ -56,9 +54,9 @@
         {% assign words = post.content | strip_html | number_of_words %}
         <div class="k">{{ post.pillar | default: 'Article' }} · {{ words | divided_by: 220 | plus: 1 }} min</div>
 
-        <h4>
+        <h2>
           <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-        </h4>
+        </h2>
 
         <p>{{ post.description }}</p>
       </div>
@@ -66,46 +64,6 @@
     </article>
 
     {% endfor %}
-    <article class="post">
-
-      <div class="ph ph-valley"></div>
-
-      <div>
-        <div class="k">Reflection · 7 min</div>
-
-        <h4>
-          <a href="when-have-i-betrayed-my-conscience.html">When have I betrayed my own conscience?</a>
-        </h4>
-
-        <p>
-          A yogic inquiry into conscience, clarity, discrimination, and the science
-          of observing one's own mind.
-        </p>
-      </div>
-
-    </article>
-
-
-    <article class="post">
-
-      <div class="ph ph-rock"></div>
-
-      <div>
-        <div class="k">Reading · 2 min</div>
-
-        <h4>
-          <a href="why-we-are-not-the-solution.html">Why we say we are not the solution</a>
-        </h4>
-
-        <p>
-          On the difference between a platform that sells relief and one that
-          hands you a method. Written after a month of questions we couldn't
-          answer honestly.
-        </p>
-      </div>
-
-    </article>
-
 
     {% comment %}
       Coming soon: not linked yet. When an article is ready, add its link
@@ -118,9 +76,9 @@
       <div>
         <div class="k">Swar Yoga <span class="soon-badge">Coming soon</span></div>
 
-        <h4>
+        <h2>
           What Shiva Swarodaya actually claims about the hour
-        </h4>
+        </h2>
 
         <p>
           The text is more specific than most summaries admit — and specificity is
@@ -131,7 +89,6 @@
 
     </article>
 
-
     <article class="post soon">
 
       <div class="ph ph-canopy"></div>
@@ -139,9 +96,9 @@
       <div>
         <div class="k">Research <span class="soon-badge">Coming soon</span></div>
 
-        <h4>
+        <h2>
           The nasal cycle, as physiology understands it
-        </h4>
+        </h2>
 
         <p>
           What has actually been published: the range of reported periods, the

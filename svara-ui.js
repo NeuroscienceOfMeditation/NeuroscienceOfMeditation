@@ -531,13 +531,13 @@
 
     /* --- three kinds of statement --- */
     html += '<div class="sv-kinds">' +
-      '<div class="sv-kind"><h6>Your observation</h6><p>' +
+      '<div class="sv-kind"><h3>Your observation</h3><p>' +
         esc(obs ? obs.label : 'Not reported') + ', as you reported it.</p></div>' +
-      '<div class="sv-kind"><h6>Traditional expectation</h6><p>' +
+      '<div class="sv-kind"><h3>Traditional expectation</h3><p>' +
         esc(exp ? exp.label : 'Not available') +
         (r.expectedTattva ? ', with ' + esc(r.expectedTattva.name) + ' tattva' : '') +
         ', from the rule set below.</p></div>' +
-      '<div class="sv-kind void"><h6>Physiological measurement</h6><p>' +
+      '<div class="sv-kind void"><h3>Physiological measurement</h3><p>' +
         'None. Nothing on this page measures nasal airflow. That would need a ' +
         'bilateral flow sensor.</p></div>' +
     '</div>';
@@ -548,11 +548,11 @@
       return '<li>' + esc(e) + '</li>';
     }).join('') + '</ol>';
 
-    html += '<h6 class="sv-subhead">The rules this result was built from</h6>';
+    html += '<h3 class="sv-subhead">The rules this result was built from</h3>';
 
     html += r.provenance.map(function (p) {
       return '<div class="sv-rule"><header>' +
-        '<h6>' + esc(p.title) + '</h6>' + gradeBadge(p.grade) +
+        '<h3>' + esc(p.title) + '</h3>' + gradeBadge(p.grade) +
         '</header>' +
         (p.sanskrit ? '<p class="sv-sans">' + esc(p.sanskrit) + '</p>' : '') +
         (p.translation ? '<p class="sv-trans">' + esc(p.translation) + '</p>' : '') +
@@ -564,11 +564,11 @@
 
     /* rules the text states that this tool refuses to act on */
     if (r.notApplied && r.notApplied.length) {
-      html += '<h6 class="sv-subhead">What the text also says, and why this tool ' +
-              'does not act on it</h6>';
+      html += '<h3 class="sv-subhead">What the text also says, and why this tool ' +
+              'does not act on it</h3>';
       html += r.notApplied.map(function (n) {
         return '<div class="sv-rule off"><header>' +
-          '<h6>' + esc(n.section) + '</h6>' + gradeBadge(n.grade) +
+          '<h3>' + esc(n.section) + '</h3>' + gradeBadge(n.grade) +
           '<span class="sv-pill neutral">Not applied</span>' +
           '</header>' +
           (n.translation ? '<p class="sv-trans">' + esc(n.translation) + '</p>' : '') +
@@ -580,9 +580,9 @@
 
     /* the recension disagreeing with itself */
     if (r.contradictions && r.contradictions.length) {
-      html += '<h6 class="sv-subhead">Where the text disagrees with itself</h6>';
+      html += '<h3 class="sv-subhead">Where the text disagrees with itself</h3>';
       html += r.contradictions.map(function (c) {
-        return '<div class="sv-rule"><header><h6>' + esc(c.title) + '</h6></header>' +
+        return '<div class="sv-rule"><header><h3>' + esc(c.title) + '</h3></header>' +
           '<p>' + esc(c.detail) + '</p>' +
           '<div class="warn">' + esc(c.resolution) + '</div></div>';
       }).join('');
@@ -1008,7 +1008,7 @@
 
     function group(dims, heading, blurb, cls) {
       return '<div class="sv-dimgroup ' + cls + '">' +
-        '<h6 class="sv-subhead">' + esc(heading) + '</h6>' +
+        '<h3 class="sv-subhead">' + esc(heading) + '</h3>' +
         '<p class="sv-fine" style="margin-bottom:14px">' + esc(blurb) + '</p>' +
         dims.map(dimField).join('') + '</div>';
     }
@@ -1090,7 +1090,7 @@
               'than letting the reported ones break the tie.</div>';
     }
 
-    html += '<h6 class="sv-subhead">What supported it</h6><ul class="sv-support">';
+    html += '<h3 class="sv-subhead">What supported it</h3><ul class="sv-support">';
     res.ranked.forEach(function (r) {
       if (!r.support.length) return;
       html += '<li><b>' + esc(E.TATTVAS[r.key].name) + '</b> — ' +
@@ -1347,7 +1347,7 @@
          practice.indexOf(answer.slice(0, 60)) > -1);
 
       if (practice && !overlaps) {
-        html += '<div class="sv-inpractice"><h6>What to actually do</h6><p>' +
+        html += '<div class="sv-inpractice"><h3>What to actually do</h3><p>' +
                 esc(practice) + '</p></div>';
       }
 
@@ -1368,7 +1368,7 @@
 
       // Everything else collapsed to one line each, opened on demand.
       if (rest.length) {
-        html += '<h6 class="sv-subhead">Related passages</h6><div class="sv-more">' +
+        html += '<h3 class="sv-subhead">Related passages</h3><div class="sv-more">' +
           rest.map(function (h, i) {
             return '<details class="sv-alt"><summary>' +
               '<b>' + esc(h.rec.t) + '</b>' +

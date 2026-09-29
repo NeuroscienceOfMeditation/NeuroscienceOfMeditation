@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700&display=swap');
 :root{
   --forest:#1B4332;--forest-deep:#123024;--canopy:#0B1F16;
   --neon:#D6FF3F;--cream:#F4F0E2;--cream-2:#E9E3CE;--gold:#C6A15B;
-  --ink:#14180F;--ink-60:rgba(20,24,15,.62);--sage:#5B7C63;
+  --ink:#14180F;--ink-60:rgba(20,24,15,.62);--sage:#4D6954;
   --ida:#2E7FA8;--pingala:#E4744F;--sushumna:#C6A15B;
   --serif:'Fraunces',ui-serif,Georgia,serif;
   --sans:'Archivo',ui-sans-serif,'Helvetica Neue',Arial,sans-serif;
@@ -67,6 +66,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .sec.deep{background:var(--forest-deep);color:var(--cream)}
 .sec.dim{background:var(--cream-2)}
 .sec h2{font-size:40px;line-height:1.02;margin-bottom:14px}
+.sec h1{line-height:1.02;margin-bottom:14px}
 .sec .sub{font-size:15px;line-height:1.75;color:var(--ink-60);max-width:60ch;margin:0 0 34px}
 .sec.green .sub,.sec.deep .sub{color:rgba(244,240,226,.68)}
 
@@ -103,7 +103,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .card{background:var(--cream);border-radius:20px;padding:26px;border:1px solid rgba(20,24,15,.1)}
-.card h4{font-size:21px;margin-bottom:9px}
+.card h3,.card h4{font-size:21px;margin-bottom:9px}
 .card p{font-size:13.5px;line-height:1.7;color:var(--ink-60);margin:0}
 .card .ph{height:160px;margin-bottom:18px}
 .num{font-family:var(--serif);font-size:40px;font-weight:700;color:var(--neon);line-height:1;margin-bottom:12px}
@@ -114,7 +114,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .ccard .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,22,.45) 0,rgba(11,31,22,.95) 62%)}
 .ccard .body{position:relative;padding:26px}
 .ccard .tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--neon);margin-bottom:10px}
-.ccard h4{font-size:24px;margin-bottom:10px;line-height:1.08}
+.ccard h3,.ccard h4{font-size:24px;margin-bottom:10px;line-height:1.08}
 .ccard p{font-size:13px;line-height:1.6;color:rgba(244,240,226,.68);margin:0 0 18px}
 .ccard .foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .meta{font-size:12px;color:rgba(244,240,226,.6);display:flex;gap:10px;align-items:center}
@@ -124,7 +124,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .book{display:flex;gap:20px;background:var(--cream);border-radius:20px;padding:20px;align-items:center;border:1px solid rgba(20,24,15,.1)}
 .book .cov{width:98px;height:132px;flex:none;border-radius:6px;position:relative;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.16)}
 .book .cov .lbl{position:absolute;left:0;right:0;bottom:0;padding:9px;background:linear-gradient(transparent,rgba(11,31,22,.92));font-family:var(--serif);font-size:12px;color:var(--neon);line-height:1.15}
-.book h5{font-size:19px;margin-bottom:6px}
+.book h3,.book h5{font-size:19px;margin-bottom:6px}
 .book p{font-size:13px;line-height:1.6;color:var(--ink-60);margin:0 0 14px}
 .buy{display:flex;align-items:center;gap:14px}
 .price{font-weight:700;font-size:16px;color:var(--forest)}
@@ -132,8 +132,8 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 /* swara widget */
 .wcheck{background:var(--forest-deep);border-radius:26px;padding:30px;color:var(--cream);position:relative;overflow:hidden;text-align:center}
 .wcheck .glow{position:absolute;left:50%;top:44%;width:360px;height:360px;transform:translate(-50%,-50%);border-radius:50%;filter:blur(58px);opacity:.4;transition:background .5s}
-.wcheck h4{position:relative;font-size:22px;margin-bottom:5px}
-.wcheck .sm{position:relative;font-size:12.5px;color:rgba(244,240,226,.62);margin:0}
+.wcheck h2,.wcheck h4{position:relative;font-size:22px;margin-bottom:5px;line-height:normal}
+.wcheck .sm{position:relative;font-size:12.5px;color:rgba(244,240,226,.86);margin:0}
 .helix{position:relative;width:158px;height:214px;margin:14px auto 6px}
 .state h3{font-size:26px;transition:color .4s;margin:0}
 .state .san{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,240,226,.62);margin-top:8px}
@@ -224,7 +224,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 
 /* data panels */
 .panel{background:var(--cream);border-radius:20px;padding:28px;border:1px solid rgba(20,24,15,.1)}
-.panel h5{font-size:18px;margin-bottom:4px}
+.panel h3,.panel h5{font-size:18px;margin-bottom:4px}
 .panel .cap{font-size:12.5px;color:var(--ink-60);margin:0 0 20px}
 .wbars{display:flex;gap:4px;height:150px;align-items:flex-end}
 .wbars i{flex:1;border-radius:4px;display:block}
@@ -235,9 +235,9 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .qlist b{color:var(--ink)}
 .guidecols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .gcard{border-radius:20px;padding:24px;color:var(--cream);position:relative;overflow:hidden}
-.gcard h4{font-size:21px;margin-bottom:4px}
-.gcard .san{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-bottom:16px}
-.gcard ul{margin:0;padding-left:17px;font-size:13px;line-height:1.85;opacity:.9}
+.gcard h3,.gcard h4{font-size:21px;margin-bottom:4px}
+.gcard .san{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.gcard ul{margin:0;padding-left:17px;font-size:13px;line-height:1.85}
 
 /* editorial page */
 .ed{max-width:940px;margin:0 auto;padding:0 34px}
@@ -268,14 +268,15 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .post{display:grid;grid-template-columns:200px 1fr;gap:26px;padding:26px 0;border-bottom:1px solid rgba(20,24,15,.12);align-items:center}
 .post .ph{height:130px}
 .post .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:600;margin-bottom:8px}
-.post h4{font-size:24px;margin-bottom:8px;line-height:1.15}
+.post h2,.post h4{font-size:24px;margin-bottom:8px;line-height:1.15}
 .post p{font-size:13.5px;line-height:1.7;color:var(--ink-60);margin:0}
 
 /* magazine */
 .magwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
 .cover{aspect-ratio:3/4;border-radius:8px;background:linear-gradient(170deg,#DAD5B4,#C3BC94);padding:34px;display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(0,0,0,.28)}
 .cover .top{display:flex;justify-content:space-between;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#5E5834;font-weight:600;border-bottom:1px solid rgba(94,88,52,.35);padding-bottom:10px}
-.cover h3{font-size:clamp(38px,5vw,60px);text-align:center;margin:26px 0 0;font-weight:700;color:#2A2716}
+.cover .cover-t{font-family:var(--serif);letter-spacing:-.015em;line-height:normal}
+.cover h3,.cover .cover-t{font-size:clamp(38px,5vw,60px);text-align:center;margin:26px 0 0;font-weight:700;color:#2A2716}
 .cover .sig{flex:1;display:grid;place-items:center}
 .cover .sig svg{width:64%;stroke:var(--gold);fill:none;stroke-width:1.6}
 .cover .foot{text-align:center;font-size:12px;letter-spacing:.1em;color:#2A2716;font-weight:600}
@@ -295,7 +296,7 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 /* footer */
 footer{background:var(--canopy);color:rgba(244,240,226,.6);padding:56px 0 34px}
 footer .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px;margin-bottom:38px}
-footer h6{font-family:var(--serif);font-size:17px;color:var(--cream);margin:0 0 14px;font-weight:600}
+footer .foot-h,footer h6{font-family:var(--serif);font-size:17px;color:var(--cream);margin:0 0 14px;font-weight:600;letter-spacing:normal;line-height:normal}
 footer a{display:block;color:rgba(244,240,226,.6);text-decoration:none;font-size:13px;padding:5px 0;cursor:pointer}
 footer a:hover{color:var(--neon)}
 footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
@@ -456,7 +457,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .nom-signup .formkit-submit[data-active] .formkit-spinner ~ span{opacity:0}
 @keyframes nom-dot{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
 .nom-signup .formkit-input::placeholder{color:inherit;opacity:.7}
-.signup-note{margin:10px 0 0;font-size:11.5px;line-height:1.5;opacity:.7}
+.signup-note{margin:10px 0 0;font-size:11.5px;line-height:1.5;opacity:.92}
 .signup-note a{display:inline;color:inherit;text-decoration:underline;text-underline-offset:2px}
 .nom-signup .formkit-alert{list-style:none;margin:0 0 10px;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
 .nom-signup .formkit-alert:empty{display:none}
@@ -486,7 +487,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .kit-card .formkit-spinner > div:nth-child(2){animation-delay:-.16s}
 .kit-card .formkit-submit[data-active] .formkit-spinner{display:flex}
 .kit-card .formkit-submit[data-active] .formkit-spinner ~ span{opacity:0}
-.kit-card-disclaimer{margin:14px 0 0;font-size:12px;line-height:1.5;color:#7a8076}
+.kit-card-disclaimer{margin:14px 0 0;font-size:12px;line-height:1.5;color:#6b7168}
 .kit-card-disclaimer a{color:inherit;text-decoration:underline;text-underline-offset:2px}
 .kit-card .formkit-alert{list-style:none;margin:0 0 12px;padding:10px 14px;border-radius:8px;font-size:14px;line-height:1.5}
 .kit-card .formkit-alert:empty{display:none}
@@ -510,7 +511,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
    HOMEPAGE: ABOUT + LATEST ARTICLES (Sept 2026)
    ========================================= */
 .about-grid{align-items:center;gap:56px;grid-template-columns:minmax(0,440px) minmax(0,1fr)}
-.about-photo img{display:block;width:100%;max-width:460px;aspect-ratio:4/5;object-fit:cover;border-radius:22px}
+.about-photo img{display:block;width:100%;height:auto;max-width:460px;aspect-ratio:4/5;object-fit:cover;border-radius:22px}
 .latest{margin-top:30px}
 .latest-card{display:block;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
 .latest-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,24,15,.12)}
@@ -552,10 +553,12 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 
 /* Blog list: the title link covers the whole row */
 .post{position:relative}
-.post h4 a{color:inherit;text-decoration:none}
-.post h4 a::after{content:"";position:absolute;inset:0}
-.post:hover h4 a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
-.post.soon{opacity:.62}
+.post h2 a,.post h4 a{color:inherit;text-decoration:none}
+.post h2 a::after,.post h4 a::after{content:"";position:absolute;inset:0}
+.post:hover h2 a,.post:hover h4 a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+/* only the picture fades; the text stays readable */
+.post.soon .ph{opacity:.45}
+.post.soon h2{color:var(--ink-60)}
 .soon-badge{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 9px;border-radius:999px;background:rgba(198,161,91,.24);color:#6d5a2c;font-size:10px;letter-spacing:.1em}
 
 /* Contact form */
@@ -575,6 +578,21 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 /* Swar Yoga open-record panels: chart wider than the questions, stacked on phones */
 .record-grid{grid-template-columns:1.35fr 1fr}
 @media (max-width:640px){.record-grid{grid-template-columns:1fr}}
+
+/* h2s that keep their own size where the phone rule for section titles (.sec h2) would enlarge them */
+.sec .post h2{font-size:24px}
+.sec .wcheck h2{font-size:22px}
+
+/* Articles: share bar, keep reading, lead image */
+.post-img{display:block;width:100%;height:auto;border-radius:16px;margin:0 0 36px}
+.post-share{max-width:720px;margin:44px auto 0;padding-top:24px;border-top:1px solid rgba(20,24,15,.12);display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.post-share-label{font-size:13px;font-weight:600;color:var(--ink);margin-right:6px}
+.share-btn{display:inline-flex;align-items:center;border:1px solid rgba(20,24,15,.2);background:var(--cream);color:var(--ink);border-radius:999px;padding:10px 16px;font:600 13px var(--sans);text-decoration:none;cursor:pointer}
+.share-btn:hover{border-color:var(--forest);color:var(--forest)}
+.keep-reading{max-width:960px;margin:64px auto 0}
+.keep-reading h2{font-size:28px;margin-bottom:20px}
+.keep-reading .two{margin-bottom:24px}
+.latest-card .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:600}
 
 /* Placeholder notice for articles still being written */
 .soon-note{background:var(--cream-2);border-radius:18px;padding:28px}
