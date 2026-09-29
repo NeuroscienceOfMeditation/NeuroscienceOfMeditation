@@ -103,7 +103,10 @@
       var msg = (err && err.message) || '';
       if (/anonymous/i.test(msg) && /disabled|not enabled/i.test(msg)) consentStatus('Contributions aren’t switched on yet. You can continue without saving.');
       else if (/rate limit/i.test(msg)) consentStatus('Too many people joined from this network recently. You can continue without saving and join later.');
+      else if (/failed to fetch|networkerror|load failed|network request failed/i.test(msg)) consentStatus('We couldn’t reach the open record. Check your connection, or allow this site in any ad or tracker blocker, then try again. You can also continue without saving.');
+      else if (/row-level security|permission denied|does not exist|schema cache|captcha/i.test(msg)) consentStatus('The open record isn’t accepting new contributors right now. You can continue without saving; the tool works the same.');
       else consentStatus('We couldn’t connect just now. You can continue without saving and try again later.');
+      consentDetail(err);
     });
   }
 
@@ -130,6 +133,7 @@
           '<button type="button" class="rc-btn" data-rc-skip>Continue without saving</button>' +
         '</div>' +
         '<p class="rc-status" data-rc-status role="status" aria-live="polite"></p>' +
+        '<details class="rc-detail" data-rc-detail hidden><summary>Technical details</summary><code></code></details>' +
         '<p class="rc-fine">Under 18? Choose “Continue without saving”. The tool works exactly the same. To see or delete your data later, email ' + esc(DATA_EMAIL) + ' with the record code you’ll be shown.</p>' +
       '</form>';
     document.body.appendChild(d);
@@ -156,6 +160,7 @@
     d.querySelector('[data-rc-agree]').checked = false;
     d.querySelector('[data-rc-join]').disabled = true;
     consentStatus('');
+    consentDetail(null);
     if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
     d.querySelector('[data-rc-adult]').focus();
   }
@@ -164,6 +169,18 @@
     if (d && d.open) { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); }
   }
   function consentStatus(t) { var e = consent.dlg && consent.dlg.querySelector('[data-rc-status]'); if (e) e.textContent = t; }
+
+  // The raw reason a join failed, behind a toggle: visitors can ignore it, and
+  // the site owner can read it (or pass it on) without opening developer tools.
+  function consentDetail(err) {
+    var box = consent.dlg && consent.dlg.querySelector('[data-rc-detail]');
+    if (!box) return;
+    if (!err) { box.hidden = true; box.open = false; return; }
+    if (window.console) console.warn('Open record: joining failed.', err);
+    var code = err.code || err.status;
+    box.querySelector('code').textContent = ((err.message || String(err)) + (code ? ' [' + code + ']' : '')).slice(0, 300);
+    box.hidden = false;
+  }
 
   function declined() { try { return sessionStorage.getItem(DECLINED_KEY) === '1'; } catch (e) { return false; } }
 
@@ -212,6 +229,7 @@
     toastResult('Saving to the open record…', 'neutral');
     db.from('svara_logs').insert(row).then(function (res) {
       if (res.error) {
+        if (window.console) console.warn('Open record: saving failed.', res.error);
         var m = res.error.message || '';
         if (/2 days old/.test(m)) toastResult('Not saved: the record only accepts observations from the last two days.', 'off');
         else if (/future/.test(m)) toastResult('Not saved: the time is set in the future. Check the date and time.', 'off');
@@ -338,7 +356,10 @@
   /* ---------------------------------------------------------------- stats */
   function loadStats() {
     db.rpc('open_record_stats').then(function (res) {
-      if (res.error || !res.data) { renderStatsUnavailable(); return; }
+      if (res.error || !res.data) {
+        if (res.error && window.console) console.warn('Open record: stats unavailable.', res.error);
+        renderStatsUnavailable(); return;
+      }
       renderStats(res.data);
     }).catch(renderStatsUnavailable);
   }
