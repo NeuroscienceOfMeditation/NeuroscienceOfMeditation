@@ -102,7 +102,32 @@
   </div>
 </form>
 </dialog>
-<script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
+<script>
+// Kit's script isn't needed to show the signup forms, only to send them without
+// leaving the page, so it loads when someone starts using a form, or once the
+// page has loaded and the browser is idle. Until then the forms still work:
+// they post straight to Kit.
+(function () {
+  var loaded = false;
+  function loadKit() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://f.convertkit.com/ckjs/ck.5.js';
+    s.async = true;
+    document.body.appendChild(s);
+  }
+  ['focusin', 'pointerdown'].forEach(function (type) {
+    document.addEventListener(type, function (e) {
+      if (e.target.closest && e.target.closest('.formkit-form, [data-open-signup]')) loadKit();
+    }, true);
+  });
+  window.addEventListener('load', function () {
+    if ('requestIdleCallback' in window) requestIdleCallback(loadKit, { timeout: 3000 });
+    else setTimeout(loadKit, 2000);
+  });
+})();
+</script>
 <script>
 (function () {
   var dlg = document.getElementById('signup-dialog');

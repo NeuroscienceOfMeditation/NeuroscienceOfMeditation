@@ -1132,3 +1132,14 @@ html.pv-lock { overflow: hidden; }
 #svara .rec-code small { display: block; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #5E6F68; }
 #svara .rec-code b { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 22px; letter-spacing: .14em; color: #14342B; }
 #svara .rec-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+
+/* Daily reminder for the morning check ("Do it at waking") */
+#svara .sv-remind { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--sv-line); }
+#svara .sv-remind-l { display: block; font-size: 13px; font-weight: 600; color: var(--sv-ink); margin-bottom: 8px; }
+#svara .sv-remind-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+#svara .sv-remind-row input {
+  font: inherit; font-size: 15px; padding: 11px 14px; border-radius: 12px;
+  border: 1.5px solid var(--sv-line); background: var(--sv-panel); color: var(--sv-ink);
+}
+#svara .sv-remind-row .sv-btn { padding: 12px 18px; }
+#svara .sv-remind a { color: var(--sv-forest); text-underline-offset: 2px; }

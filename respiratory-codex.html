@@ -1,0 +1,392 @@
+---
+title: "The Respiratory Codex"
+description: "A neurocognitive decoding of the Śiva Svarodaya: all 313 verses translated and every claim graded against current physiology — what the text got right, what it got wrong, and what is still worth doing."
+image: /img/og-respiratory-codex.jpg
+---
+{% comment %}
+  Price, blurb and order link come from _data/catalog.yml (the book whose
+  page is /respiratory-codex.html), so they only need changing there.
+{% endcomment %}
+{% assign bk = site.data.catalog.books | where: "page", "/respiratory-codex.html" | first %}
+{% capture order %}contact.html?reason=book&amp;item={{ bk.title | url_encode }}{% endcapture %}
+{% assign price_num = bk.price | remove: '₹' | remove: ',' | strip %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": "The Respiratory Codex",
+    "alternativeHeadline": "A Neurocognitive Decoding of the Śiva Svarodaya",
+    "description": {{ page.description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "image": {{ page.image | absolute_url | jsonify }},
+    "inLanguage": "en",
+    "bookFormat": "https://schema.org/EBook",
+    "about": { "@type": "Book", "name": "Śiva Svarodaya", "inLanguage": "sa" },
+    "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "url": {{ '/' | absolute_url | jsonify }} },
+    "offers": {
+      "@type": "Offer",
+      "price": {{ price_num | jsonify }},
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": {{ page.url | absolute_url | jsonify }}
+    }
+  }
+  </script>
+</head>
+
+<body>
+
+{% include header.html active="courses" %}
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="sec tight">
+  <div class="wrap bk-hero">
+
+    <div>
+      <p class="crumbs"><a href="courses-books.html#books">Courses &amp; Books</a> <span aria-hidden="true">/</span> Book</p>
+
+      <div class="eyebrow">{{ bk.tag | default: 'Book' }}</div>
+
+      <h1 style="font-size:clamp(36px,5vw,58px)">The Respiratory Codex</h1>
+
+      <p class="bk-subtitle">A neurocognitive decoding of the <i>Śiva Svarodaya</i></p>
+
+      <p class="sub">
+        Read without its cosmological vocabulary, the <i>Śiva Svarodaya</i> is a
+        manual of interoceptive self-measurement and autonomic self-regulation —
+        arguably the most detailed one written before the twentieth century. This
+        book reads it that way: every surviving verse translated word by word and
+        then plainly, and every claim graded against what physiology has measured.
+      </p>
+
+      <div class="bk-buy">
+        <span class="price">{{ bk.price }}</span>
+        <a class="btn p" href="{{ order }}" style="text-decoration:none">Order your copy</a>
+        <a class="btn s" href="#sample" style="text-decoration:none">Read a sample</a>
+      </div>
+
+      <ul class="bk-facts">
+        <li><b>313</b> verses, 5 to 395</li>
+        <li><b>25</b> parts</li>
+        <li><b>3</b> evidence grades on every claim</li>
+        <li><b>1</b> appendix of consolidated cautions</li>
+      </ul>
+    </div>
+
+    <div class="bk-cover" aria-hidden="true">
+      <div class="bk-cover-inner">
+        <span class="bk-cover-k">Śiva Svarodaya</span>
+        <span class="bk-cover-t">The Respiratory Codex</span>
+        <svg viewBox="0 0 150 214" fill="none">
+          <ellipse cx="61" cy="13" rx="7.5" ry="10" stroke="rgba(244,240,226,.45)" stroke-width="1.6"/>
+          <ellipse cx="89" cy="13" rx="7.5" ry="10" stroke="rgba(244,240,226,.45)" stroke-width="1.6"/>
+          <line x1="75" y1="24" x2="75" y2="204" stroke="rgba(244,240,226,.3)" stroke-width="2"/>
+          <path d="M61 24 C28 54 28 86 75 110 C122 134 122 172 75 202" stroke="#2E7FA8" stroke-width="3.6"/>
+          <path d="M89 24 C122 54 122 86 75 110 C28 134 28 172 75 202" stroke="#E4744F" stroke-width="3.6"/>
+          <circle cx="75" cy="110" r="4.6" fill="#C6A15B"/>
+        </svg>
+        <span class="bk-cover-s">A neurocognitive decoding</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============ WHAT IT CLAIMS ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="eyebrow">The argument</div>
+    <h2>What this book claims, and what it does not</h2>
+
+    <div class="three" style="margin-top:30px">
+      <div class="card">
+        <div class="bk-no">Not claimed</div>
+        <h3>That the authors knew neuroscience</h3>
+        <p>They did not know about the locus coeruleus or heart-rate variability.
+           They had something else: generations of careful observation trained on
+           a signal physiology has since confirmed is real.</p>
+      </div>
+      <div class="card">
+        <div class="bk-no">Not claimed</div>
+        <h3>That the predictions work</h3>
+        <p>Large parts of the text are divination: lost objects, the sex of a
+           child, the return of travellers. Those claims are false, and the book
+           treats them as false — while asking why the text trusted the breath
+           enough to hang predictions on it.</p>
+      </div>
+      <div class="card">
+        <div class="bk-yes">Claimed</div>
+        <h3>A real rhythm, a testable model</h3>
+        <p>The text describes the nasal cycle with a precision unmatched in any
+           pre-modern literature; its advice amounts to a testable model of which
+           tasks suit which body state; and its techniques map onto methods modern
+           research has independently arrived at.</p>
+      </div>
+    </div>
+
+    <p class="bk-pull">“Where the text is right, this book says so and explains the
+      mechanism. Where the text is wrong, this book says so. Where the evidence is
+      thin, this book says that too, and marks it.”</p>
+  </div>
+</section>
+
+
+<!-- ============ GRADING ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow">How to read it</div>
+    <h2>Every claim carries a grade</h2>
+    <p class="sub">
+      A book like this can fail in two directions: fitting every verse to a
+      fashionable finding, or throwing the whole text out because parts of it are
+      astrology. Both come from refusing to judge claims one at a time. So every
+      scientific statement in the commentary is marked.
+    </p>
+
+    <div class="three" style="margin-top:26px">
+      <div class="card">
+        <span class="grade g-e">E</span>
+        <h3>Established</h3>
+        <p>Replicated human studies, physiological measurement or anatomical fact.
+           The nasal cycle itself, the nerve supply of the nose, respiratory sinus
+           arrhythmia.</p>
+      </div>
+      <div class="card">
+        <span class="grade g-s">S</span>
+        <h3>Suggestive</h3>
+        <p>Some human data, often small studies, sometimes with failed or partial
+           replications. Single-nostril breathing effects; most of the
+           slow-breathing research.</p>
+      </div>
+      <div class="card">
+        <span class="grade g-x">X</span>
+        <h3>Speculative</h3>
+        <p>A mechanism the author proposes to explain why the text says what it
+           says. A hypothesis to test, not a finding to rely on.</p>
+      </div>
+    </div>
+
+    <h3 class="bk-h3">Inside each verse</h3>
+    <ol class="bk-layers">
+      <li><b>The verse</b> in Devanagari and in transliteration</li>
+      <li><b>Literal translation</b>, word by word</li>
+      <li><b>Fluid translation</b> in plain English</li>
+      <li><b>Neurocognitive analysis</b>: what the claim is, and how it holds up</li>
+      <li><b>Modern scientific integration</b>: what, if anything, to actually do</li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ============ SAMPLE ============ -->
+<section class="sec dim" id="sample">
+  <div class="wrap">
+    <div class="eyebrow">A sample</div>
+    <h2>Verse 149 — The Daily Observation</h2>
+    <p class="sub">The book calls this the single most important practical instruction it contains.</p>
+
+    <article class="bk-sample">
+      <p class="bk-dev" lang="sa">निरीक्षितव्यं यत्नेन सदा प्रत्यूषकालतः।<br>कालस्य वञ्चनार्थाय कर्म कुर्वन्ति योगिनः॥१४९॥</p>
+      <p class="bk-iast" lang="sa-Latn">nirīkṣitavyaṃ yatnena sadā pratyūṣakālataḥ |<br>kālasya vañcanārthāya karma kurvanti yoginaḥ ||149||</p>
+
+      <h3>Fluid translation</h3>
+      <p class="bk-trans">It should be examined carefully every day from daybreak.
+        Practitioners act with the aim of outwitting Time.</p>
+
+      <h3>From the analysis</h3>
+      <p>Anchoring the observation to daybreak solves the adherence problem that
+        defeats most self-monitoring: the observation is attached to an unavoidable
+        daily event rather than to a clock time or an intention. <span class="grade g-e">E</span>
+        The specification <i>yatnena</i>, with effort, is also correct. Interoceptive
+        discrimination is not automatic and does not improve through casual
+        attention.</p>
+      <p>There is a physiological reason why waking is the right observation point,
+        and the text could not have known it. The transition from sleep to wake
+        involves a large, stereotyped autonomic shift: sympathetic activity rises
+        sharply in the hour around waking, and the cortisol awakening response
+        raises circulating cortisol by fifty per cent or more within thirty to
+        forty-five minutes. <span class="grade g-e">E</span></p>
+
+      <h3>What to actually do</h3>
+      <p><b>On waking, before rising, before any device, take one minute.</b> Note
+        three things: which nostril is dominant, the approximate rate and depth of
+        the breath, and a single word for the current state. Record them somewhere
+        fixed. Do not interpret.</p>
+      <p>A single morning observation is nearly uninformative. Thirty of them
+        establish a baseline; sixty reveal structure.</p>
+    </article>
+
+    <div class="bk-try">
+      <p>The Swar Yoga page turns this verse into a one-minute morning check with a
+        log, and its <b>Ask the text</b> tab answers questions from this commentary.</p>
+      <a class="btn s" href="swar-yoga.html#svara" style="text-decoration:none">Try the morning check</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ CONTENTS ============ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow">Contents</div>
+    <h2>Twenty-five parts, in the text's own order</h2>
+    <p class="sub">Front matter on the source text and the evidence grades, then an
+      introduction on the physiology the text was watching.</p>
+
+    <ol class="bk-toc">
+      <li><b>The Instrument</b><span>Verses 5, 38–47, 50 · the ten channels, the ten winds, the solar–lunar polarity</span></li>
+      <li><b>The Clock</b><span>Verses 64–74 · the five phases, their timing, deliberate reversal</span></li>
+      <li><b>The Ledger of Actions</b><span>Verses 96–123 · which tasks for which side; sleep posture</span></li>
+      <li><b>The Unstable State</b><span>Verses 124–130 · the transition, and what it is for</span></li>
+      <li><b>The Junction</b><span>Verses 131–140</span></li>
+      <li><b>The Five Phases</b><span>Verses 141–158 · the daily observation, the mirror test</span></li>
+      <li><b>The Applied Phase System</b><span>Verses 159–177</span></li>
+      <li><b>The Interrogation Apparatus</b><span>Verses 178–189</span></li>
+      <li><b>The Body Analysed</b><span>Verses 190–200</span></li>
+      <li><b>The Astronomical Overlay and the Appeal to Precedent</b><span>Verses 190, 201–208</span></li>
+      <li><b>The Bīja Practices</b><span>Verses 209–213</span></li>
+      <li><b>Prāṇa as Measured Quantity</b><span>Verses 214–225 · the reduction ladder</span></li>
+      <li><b>The Limits of Written Transmission</b><span>Verses 226–228</span></li>
+      <li><b>The Military Application</b><span>Verses 229–261</span></li>
+      <li><b>The Close of the Combat Section</b><span>Verses 262–269</span></li>
+      <li><b>The Vaśīkaraṇa Verses</b><span>Verses 275–285 · why no application is offered</span></li>
+      <li><b>Conception and Sex Prediction</b><span>Verses 286–299</span></li>
+      <li><b>The Year's Forecast</b><span>Verses 300–314</span></li>
+      <li><b>The Bedside Interrogation</b><span>Verses 315–325</span></li>
+      <li><b>The Cycle That Stops</b><span>Verses 326–334</span></li>
+      <li><b>The Ariṣṭa Signs</b><span>Verses 335–345</span></li>
+      <li><b>The Countdown</b><span>Verses 346–350, 362–369</span></li>
+      <li><b>The Shadow Practice</b><span>Verses 351–361</span></li>
+      <li><b>The Yogic Close</b><span>Verses 370–387 · the breathing practice</span></li>
+      <li><b>The Colophon</b><span>Verses 388–395</span></li>
+    </ol>
+    <p class="bk-after">Then <b>Conclusion: What Survives</b> — the ledger, the
+      transmission thesis, what actually works — and <b>Appendix A</b>, every
+      caution in the book gathered in one place.</p>
+  </div>
+</section>
+
+
+<!-- ============ WHAT SURVIVES ============ -->
+<section class="sec green">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon)">From the conclusion</div>
+    <h2 style="margin-bottom:30px">What survives</h2>
+
+    <div class="two bk-ledger">
+      <div>
+        <h3>Observed correctly</h3>
+        <p>The nasal cycle is real, centrally generated, and readable from outside —
+          documented in Western medicine only in 1895. Its period is roughly right.
+          So is its alternating, see-saw character.</p>
+      </div>
+      <div>
+        <h3>Right for the wrong reasons</h3>
+        <p>Sleeping on the left side eases reflux; the text gets there through a
+          theory of conserving vital force. Its matching of tasks to states is sound
+          discrimination attached to a false cause.</p>
+      </div>
+      <div>
+        <h3>Wrong</h3>
+        <p>Everything astronomical: weekdays, planets, the moon's phase. Every claim
+          that the breath predicts an outside event. Fetal sex. The survival
+          timetables.</p>
+      </div>
+      <div>
+        <h3>Harmful</h3>
+        <p>A promise of invulnerability, death timetables that breed health anxiety,
+          and techniques aimed at another person's consent. The book says why, and
+          offers no application for them.</p>
+      </div>
+    </div>
+
+    <div class="bk-works">
+      <h3>What actually works</h3>
+      <ul>
+        <li><b>Slow breathing</b>, about six breaths a minute, out-breath longer than the in-breath, for three to five minutes</li>
+        <li><b>Breathing through the nose</b> rather than the mouth</li>
+        <li><b>Sleeping on the left side</b>, especially after meals</li>
+        <li><b>A one-minute morning observation</b>, recorded before it is interpreted</li>
+        <li><b>A short, fixed physical routine</b> before demanding tasks</li>
+        <li><b>Matching work to state</b>: precision to the settled state, force to the mobilised one</li>
+        <li><b>Ten to fifteen minutes of attention to the breath</b>, noticing each lapse and returning</li>
+      </ul>
+      <p>“Nothing on this list requires belief in nāḍīs, tattvas, or anything else in
+        the treatise's vocabulary.”</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ FAQ ============ -->
+<section class="sec">
+  <div class="wrap bk-faq">
+    <div class="eyebrow">Questions</div>
+    <h2>Before you order</h2>
+
+    <details>
+      <summary>Do I need to know Sanskrit?</summary>
+      <p>No. Every verse comes with a transliteration, a word-by-word translation
+        and a plain-English one, and the method the book argues for — take the
+        measurements, test the recommendations, grade each claim on its own
+        evidence — needs no Sanskrit at all.</p>
+    </details>
+    <details>
+      <summary>Is this a devotional or traditional commentary?</summary>
+      <p>No. It treats the <i>Śiva Svarodaya</i> as an empirical document and reads
+        it for what can be checked. It is neither reverent nor dismissive: where
+        the text is right it explains why, and where it is wrong it says so.</p>
+    </details>
+    <details>
+      <summary>Is any of it medical advice?</summary>
+      <p>No. It is education. Several practices in the text are unsafe for some
+        people — breath retention with high blood pressure, glaucoma or pregnancy,
+        for example — and Appendix A collects every caution in one place.
+        Persistent one-sided nasal blockage is a reason to see an ENT doctor, not
+        a sign to read.</p>
+    </details>
+    <details>
+      <summary>How do I get it?</summary>
+      <p>It is a digital copy. Use <a href="{{ order }}">the order form</a> and you
+        will get a reply with payment and download details. You can swap it for
+        another book in your order any time before download.</p>
+    </details>
+    <details>
+      <summary>Is there a course that uses it?</summary>
+      <p>Yes: <a href="swar-yoga-course.html">Swar Yoga, properly</a> is a
+        four-week course taught from this book, built around the practices that
+        survive.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ============ CTA ============ -->
+<section class="sec dim">
+  <div class="wrap bk-cta">
+    <div>
+      <h2>The Respiratory Codex</h2>
+      <p class="sub" style="margin:0">All 313 verses, graded. {{ bk.price }}.</p>
+    </div>
+    <div class="bk-buy" style="margin:0">
+      <a class="btn p" href="{{ order }}" style="text-decoration:none">Order your copy</a>
+      <a class="btn s" href="swar-yoga-course.html" style="text-decoration:none">See the course</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

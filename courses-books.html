@@ -47,12 +47,12 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
       Theory &amp; Physical Classes
     </h2>
 
+    {% comment %} Courses come from _data/catalog.yml — edit them there. {% endcomment %}
     <div class="three" style="margin-bottom:22px">
-
-      <!-- COURSE 1 -->
+      {% for c in site.data.catalog.courses %}
       <article class="ccard">
 
-        <svg class="morris" preserveAspectRatio="xMidYMid slice">
+        <svg class="morris" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <rect width="100%" height="100%" fill="url(#morris)"/>
         </svg>
 
@@ -60,24 +60,23 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
 
         <div class="body">
 
-          <div class="tag">Foundation · Live</div>
+          {% if c.tag %}<div class="tag">{{ c.tag }}</div>{% endif %}
 
-          <h3>Asana &amp; the Nervous System</h3>
+          <h3>{% if c.page %}<a href="{{ c.page | relative_url }}">{{ c.title }}</a>{% else %}{{ c.title }}{% endif %}</h3>
 
-          <p>
-            Eight weeks of physical practice taught alongside what each posture
-            does to the body.
-          </p>
+          <p>{{ c.blurb }}</p>
+
+          {% if c.page %}<a class="ccard-more" href="{{ c.page | relative_url }}">Week by week, who it's for, FAQ</a>{% endif %}
 
           <div class="foot">
 
             <span class="meta">
-              8 weeks <i></i> Beginner
+              {{ c.length }}{% if c.level %} <i></i> {{ c.level }}{% endif %}
             </span>
 
-            <a class="btn n" href="contact.html?reason=course&amp;item=Asana%20%26%20the%20Nervous%20System"
+            <a class="btn n" href="{% if c.link %}{{ c.link | relative_url }}{% else %}contact.html?reason=course&amp;item={{ c.title | url_encode }}{% endif %}"
                style="padding:11px 20px;font-size:13px;text-decoration:none">
-              ₹3,400 · Join
+              {{ c.price }} · {{ c.button | default: 'Join' }}
             </a>
 
           </div>
@@ -85,83 +84,7 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
         </div>
 
       </article>
-
-
-      <!-- COURSE 2 -->
-      <article class="ccard">
-
-        <svg class="morris" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="url(#morris)"/>
-        </svg>
-
-        <div class="shade"></div>
-
-        <div class="body">
-
-          <div class="tag">Theory · Self-paced</div>
-
-          <h3>Neuroscience of Meditation</h3>
-
-          <p>
-            What centuries of sitting practice look like under a scanner,
-            module by module.
-          </p>
-
-          <div class="foot">
-
-            <span class="meta">
-              12 lessons <i></i> All levels
-            </span>
-
-            <a class="btn n" href="contact.html?reason=course&amp;item=Neuroscience%20of%20Meditation"
-               style="padding:11px 20px;font-size:13px;text-decoration:none">
-              ₹2,100 · Join
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- COURSE 3 -->
-      <article class="ccard">
-
-        <svg class="morris" preserveAspectRatio="xMidYMid slice">
-          <rect width="100%" height="100%" fill="url(#morris)"/>
-        </svg>
-
-        <div class="shade"></div>
-
-        <div class="body">
-
-          <div class="tag">New · 4 weeks</div>
-
-          <h3>Swar Yoga, properly</h3>
-
-          <p>
-            Reading the swara, changing it, and what Shiva Swarodaya actually
-            says about the day.
-          </p>
-
-          <div class="foot">
-
-            <span class="meta">
-              4 weeks <i></i> Beginner
-            </span>
-
-            <a class="btn n" href="contact.html?reason=course&amp;item=Swar%20Yoga%2C%20properly"
-               style="padding:11px 20px;font-size:13px;text-decoration:none">
-              ₹1,800 · Join
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
+      {% endfor %}
     </div>
 
 
@@ -219,39 +142,38 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
     </p>
 
 
+    {% comment %} Books come from _data/catalog.yml — edit them there. {% endcomment %}
     <div class="two">
-
-      <!-- BOOK 1 -->
+      {% for bk in site.data.catalog.books %}
       <article class="book">
 
-        <div class="cov">
+        <div class="cov" aria-hidden="true">
 
           <svg class="morris" preserveAspectRatio="xMidYMid slice">
             <rect width="100%" height="100%" fill="url(#morris)"/>
           </svg>
 
-          <span class="lbl">
-            Breath &amp; Brain
-          </span>
+          <span class="lbl">{{ bk.cover | default: bk.title }}</span>
 
         </div>
 
         <div>
 
-          <h3>Breath &amp; Brain</h3>
+          {% if bk.tag %}<div class="book-tag">{{ bk.tag }}</div>{% endif %}
 
-          <p>
-            Pranayama read through respiratory physiology.
-            148 pages, PDF + EPUB.
-          </p>
+          <h3>{% if bk.page %}<a href="{{ bk.page | relative_url }}">{{ bk.title }}</a>{% else %}{{ bk.title }}{% endif %}</h3>
+
+          <p>{{ bk.blurb }}</p>
+
+          {% if bk.page %}<p class="book-more"><a href="{{ bk.page | relative_url }}">Contents, a sample and FAQ</a></p>{% endif %}
 
           <div class="buy">
 
-            <span class="price">₹499</span>
+            <span class="price">{{ bk.price }}</span>
 
-            <a class="btn p" href="contact.html?reason=book&amp;item=Breath%20%26%20Brain"
+            <a class="btn p" href="{% if bk.link %}{{ bk.link | relative_url }}{% else %}contact.html?reason=book&amp;item={{ bk.title | url_encode }}{% endif %}"
                style="padding:11px 20px;font-size:13px;text-decoration:none">
-              Order copy
+              {{ bk.button | default: 'Order copy' }}
             </a>
 
           </div>
@@ -259,130 +181,7 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
         </div>
 
       </article>
-
-
-      <!-- BOOK 2 -->
-      <article class="book">
-
-        <div class="cov">
-
-          <svg class="morris" preserveAspectRatio="xMidYMid slice">
-            <rect width="100%" height="100%" fill="url(#morris)"/>
-          </svg>
-
-          <span class="lbl">
-            The Ancestral Mind
-          </span>
-
-        </div>
-
-        <div>
-
-          <h3>The Ancestral Mind</h3>
-
-          <p>
-            Where the old texts and current research agree —
-            and where they don't.
-          </p>
-
-          <div class="buy">
-
-            <span class="price">₹649</span>
-
-            <a class="btn p" href="contact.html?reason=book&amp;item=The%20Ancestral%20Mind"
-               style="padding:11px 20px;font-size:13px;text-decoration:none">
-              Order copy
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- BOOK 3 -->
-      <article class="book">
-
-        <div class="cov">
-
-          <svg class="morris" preserveAspectRatio="xMidYMid slice">
-            <rect width="100%" height="100%" fill="url(#morris)"/>
-          </svg>
-
-          <span class="lbl">
-            Swara &amp; the Day
-          </span>
-
-        </div>
-
-        <div>
-
-          <h3>Swara &amp; the Day</h3>
-
-          <p>
-            A working translation of Shiva Swarodaya with notes
-            on what is testable.
-          </p>
-
-          <div class="buy">
-
-            <span class="price">₹549</span>
-
-            <a class="btn p" href="contact.html?reason=book&amp;item=Swara%20%26%20the%20Day"
-               style="padding:11px 20px;font-size:13px;text-decoration:none">
-              Order copy
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- BOOK 4 -->
-      <article class="book">
-
-        <div class="cov">
-
-          <svg class="morris" preserveAspectRatio="xMidYMid slice">
-            <rect width="100%" height="100%" fill="url(#morris)"/>
-          </svg>
-
-          <span class="lbl">
-            Aṇūṭṭara<br>
-            Issue 01
-          </span>
-
-        </div>
-
-        <div>
-
-          <h3>Aṇūṭṭara · Issue 01</h3>
-
-          <p>
-            January 2026 research edition. Where you find your answers.
-          </p>
-
-          <div class="buy">
-
-            <span class="price">Free</span>
-
-            <a
-              class="btn p"
-              href="anuttara.html"
-              style="padding:11px 20px;font-size:13px;text-decoration:none"
-            >
-              Read now
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
+      {% endfor %}
     </div>
 
 

@@ -549,10 +549,36 @@
       verses: ['145–148', '150–152', '153–155', '156–158', '71–72'] },
     { terms: ['pranayama', 'practice', 'technique', 'exercise', 'anxiety',
               'calm', 'stress', 'relax', 'arousal', 'panic'],
-      verses: ['50', '42–45', '66–67'] },
+      verses: ['CONCL-works', '375–387', '50', '42–45', '66–67'] },
     { terms: ['retention', 'kumbhaka', 'hold', 'holding', 'safe', 'safety', 'danger',
-              'risk', 'bandha', 'contraindication'],
-      verses: ['40', '150–152'] },
+              'risk', 'bandha', 'contraindication', 'caution', 'warning', 'pregnant',
+              'pregnancy', 'glaucoma', 'hypertension', 'blood', 'pressure', 'dizzy'],
+      verses: ['APPX-cautions', '375–387', '40', '150–152'] },
+    // The book's own summary of what survives testing, and of what does not.
+    { terms: ['work', 'works', 'working', 'benefit', 'benefits', 'useful', 'worth',
+              'effective', 'helps', 'recommend', 'should'],
+      verses: ['CONCL-works', '375–387', '224–225'] },
+    { terms: ['wrong', 'false', 'myth', 'myths', 'true', 'correct', 'right',
+              'accurate', 'survive', 'survives', 'verdict', 'conclusion', 'summary'],
+      with: ['text', 'book', 'svarodaya', 'svara', 'claims', 'claim', 'tradition', 'what'],
+      verses: ['CONCL-ledger', 'CONCL-limit', 'CONCL-transmission'] },
+    { terms: ['alternate', 'anulom', 'vilom', 'shodhana', 'shodana'],
+      verses: ['375–387', '66–67'] },
+    { terms: ['attract', 'attraction', 'seduce', 'seduction', 'subjugate', 'subjugation',
+              'vashikaran', 'vashikarana', 'vasikaran', 'love', 'lover', 'crush', 'compliant'],
+      verses: ['275–282', 'CONCL-ledger'] },
+    { terms: ['tape', 'mouth'],
+      verses: ['APPX-cautions', 'CONCL-works'] },
+    { terms: ['death', 'die', 'dying', 'prognosis', 'patient', 'illness', 'sick',
+              'disease', 'omen', 'omens', 'arishta'],
+      verses: ['APPX-cautions', '326–334', '316–325', '337–345', '370–374'] },
+    { terms: ['conception', 'conceive', 'son', 'daughter', 'baby', 'sex', 'boy', 'girl'],
+      verses: ['286–292', '293–299'] },
+    { terms: ['battle', 'war', 'combat', 'fight', 'fighting', 'enemy'],
+      verses: ['229–234', '235–245', '250–261'] },
+    { terms: ['think', 'thinking', 'thoughts', 'thought', 'mind', 'meditation',
+              'meditate', 'attention', 'focus'],
+      verses: ['375–387', '267–269'] },
     { terms: ['sushumna', 'transition', 'changeover', 'both', 'balanced', 'middle'],
       verses: ['50', '41', '124–125'] },
     { terms: ['moon', 'lunar', 'tithi', 'paksha', 'fortnight', 'waxing', 'waning'],
@@ -618,11 +644,13 @@
     tattvas: 'tattva', tatva: 'tattva', tattwa: 'tattva',
     nadis: 'nadi', nadees: 'nadi',
     anxious: 'anxiety', anxiousness: 'anxiety',
-    sleeping: 'sleep', digest: 'digestion', digesting: 'digestion'
+    sleeping: 'sleep', digest: 'digestion', digesting: 'digestion',
+    taping: 'tape', taped: 'tape', bp: 'hypertension'
   };
 
   function tokenize(s) {
     return translit(s)
+      .replace(/high blood pressure|blood pressure/g, 'hypertension')
       .replace(/[^a-z0-9\s]/g, ' ')
       .split(/\s+/)
       .map(function (w) { return SYNONYM[w] || w; })
@@ -760,7 +788,11 @@
    * a protocol for lowering arousal.
    */
   function summarise(rec, terms, sentences) {
-    var candidates = [rec.a, rec.m, rec.f].filter(Boolean);
+    // The verse's own words are offered separately ("Read the verse itself").
+    // Leading with them would present claims the book grades as false — death
+    // timetables, sex prediction — as if they were the answer.
+    var candidates = [rec.a, rec.m].filter(Boolean);
+    if (!candidates.length && rec.f) candidates = [rec.f];
     var best = null, bestDensity = -1;
 
     candidates.forEach(function (src) {

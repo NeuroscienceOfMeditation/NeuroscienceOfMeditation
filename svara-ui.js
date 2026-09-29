@@ -658,6 +658,16 @@
     return v ? 'Verse ' + esc(String(v)) : 'verse not given';
   }
 
+  // Corpus entries that are not verses: the introduction, the conclusion and
+  // the cautions appendix carry ids like INTRO-nasal, CONCL-works, APPX-cautions.
+  function isVerseRec(rec) { return /^\d/.test(String(rec.v || '')); }
+  function sourceLabel(rec) {
+    var v = String(rec.v || '');
+    if (v.indexOf('CONCL') === 0) return 'Conclusion';
+    if (v.indexOf('APPX') === 0) return 'Appendix A';
+    return isVerseRec(rec) ? verseRef(rec.v) : 'Introduction';
+  }
+
   /* --- the dial ------------------------------------------------------------ */
 
   function renderDial(r) {
@@ -1263,11 +1273,11 @@
      ========================================================================== */
 
   var SUGGESTS = [
+    'What actually works?',
     'How do I switch which nostril is flowing?',
-    'What is sushumna?',
     'Is breath retention safe?',
-    'Does the day of the week matter?',
-    'How do I measure my breath?',
+    'What is sushumna?',
+    'What did the text get wrong?',
     'What does the text say about sleep?'
   ];
 
@@ -1324,9 +1334,10 @@
       var lead = hits[0];
       var rest = hits.slice(1);
 
-      // Introduction sections have no verse; their `f` is just the opening of
-      // the same prose, so offering to "read the verse" would repeat the answer.
-      var isVerse = lead.rec.v && String(lead.rec.v).indexOf('INTRO') !== 0;
+      // Introduction, conclusion and appendix sections have no verse; their `f`
+      // is just the opening of the same prose, so offering to "read the verse"
+      // would repeat the answer.
+      var isVerse = isVerseRec(lead.rec);
 
       var answer = K.summarise(lead.rec, lead.matched, 3);
       var practice = lead.rec.m ? K.bestPassage(lead.rec.m, lead.matched, 2) : '';
@@ -1338,7 +1349,7 @@
 
       // Where it came from, stated once and quietly.
       html += '<p class="sv-from">' + esc(lead.rec.t) +
-        (isVerse ? ' · ' + verseRef(lead.rec.v) : ' · Introduction') + '</p>';
+        ' · ' + sourceLabel(lead.rec) + '</p>';
 
       // If the practical section is where the answer already came from, the
       // block would just repeat it back.
@@ -1372,11 +1383,10 @@
           rest.map(function (h, i) {
             return '<details class="sv-alt"><summary>' +
               '<b>' + esc(h.rec.t) + '</b>' +
-              '<span class="sv-src">' + (h.rec.v && h.rec.v.indexOf('INTRO') !== 0
-                ? verseRef(h.rec.v) : 'Introduction') + '</span>' +
+              '<span class="sv-src">' + sourceLabel(h.rec) + '</span>' +
               '</summary>' +
               '<p>' + esc(K.summarise(h.rec, h.matched, 3)) + '</p>' +
-              (h.rec.v && String(h.rec.v).indexOf('INTRO') !== 0 && h.rec.f
+              (isVerseRec(h.rec) && h.rec.f
                 ? '<p class="sv-trans">' + esc(K.clean(h.rec.f)) + '</p>' : '') +
               '</details>';
           }).join('') + '</div>';
