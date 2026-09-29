@@ -904,57 +904,85 @@
     catch (e) { return []; }
   }
 
+  // Every completed observation is kept on this device so the "last two
+  // weeks" panel can show a pattern and a streak. Nothing here is sent anywhere.
   function saveLog(r) {
-    var opt = $('[data-log-opt]');
-    if (!opt || !opt.checked) return;   // browser log panel removed: nothing stored locally
+    if (!r.observedSvara) { renderLog(); return; }   // skipped the report: nothing observed
     var entries = readLog();
     entries.unshift({
       t: (r.context.date || new Date()).toISOString(),
-      obs: r.observedSvara ? r.observedSvara.key : null,
+      obs: r.observedSvara.key,
       exp: r.expectedSvara ? r.expectedSvara.key : null,
       tat: r.expectedTattva ? r.expectedTattva.key : null,
       align: r.alignment
     });
-    try { localStorage.setItem(LOG_KEY, JSON.stringify(entries.slice(0, 200))); }
+    try { localStorage.setItem(LOG_KEY, JSON.stringify(entries.slice(0, 400))); }
     catch (e) { /* storage full or blocked; the tool still works */ }
     renderLog();
   }
 
+  function dayKey(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+
+  var SIDE_WORD = { ida: 'left', pingala: 'right', sushumna: 'both' };
+
   function renderLog() {
-    var list = $('[data-log]');
-    if (!list) return;
-    var entries = readLog();
-    if (!entries.length) {
-      list.innerHTML = '<li style="grid-template-columns:1fr"><div class="sv-empty">' +
-        'Nothing logged yet. Tick the box above and complete an observation — ' +
-        'entries stay in this browser and are never sent anywhere.</div></li>';
-      $('[data-log-clear]').disabled = true;
-      return;
-    }
-    $('[data-log-clear]').disabled = false;
-    list.innerHTML = entries.slice(0, 12).map(function (e) {
+    var box = $('[data-mornings]');
+    if (!box) return;
+    var entries = readLog().filter(function (e) { return e && e.obs && SIDE_WORD[e.obs]; });
+
+    // The first check of each day is the one that counts (verse 149: at waking).
+    var first = {};
+    entries.forEach(function (e) {
       var d = new Date(e.t);
-      var S = E.SVARAS, T = E.TATTVAS;
-      return '<li><time>' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + '</time>' +
-        '<div class="sv-logmain">' +
-          (e.obs ? esc(S[e.obs].name) : '—') +
-          ' <em>observed</em>' +
-          (e.exp ? ' · ' + esc(S[e.exp].name) + ' <em>expected</em>' : '') +
-          (e.tat ? ' · ' + esc(T[e.tat].name) : '') +
-        '</div>' +
-        '<span class="sv-logtag sv-pill ' +
-          (e.align === 'aligned' ? 'ok' : e.align === 'misaligned' ? 'off' : 'neutral') +
-          '">' + esc(e.align === 'aligned' ? 'aligned'
-                   : e.align === 'misaligned' ? 'not aligned'
-                   : e.align === 'sushumna' ? 'sushumna' : 'no comparison') +
-        '</span></li>';
+      if (isNaN(d)) return;
+      var k = dayKey(d);
+      if (!first[k] || new Date(first[k].t) > d) first[k] = e;
+    });
+
+    var today = new Date(); today.setHours(12, 0, 0, 0);
+    var days = [];
+    for (var i = 13; i >= 0; i--) {
+      var d = new Date(today); d.setDate(today.getDate() - i);
+      days.push({ date: d, e: first[dayKey(d)] || null });
+    }
+
+    // Streak: consecutive days with a check, counting back from today (or from
+    // yesterday, so an unchecked morning doesn't read as a broken streak).
+    var streak = 0, cursor = new Date(today);
+    if (!first[dayKey(cursor)]) cursor.setDate(cursor.getDate() - 1);
+    while (first[dayKey(cursor)]) { streak++; cursor.setDate(cursor.getDate() - 1); }
+    var checkedToday = !!first[dayKey(today)];
+    var inWindow = days.filter(function (x) { return x.e; }).length;
+
+    var msg;
+    if (!entries.length) msg = 'Nothing yet. Finish a check and it appears here, one dot a day.';
+    else if (checkedToday) msg = streak > 1 ? '<b>' + streak + ' days in a row.</b> Today is done.' : '<b>Today is done.</b> Check again tomorrow to start a run.';
+    else if (streak) msg = 'Not checked today yet. <b>' + streak + (streak > 1 ? ' days' : ' day') + ' in a row</b> so far.';
+    else msg = 'Not checked today yet. ' + inWindow + ' of the last 14 days recorded.';
+
+    var DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    $('[data-mornings-status]', box).innerHTML = msg;
+    $('[data-mornings-days]', box).innerHTML = days.map(function (x) {
+      var label = DOW[x.date.getDay()] + ' ' + x.date.getDate() + ' ' + MON[x.date.getMonth()] + ': ';
+      var e = x.e;
+      var when = e ? new Date(e.t) : null;
+      label += e ? SIDE_WORD[e.obs] + ' side, at ' + pad(when.getHours()) + ':' + pad(when.getMinutes()) : 'no check';
+      return '<li class="sv-day ' + (e ? 'is-' + e.obs : 'is-none') + '" title="' + esc(label) + '">' +
+        '<span class="sv-dot" aria-hidden="true"></span>' +
+        '<span class="sv-vh">' + esc(label) + '</span>' +
+        '<span class="sv-dow" aria-hidden="true">' + DOW[x.date.getDay()].charAt(0) + '</span></li>';
     }).join('');
+    var clear = $('[data-log-clear]', box);
+    if (clear) clear.hidden = !entries.length;
   }
 
   if ($('[data-log-clear]')) $('[data-log-clear]').addEventListener('click', function () {
+    if (!window.confirm('Clear the checks saved on this device? This cannot be undone.')) return;
     try { localStorage.removeItem(LOG_KEY); } catch (e) {}
     renderLog();
   });
+  renderLog();
 
   /* ==========================================================================
      MODE SWITCH

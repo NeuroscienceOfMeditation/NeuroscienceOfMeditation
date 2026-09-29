@@ -8,7 +8,9 @@
 #svara {
   /* Fallbacks are used only if style.css does not define these. */
   --sv-forest: var(--forest, #14342B);
-  --sv-cream:  var(--cream,  #F4F0E2);
+  --sv-cream:  var(--paper,  #F4F0E2);   /* text on the green fills */
+  --sv-accent: var(--sv-forest);          /* green used as text and outlines */
+  --sv-card:   #fff;                      /* choice buttons, inputs, cards */
 
   --sv-ida:    #2E7FA8;
   --sv-ping:   #E4744F;
@@ -110,10 +112,10 @@
 }
 #svara .sv-progress li span { overflow: hidden; text-overflow: ellipsis; }
 #svara .sv-progress li.done::before {
-  content: "\2713"; background: var(--sv-forest); border-color: var(--sv-forest); color: var(--sv-cream);
+  content: "\2713"; background: var(--sv-forest); border-color: var(--sv-accent); color: var(--sv-cream);
 }
 #svara .sv-progress li[aria-current="step"] {
-  background: var(--sv-forest); border-color: var(--sv-forest);
+  background: var(--sv-forest); border-color: var(--sv-accent);
   color: var(--sv-cream); font-weight: 600;
 }
 #svara .sv-progress li[aria-current="step"]::before { border-color: rgba(244, 240, 226, .55); }
@@ -225,7 +227,7 @@
 
 #svara .sv-choice {
   border: 1.5px solid var(--sv-line);
-  background: #fff;
+  background: var(--sv-card);
   border-radius: 14px;
   padding: 18px 12px;
   cursor: pointer;
@@ -243,7 +245,7 @@
 #svara .sv-choice:hover { border-color: rgba(23, 35, 31, .3); }
 
 #svara .sv-choice:focus-visible {
-  outline: 2px solid var(--sv-forest);
+  outline: 2px solid var(--sv-accent);
   outline-offset: 2px;
 }
 
@@ -278,7 +280,7 @@
 #svara .sv-btn.quiet   { background: transparent; border-color: var(--sv-line); color: var(--sv-ink); }
 #svara .sv-btn:hover   { opacity: .88; }
 #svara .sv-btn:disabled { opacity: .4; cursor: not-allowed; }
-#svara .sv-btn:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-btn:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 
 #svara .sv-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
@@ -306,13 +308,13 @@
   padding: 10px 12px;
   border: 1px solid var(--sv-line);
   border-radius: 10px;
-  background: #fff;
+  background: var(--sv-card);
   color: var(--sv-ink);
 }
 
 #svara .sv-field input:focus-visible,
 #svara .sv-field select:focus-visible {
-  outline: 2px solid var(--sv-forest);
+  outline: 2px solid var(--sv-accent);
   outline-offset: 1px;
 }
 
@@ -342,7 +344,7 @@
   font-size: 11.5px;
   margin: 0 0 6px;
   font-weight: 600;
-  color: var(--sv-forest);
+  color: var(--sv-accent);
 }
 #svara .sv-kind p { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--sv-muted); }
 #svara .sv-kind.void { background: var(--sv-sunk); }
@@ -429,7 +431,7 @@
 #svara .sv-why summary::-webkit-details-marker { display: none; }
 #svara .sv-why summary::after { content: '+'; font-size: 19px; color: var(--sv-muted); font-weight: 400; }
 #svara .sv-why[open] summary::after { content: '−'; }
-#svara .sv-why summary:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-why summary:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 
 #svara .sv-why ol { margin: 0 0 18px; padding-left: 20px; }
 #svara .sv-why ol li {
@@ -522,8 +524,8 @@
   border: 1px solid var(--sv-line);
   border-radius: 999px;
 }
-#svara .sv-trail b.done { border-color: var(--sv-forest); color: var(--sv-forest); }
-#svara .sv-trail b.now  { background: var(--sv-forest); color: var(--sv-cream); border-color: var(--sv-forest); }
+#svara .sv-trail b.done { border-color: var(--sv-accent); color: var(--sv-accent); }
+#svara .sv-trail b.now  { background: var(--sv-forest); color: var(--sv-cream); border-color: var(--sv-accent); }
 
 /* --- log ------------------------------------------------------------------- */
 
@@ -620,7 +622,7 @@
 #svara .sv-subhead {
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--sv-forest);
+  color: var(--sv-accent);
   margin: 22px 0 10px;
 }
 
@@ -628,7 +630,7 @@
   font-size: 13.5px;
   line-height: 1.7;
   font-style: italic;
-  color: var(--sv-forest);
+  color: var(--sv-accent);
   margin: 0 0 6px;
 }
 
@@ -658,7 +660,7 @@
 #svara .sv-method {
   text-align: left;
   font: inherit;
-  background: #fff;
+  background: var(--sv-card);
   border: 1.5px solid var(--sv-line);
   border-radius: 14px;
   padding: 16px 18px;
@@ -667,9 +669,9 @@
   transition: border-color .18s, background .18s;
 }
 #svara .sv-method:hover { border-color: rgba(23,35,31,.3); }
-#svara .sv-method:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-method:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 #svara .sv-method[aria-pressed="true"] {
-  border-color: var(--sv-forest);
+  border-color: var(--sv-accent);
   background: var(--sv-sunk);
 }
 
@@ -711,7 +713,7 @@
   color: var(--sv-muted); white-space: nowrap;
 }
 #svara .sv-tab[aria-selected="true"] { background: var(--sv-forest); color: var(--sv-cream); }
-#svara .sv-tab:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-tab:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 
 #svara .sv-pane { display: none; }
 #svara .sv-pane.on { display: block; }
@@ -722,7 +724,7 @@
   margin: 0 0 16px;
 }
 #svara .sv-note strong { color: #8A3C1E; font-weight: 600; }
-#svara .sv-note a { color: var(--sv-forest); }
+#svara .sv-note a { color: var(--sv-accent); }
 
 #svara .sv-vh {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
@@ -750,7 +752,7 @@
 
 #svara .sv-mini { margin-top: 10px; }
 #svara .sv-mini summary {
-  cursor: pointer; font-size: 12.5px; color: var(--sv-forest);
+  cursor: pointer; font-size: 12.5px; color: var(--sv-accent);
   list-style: none; padding: 4px 0;
 }
 #svara .sv-mini summary::-webkit-details-marker { display: none; }
@@ -776,12 +778,12 @@
 #svara .sv-filters { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
 #svara .sv-filter {
   font: inherit; font-size: 13px; padding: 8px 16px; border-radius: 999px;
-  border: 1px solid var(--sv-line); background: #fff; cursor: pointer; color: var(--sv-muted);
+  border: 1px solid var(--sv-line); background: var(--sv-card); cursor: pointer; color: var(--sv-muted);
 }
 #svara .sv-filter[aria-pressed="true"] {
-  background: var(--sv-forest); color: var(--sv-cream); border-color: var(--sv-forest);
+  background: var(--sv-forest); color: var(--sv-cream); border-color: var(--sv-accent);
 }
-#svara .sv-filter:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-filter:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 
 #svara .sv-prac {
   border: 1px solid var(--sv-line); border-radius: 14px;
@@ -796,16 +798,16 @@
 #svara .sv-prac ol { margin: 0; padding-left: 19px; }
 #svara .sv-prac ol li { font-size: 13.5px; line-height: 1.75; color: var(--sv-muted); margin-bottom: 4px; }
 
-#svara .sv-runner { border-color: var(--sv-forest); }
+#svara .sv-runner { border-color: var(--sv-accent); }
 
 /* --- ask ------------------------------------------------------------------- */
 
 #svara .sv-ask { display: flex; gap: 9px; margin-bottom: 14px; flex-wrap: wrap; }
 #svara .sv-ask input {
   flex: 1 1 260px; font: inherit; font-size: 15px; padding: 13px 16px;
-  border: 1.5px solid var(--sv-line); border-radius: 12px; background: #fff; color: var(--sv-ink);
+  border: 1.5px solid var(--sv-line); border-radius: 12px; background: var(--sv-card); color: var(--sv-ink);
 }
-#svara .sv-ask input:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 1px; }
+#svara .sv-ask input:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 1px; }
 
 #svara .sv-suggests { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
 #svara .sv-sugg {
@@ -813,11 +815,11 @@
   border: 1px solid var(--sv-line); background: transparent;
   cursor: pointer; color: var(--sv-muted); text-align: left;
 }
-#svara .sv-sugg:hover { border-color: var(--sv-forest); color: var(--sv-forest); }
+#svara .sv-sugg:hover { border-color: var(--sv-accent); color: var(--sv-accent); }
 
 #svara .sv-lead {
   border: 1px solid var(--sv-line);
-  border-left: 3px solid var(--sv-forest);
+  border-left: 3px solid var(--sv-accent);
   border-radius: 4px 14px 14px 4px;
   padding: 22px 24px;
   background: var(--sv-panel);
@@ -847,7 +849,7 @@
   margin: 0 0 6px;
   font-size: 11.5px;
   font-weight: 600;
-  color: var(--sv-forest);
+  color: var(--sv-accent);
 }
 #svara .sv-inpractice p {
   margin: 0;
@@ -888,7 +890,7 @@
 }
 #svara .sv-alt[open] summary::after { content: '−'; }
 #svara .sv-alt summary b { font-size: 14px; font-weight: 500; }
-#svara .sv-alt summary:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: -2px; }
+#svara .sv-alt summary:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: -2px; }
 #svara .sv-alt[open] { background: var(--sv-panel); }
 #svara .sv-alt p {
   margin: 0 16px 14px;
@@ -922,14 +924,14 @@
   display: inline-flex; align-items: center; gap: 9px;
   font: inherit; font-size: 13.5px;
   padding: 9px 18px 9px 15px; border-radius: 999px;
-  border: 1.5px solid var(--sv-line); background: #fff;
+  border: 1.5px solid var(--sv-line); background: var(--sv-card);
   color: var(--sv-muted); cursor: pointer;
   transition: border-color .18s, color .18s;
 }
 #svara .sv-vtoggle:hover { border-color: rgba(23,35,31,.3); }
-#svara .sv-vtoggle:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-vtoggle:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 #svara .sv-vtoggle[aria-pressed="true"] {
-  border-color: var(--sv-forest); color: var(--sv-forest); background: var(--sv-sunk);
+  border-color: var(--sv-accent); color: var(--sv-accent); background: var(--sv-sunk);
 }
 
 /* Show the crossed-out speaker when off, the sound waves when on. */
@@ -945,15 +947,15 @@
 #svara .sv-vopts select {
   font: inherit; font-size: 12.5px; padding: 7px 10px; max-width: 210px;
   border: 1px solid var(--sv-line); border-radius: 9px;
-  background: #fff; color: var(--sv-ink);
+  background: var(--sv-card); color: var(--sv-ink);
 }
-#svara .sv-vopts input[type="range"] { width: 96px; accent-color: var(--sv-forest); }
+#svara .sv-vopts input[type="range"] { width: 96px; accent-color: var(--sv-accent); }
 #svara .sv-vtest { padding: 7px 15px; font-size: 12.5px; }
 
 /* --- the walkthrough panel ------------------------------------------------- */
 
 #svara .sv-guided {
-  border: 1.5px solid var(--sv-forest);
+  border: 1.5px solid var(--sv-accent);
   border-radius: 16px; padding: 20px 22px; margin-bottom: 22px;
   background: var(--sv-sunk);
 }
@@ -965,12 +967,12 @@
   border: 0; background: transparent; font-size: 22px; line-height: 1;
   color: var(--sv-muted); cursor: pointer; padding: 0 4px;
 }
-#svara .sv-guided-x:focus-visible { outline: 2px solid var(--sv-forest); outline-offset: 2px; }
+#svara .sv-guided-x:focus-visible { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
 #svara .sv-guided h3 { margin: 0 0 8px; font-size: 20px; font-weight: 600; }
 #svara .sv-guided p { margin: 0 0 16px; font-size: 14.5px; line-height: 1.75; color: var(--sv-ink); }
 
 #svara .sv-dim.active {
-  border-color: var(--sv-forest);
+  border-color: var(--sv-accent);
   box-shadow: 0 0 0 3px rgba(20, 52, 43, .08);
 }
 
@@ -1008,7 +1010,7 @@
 .rec-scale-name{width:58px;font-size:14px;font-weight:600}
 .rec-scale-end{font-size:12px;opacity:.6;min-width:48px}
 .rec-scale-end:last-child{text-align:left}
-.rec-dot{width:34px;height:34px;border-radius:50%;border:1px solid rgba(20,24,15,.2);background:#fff;font:600 13px/1 inherit;cursor:pointer;color:inherit}
+.rec-dot{width:34px;height:34px;border-radius:50%;border:1px solid rgba(20,24,15,.2);background:var(--sv-card,#fff);font:600 13px/1 inherit;cursor:pointer;color:inherit}
 .rec-dot[aria-pressed="true"]{background:#1B4332;border-color:#1B4332;color:#fff}
 .rec-dot:focus-visible{outline:2px solid #1B4332;outline-offset:2px}
 .rec-bars-empty{display:flex;align-items:center;justify-content:center;border:1px dashed rgba(20,24,15,.2);border-radius:10px;padding:18px;text-align:center}
@@ -1142,4 +1144,48 @@ html.pv-lock { overflow: hidden; }
   border: 1.5px solid var(--sv-line); background: var(--sv-panel); color: var(--sv-ink);
 }
 #svara .sv-remind-row .sv-btn { padding: 12px 18px; }
-#svara .sv-remind a { color: var(--sv-forest); text-underline-offset: 2px; }
+#svara .sv-remind a { color: var(--sv-accent); text-underline-offset: 2px; }
+
+/* "Your last two weeks": the first check of each day as a dot */
+#svara .sv-days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
+#svara .sv-day { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+#svara .sv-dot { width: 100%; max-width: 20px; aspect-ratio: 1; border-radius: 50%; background: var(--sv-sunk); border: 1.5px dashed var(--sv-line); box-sizing: border-box; }
+#svara .sv-day.is-ida .sv-dot { background: var(--sv-ida); border: 0; }
+#svara .sv-day.is-pingala .sv-dot { background: var(--sv-ping); border: 0; }
+#svara .sv-day.is-sushumna .sv-dot { background: var(--sv-sush); border: 0; }
+#svara .sv-day:last-child .sv-dot { outline: 2px solid var(--sv-accent); outline-offset: 2px; }
+#svara .sv-dow { font-size: 10px; color: var(--sv-muted); line-height: 1; }
+#svara .sv-legend { display: flex; gap: 14px; margin: 12px 0 0; font-size: 12px; color: var(--sv-muted); }
+#svara .sv-legend span { display: inline-flex; align-items: center; gap: 6px; }
+#svara .sv-legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+#svara .sv-legend .is-ida { background: var(--sv-ida); }
+#svara .sv-legend .is-pingala { background: var(--sv-ping); }
+#svara .sv-legend .is-sushumna { background: var(--sv-sush); }
+#svara .sv-linkbtn { font: inherit; font-size: inherit; background: none; border: 0; padding: 0; color: var(--sv-accent); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+
+
+/* ==========================================================================
+   Dark mode (follows the phone or computer setting). The morning check
+   happens straight after waking, when a bright screen is harshest.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  #svara {
+    --sv-ink:    #E8E3D2;
+    --sv-muted:  #A9B6AE;
+    --sv-line:   rgba(232, 227, 210, .16);
+    --sv-panel:  #16241C;
+    --sv-sunk:   rgba(232, 227, 210, .05);
+    --sv-card:   #1D2F26;
+    --sv-accent: #9CD3AC;
+  }
+  #svara .sv-tag.confirmed, #svara .sv-grade.g-e { color: #8CC6E4; }
+  #svara .sv-tag.unverified, #svara .sv-tag.partial, #svara .sv-grade.g-s { color: #E3C98C; }
+  #svara .sv-grade.g-en, #svara .sv-note strong { color: #F0A386; }
+  #svara .sv-flag.blocking, #svara .sv-flag.grade-en { color: #F2B79E; }
+  #svara .sv-rule .warn { color: #E3C98C; }
+  #svara .sv-method:hover, #svara .sv-vtoggle:hover { border-color: rgba(232, 227, 210, .3); }
+  #svara .rec-code b { color: #9CD3AC; }
+  .rec-history li { border-top-color: rgba(232, 227, 210, .12); }
+  .rec-toast.neutral, .rec-checkin, .wbars .rec-bar-gap { background: rgba(232, 227, 210, .06); }
+  .rec-dot, .rec-bars-empty { border-color: rgba(232, 227, 210, .22); }
+}

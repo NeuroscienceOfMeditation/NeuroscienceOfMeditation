@@ -15,6 +15,13 @@ social:
     - https://www.instagram.com/neuroscienceofmeditation/
 timezone: Asia/Kolkata
 
+# Contact form delivery. Paste your free Web3Forms access key between the
+# quotes (get one at web3forms.com with adiyogistudios@gmail.com) and the
+# contact form sends messages straight to that inbox. Left empty, the form
+# opens the visitor's email app instead, as before. The key is safe to
+# publish: it can only send mail to your own address.
+contact_form_key: ""
+
 markdown: kramdown
 kramdown:
   auto_ids: true

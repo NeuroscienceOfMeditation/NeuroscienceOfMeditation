@@ -29,7 +29,7 @@ image: /img/og-swar-yoga.jpg
 
         <h1 style="font-size:clamp(34px,4.6vw,54px);line-height:1">
           Your breath changes sides all day.
-          <em style="font-style:italic;color:var(--forest)">
+          <em style="font-style:italic;color:var(--forest-ink)">
             Nobody has measured it properly.
           </em>
         </h1>
@@ -139,7 +139,7 @@ image: /img/og-swar-yoga.jpg
      svara-corpus.js is loaded lazily on the first question.
      ========================================================================== -->
 
-<section class="sec dim" id="svara">
+<section class="sec dim" id="svara" data-no-fab>
   <div class="wrap">
 
     <div class="eyebrow">Practice tool</div>
@@ -411,6 +411,19 @@ image: /img/og-swar-yoga.jpg
               A repeating event made on this page; nothing is sent to us.
             </p>
           </div>
+        </div>
+
+        <div class="sv-panel" data-mornings>
+          <h2 class="sv-h" style="font-size:18px">Your last two weeks</h2>
+          <p class="sv-fine" data-mornings-status style="margin:0 0 12px">Nothing yet.</p>
+          <ol class="sv-days" data-mornings-days aria-label="Your first check each day, oldest first"></ol>
+          <p class="sv-legend" aria-hidden="true">
+            <span><i class="is-ida"></i>Left</span><span><i class="is-pingala"></i>Right</span><span><i class="is-sushumna"></i>Both</span>
+          </p>
+          <p class="sv-fine" style="margin:10px 0 0">
+            Saved only on this device, never sent anywhere.
+            <button type="button" class="sv-linkbtn" data-log-clear hidden>Clear</button>
+          </p>
         </div>
 
         <div class="sv-panel" id="record" data-record>
@@ -830,7 +843,7 @@ image: /img/og-swar-yoga.jpg
     <div class="two" style="gap:14px">
 
       <div class="card"
-           style="background:rgba(244,240,226,.06);border-color:rgba(244,240,226,.16);color:var(--cream)">
+           style="background:rgba(244,240,226,.06);border-color:rgba(244,240,226,.16);color:var(--paper)">
         <h3 style="font-size:18px">We collect</h3>
         <p style="color:rgba(244,240,226,.7);font-size:13px">
           Nostril side, time, location rounded to about 11 km, and, only if you
@@ -839,7 +852,7 @@ image: /img/og-swar-yoga.jpg
       </div>
 
       <div class="card"
-           style="background:rgba(244,240,226,.06);border-color:rgba(244,240,226,.16);color:var(--cream)">
+           style="background:rgba(244,240,226,.06);border-color:rgba(244,240,226,.16);color:var(--paper)">
         <h3 style="font-size:18px">We never</h3>
         <p style="color:rgba(244,240,226,.7);font-size:13px">
           Sell it, share it with advertisers, track you across other sites,

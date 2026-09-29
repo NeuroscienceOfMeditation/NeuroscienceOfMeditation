@@ -25,7 +25,7 @@ description: "What Neuroscience of Meditation collects, why, where it is stored,
       What this site collects, why, where it's kept, and how to download or delete it.
       Written to be read, not skimmed past.
     </p>
-    <p style="margin-top:14px;font-size:13px;opacity:.7">Version 1.2 · 29 September 2026</p>
+    <p style="margin-top:14px;font-size:13px;opacity:.7">Version 1.3 · 29 September 2026</p>
   </div>
 </section>
 
@@ -72,9 +72,11 @@ description: "What Neuroscience of Meditation collects, why, where it is stored,
       <h2>4. What stays in your browser</h2>
       <p>A few things are saved only on your own device, in this site's browser storage, so the Swar Yoga tool remembers them between visits. They are never sent to us. Clearing this site's data in your browser settings removes all of them.</p>
       <ul>
+        <li><b>Your checks</b>: the side you reported, the time, and what the Svarodaya rules expected, for the "Your last two weeks" panel. Use <b>Clear</b> in that panel to delete them.</li>
         <li><b>The place you chose</b>, rounded to about 1 km, so sunrise can be worked out next time without asking again.</li>
         <li><b>Your settings for the guided practices</b>: whether the voice is on, which voice, how fast, and how the practice is shown.</li>
         <li><b>If you choose “Continue without saving”</b> in the open-record box: a note not to ask again, kept only until you close the tab.</li>
+        <li><b>If you close the floating newsletter button</b>: a note to keep it closed.</li>
         <li><b>If you join the open record</b>: the anonymous sign-in that links this browser to your record. It is kept by Supabase's code in your browser, and it is why a new browser or cleared data can't find your record without your code.</li>
       </ul>
       <p><b>The morning reminder</b> is a calendar file made on the page itself; nothing about it reaches us. If you choose Google Calendar instead, the link opens Google with the reminder's text and time filled in.</p>
@@ -83,7 +85,8 @@ description: "What Neuroscience of Meditation collects, why, where it is stored,
       <p>Like any website, these services see your IP address and browser type when your browser fetches something from them. They receive nothing from the Swar Yoga tool unless you join the open record.</p>
       <ul>
         <li><b>GitHub Pages</b> (github.com) hosts the site and may keep standard server logs for security.</li>
-        <li><b>Kit</b> (kit.com) provides the newsletter forms. Its script loads when you start using a signup form, or after the rest of the page has loaded.</li>
+{% if site.contact_form_key != "" %}        <li><b>Web3Forms</b> (web3forms.com) delivers messages sent with the contact form to our inbox. It receives what you type in the form, including your name and email address, only when you press Send.</li>
+{% endif %}        <li><b>Kit</b> (kit.com) provides the newsletter forms. Its script loads when you start using a signup form, or after the rest of the page has loaded.</li>
         <li><b>jsDelivr</b> (jsdelivr.com) serves the code library the Swar Yoga page uses to talk to the open record.</li>
         <li><b>Supabase</b> (supabase.com) holds the open record. The Swar Yoga page reads the public totals from it on each visit.</li>
       </ul>

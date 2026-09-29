@@ -78,10 +78,13 @@
 })();
 </script>
 
-<a class="signup-fab" href="#newsletter" data-open-signup aria-label="Subscribe to the newsletter">
-  <img src="{{ '/img/logo-96.webp' | relative_url }}" alt="" width="40" height="40" loading="lazy">
-  <span>Newsletter</span>
-</a>
+<div class="fab-wrap is-hidden" data-fab>
+  <a class="signup-fab" href="#newsletter" data-open-signup aria-label="Subscribe to the newsletter">
+    <img src="{{ '/img/logo-96.webp' | relative_url }}" alt="" width="40" height="40" loading="lazy">
+    <span>Newsletter</span>
+  </a>
+  <button type="button" class="fab-x" data-fab-x aria-label="Hide the newsletter button">×</button>
+</div>
 
 <!-- Newsletter popup: opened by the floating button and any [data-open-signup] link -->
 <dialog class="signup-dialog" id="signup-dialog" aria-label="Subscribe to Neuroscience of Meditation">
@@ -142,13 +145,57 @@
     dlg.querySelector('.signup-close').addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
   }
-  // The footer already has a signup form, so the floating button steps aside there.
-  var fab = document.querySelector('.signup-fab');
-  var foot = document.getElementById('newsletter');
-  if (fab && foot && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (entries) {
-      fab.classList.toggle('is-hidden', entries[0].isIntersecting);
-    }).observe(foot);
+  // The floating newsletter button waits until someone has read a good part
+  // of the page, steps aside over the footer form and over anything marked
+  // data-no-fab (the Swar Yoga tool), and stays gone once closed.
+  var wrap = document.querySelector('[data-fab]');
+  if (!wrap) return;
+  var KEY = 'nom.fab.closed';
+  try { if (localStorage.getItem(KEY) === '1') { wrap.remove(); return; } } catch (e) {}
+  var early = true, covering = [];
+  function update() { wrap.classList.toggle('is-hidden', early || covering.length > 0); }
+  function onScroll() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    early = max < 400 || window.scrollY < max * 0.4;
+    update();
   }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  var avoid = [document.getElementById('newsletter')].concat([].slice.call(document.querySelectorAll('[data-no-fab]'))).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var i = covering.indexOf(en.target);
+        if (en.isIntersecting && i < 0) covering.push(en.target);
+        if (!en.isIntersecting && i > -1) covering.splice(i, 1);
+      });
+      update();
+    });
+    avoid.forEach(function (el) { io.observe(el); });
+  }
+  wrap.querySelector('[data-fab-x]').addEventListener('click', function () {
+    wrap.remove();
+    try { localStorage.setItem(KEY, '1'); } catch (e) {}
+  });
+})();
+</script>
+<script>
+// Offline support (sw.js). After the page has loaded, register the worker and
+// hand it the files this page used, so the page opens without a connection
+// next time. Only on the real site (https) or a local preview.
+(function () {
+  if (!('serviceWorker' in navigator)) return;
+  if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}').then(function () {
+      return navigator.serviceWorker.ready;
+    }).then(function (reg) {
+      var urls = [location.href.split('#')[0]].concat(
+        performance.getEntriesByType('resource').map(function (e) { return e.name; })
+      ).filter(function (u) { return u.indexOf(location.origin) === 0; });
+      if (reg.active) reg.active.postMessage({ type: 'save', urls: urls });
+    }).catch(function () { /* offline support is a bonus; the site works without it */ });
+  });
 })();
 </script>

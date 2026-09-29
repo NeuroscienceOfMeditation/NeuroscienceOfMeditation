@@ -71,6 +71,11 @@ description: "Questions about a course, a book order or the research. Write to N
           <input id="cf-name" type="text" name="name" autocomplete="name" required>
         </label>
 
+        <label class="field" for="cf-email">
+          <span>Your email</span>
+          <input id="cf-email" type="email" name="email" autocomplete="email" required>
+        </label>
+
         <label class="field" for="cf-reason">
           <span>What's it about?</span>
           <select id="cf-reason" name="reason" required>
@@ -88,7 +93,20 @@ description: "Questions about a course, a book order or the research. Write to N
           <textarea id="cf-message" name="message" required></textarea>
         </label>
 
-        <button class="btn p" type="submit" style="width:100%">
+        {% comment %} Spam trap: people never see or tick this; bots often do. {% endcomment %}
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        {% if site.contact_form_key != "" %}
+        <button class="btn p" type="submit" style="width:100%" data-submit>
+          Send message
+        </button>
+
+        <p class="form-note">
+          Your message goes straight to our inbox and we reply to the email you
+          give. Nothing is stored on this site. <a href="privacy.html">Privacy notice</a>
+        </p>
+        {% else %}
+        <button class="btn p" type="submit" style="width:100%" data-submit>
           Open in my email app
         </button>
 
@@ -96,6 +114,7 @@ description: "Questions about a course, a book order or the research. Write to N
           This opens your email app with the message filled in, ready to send.
           Nothing is stored on this site.
         </p>
+        {% endif %}
 
         <p class="form-status" data-status role="status" aria-live="polite"></p>
 
@@ -104,6 +123,9 @@ description: "Questions about a course, a book order or the research. Write to N
       <script>
       (function () {
         var TO = 'adiyogistudios@gmail.com';
+        // Set in _config.yml. With a key the form sends from the page;
+        // without one it falls back to opening the visitor's email app.
+        var KEY = {{ site.contact_form_key | jsonify }};
         var REASONS = {
           course: 'Joining a course',
           book: 'A book order',
@@ -115,6 +137,8 @@ description: "Questions about a course, a book order or the research. Write to N
         var nameEl = document.getElementById('cf-name');
         var reasonEl = document.getElementById('cf-reason');
         var msgEl = document.getElementById('cf-message');
+        var emailEl = document.getElementById('cf-email');
+        var submitEl = form.querySelector('[data-submit]');
         var statusEl = form.querySelector('[data-status]');
 
         // Buttons elsewhere on the site link here as contact.html?reason=course&item=...
@@ -127,17 +151,60 @@ description: "Questions about a course, a book order or the research. Write to N
           msgEl.value = lead + item + '\n\n';
         }
 
+        function openMailApp(subject, body) {
+          window.location.href = 'mailto:' + TO +
+            '?subject=' + encodeURIComponent(subject) +
+            '&body=' + encodeURIComponent(body);
+        }
+
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (!form.reportValidity()) return;
           var name = nameEl.value.trim();
+          var email = emailEl.value.trim();
           var subject = REASONS[reasonEl.value] + ' (from ' + name + ')';
-          var body = msgEl.value.trim() + '\n\n' + name;
-          window.location.href = 'mailto:' + TO +
-            '?subject=' + encodeURIComponent(subject) +
-            '&body=' + encodeURIComponent(body);
-          statusEl.innerHTML = 'Your email app should now be open with the message ready. ' +
-            'Press send there. Nothing opened? Email <a href="mailto:' + TO + '">' + TO + '</a> directly.';
+          var body = msgEl.value.trim() + '\n\n' + name + '\n' + email;
+
+          if (!KEY) {
+            openMailApp(subject, body);
+            statusEl.innerHTML = 'Your email app should now be open with the message ready. ' +
+              'Press send there. Nothing opened? Email <a href="mailto:' + TO + '">' + TO + '</a> directly.';
+            return;
+          }
+
+          submitEl.disabled = true;
+          submitEl.textContent = 'Sending…';
+          statusEl.textContent = '';
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: KEY,
+              subject: subject,
+              from_name: 'Neuroscience of Meditation website',
+              name: name,
+              email: email,
+              reason: REASONS[reasonEl.value],
+              message: msgEl.value.trim(),
+              botcheck: form.botcheck.checked
+            })
+          }).then(function (res) {
+            return res.json().then(function (data) {
+              if (!res.ok || !data.success) throw new Error(data.message || res.status);
+            });
+          }).then(function () {
+            form.reset();
+            submitEl.textContent = 'Sent';
+            statusEl.textContent = 'Thank you, ' + name + '. Your message has arrived, and we\u2019ll reply to ' +
+              email + ' within two working days.';
+          }).catch(function () {
+            submitEl.disabled = false;
+            submitEl.textContent = 'Send message';
+            statusEl.innerHTML = 'That didn\u2019t go through, sorry. Please try again, or ' +
+              '<a href="#" data-mailapp>send it from your email app</a> instead.';
+            var link = statusEl.querySelector('[data-mailapp]');
+            link.addEventListener('click', function (ev) { ev.preventDefault(); openMailApp(subject, body); });
+          });
         });
       })();
       </script>
