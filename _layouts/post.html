@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% seo title=false %}
   <title>{{ page.title }} | {{ site.title }}</title>
-  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  {% include head.html %}
   <style>
     .prose{max-width:720px;margin:0 auto}
     .prose p,.prose li{font-size:17px;line-height:1.9;color:var(--ink-60)}
@@ -28,12 +28,12 @@
 
 <body>
 
-{% include header.html %}
+{% include header.html active="words" %}
 
 {% assign words = content | strip_html | number_of_words %}
 {% assign minutes = words | divided_by: 220 | plus: 1 %}
 
-<main>
+<main id="main">
 
   <section class="sec tight">
     <div class="wrap">
@@ -69,6 +69,10 @@
       <div class="card post-note">
         <h4>How this article was checked</h4>
         <p>Every study cited here was checked against its PubMed record before publishing. This is educational content, not medical advice. If you have a health condition, keep following your doctor's guidance.</p>
+      </div>
+
+      <div class="post-head" style="margin-top:32px">
+        <a class="btn s" href="{{ '/words-of-yoga.html' | relative_url }}" style="text-decoration:none;display:inline-block">← More from Words of Yoga</a>
       </div>
 
       <div class="post-signup">

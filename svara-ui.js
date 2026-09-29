@@ -892,6 +892,17 @@
     });
   });
 
+  // Deep links from other pages: swar-yoga.html#practice, #tattva, #ask
+  function openTabFromHash() {
+    var want = window.location.hash.slice(1);
+    var tab = want && document.querySelector('.sv-tab[data-tab="' + want + '"]');
+    if (!tab) return;
+    tab.click();
+    var tool = document.getElementById('svara');
+    if (tool) tool.scrollIntoView();
+  }
+  window.addEventListener('hashchange', openTabFromHash);
+
   /* ==========================================================================
      TATTVA — the eightfold scheme, verses 145-147
      ========================================================================== */
@@ -1453,5 +1464,6 @@
 
   renderLog();
   go('observe');
+  openTabFromHash();
 
 }());

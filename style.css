@@ -17,17 +17,36 @@ img,svg{display:block}
 /* nav */
 .topbar{background:var(--forest);color:var(--cream);position:sticky;top:0;z-index:40}
 .topbar .wrap{display:flex;align-items:center;gap:8px;height:74px}
-.brand{display:flex;align-items:center;gap:12px;margin-right:auto;cursor:pointer}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;cursor:pointer;color:inherit;text-decoration:none;flex-shrink:0}
+.brand img{width:48px;height:48px;object-fit:contain;border-radius:8px;flex:none}
 .brand .mark{width:40px;height:40px;border-radius:50%;background:var(--neon);display:grid;place-items:center;flex:none}
 .brand .mark svg{width:27px;height:27px}
-.brand b{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.05;display:block}
-.brand small{font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,240,226,.6)}
-.nav{display:flex;gap:4px;align-items:center}
-.nav a{color:rgba(244,240,226,.74);text-decoration:none;font-size:13px;padding:9px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.brand b{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.05;display:block;white-space:nowrap}
+.brand small{display:block;font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,240,226,.6);margin-top:3px}
+.nav{display:flex;gap:2px;align-items:center}
+.nav a{color:rgba(244,240,226,.74);text-decoration:none;font-size:13px;padding:9px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .nav a:hover{color:var(--cream);background:rgba(244,240,226,.08)}
 .nav a.on{color:var(--neon);font-weight:600;background:rgba(214,255,63,.1)}
-.navcta{background:var(--neon);color:var(--ink);border:0;border-radius:999px;padding:11px 18px;font-family:var(--sans);font-weight:600;font-size:13px;cursor:pointer;margin-left:10px;white-space:nowrap}
-.burger{display:none;background:none;border:0;color:var(--cream);cursor:pointer}
+.nav .nav-cta{display:none}
+.navcta{background:var(--neon);color:var(--ink);border:0;border-radius:999px;padding:11px 18px;font-family:var(--sans);font-weight:600;font-size:13px;cursor:pointer;margin-left:10px;white-space:nowrap;text-decoration:none}
+.burger{display:none;width:44px;height:44px;margin-right:-8px;padding:0;background:none;border:0;border-radius:10px;color:var(--cream);cursor:pointer;place-items:center}
+.burger:hover{background:rgba(244,240,226,.08)}
+.burger-lines,.burger-lines::before,.burger-lines::after{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,background-color .2s ease}
+.burger-lines{position:relative}
+.burger-lines::before,.burger-lines::after{content:"";position:absolute;left:0}
+.burger-lines::before{top:-7px}
+.burger-lines::after{top:7px}
+.burger[aria-expanded="true"] .burger-lines{background-color:transparent}
+.burger[aria-expanded="true"] .burger-lines::before{transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] .burger-lines::after{transform:translateY(-7px) rotate(-45deg)}
+
+/* keyboard users: jump past the nav */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:100;background:var(--neon);color:var(--ink);padding:10px 16px;border-radius:999px;font-weight:600;font-size:14px;text-decoration:none}
+.skip-link:focus{top:12px}
+
+/* anchors land below the sticky header */
+html{scroll-padding-top:90px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 
 .page{display:none}.page.on{display:block}
 
@@ -279,24 +298,15 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .sub-form input{flex:1;padding:13px 16px;border-radius:999px;border:1px solid rgba(244,240,226,.2);background:rgba(244,240,226,.06);color:var(--cream);font-family:var(--sans);font-size:13px}
 .legal{border-top:1px solid rgba(244,240,226,.12);padding-top:22px;display:flex;justify-content:space-between;gap:20px;font-size:12px;flex-wrap:wrap}
 
-:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+/* Focus ring: forest on light backgrounds, neon on dark ones */
+:focus-visible{outline:2px solid var(--forest);outline-offset:2px}
+.topbar :focus-visible,footer :focus-visible,.sec.green :focus-visible,.sec.deep :focus-visible,
+.ccard :focus-visible,.wcheck :focus-visible,.e-dark :focus-visible,.skip-link:focus-visible{outline-color:var(--neon)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-/* Mobile navigation */
-@media (max-width:1040px){
-
-  .topbar .wrap{
-    position:relative;
-  }
-
-  .burger{
-    display:block;
-    background:none;
-    border:0;
-    color:var(--cream);
-    cursor:pointer;
-    padding:8px;
-  }
-
+/* Mobile navigation (the full nav needs ~1180px) */
+@media (max-width:1180px){
+  .topbar .wrap{position:relative}
+  .burger{display:grid}
   .nav.mobile-open{
     display:flex;
     position:absolute;
@@ -308,74 +318,33 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
     align-items:stretch;
     padding:12px 20px 18px;
     box-shadow:0 12px 25px rgba(0,0,0,.18);
+    max-height:calc(100vh - 74px);
+    overflow-y:auto;
   }
-
   .nav.mobile-open a{
     display:block;
     padding:14px 12px;
     border-radius:10px;
+    font-size:15px;
   }
+}
+@media (max-width:640px){
+  .nav.mobile-open .nav-cta{display:block;margin-top:10px;background:var(--neon);color:var(--ink);font-weight:600;text-align:center;border-radius:999px}
+}
+
 /* =========================================
    MY MIND AND ME — INTRO LAYOUT
+   (was nested inside the mobile-nav media query, so it never applied on desktop)
    ========================================= */
-
-.intro-grid {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 45px !important;
-  width: 100% !important;
-}
-
-.intro-image {
-  flex: 0 0 38% !important;
-  width: 38% !important;
-  min-width: 0 !important;
-}
-
-.intro-image img {
-  display: block !important;
-  width: 100% !important;
-  height: 460px !important;
-  object-fit: cover !important;
-  border-radius: 16px !important;
-}
-
-.intro-text {
-  flex: 1 1 62% !important;
-  width: auto !important;
-  min-width: 0 !important;
-}
-
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .intro-grid {
-    flex-direction: column !important;
-    gap: 30px !important;
-  }
-
-  .intro-image {
-    width: 100% !important;
-    flex: none !important;
-  }
-
-  .intro-image img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 500px !important;
-  }
-
-  .intro-text {
-    width: 100% !important;
-    flex: none !important;
-  }
-
-}
-    height: auto;
-    max-height: 500px;
-  }
+.intro-grid{display:flex;align-items:center;gap:45px;width:100%}
+.intro-image{flex:0 0 38%;min-width:0}
+.intro-image img{display:block;width:100%;height:460px;object-fit:cover;border-radius:16px}
+.intro-text{flex:1 1 62%;min-width:0}
+@media (max-width:768px){
+  .intro-grid{flex-direction:column;gap:30px}
+  .intro-image{width:100%;flex:none}
+  .intro-image img{height:auto;max-height:500px}
+  .intro-text{width:100%;flex:none}
 }
 
 /* Hero image (replaces old Swara widget) */
@@ -421,7 +390,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
    The menu now collapses behind the ☰ button on
    tablets and phones instead of overflowing the page.
    ========================================= */
-@media (max-width:1040px){
+@media (max-width:1180px){
   .nav{display:none}
   .nav.mobile-open{display:flex}
 }
@@ -434,10 +403,36 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   .navcta{display:none}
   .topbar .wrap{padding:0 18px}
   .wrap{padding:0 20px}
+  /* less scrolling on phones */
+  .sec{padding:60px 0}
+  .sec.tight{padding:44px 0}
+  .sec h2{font-size:32px}
+  .hero{padding-top:44px}
+  .trip{margin-top:40px}
+  .trip .ph{height:190px}
 }
 @media (max-width:420px){
-  .brand b{font-size:16px}
+  .brand{flex-shrink:1;min-width:0}
+  .brand b{font-size:16px;white-space:normal}
   .brand small{display:none}
+}
+
+/* Aṇūṭṭara: stack the cover above the description on smaller screens */
+@media (max-width:900px){
+  .magwrap{grid-template-columns:1fr;gap:40px}
+  .cover{width:100%;max-width:360px;margin:0 auto}
+}
+
+/* My Mind and Me editorial cards on phones */
+@media (max-width:640px){
+  .ed{padding:0 16px}
+  .e-neon,.e-cream{padding:26px 22px}
+  .e-dark{min-height:0}
+  .e-dark .inner{padding:26px 22px}
+  .e-h{font-size:32px}
+  .e-h.sm{font-size:27px}
+  .e-foot{font-size:21px;padding:22px}
+  .esplit{grid-template-columns:1fr}
 }
 
 
@@ -529,3 +524,54 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .privacy ul{padding-left:22px;margin:0 0 16px}
 .privacy b{color:var(--ink)}
 .privacy a{color:var(--forest);text-decoration:underline;text-underline-offset:3px}
+
+
+/* =========================================
+   UX PASS (Sept 2026)
+   ========================================= */
+
+/* Floating newsletter button: labelled, and it steps aside at the footer */
+.signup-fab{position:fixed;right:20px;bottom:20px;z-index:1000;display:flex;align-items:center;gap:10px;padding:6px 18px 6px 6px;background:var(--cream);color:var(--forest);border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.18);text-decoration:none;font-weight:600;font-size:13px;transition:opacity .25s ease,transform .25s ease,visibility .25s}
+.signup-fab img{width:40px;height:40px;object-fit:contain;border-radius:50%;flex:none}
+.signup-fab:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.22)}
+.signup-fab.is-hidden{opacity:0;visibility:hidden;transform:translateY(12px)}
+@media (max-width:640px){
+  .signup-fab{right:14px;bottom:14px;padding:5px}
+  .signup-fab span{display:none}
+}
+
+/* Whole card is the link, not just the picture */
+.card-link{display:block;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease}
+.card-link:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,24,15,.12)}
+.card-link .more{display:inline-block;margin-top:14px;font-size:13px;font-weight:600;color:var(--forest)}
+
+/* Blog list: the title link covers the whole row */
+.post{position:relative}
+.post h4 a{color:inherit;text-decoration:none}
+.post h4 a::after{content:"";position:absolute;inset:0}
+.post:hover h4 a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.post.soon{opacity:.62}
+.soon-badge{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 9px;border-radius:999px;background:rgba(198,161,91,.24);color:#6d5a2c;font-size:10px;letter-spacing:.1em}
+
+/* Contact form */
+.form .field{display:grid;gap:7px}
+.form .field > span{font-size:13px;font-weight:600;color:var(--ink)}
+.form select:invalid{color:var(--ink-60)}
+.form-note{font-size:12.5px;line-height:1.6;color:var(--ink-60);margin:0}
+.form-note a,.form-status a,.contact-direct a{color:var(--forest);text-decoration:underline;text-underline-offset:2px}
+.form-status{font-size:13.5px;line-height:1.6;margin:0;padding:12px 14px;border-radius:12px;background:rgba(27,67,50,.08);color:var(--forest)}
+.form-status:empty{display:none}
+.contact-direct{font-size:14px;line-height:1.7;color:var(--ink-60);margin:-14px 0 28px}
+@media (max-width:640px){
+  .form .row{grid-template-columns:1fr}
+  .contact-art,.deco-pair{display:none}
+}
+
+/* Swar Yoga open-record panels: chart wider than the questions, stacked on phones */
+.record-grid{grid-template-columns:1.35fr 1fr}
+@media (max-width:640px){.record-grid{grid-template-columns:1fr}}
+
+/* Placeholder notice for articles still being written */
+.soon-note{background:var(--cream-2);border-radius:18px;padding:28px}
+.soon-note h2{font-size:24px;margin:0 0 10px}
+.soon-note p{font-size:16px;line-height:1.75;color:var(--ink-60);margin:0 0 18px}
