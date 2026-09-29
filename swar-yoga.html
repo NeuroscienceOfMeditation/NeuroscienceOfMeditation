@@ -8,7 +8,7 @@
   <title>Swar Yoga — Neuroscience of Meditation</title>
   <meta name="description" content="Observe which nostril is flowing, check it against the Shiva Swarodaya rules, try the practices the text contains, and add your observation to an open record.">
   {% include head.html %}
-  <link rel="stylesheet" href="svara-tool.css">
+  <link rel="stylesheet" href="svara-tool.css?v={{ site.time | date: '%s' }}">
 </head>
 
 <body>
@@ -58,7 +58,7 @@
         <span class="glow" data-glow></span>
 
         <h4>Which side is flowing?</h4>
-        <p class="sm">No account needed. One tap.</p>
+        <p class="sm">Breathe out gently through your nose. Which side feels more open?</p>
 
         <svg class="helix" viewBox="0 0 150 214" fill="none">
 
@@ -84,15 +84,15 @@
         </svg>
 
         <div class="state">
-          <h3 data-name>Ida · left</h3>
+          <h3 data-name>Left, right or both?</h3>
           <div class="san" data-san>
-            Chandra swara — cooling
+            Ida · Pingala · Sushumna
           </div>
         </div>
 
         <div class="pick" data-pick>
 
-          <button class="pk on" data-s="left">
+          <button class="pk" data-s="left" aria-pressed="false">
             <span class="nose">
               <span class="l"></span>
               <span class="r"></span>
@@ -100,7 +100,7 @@
             <b>Left</b>
           </button>
 
-          <button class="pk" data-s="right">
+          <button class="pk" data-s="right" aria-pressed="false">
             <span class="nose">
               <span class="l"></span>
               <span class="r"></span>
@@ -108,7 +108,7 @@
             <b>Right</b>
           </button>
 
-          <button class="pk" data-s="both">
+          <button class="pk" data-s="both" aria-pressed="false">
             <span class="nose">
               <span class="l"></span>
               <span class="r"></span>
@@ -118,8 +118,10 @@
 
         </div>
 
-        <div class="thanks" data-thanks>
-          Noted. To add it to the open record, use the tool below.
+        <div class="thanks" data-thanks aria-live="polite" hidden>
+          <p>Nothing is saved yet. Next, settle for fifteen seconds and see what the
+             Svarodaya rule expected at this hour.</p>
+          <button type="button" class="hero-go" data-hero-go>Continue with this answer ↓</button>
         </div>
 
       </div>
@@ -180,6 +182,12 @@
 
     <!-- ================= SVARA ================= -->
     <div class="sv-pane on" data-pane="observe">
+    <ol class="sv-progress" data-progress aria-label="Steps">
+      <li aria-current="step"><span>Settle</span></li>
+      <li><span>Your side</span></li>
+      <li><span>Time &amp; place</span></li>
+      <li><span>Result</span></li>
+    </ol>
     <div class="sv-shell">
       <div>
 
@@ -188,22 +196,22 @@
           <h2 class="sv-h">Which channel is flowing?</h2>
           <p class="sv-p">Sit for a moment and let the breath settle before you answer.</p>
 
+          <div class="sv-row">
+            <button class="sv-btn quiet" data-cam-toggle aria-pressed="false">Turn on camera</button>
+            <span class="sv-fine" data-cam-note>
+              Optional. It helps you sit square and look; it measures nothing, and
+              nothing leaves your browser.
+            </span>
+          </div>
+
           <div class="sv-cam">
             <video playsinline muted aria-label="Camera preview"></video>
-            <div class="sv-camoff">
-              Optional. The camera helps you sit square and look — it measures nothing.
-            </div>
             <svg class="sv-guide" viewBox="0 0 100 75" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <ellipse cx="50" cy="36" rx="20" ry="26" fill="none" stroke="rgba(244,240,226,.35)" stroke-width=".6"/>
               <line x1="50" y1="16" x2="50" y2="58" stroke="rgba(244,240,226,.25)" stroke-width=".4"/>
               <circle cx="45" cy="42" r="1.6" fill="none" stroke="rgba(46,127,168,.8)" stroke-width=".6"/>
               <circle cx="55" cy="42" r="1.6" fill="none" stroke="rgba(228,116,79,.8)" stroke-width=".6"/>
             </svg>
-          </div>
-
-          <div class="sv-row" style="margin-top:14px">
-            <button class="sv-btn quiet" data-cam-toggle aria-pressed="false">Turn on camera</button>
-            <span class="sv-fine">Nothing leaves your browser.</span>
           </div>
 
           <div class="sv-orb-wrap">
@@ -268,40 +276,79 @@
 
         <!-- step 3: context -->
         <div class="sv-panel sv-step" data-step="context">
-          <h2 class="sv-h">When and where</h2>
+          <h2 class="sv-h">Where are you?</h2>
           <p class="sv-p">
-            The cycle is counted from sunrise and the rule turns on the lunar day.
-            Correct anything that looks wrong.
+            The Svarodaya counts the cycle from sunrise, so the comparison needs
+            roughly where you are. The nearest city is close enough.
           </p>
 
-          <div class="sv-fields">
-            <div class="sv-field"><label for="sv-date">Date</label>
-              <input id="sv-date" data-f-date type="date"></div>
-            <div class="sv-field"><label for="sv-time">Time</label>
-              <input id="sv-time" data-f-time type="time"></div>
-            <div class="sv-field"><label for="sv-tz">Timezone</label>
-              <input id="sv-tz" data-f-tz type="text" readonly></div>
-            <div class="sv-field"><label for="sv-loc">Latitude, longitude</label>
-              <input id="sv-loc" data-f-loc type="text" placeholder="28.61, 77.21" inputmode="decimal"></div>
-          </div>
-
-          <div class="sv-field" style="margin-bottom:14px">
-            <label for="sv-period">How long does one channel hold?</label>
-            <select id="sv-period" data-f-period></select>
-            <p class="sv-fine" style="margin-top:7px" data-period-note></p>
-          </div>
-
-          <div class="sv-row" style="margin-bottom:10px">
+          <div class="sv-where">
+            <div class="sv-field">
+              <label for="sv-city">Nearest city</label>
+              <select id="sv-city" data-f-city>
+              <option value="">Choose a city…</option>
+              <option value="28.61, 77.21">Delhi</option>
+              <option value="19.08, 72.88">Mumbai</option>
+              <option value="12.97, 77.59">Bengaluru</option>
+              <option value="22.57, 88.36">Kolkata</option>
+              <option value="13.08, 80.27">Chennai</option>
+              <option value="17.39, 78.49">Hyderabad</option>
+              <option value="18.52, 73.86">Pune</option>
+              <option value="23.02, 72.57">Ahmedabad</option>
+              <option value="26.91, 75.79">Jaipur</option>
+              <option value="26.85, 80.95">Lucknow</option>
+              <option value="30.73, 76.78">Chandigarh</option>
+              <option value="30.09, 78.27">Rishikesh</option>
+              <option value="25.32, 82.97">Varanasi</option>
+              <option value="23.26, 77.41">Bhopal</option>
+              <option value="26.14, 91.74">Guwahati</option>
+              <option value="9.93, 76.27">Kochi</option>
+              <option value="27.72, 85.32">Kathmandu</option>
+              <option value="25.2, 55.27">Dubai</option>
+              <option value="1.35, 103.82">Singapore</option>
+              <option value="51.51, -0.13">London</option>
+              <option value="40.71, -74.01">New York</option>
+              <option value="37.77, -122.42">San Francisco</option>
+              <option value="-33.87, 151.21">Sydney</option>
+              </select>
+            </div>
             <button class="sv-btn quiet" data-locate>Use my location</button>
           </div>
-          <p class="sv-fine" data-loc-note style="margin-bottom:18px">
-            Used in this browser to work out your sunrise. Not sent anywhere.
+          <p class="sv-fine" data-loc-note style="margin:10px 0 16px">
+            Kept in this browser to work out your sunrise. If you join the open
+            record, only a rounded version (about 11 km) is shared.
           </p>
 
-          <div class="sv-row">
+          <details class="sv-why sv-more">
+            <summary>Change the date, time, coordinates or cycle length</summary>
+            <p class="sv-fine" style="margin:0 0 12px">
+              Use these to log an observation made earlier, for example on waking.
+            </p>
+            <div class="sv-fields">
+              <div class="sv-field"><label for="sv-date">Date</label>
+                <input id="sv-date" data-f-date type="date"></div>
+              <div class="sv-field"><label for="sv-time">Time</label>
+                <input id="sv-time" data-f-time type="time"></div>
+              <div class="sv-field"><label for="sv-tz">Timezone</label>
+                <input id="sv-tz" data-f-tz type="text" readonly></div>
+              <div class="sv-field"><label for="sv-loc">Latitude, longitude</label>
+                <input id="sv-loc" data-f-loc type="text" placeholder="28.61, 77.21" inputmode="decimal"></div>
+            </div>
+            <div class="sv-field">
+              <label for="sv-period">How long does one channel hold?</label>
+              <select id="sv-period" data-f-period></select>
+              <p class="sv-fine" style="margin-top:7px" data-period-note></p>
+            </div>
+          </details>
+
+          <div class="sv-row" style="margin-top:18px">
             <button class="sv-btn primary" data-context-done disabled>See the assessment</button>
-            <button class="sv-btn quiet" data-context-skip>Skip</button>
+            <button class="sv-btn quiet" data-context-skip>Skip the comparison</button>
           </div>
+          <p class="sv-fine" data-context-hint style="margin-top:10px">
+            Choose a city or use your location to continue. Skipping shows your
+            observation without the traditional comparison.
+          </p>
         </div>
 
         <!-- step 4: result -->
@@ -751,7 +798,7 @@ const SW = {
 
 document.querySelectorAll('.wcheck').forEach(function(w) {
 
-  function setSwara(k, announce) {
+  function setSwara(k) {
 
     const d = SW[k];
 
@@ -777,15 +824,14 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
       k === 'right' ? '1' : (k === 'both' ? '.75' : '.18')
     );
 
-    if (announce) {
-      const t = w.querySelector('[data-thanks]');
-      t.classList.add('show');
-
-      setTimeout(function() {
-        t.classList.remove('show');
-      }, 2600);
-    }
   }
+
+  // Both channels half-lit until the visitor answers: no side is preselected.
+  w.querySelector('[data-glow]').style.background = '#C6A15B';
+  w.querySelector('[data-ida]').setAttribute('opacity', '.55');
+  w.querySelector('[data-ping]').setAttribute('opacity', '.55');
+
+  let picked = null;
 
   w.querySelector('[data-pick]').addEventListener('click', function(e) {
 
@@ -795,12 +841,26 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 
     this.querySelectorAll('.pk').forEach(function(x) {
       x.classList.toggle('on', x === button);
+      x.setAttribute('aria-pressed', x === button ? 'true' : 'false');
     });
 
-    setSwara(button.dataset.s, true);
+    picked = button.dataset.s;
+    setSwara(picked);
+    w.querySelector('[data-thanks]').hidden = false;
   });
 
-  setSwara('left', false);
+  // Carry the answer into the tool below: it waits on the "Which svara is
+  // active?" step, after the settling period, where it can still be changed.
+  const TOOL_CHOICE = { left: 'ida', right: 'pingala', both: 'sushumna' };
+
+  w.querySelector('[data-hero-go]').addEventListener('click', function() {
+    const tab = document.querySelector('.sv-tab[data-tab="observe"]');
+    if (tab && tab.getAttribute('aria-selected') !== 'true') tab.click();
+    const choice = picked && document.querySelector('.sv-choice[data-s="' + TOOL_CHOICE[picked] + '"]');
+    if (choice) choice.click();
+    const tool = document.getElementById('svara');
+    if (tool) tool.scrollIntoView();
+  });
 });
 
 
@@ -808,12 +868,12 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 </script>
 <!-- Svara tool -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
-<script src="svara-engine.js"></script>
-<script src="svara-knowledge.js"></script>
-<script src="svara-voice.js"></script>
-<script src="svara-practice-view.js"></script>
-<script src="svara-ui.js"></script>
-<script src="svara-record.js"></script>
+<script src="svara-engine.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-knowledge.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-voice.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-practice-view.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-ui.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-record.js?v={{ site.time | date: '%s' }}"></script>
 
 </body>
 </html>
