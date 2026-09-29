@@ -3,4 +3,5 @@
   <link rel="icon" type="image/png" href="{{ '/logo.png' | relative_url }}">
   <link rel="apple-touch-icon" href="{{ '/logo.png' | relative_url }}">
   <meta name="theme-color" content="#1B4332">
-  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+  {% comment %} ?v= changes on every build, so browsers never pair new pages with an old saved stylesheet. {% endcomment %}
+  <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">

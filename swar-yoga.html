@@ -8,7 +8,7 @@
   <title>Swar Yoga — Neuroscience of Meditation</title>
   <meta name="description" content="Observe which nostril is flowing, check it against the Shiva Swarodaya rules, try the practices the text contains, and add your observation to an open record.">
   {% include head.html %}
-  <link rel="stylesheet" href="svara-tool.css">
+  <link rel="stylesheet" href="svara-tool.css?v={{ site.time | date: '%s' }}">
 </head>
 
 <body>
@@ -808,12 +808,12 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 </script>
 <!-- Svara tool -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
-<script src="svara-engine.js"></script>
-<script src="svara-knowledge.js"></script>
-<script src="svara-voice.js"></script>
-<script src="svara-practice-view.js"></script>
-<script src="svara-ui.js"></script>
-<script src="svara-record.js"></script>
+<script src="svara-engine.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-knowledge.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-voice.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-practice-view.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-ui.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-record.js?v={{ site.time | date: '%s' }}"></script>
 
 </body>
 </html>
