@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+</head>
+
+<body>
+
+{% include header.html active="anuttara" %}
+
+{% comment %} Contents page of one Aṇūṭṭara issue: lists the other files in its folder. {% endcomment %}
+{% assign folder = page.path | split: '/' | slice: 1 | first %}
+{% assign pieces = site.anuttara | where_exp: "d", "d.path contains folder" | where_exp: "d", "d.order > 0" | sort: "order" %}
+
+<main id="main">
+
+  {% if page.published == false %}
+  <div class="mag-draft" role="note">
+    <b>Draft issue.</b> Not on the live site until each file in <code>_anuttara/{{ folder }}/</code> says <code>published: true</code>.
+  </div>
+  {% endif %}
+
+  <section class="sec">
+    <div class="wrap magwrap">
+      <div class="cover" aria-hidden="true">
+        <div class="top"><span>{{ page.cover_date }}</span><span>Issue {{ page.issue | prepend: '0' | slice: -2, 2 }}</span></div>
+        <p class="cover-t">Aṇūṭṭara</p>
+        <div class="sig">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="52" r="30"/>
+            <path d="M60 20 L88 74 H32 Z"/>
+            <path d="M32 92h56M36 98h48"/>
+            <g fill="#C6A15B" stroke="none">
+              <circle cx="60" cy="14" r="2"/><circle cx="84" cy="22" r="2"/><circle cx="98" cy="44" r="2"/>
+              <circle cx="94" cy="68" r="2"/><circle cx="26" cy="68" r="2"/><circle cx="22" cy="44" r="2"/><circle cx="36" cy="22" r="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="foot">{{ page.cover_line | upcase }}</div>
+      </div>
+
+      <div>
+        <div class="eyebrow">Aṇūṭṭara · Issue {{ page.issue | prepend: '0' | slice: -2, 2 }}</div>
+        <h1 style="font-size:clamp(32px,4.4vw,48px)">{{ page.title }}</h1>
+        <p class="sub">{{ page.description }}</p>
+
+        <h2 style="font-size:19px;margin:8px 0 14px;line-height:normal">In this issue</h2>
+        <ol class="mag-toc">
+          {% for p in pieces %}
+          <li>
+            <a href="{{ p.url | relative_url }}">
+              <span class="k">{{ p.section }}</span>
+              <b>{{ p.title }}</b>
+              <span>{{ p.description }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ol>
+
+        <a class="btn p" href="{{ pieces.first.url | relative_url }}" style="text-decoration:none">Start reading</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

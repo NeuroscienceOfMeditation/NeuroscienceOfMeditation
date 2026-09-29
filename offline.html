@@ -1,0 +1,53 @@
+---
+permalink: /offline.html
+title: "You're offline"
+noindex: true
+sitemap: false
+---
+{% comment %}
+  Shown by sw.js when a page is opened without a connection and hasn't been
+  saved on this device yet. It is saved on the first visit, so it always works.
+{% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+</head>
+
+<body>
+
+{% include header.html %}
+
+<main id="main">
+
+<section class="sec">
+  <div class="wrap" style="max-width:760px">
+
+    <div class="eyebrow">No connection</div>
+
+    <h1 style="font-size:clamp(34px,5vw,54px);line-height:1.04">
+      You're offline, and this page isn't saved yet
+    </h1>
+
+    <p class="lede" style="margin:20px 0 30px">
+      Pages you've opened before on this device still work without a connection,
+      including the Swar Yoga morning check. Everything else will load again when
+      you're back online.
+    </p>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn p" href="{{ '/swar-yoga.html' | relative_url }}#svara" style="text-decoration:none">Open the morning check</a>
+      <a class="btn s" href="{{ '/' | relative_url }}" style="text-decoration:none">Go to the homepage</a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

@@ -15,6 +15,13 @@ social:
     - https://www.instagram.com/neuroscienceofmeditation/
 timezone: Asia/Kolkata
 
+# Contact form delivery. Paste your free Web3Forms access key between the
+# quotes (get one at web3forms.com with adiyogistudios@gmail.com) and the
+# contact form sends messages straight to that inbox. Left empty, the form
+# opens the visitor's email app instead, as before. The key is safe to
+# publish: it can only send mail to your own address.
+contact_form_key: ""
+
 markdown: kramdown
 kramdown:
   auto_ids: true
@@ -22,6 +29,14 @@ kramdown:
 # Keep URLs flat like the rest of the site, e.g. /nadi-shodhana-without-mythology.html
 # (:output_ext keeps ".html" on pages too, so canonical links match the links on the site)
 permalink: /:title:output_ext
+
+# Aṇūṭṭara magazine: each issue is a folder in _anuttara/ (issue-01, issue-02 …)
+# holding an index.md (the contents page) and one .md file per piece.
+# A piece stays off the site while its front matter says published: false.
+collections:
+  anuttara:
+    output: true
+    permalink: /anuttara/:path:output_ext
 
 plugins:
   - jekyll-sitemap
@@ -37,6 +52,12 @@ defaults:
       type: posts
     values:
       layout: post
+  - scope:
+      path: ""
+      type: anuttara
+    values:
+      layout: anuttara-piece
+      author: Aditi
 
 # Files that should never be published
 exclude:
