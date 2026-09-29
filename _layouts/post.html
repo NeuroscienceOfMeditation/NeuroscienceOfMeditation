@@ -3,8 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% seo title=false %}
-  <title>{{ page.title }} | {{ site.title }}</title>
   {% include head.html %}
   <style>
     .prose{max-width:720px;margin:0 auto}
@@ -17,6 +15,8 @@
     .prose strong{color:var(--ink)}
     .prose ul,.prose ol{padding-left:22px;margin:0 0 22px}
     .prose blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:3px solid var(--gold)}
+    .prose blockquote p:last-child{margin-bottom:0}
+    .prose blockquote p{color:var(--ink)}
     .prose #sources + ul li,.prose #sources + ol li{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
     .post-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:13px;color:var(--ink-60)}
     .post-note{max-width:720px;margin:56px auto 0}
@@ -66,14 +66,40 @@
         {{ content }}
       </article>
 
+      {% comment %} Only research pieces cite studies; reflections skip this note. {% endcomment %}
+      {% if page.sources %}
       <div class="card post-note">
-        <h4>How this article was checked</h4>
+        <h3>How this article was checked</h3>
         <p>Every study cited here was checked against its PubMed record before publishing. This is educational content, not medical advice. If you have a health condition, keep following your doctor's guidance.</p>
       </div>
+      {% endif %}
 
-      <div class="post-head" style="margin-top:32px">
-        <a class="btn s" href="{{ '/words-of-yoga.html' | relative_url }}" style="text-decoration:none;display:inline-block">← More from Words of Yoga</a>
+      {% assign share_url = page.url | absolute_url %}
+      {% assign share_text = page.title | append: ' ' | append: share_url | url_encode | replace: '+', '%20' %}
+      <div class="post-share" data-share data-url="{{ share_url }}">
+        <span class="post-share-label">Share this article</span>
+        <a class="share-btn" href="https://wa.me/?text={{ share_text }}" target="_blank" rel="noopener">WhatsApp</a>
+        <button type="button" class="share-btn" data-copy>Copy link</button>
+        <button type="button" class="share-btn" data-native hidden>More ways to share</button>
       </div>
+
+      {% assign others = site.posts | where_exp: "p", "p.url != page.url" %}
+      {% if others.size > 0 %}
+      <section class="keep-reading" aria-labelledby="keep-reading-h">
+        <h2 id="keep-reading-h">Keep reading</h2>
+        <div class="two">
+          {% for p in others limit:2 %}
+          <a class="card latest-card" href="{{ p.url | relative_url }}">
+            <div class="ph {{ p.card_class | default: 'ph-forest' }}"></div>
+            <div class="k">{{ p.pillar | default: 'Article' }}</div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.description }}</p>
+          </a>
+          {% endfor %}
+        </div>
+        <a class="btn s" href="{{ '/words-of-yoga.html' | relative_url }}" style="text-decoration:none;display:inline-block">All articles</a>
+      </section>
+      {% endif %}
 
       <div class="post-signup">
 <form action="https://app.kit.com/forms/9927031/subscriptions" class="seva-form formkit-form kit-card" method="post" data-sv-form="9927031" data-uid="1e1c9bcc9e" data-format="inline" data-version="5" data-options="{&quot;settings&quot;:{&quot;after_subscribe&quot;:{&quot;action&quot;:&quot;message&quot;,&quot;success_message&quot;:&quot;Almost done. Check your inbox and click the confirmation link to join.&quot;,&quot;redirect_url&quot;:&quot;&quot;},&quot;analytics&quot;:{&quot;google&quot;:null,&quot;fathom&quot;:null,&quot;facebook&quot;:null,&quot;segment&quot;:null,&quot;pinterest&quot;:null,&quot;sparkloop&quot;:null,&quot;googletagmanager&quot;:null},&quot;modal&quot;:{&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;powered_by&quot;:{&quot;show&quot;:true,&quot;url&quot;:&quot;https://kit.com/features/forms?utm_campaign=poweredby&amp;utm_content=form&amp;utm_medium=referral&amp;utm_source=dynamic&quot;},&quot;recaptcha&quot;:{&quot;enabled&quot;:false},&quot;return_visitor&quot;:{&quot;action&quot;:&quot;show&quot;,&quot;custom_content&quot;:&quot;&quot;},&quot;slide_in&quot;:{&quot;display_in&quot;:&quot;bottom_right&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15},&quot;sticky_bar&quot;:{&quot;display_in&quot;:&quot;top&quot;,&quot;trigger&quot;:&quot;timer&quot;,&quot;scroll_percentage&quot;:null,&quot;timer&quot;:5,&quot;devices&quot;:&quot;all&quot;,&quot;show_once_every&quot;:15}},&quot;version&quot;:&quot;5&quot;}" aria-labelledby="kit-title-post">
@@ -99,6 +125,34 @@
 </main>
 
 {% include footer.html %}
+
+<script>
+(function () {
+  var box = document.querySelector('[data-share]');
+  if (!box) return;
+  var url = box.getAttribute('data-url');
+  var copy = box.querySelector('[data-copy]');
+  copy.addEventListener('click', function () {
+    function done() {
+      copy.textContent = 'Link copied';
+      setTimeout(function () { copy.textContent = 'Copy link'; }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, function () { window.prompt('Copy this link:', url); });
+    } else {
+      window.prompt('Copy this link:', url);
+    }
+  });
+  // Phones get the system share sheet (Instagram, Telegram, email, …).
+  var more = box.querySelector('[data-native]');
+  if (navigator.share) {
+    more.hidden = false;
+    more.addEventListener('click', function () {
+      navigator.share({ title: document.title, url: url }).catch(function () {});
+    });
+  }
+})();
+</script>
 
 </body>
 </html>

@@ -7,7 +7,12 @@ description: >-
 url: "https://neuroscienceofmeditation.in"
 baseurl: ""
 lang: en_IN
-author: Neuroscience of Meditation
+author: Aditi
+logo: /img/icon-512.png
+social:
+  name: Neuroscience of Meditation
+  links:
+    - https://www.instagram.com/neuroscienceofmeditation/
 timezone: Asia/Kolkata
 
 markdown: kramdown
@@ -15,13 +20,18 @@ kramdown:
   auto_ids: true
 
 # Keep URLs flat like the rest of the site, e.g. /nadi-shodhana-without-mythology.html
-permalink: /:title.html
+# (:output_ext keeps ".html" on pages too, so canonical links match the links on the site)
+permalink: /:title:output_ext
 
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
 defaults:
+  - scope:
+      path: ""
+    values:
+      image: /img/og-default.jpg
   - scope:
       path: ""
       type: posts

@@ -15,7 +15,7 @@
   --sv-sush:   #C6A15B;
 
   --sv-ink:    #17231F;
-  --sv-muted:  #5E6F68;
+  --sv-muted:  #54635D;
   --sv-line:   rgba(23, 35, 31, .13);
   --sv-panel:  #FFFDF7;
   --sv-sunk:   rgba(23, 35, 31, .035);
@@ -338,7 +338,7 @@
 }
 
 #svara .sv-kind { background: var(--sv-panel); padding: 16px 15px; }
-#svara .sv-kind h6 {
+#svara .sv-kind h3 {
   font-size: 11.5px;
   margin: 0 0 6px;
   font-weight: 600;
@@ -449,7 +449,7 @@
   display: flex; gap: 10px; align-items: center;
   flex-wrap: wrap; margin-bottom: 7px;
 }
-#svara .sv-rule h6 { margin: 0; font-size: 13.5px; font-weight: 600; }
+#svara .sv-rule h3 { margin: 0; font-size: 13.5px; font-weight: 600; }
 #svara .sv-rule p { margin: 0 0 6px; font-size: 12.5px; line-height: 1.6; color: var(--sv-muted); }
 #svara .sv-rule .warn {
   font-size: 12px; line-height: 1.6;
@@ -613,6 +613,10 @@
 #svara .sv-grade.g-x  { background: rgba(23,35,31,.09);    color: var(--sv-muted); }
 #svara .sv-grade.g-en { background: rgba(228,116,79,.15);  color: #8A3C1E; }
 
+/* small sans labels; they are h3 for the outline, not for a serif heading look */
+#svara .sv-kind h3, #svara .sv-rule h3, #svara .sv-inpractice h3, #svara h3.sv-subhead {
+  font-family: inherit; letter-spacing: normal; line-height: normal;
+}
 #svara .sv-subhead {
   font-size: 12.5px;
   font-weight: 600;
@@ -839,7 +843,7 @@
   background: var(--sv-sunk);
   border-radius: 11px;
 }
-#svara .sv-inpractice h6 {
+#svara .sv-inpractice h3 {
   margin: 0 0 6px;
   font-size: 11.5px;
   font-weight: 600;

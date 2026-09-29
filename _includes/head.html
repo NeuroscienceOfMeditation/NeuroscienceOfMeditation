@@ -1,7 +1,18 @@
+  {% comment %}
+    Title, description, canonical link, Open Graph / Twitter link previews and
+    Google structured data, from each page's front matter: title, description,
+    image (1200x630 JPG works best on WhatsApp). Pages without an image use
+    /img/og-default.jpg, set in _config.yml.
+  {% endcomment %}
+  {% seo %}
+  {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" type="image/png" href="{{ '/logo.png' | relative_url }}">
-  <link rel="apple-touch-icon" href="{{ '/logo.png' | relative_url }}">
+  {% comment %} Fonts load in parallel with style.css; an @import inside it used to make them wait. {% endcomment %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&amp;family=Archivo:wght@400;500;600;700&amp;display=swap">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/img/favicon-32.png' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/img/apple-touch-icon.png' | relative_url }}">
+  <link rel="manifest" href="{{ '/manifest.webmanifest' | relative_url }}">
   <meta name="theme-color" content="#1B4332">
   {% comment %} ?v= changes on every build, so browsers never pair new pages with an old saved stylesheet. {% endcomment %}
   <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
