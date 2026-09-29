@@ -3,8 +3,9 @@ title: "Does Nadi Shodhana Balance Your Brain? The Evidence"
 description: "Alternate nostril breathing is said to balance your brain's hemispheres. Here's what EEG studies found, and what the practice does seem to do."
 date: 2026-09-16 09:00:00 +0530
 pillar: Claim check
-card_class: ph-mist
+cover: wave
 sources: 8
+takeaway: "Nadi Shodhana is probably worth practising because it seems to calm you, not because it balances your brain."
 permalink: /nadi-shodhana-without-mythology.html
 keywords: [alternate nostril breathing benefits, anulom vilom benefits for brain, nadi shodhana pranayama science, does anulom vilom reduce blood pressure, alternate nostril breathing for anxiety]
 ---

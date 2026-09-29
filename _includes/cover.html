@@ -1,0 +1,60 @@
+{% comment %}
+  Cover art for article cards: a small line drawing in the site's palette.
+  Use it as: include cover.html motif=post.cover pillar=post.pillar
+  motif is one of breath, cycle, wave, ripple, book. Without one it follows the
+  pillar (Swar Yoga -> breath, Research -> cycle, Claim check -> wave,
+  Reflection -> ripple, Reading -> book). Sizes come from the card's .ph rules.
+{% endcomment %}
+{%- assign m = include.motif -%}
+{%- unless m -%}
+  {%- case include.pillar -%}
+    {%- when 'Swar Yoga' -%}{%- assign m = 'breath' -%}
+    {%- when 'Research' -%}{%- assign m = 'cycle' -%}
+    {%- when 'Reflection' -%}{%- assign m = 'ripple' -%}
+    {%- when 'Reading' -%}{%- assign m = 'book' -%}
+    {%- else -%}{%- assign m = 'wave' -%}
+  {%- endcase -%}
+{%- endunless -%}
+<div class="ph artcover artcover-{{ m }}{% if include.class %} {{ include.class }}{% endif %}" aria-hidden="true">
+  <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  {%- case m -%}
+  {%- when 'breath' %}
+    <g transform="translate(112 14) scale(.64 .72)">
+      <ellipse cx="61" cy="13" rx="7.5" ry="10" stroke="rgba(244,240,226,.5)" stroke-width="2"/>
+      <ellipse cx="89" cy="13" rx="7.5" ry="10" stroke="rgba(244,240,226,.5)" stroke-width="2"/>
+      <line x1="75" y1="24" x2="75" y2="204" stroke="rgba(244,240,226,.28)" stroke-width="2"/>
+      <path d="M61 24 C28 54 28 86 75 110 C122 134 122 172 75 202" stroke="#4E9CC4" stroke-width="3.4"/>
+      <path d="M89 24 C122 54 122 86 75 110 C28 134 28 172 75 202" stroke="#E4744F" stroke-width="3.4"/>
+      <circle cx="75" cy="110" r="5" fill="#C6A15B" stroke="none"/>
+    </g>
+  {%- when 'cycle' %}
+    <line x1="0" y1="90" x2="320" y2="90" stroke="rgba(244,240,226,.14)" stroke-width="1"/>
+    <path d="M-8 81.9 L0 90.0 L8 98.1 L16 105.7 L24 112.4 L32 117.8 L40 121.6 L48 123.7 L56 123.8 L64 122.0 L72 118.4 L80 113.1 L88 106.6 L96 99.0 L104 91.0 L112 82.9 L120 75.2 L128 68.4 L136 62.8 L144 58.7 L152 56.5 L160 56.1 L168 57.7 L176 61.1 L184 66.1 L192 72.6 L200 80.0 L208 88.0 L216 96.1 L224 103.8 L232 110.8 L240 116.6 L248 120.9 L256 123.4 L264 124.0 L272 122.6 L280 119.4 L288 114.6 L296 108.3 L304 101.0 L312 93.0 L320 84.9 L328 77.1" stroke="#4E9CC4" stroke-width="2.4"/>
+    <path d="M-8 98.1 L0 90.0 L8 81.9 L16 74.3 L24 67.6 L32 62.2 L40 58.4 L48 56.3 L56 56.2 L64 58.0 L72 61.6 L80 66.9 L88 73.4 L96 81.0 L104 89.0 L112 97.1 L120 104.8 L128 111.6 L136 117.2 L144 121.3 L152 123.5 L160 123.9 L168 122.3 L176 118.9 L184 113.9 L192 107.4 L200 100.0 L208 92.0 L216 83.9 L224 76.2 L232 69.2 L240 63.4 L248 59.1 L256 56.6 L264 56.0 L272 57.4 L280 60.6 L288 65.4 L296 71.7 L304 79.0 L312 87.0 L320 95.1 L328 102.9" stroke="#E4744F" stroke-width="2.4"/>
+    <circle cx="105" cy="90" r="4" fill="#C6A15B" stroke="none"/>
+    <circle cx="210" cy="90" r="4" fill="#C6A15B" stroke="none"/>
+  {%- when 'ripple' %}
+    <ellipse cx="160" cy="118" rx="136" ry="30" stroke="rgba(27,67,50,.16)" stroke-width="1.4"/>
+    <ellipse cx="160" cy="118" rx="100" ry="22" stroke="rgba(27,67,50,.28)" stroke-width="1.4"/>
+    <ellipse cx="160" cy="118" rx="66" ry="14.5" stroke="rgba(27,67,50,.45)" stroke-width="1.5"/>
+    <ellipse cx="160" cy="118" rx="36" ry="8" stroke="rgba(27,67,50,.7)" stroke-width="1.6"/>
+    <ellipse cx="160" cy="118" rx="12" ry="2.8" stroke="#1B4332" stroke-width="1.6"/>
+    <circle cx="160" cy="64" r="4.5" fill="#1B4332" stroke="none"/>
+    <line x1="160" y1="74" x2="160" y2="100" stroke="rgba(27,67,50,.35)" stroke-width="1.2" stroke-dasharray="2 5"/>
+  {%- when 'book' %}
+    <path d="M160 60 C138 50 110 49 84 57 V131 C110 123 138 124 160 134 Z" stroke="#D6FF3F" stroke-width="1.8"/>
+    <path d="M160 60 C182 50 210 49 236 57 V131 C210 123 182 124 160 134 Z" stroke="#D6FF3F" stroke-width="1.8"/>
+    <g stroke="rgba(244,240,226,.45)" stroke-width="1.4">
+      <path d="M98 74 C115 70 132 70 148 75 M98 88 C115 84 132 84 148 89 M98 102 C115 98 132 98 148 103 M98 116 C112 112 124 112 136 115"/>
+      <path d="M172 75 C188 70 205 70 222 74 M172 89 C188 84 205 84 222 88 M172 103 C188 98 205 98 222 102 M172 117 C184 112 196 112 208 114"/>
+    </g>
+  {%- else %}
+    <g stroke="rgba(244,240,226,.07)" stroke-width="1">
+      <line x1="0" y1="40" x2="320" y2="40"/><line x1="0" y1="74" x2="320" y2="74"/><line x1="0" y1="108" x2="320" y2="108"/><line x1="0" y1="142" x2="320" y2="142"/>
+    </g>
+    <path d="M-8 49 L-2 54 L4 63 L10 65 L16 68 L22 64 L28 61 L34 63 L40 63 L46 65 L52 59 L58 53 L64 49 L70 48 L76 46 L82 50 L88 55 L94 57 L100 54 L106 54 L112 62 L118 63 L124 72 L130 69 L136 65 L142 60 L148 58 L154 60 L160 58 L166 58 L172 53 L178 47 L184 45 L190 45 L196 51 L202 57 L208 61 L214 60 L220 59 L226 62 L232 66 L238 69 L244 71 L250 66 L256 57 L262 54 L268 53 L274 55 L280 55 L286 51 L292 51 L298 45 L304 49 L310 57 L316 60 L322 66 L328 63" stroke="rgba(244,240,226,.55)" stroke-width="1.5"/>
+    <path d="M-8 105 L-2 110 L4 110 L10 108 L16 100 L22 97 L28 93 L34 93 L40 93 L46 95 L52 94 L58 86 L64 80 L70 71 L76 71 L82 72 L88 78 L94 84 L100 87 L106 91 L112 94 L118 89 L124 91 L130 91 L136 95 L142 101 L148 110 L154 107 L160 106 L166 101 L172 96 L178 85 L184 83 L190 83 L196 86 L202 86 L208 86 L214 79 L220 75 L226 72 L232 75 L238 79 L244 81 L250 90 L256 97 L262 100 L268 102 L274 100 L280 96 L286 95 L292 99 L298 102 L304 105 L310 106 L316 100 L322 91 L328 84" stroke="#D6FF3F" stroke-width="1.8"/>
+    <path d="M-8 134 L-2 131 L4 128 L10 123 L16 124 L22 123 L28 116 L34 114 L40 118 L46 127 L52 127 L58 125 L64 128 L70 131 L76 129 L82 120 L88 115 L94 118 L100 118 L106 117 L112 116 L118 127 L124 132 L130 130 L136 127 L142 127 L148 128 L154 123 L160 118 L166 117 L172 119 L178 122 L184 120 L190 122 L196 129 L202 133 L208 132 L214 124 L220 122 L226 126 L232 120 L238 113 L244 116 L250 120 L256 127 L262 128 L268 129 L274 132 L280 132 L286 127 L292 119 L298 120 L304 121 L310 120 L316 115 L322 119 L328 129" stroke="rgba(214,255,63,.45)" stroke-width="1.4"/>
+  {%- endcase %}
+  </svg>
+</div>

@@ -25,7 +25,7 @@ img,svg{display:block}
 .brand b{font-family:var(--serif);font-size:19px;font-weight:600;line-height:1.05;display:block;white-space:nowrap}
 .brand small{display:block;font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,240,226,.6);margin-top:3px}
 .nav{display:flex;gap:2px;align-items:center}
-.nav a{color:rgba(244,240,226,.74);text-decoration:none;font-size:13px;padding:9px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.nav a{color:rgba(244,240,226,.74);text-decoration:none;font-size:13px;line-height:16px;padding:9px 10px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .nav a:hover{color:var(--cream);background:rgba(244,240,226,.08)}
 .nav a.on{color:var(--neon);font-weight:600;background:rgba(214,255,63,.1)}
 .nav .nav-cta{display:none}
@@ -97,7 +97,15 @@ h1,h2,h3,h4,h5{font-family:var(--serif);letter-spacing:-.015em;margin:0}
 .hero .btns{display:flex;gap:12px;flex-wrap:wrap}
 .trip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:64px;padding-bottom:0}
 .trip .ph{height:230px}
-.bandgreen{background:var(--forest);height:150px;margin-top:-115px;position:relative;z-index:-1}
+.bandgreen{background:var(--forest);height:150px;margin-top:-115px;position:relative}
+/* The photos sit above the green band; z-index:-1 on the band used to hide it behind the hero. */
+.trip{position:relative;z-index:1}
+.trip-quote{margin:0;display:flex;align-items:flex-end}
+.trip-quote img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.trip-quote::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(11,31,22,.15) 0%,rgba(11,31,22,.78) 100%);border-radius:inherit}
+.trip-quote blockquote{position:relative;z-index:2;margin:0;padding:22px 24px}
+.trip-quote p{margin:0;font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.7vw,21px);line-height:1.3;color:var(--cream);text-wrap:balance}
+
 
 /* cards */
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -404,7 +412,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   footer .cols{grid-template-columns:1fr 1fr;gap:28px}
   footer .cols > div:first-child{grid-column:1 / -1}
   .post{grid-template-columns:1fr;gap:14px}
-  .three,.two,.trip,.guidecols{grid-template-columns:1fr}
+  .three,.two,.guidecols{grid-template-columns:1fr}
   .helix{max-width:100%}
   .navcta{display:none}
   .topbar .wrap{padding:0 18px}
@@ -414,8 +422,10 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   .sec.tight{padding:44px 0}
   .sec h2{font-size:32px}
   .hero{padding-top:44px}
-  .trip{margin-top:40px}
-  .trip .ph{height:190px}
+  .trip{margin-top:40px;grid-template-columns:1fr 1fr;gap:10px}
+  .trip .ph{height:150px}
+  .trip .trip-quote{grid-column:1 / -1;height:auto;min-height:130px}
+  .trip-quote blockquote{padding:18px 20px}
 }
 @media (max-width:420px){
   .brand{flex-shrink:1;min-width:0}
@@ -721,3 +731,26 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
    left them blank. A dark cover keeps the neon title readable. */
 .book .cov{background:linear-gradient(160deg,var(--forest) 0%,var(--canopy) 100%)}
 .book .cov .lbl{font-size:13px;padding:12px 10px}
+
+/* Article covers (_includes/cover.html): line art on a tinted ground */
+.artcover svg{position:absolute;inset:0;width:100%;height:100%}
+.artcover-breath,.artcover-cycle{background:radial-gradient(90% 90% at 50% 40%,#17392A 0,transparent 70%),linear-gradient(170deg,#0F2A1D,#0B1F16)}
+.artcover-wave{background:radial-gradient(100% 90% at 20% 10%,#2C5A40 0,transparent 60%),linear-gradient(165deg,#1B4332,#123024)}
+.artcover-book{background:radial-gradient(90% 90% at 50% 30%,#1F4636 0,transparent 65%),linear-gradient(170deg,#123024,#0B1F16)}
+.artcover-ripple{background:radial-gradient(100% 90% at 50% 20%,#F4F0E2 0,transparent 70%),linear-gradient(175deg,#E9E3CE,#D9CFAF)}
+
+/* Anuttara archive: the next issue as an outline, not a faded ghost */
+.issue .it-next .c{background:transparent;border:1.5px dashed rgba(94,88,52,.45);color:#5E5834}
+
+/* My Mind and Me: calmer headings in sentence case, and the words in each
+   collage available as real text (they are part of the images otherwise). */
+.e-h{text-transform:none;font-weight:700;line-height:1.08;letter-spacing:-.015em;font-size:42px}
+.e-h.sm{font-size:34px}
+.e-foot{text-transform:none}
+.mm-words{margin:0 0 6px}
+.e-dark .mm-words{margin:-8px 0 0}
+.mm-words summary{cursor:pointer;display:inline-block;font-size:13px;font-weight:600;padding:8px 0;color:inherit;opacity:.85}
+.e-dark .mm-words summary{color:var(--neon)}
+.mm-words p{margin:6px 0 4px;font-family:var(--serif);font-size:17px;line-height:1.6;max-width:62ch}
+.e-dark .mm-words p{color:rgba(244,240,226,.86)}
+@media (max-width:640px){.e-h{font-size:30px}.e-h.sm{font-size:26px}}

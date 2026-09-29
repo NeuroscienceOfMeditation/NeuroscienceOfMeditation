@@ -21,10 +21,10 @@ description: "Words of Yoga: longer pieces on the texts, the practice, and what 
 
   <div class="wrap">
 
-    <div class="eyebrow">Words of Yoga</div>
+    <div class="eyebrow">The blog</div>
 
     <h1 style="font-size:clamp(34px,4.6vw,52px)">
-      The blog
+      Words of Yoga
     </h1>
 
     <p class="sub">
@@ -48,7 +48,7 @@ description: "Words of Yoga: longer pieces on the texts, the practice, and what 
     {% for post in site.posts %}
     <article class="post">
 
-      <div class="ph {{ post.card_class | default: 'ph-forest' }}"></div>
+      {% include cover.html motif=post.cover pillar=post.pillar %}
 
       <div>
         {% assign words = post.content | strip_html | number_of_words %}
@@ -71,7 +71,7 @@ description: "Words of Yoga: longer pieces on the texts, the practice, and what 
     {% endcomment %}
     <article class="post soon">
 
-      <div class="ph ph-water"></div>
+      {% include cover.html motif="breath" %}
 
       <div>
         <div class="k">Swar Yoga <span class="soon-badge">Coming soon</span></div>
@@ -91,7 +91,7 @@ description: "Words of Yoga: longer pieces on the texts, the practice, and what 
 
     <article class="post soon">
 
-      <div class="ph ph-canopy"></div>
+      {% include cover.html motif="cycle" %}
 
       <div>
         <div class="k">Research <span class="soon-badge">Coming soon</span></div>

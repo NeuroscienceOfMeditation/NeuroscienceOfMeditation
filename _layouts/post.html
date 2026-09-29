@@ -6,7 +6,8 @@
   {% include head.html %}
   <style>
     .prose{max-width:720px;margin:0 auto}
-    .prose p,.prose li{font-size:17px;line-height:1.9;color:var(--ink-60)}
+    /* Body text is near-black on cream (about 11:1) for comfortable long reading. */
+    .prose p,.prose li{font-size:18px;line-height:1.85;color:#33382C}
     .prose p{margin:0 0 22px}
     .prose h2{font-size:clamp(26px,3.2vw,34px);line-height:1.12;margin:52px 0 16px;color:var(--ink)}
     .prose h3{font-size:22px;margin:36px 0 12px}
@@ -14,15 +15,18 @@
     .prose a:hover{text-decoration-thickness:2px}
     .prose strong{color:var(--ink)}
     .prose ul,.prose ol{padding-left:22px;margin:0 0 22px}
-    .prose blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:3px solid var(--gold)}
+    .prose blockquote{margin:36px 0;padding:6px 0 6px 24px;border-left:3px solid var(--gold)}
     .prose blockquote p:last-child{margin-bottom:0}
-    .prose blockquote p{color:var(--ink)}
+    .prose blockquote p{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.55;color:var(--forest)}
+    .takeaway{max-width:720px;margin:0 auto 40px;padding:22px 26px;border-radius:16px;background:var(--cream-2);border-left:4px solid var(--forest)}
+    .takeaway .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:8px}
+    .takeaway p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.5;color:var(--ink)}
     .prose #sources + ul li,.prose #sources + ol li{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
     .post-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:13px;color:var(--ink-60)}
     .post-note{max-width:720px;margin:56px auto 0}
     .post-head{max-width:720px;margin:0 auto}
     .back{display:inline-block;margin-bottom:24px;color:var(--forest);text-decoration:none;font-size:13px;font-weight:600}
-    @media (max-width:640px){.prose p,.prose li{font-size:16px;line-height:1.8}}
+    @media (max-width:640px){.prose p,.prose li{font-size:17px;line-height:1.8}.prose blockquote p{font-size:19px}.takeaway p{font-size:18px}}
   </style>
 </head>
 
@@ -62,6 +66,14 @@
   <section class="sec" style="padding-top:0">
     <div class="wrap">
 
+      {% comment %} Optional one-line summary: add takeaway: "..." to the post's front matter. {% endcomment %}
+      {% if page.takeaway %}
+      <aside class="takeaway" aria-label="The short version">
+        <div class="k">The short version</div>
+        <p>{{ page.takeaway }}</p>
+      </aside>
+      {% endif %}
+
       <article class="prose">
         {{ content }}
       </article>
@@ -90,7 +102,7 @@
         <div class="two">
           {% for p in others limit:2 %}
           <a class="card latest-card" href="{{ p.url | relative_url }}">
-            <div class="ph {{ p.card_class | default: 'ph-forest' }}"></div>
+            {% include cover.html motif=p.cover pillar=p.pillar %}
             <div class="k">{{ p.pillar | default: 'Article' }}</div>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>

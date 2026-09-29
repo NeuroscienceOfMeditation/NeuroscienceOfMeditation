@@ -84,13 +84,13 @@ description: "Evidence-checked yoga, breathwork and meditation by Aditi, a docto
     >
   </div>
 
-  <div class="ph ph-forest">
-    <img
-      src="img/picture3.webp" width="503" height="503" loading="lazy" decoding="async"
-      alt="I've learned to be more curious than fearful of the more dense or hurt areas of my psyche"
-      style="width:100%;height:100%;object-fit:cover;border-radius:inherit"
-    >
-  </div>
+  {% comment %} The quote is real text over the photo, so it is never cropped and screen readers get it. {% endcomment %}
+  <figure class="ph ph-forest trip-quote">
+    <img src="img/picture3-trees.webp" width="503" height="231" loading="lazy" decoding="async" alt="">
+    <blockquote>
+      <p>I've learned to be more curious than fearful of the more dense or hurt areas of my psyche.</p>
+    </blockquote>
+  </figure>
 
 </div>
 
@@ -138,7 +138,7 @@ description: "Evidence-checked yoga, breathwork and meditation by Aditi, a docto
     <div class="three latest">
       {% for post in site.posts limit:3 %}
       <a class="card latest-card" href="{{ post.url | relative_url }}">
-        <div class="ph {{ post.card_class | default: 'ph-forest' }}"></div>
+        {% include cover.html motif=post.cover pillar=post.pillar %}
         <div class="k">{{ post.pillar | default: 'Article' }}</div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.description }}</p>

@@ -15,4 +15,5 @@ Between the two `---` lines of a post you can add:
 - `pillar:` the small label above the title, e.g. `Claim check`, `Reflection`.
 - `sources:` the number of studies cited. Only posts with this show the "How this article was checked" note.
 - `image:` a picture for link previews, e.g. `/img/og-default.jpg`. A 1200×630 JPG looks best. Without it, the site's default preview card is used.
-- `card_class:` the colour block used for the post in lists, e.g. `ph-mist`, `ph-valley`, `ph-rock`.
+- `takeaway:` one sentence shown in a "The short version" box above the article, e.g. `takeaway: "The practice seems to calm you, but brain balancing is the weakest part of the story."`
+- `cover:` the small drawing shown for the post in lists: `wave`, `ripple`, `book`, `breath` or `cycle`. Leave it out and it follows the pillar (Claim check gets `wave`, Reflection `ripple`, Reading `book`, Swar Yoga `breath`, Research `cycle`).
