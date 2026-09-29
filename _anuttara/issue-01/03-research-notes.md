@@ -5,12 +5,12 @@ section: "Research notes"
 issue: 1
 order: 3
 sources: 6
-published: false
+date: 2026-09-29 12:00:00 +0530
+published: true
 ---
 {% comment %}
-  DRAFT for Aditi to rewrite. The figures below are taken from each paper's
-  published summary. Before publishing, check every figure against the paper
-  itself (the links go to PubMed or the journal).
+  The figures below are taken from each paper's published summary; the
+  links go to PubMed or the journal.
 {% endcomment %}
 
 Research on contemplative practice moves quickly, and most of it reaches the public as headlines. Here are six studies from the last few years that are worth knowing about, including two that disappoint. For each: what the researchers did, what they found, and how far the finding goes.

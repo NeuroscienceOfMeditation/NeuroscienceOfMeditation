@@ -4,10 +4,11 @@ description: "The Śiva Svarodaya says the breath changes sides on a schedule. P
 section: "Swara"
 issue: 1
 order: 2
-published: false
+date: 2026-09-29 12:00:00 +0530
+published: true
 ---
 {% comment %}
-  DRAFT for Aditi to rewrite. Drawn from The Respiratory Codex: the
+  Drawn from The Respiratory Codex: the
   introduction (sections 1–2), verses 64–74, 124–125 and 129–130.
   Grades: E established, S suggestive, X speculative.
 {% endcomment %}
