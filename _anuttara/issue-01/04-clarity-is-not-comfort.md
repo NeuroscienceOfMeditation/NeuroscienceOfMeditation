@@ -4,10 +4,11 @@ description: "On guilt, conscience and the quiet test that yoga offers: whether 
 section: "Essay"
 issue: 1
 order: 4
-published: false
+date: 2026-09-29 12:00:00 +0530
+published: true
 ---
 {% comment %}
-  DRAFT for Aditi to rewrite. Built entirely from her own writing: the essay
+  Built from Aditi's own writing: the essay
   "When have I betrayed my own conscience?", "Why we say we are not the
   solution", and the words in the My Mind and Me collages. Most sentences are
   hers, shortened and re-ordered; nothing new has been claimed.

@@ -4,10 +4,11 @@ description: "One minute at waking, five minutes of slower breathing. The two pr
 section: "Practice"
 issue: 1
 order: 5
-published: false
+date: 2026-09-29 12:00:00 +0530
+published: true
 ---
 {% comment %}
-  DRAFT for Aditi to rewrite. From The Respiratory Codex: verse 149, verses
+  From The Respiratory Codex: verse 149, verses
   66–67, verses 375–387, the conclusion's "What actually works" and Appendix A.
 {% endcomment %}
 

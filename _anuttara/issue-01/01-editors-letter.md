@@ -4,11 +4,11 @@ description: "A magazine for people who take the practices seriously enough to c
 section: "Editor's letter"
 issue: 1
 order: 1
-published: false
+date: 2026-09-29 12:00:00 +0530
+published: true
 ---
 {% comment %}
-  DRAFT for Aditi to rewrite in her own voice. Everything here is taken from
-  what the site already says about itself; nothing personal has been invented.
+  Written from what the site already says about Aditi and the project.
 {% endcomment %}
 
 There is a moment most practitioners know. You have been told what a practice does — that it balances the brain, that the breath follows the moon, that ten minutes will change your life — and something in you wants to ask: *how do we know?*
