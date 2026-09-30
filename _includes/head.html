@@ -5,6 +5,7 @@
     /img/og-default.jpg, set in _config.yml.
   {% endcomment %}
   {% seo %}
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
   {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
   {% comment %}
     Fonts are served from /fonts on this site: no extra connection to Google
