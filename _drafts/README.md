@@ -6,6 +6,7 @@ To publish a draft:
 1. Open the draft file on GitHub and click the pencil (Edit) icon.
 2. Change the file path at the top from `_drafts/my-post.md` to `_posts/YYYY-MM-DD-my-post.md` (use today's date).
 3. Click "Commit changes". The post goes live in 1-2 minutes and appears on Words of Yoga automatically.
+4. Email it to the newsletter: see `_newsletter/README.md` for the steps and a ready-made email to copy.
 
 ## Optional settings at the top of a post
 
@@ -16,7 +17,7 @@ Between the two `---` lines of a post you can add:
 - `sources:` the number of studies cited. Only posts with this show the "How this article was checked" note.
 - `image:` a picture for link previews, e.g. `/img/og-default.jpg`. A 1200×630 JPG looks best. Without it, the site's default preview card is used.
 - `takeaway:` one sentence shown in a "The short version" box above the article, e.g. `takeaway: "The practice seems to calm you, but brain balancing is the weakest part of the story."`
-- `cover:` the small drawing shown for the post in lists: `wave`, `ripple`, `book`, `breath` or `cycle`. Leave it out and it follows the pillar (Claim check gets `wave`, Reflection `ripple`, Reading `book`, Swar Yoga `breath`, Research `cycle`).
+- `cover:` the small drawing shown for the post in lists: `wave`, `ripple`, `book`, `breath`, `cycle` or `light`. Leave it out and it follows the pillar (Claim check gets `wave`, Reflection `ripple`, Reading `book`, Swar Yoga `breath`, Research `cycle`, Philosophy `light`).
 
 ## Aṇūṭṭara issues
 

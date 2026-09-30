@@ -1,0 +1,117 @@
+---
+title: "The newsletter"
+description: "Get new evidence-checked articles, each Aṇūṭṭara issue and course start dates by email. One email when something new is published. Free, and one click to leave."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+</head>
+
+<body>
+
+{% include header.html %}
+
+<main id="main">
+
+<section class="sec tight" data-no-fab>
+  <div class="wrap" style="max-width:820px">
+    <div class="eyebrow">The newsletter</div>
+    <h1 style="font-size:clamp(34px,4.6vw,52px)">New writing, in your inbox</h1>
+    <p class="sub">
+      One email when something new is published: an evidence-checked article, a new
+      issue of <a href="anuttara.html">Aṇūṭṭara</a>, or a course opening. Free, no
+      spam, and one click to leave.
+    </p>
+    <div style="margin-top:30px">
+      {% include signup-card.html id="page" title="Join the newsletter" text="Articles on yoga, meditation, breath and the philosophy behind them, checked against the research and the texts." %}
+    </div>
+  </div>
+</section>
+
+<section class="sec dim">
+  <div class="wrap">
+    <div class="eyebrow">What you'll get</div>
+    <h2>Three kinds of email</h2>
+    <div class="three" style="margin-top:28px">
+      <div class="card">
+        <h3>New articles</h3>
+        <p>Each new piece on <a href="words-of-yoga.html">Words of Yoga</a>: research
+          on breath and meditation, claim checks, and essays on the philosophy of
+          yoga. Usually two or three a month.</p>
+      </div>
+      <div class="card">
+        <h3>Aṇūṭṭara issues</h3>
+        <p>Our free magazine, when each issue comes out: one old text read closely,
+          recent studies, an essay and practices to try that week.</p>
+      </div>
+      <div class="card">
+        <h3>Course and book news</h3>
+        <p>Start dates for courses and new books, sent to the list first. You'll never
+          get an email just to sell you something unrelated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if site.posts.size > 0 %}
+<section class="sec">
+  <div class="wrap">
+    <div class="eyebrow">Recently sent</div>
+    <h2>The latest articles</h2>
+    <div class="three latest" style="margin-top:28px">
+      {% for p in site.posts limit:3 %}
+      <a class="card latest-card" href="{{ p.url | relative_url }}">
+        {% include cover.html motif=p.cover pillar=p.pillar %}
+        <div class="k">{{ p.pillar | default: 'Article' }}</div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.description }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="sec dim">
+  <div class="wrap bk-faq" style="max-width:820px">
+    <div class="eyebrow">Questions</div>
+    <h2>Before you sign up</h2>
+    <details>
+      <summary>How often will you email me?</summary>
+      <p>Only when something is published, which is usually two to four times a month.</p>
+    </details>
+    <details>
+      <summary>Why do I need to confirm?</summary>
+      <p>After you sign up, Kit sends a short email with a confirmation link. That
+        stops anyone from adding your address without asking you. If it hasn't
+        arrived, check your spam or Promotions folder.</p>
+    </details>
+    <details>
+      <summary>How do I leave?</summary>
+      <p>Every email has an unsubscribe link at the bottom. One click and you're off
+        the list.</p>
+    </details>
+    <details>
+      <summary>What happens to my email address?</summary>
+      <p>It's kept by Kit (kit.com), the service that sends our emails, and used only
+        for this newsletter. It is never sold or shared. See the
+        <a href="privacy.html">privacy notice</a>.</p>
+    </details>
+    <details>
+      <summary>Can I follow along without email?</summary>
+      <p>Yes. Add <a href="{{ '/feed.xml' | relative_url }}">the RSS feed</a> to any
+        feed reader, or follow us on
+        <a href="https://www.instagram.com/neuroscienceofmeditation/" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

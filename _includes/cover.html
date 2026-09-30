@@ -1,9 +1,10 @@
 {% comment %}
   Cover art for article cards: a small line drawing in the site's palette.
   Use it as: include cover.html motif=post.cover pillar=post.pillar
-  motif is one of breath, cycle, wave, ripple, book. Without one it follows the
-  pillar (Swar Yoga -> breath, Research -> cycle, Claim check -> wave,
-  Reflection -> ripple, Reading -> book). Sizes come from the card's .ph rules.
+  motif is one of breath, cycle, wave, ripple, book, light. Without one it
+  follows the pillar (Swar Yoga -> breath, Research -> cycle, Claim check -> wave,
+  Reflection -> ripple, Reading -> book, Philosophy -> light). Sizes come from
+  the card's .ph rules.
 {% endcomment %}
 {%- assign m = include.motif -%}
 {%- unless m -%}
@@ -12,6 +13,7 @@
     {%- when 'Research' -%}{%- assign m = 'cycle' -%}
     {%- when 'Reflection' -%}{%- assign m = 'ripple' -%}
     {%- when 'Reading' -%}{%- assign m = 'book' -%}
+    {%- when 'Philosophy' -%}{%- assign m = 'light' -%}
     {%- else -%}{%- assign m = 'wave' -%}
   {%- endcase -%}
 {%- endunless -%}
@@ -47,6 +49,16 @@
     <g stroke="rgba(244,240,226,.45)" stroke-width="1.4">
       <path d="M98 74 C115 70 132 70 148 75 M98 88 C115 84 132 84 148 89 M98 102 C115 98 132 98 148 103 M98 116 C112 112 124 112 136 115"/>
       <path d="M172 75 C188 70 205 70 222 74 M172 89 C188 84 205 84 222 88 M172 103 C188 98 205 98 222 102 M172 117 C184 112 196 112 208 114"/>
+    </g>
+  {%- when 'light' %}
+    <line x1="0" y1="118" x2="320" y2="118" stroke="rgba(244,240,226,.3)" stroke-width="1.2"/>
+    <path d="M188.0 74.0 L204.0 74.0 M185.9 84.7 L193.3 87.8 M179.8 93.8 L191.1 105.1 M170.7 99.9 L173.8 107.3 M149.3 99.9 L146.2 107.3 M140.2 93.8 L128.9 105.1 M134.1 84.7 L126.7 87.8 M132.0 74.0 L116.0 74.0 M134.1 63.3 L126.7 60.2 M140.2 54.2 L128.9 42.9 M149.3 48.1 L146.2 40.7 M160.0 46.0 L160.0 30.0 M170.7 48.1 L173.8 40.7 M179.8 54.2 L191.1 42.9 M185.9 63.3 L193.3 60.2" stroke="rgba(198,161,91,.6)" stroke-width="1.6"/>
+    <circle cx="160" cy="74" r="19" fill="#C6A15B" stroke="none"/>
+    <g stroke="#C6A15B" stroke-width="2">
+      <line x1="146" y1="128" x2="174" y2="128" opacity=".7"/>
+      <line x1="138" y1="137" x2="182" y2="137" opacity=".45"/>
+      <line x1="150" y1="146" x2="170" y2="146" opacity=".35"/>
+      <line x1="130" y1="155" x2="190" y2="155" opacity=".2"/>
     </g>
   {%- else %}
     <g stroke="rgba(244,240,226,.07)" stroke-width="1">

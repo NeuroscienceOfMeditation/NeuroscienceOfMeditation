@@ -1,0 +1,34 @@
+---
+layout: null
+sitemap: false
+---
+{%- comment -%}
+  Atom feed of the articles, newest first, at /feed.xml. Feed readers use it, and
+  Kit can too if you later move to a paid plan and set up an RSS email.
+{%- endcomment -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>{{ site.title | xml_escape }}</title>
+  <subtitle>{{ site.description | strip | xml_escape }}</subtitle>
+  <link href="{{ '/feed.xml' | absolute_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ '/' | absolute_url }}" rel="alternate" type="text/html"/>
+  <id>{{ '/' | absolute_url }}</id>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <author><name>{{ site.author | xml_escape }}</name></author>
+  <icon>{{ '/img/icon-512.png' | absolute_url }}</icon>
+  {%- for post in site.posts limit:20 %}
+  <entry>
+    <title>{{ post.title | strip_html | xml_escape }}</title>
+    <link href="{{ post.url | absolute_url }}" rel="alternate" type="text/html"/>
+    <id>{{ post.url | absolute_url }}</id>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.updated | default: post.date | date_to_xmlschema }}</updated>
+    <author><name>{{ post.author | default: site.author | xml_escape }}</name></author>
+    {%- if post.pillar %}
+    <category term="{{ post.pillar | xml_escape }}"/>
+    {%- endif %}
+    <summary>{{ post.description | strip_html | xml_escape }}</summary>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

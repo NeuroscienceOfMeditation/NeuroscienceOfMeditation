@@ -16,11 +16,25 @@
     .takeaway{max-width:720px;margin:0 auto 40px;padding:22px 26px;border-radius:16px;background:var(--cream-2);border-left:4px solid var(--forest)}
     .takeaway .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);font-weight:700;margin-bottom:8px}
     .takeaway p{margin:0;font-family:var(--serif);font-size:20px;line-height:1.5;color:var(--ink)}
-    .prose #sources + ul li,.prose #sources + ol li{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+    .prose #sources + ul li,.prose #sources + ol li,.prose #references + ul li{font-size:14px;line-height:1.7;overflow-wrap:anywhere}
+    /* Tables: scroll sideways on phones instead of squeezing the page. */
+    .prose table{display:block;width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-collapse:collapse;margin:8px 0 30px;font-size:15px;line-height:1.55}
+    .prose th,.prose td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);min-width:150px}
+    .prose th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);font-weight:700;border-bottom:2px solid var(--forest)}
+    .prose td{color:#33382C}
+    .prose td:first-child{font-weight:600;color:var(--ink)}
+    .prose tbody tr:nth-child(even){background:var(--cream-2)}
     .post-meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:22px;font-size:13px;color:var(--ink-60)}
     .post-note{max-width:720px;margin:56px auto 0}
     .post-head{max-width:720px;margin:0 auto}
     .back{display:inline-block;margin-bottom:24px;color:var(--forest-ink);text-decoration:none;font-size:13px;font-weight:600}
-    @media (prefers-color-scheme:dark){.prose p,.prose li{color:#DAD5C4}}
+    @media (prefers-color-scheme:dark){.prose p,.prose li,.prose td{color:#DAD5C4}}
     @media (max-width:640px){.prose p,.prose li{font-size:17px;line-height:1.8}.prose blockquote p{font-size:19px}.takeaway p{font-size:18px}}
+    /* Phones: the row label stays in view while the rest of the table scrolls. */
+    @media (max-width:640px){
+      .prose table{font-size:14px}
+      .prose th,.prose td{min-width:132px;padding:10px 12px}
+      .prose th:first-child,.prose td:first-child{position:sticky;left:0;min-width:112px;background:var(--cream);box-shadow:6px 0 8px -6px rgba(0,0,0,.25)}
+      .prose tbody tr:nth-child(even) td:first-child{background:var(--cream-2)}
+    }
   </style>
