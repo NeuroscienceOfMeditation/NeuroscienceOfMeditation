@@ -16,8 +16,8 @@ The sages said that freedom from hatred frees the mind. Somewhere along the way,
 It is a lovely idea, and it is testable. So I went looking for the studies. The short version is that the behavioural evidence is reasonably good and the brain-imaging evidence is thin — and most articles you will read have those two the wrong way round.
 
 <figure style="margin:28px 0">
-<img src="/img/forgiveness-forest.webp" alt="A woman sitting cross-legged on a mossy fallen trunk beside a stream, eyes closed, in low morning light through the trees." width="1200" height="800" style="width:100%;height:auto;border-radius:14px;display:block">
-<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">Illustration generated with AI.</figcaption>
+<img src="/img/ganga-sadhu.webp" alt="A sadhu in a red shawl and orange headwrap sitting alone on a white rock at the edge of the Ganga at Rishikesh, looking out across green water towards the forested far bank." width="1200" height="800" style="width:100%;height:auto;border-radius:14px;display:block">
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">On the Ganga at Rishikesh.</figcaption>
 </figure>
 
 ## What forgiveness actually is
