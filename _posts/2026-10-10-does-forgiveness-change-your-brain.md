@@ -7,12 +7,18 @@ cover: wave
 sources: 6
 takeaway: "Forgiveness practices do seem to reduce anger and low mood, but the claim that they rewire your brain rests on a handful of tiny imaging studies."
 permalink: /does-forgiveness-change-your-brain.html
+image: /img/og-forgiveness.jpg
 keywords: [does forgiveness change your brain, forgiveness neuroscience evidence, forgiveness therapy research, benefits of forgiveness psychology, rumination and depression, affect labelling emotions, letting go of resentment science]
 ---
 
 The sages said that freedom from hatred frees the mind. Somewhere along the way, that became a claim about neurons: forgive, and you will rewire your brain.
 
 It is a lovely idea, and it is testable. So I went looking for the studies. The short version is that the behavioural evidence is reasonably good and the brain-imaging evidence is thin — and most articles you will read have those two the wrong way round.
+
+<figure style="margin:28px 0">
+<img src="/img/forgiveness-forest.webp" alt="A woman sitting cross-legged on a mossy fallen trunk beside a stream, eyes closed, in low morning light through the trees." width="1200" height="800" style="width:100%;height:auto;border-radius:14px;display:block">
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">Illustration generated with AI.</figcaption>
+</figure>
 
 ## What forgiveness actually is
 
