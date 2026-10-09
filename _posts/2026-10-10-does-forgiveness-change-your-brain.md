@@ -185,7 +185,14 @@ Answer about **one** specific person and one specific hurt. Answering about forg
   }
 }());
 </script>
+<noscript>
+  <p style="text-align:center"><a href="https://tally.so/r/9qLZKQ" target="_blank" rel="noopener">Open the questionnaire</a></p>
+</noscript>
 </div>
+
+<p style="font-size:13px;color:#5E6F68;text-align:center;margin-top:-6px">
+Not loading? <a href="https://tally.so/r/9qLZKQ" target="_blank" rel="noopener">Open it in a new tab</a>.
+</p>
 
 A caveat I want to put plainly, since the rest of this article has been about overclaiming. This is a reflective tool, not a validated psychometric instrument. The phases are Enright's and the constructs are drawn from published measures, but the items are mine and the scoring bands have not been tested against anything. It is a structured way to think about where you are. It is not a test, and it does not produce a score that means anything outside this page.
 
