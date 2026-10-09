@@ -6,6 +6,18 @@
   Reflection -> ripple, Reading -> book, Philosophy -> light). Sizes come from
   the card's .ph rules.
 {% endcomment %}
+{%- comment -%}
+  A post with its own `image:` shows the photograph; everything else falls
+  back to the line drawing below. The og-default check matters because
+  _config.yml sets that image on every page by default, so `post.image` is
+  never empty.
+{%- endcomment -%}
+{%- assign img = include.image -%}
+{%- if img and img != '/img/og-default.jpg' -%}
+<div class="ph artcover artcover-photo{% if include.class %} {{ include.class }}{% endif %}">
+  <img src="{{ img | relative_url }}" alt="{{ include.alt | default: '' }}" loading="lazy" decoding="async">
+</div>
+{%- else -%}
 {%- assign m = include.motif -%}
 {%- unless m -%}
   {%- case include.pillar -%}
@@ -70,3 +82,4 @@
   {%- endcase %}
   </svg>
 </div>
+{%- endif -%}

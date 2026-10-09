@@ -81,7 +81,7 @@
         <div class="two">
           {% for p in others limit:2 %}
           <a class="card latest-card" href="{{ p.url | relative_url }}">
-            {% include cover.html motif=p.cover pillar=p.pillar %}
+            {% include cover.html motif=p.cover pillar=p.pillar image=p.image %}
             <div class="k">{{ p.pillar | default: 'Article' }}</div>
             <h3>{{ p.title }}</h3>
             <p>{{ p.description }}</p>

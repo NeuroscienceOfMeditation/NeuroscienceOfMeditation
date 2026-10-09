@@ -163,7 +163,7 @@ description: "Evidence-checked yoga, breathwork and meditation by Aditi, a docto
     <div class="three latest">
       {% for post in site.posts limit:3 %}
       <a class="card latest-card" href="{{ post.url | relative_url }}">
-        {% include cover.html motif=post.cover pillar=post.pillar %}
+        {% include cover.html motif=post.cover pillar=post.pillar image=post.image %}
         <div class="k">{{ post.pillar | default: 'Article' }}</div>
         <h3>{{ post.title }}</h3>
         <p>{{ post.description }}</p>

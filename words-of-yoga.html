@@ -48,7 +48,7 @@ description: "Words of Yoga: longer pieces on the texts, the practice, and what 
     {% for post in site.posts %}
     <article class="post">
 
-      {% include cover.html motif=post.cover pillar=post.pillar %}
+      {% include cover.html motif=post.cover pillar=post.pillar image=post.image %}
 
       <div>
         {% assign words = post.content | strip_html | number_of_words %}

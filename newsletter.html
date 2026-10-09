@@ -64,7 +64,7 @@ description: "Get new evidence-checked articles, each Aṇūṭṭara issue and 
     <div class="three latest" style="margin-top:28px">
       {% for p in site.posts limit:3 %}
       <a class="card latest-card" href="{{ p.url | relative_url }}">
-        {% include cover.html motif=p.cover pillar=p.pillar %}
+        {% include cover.html motif=p.cover pillar=p.pillar image=p.image %}
         <div class="k">{{ p.pillar | default: 'Article' }}</div>
         <h3>{{ p.title }}</h3>
         <p>{{ p.description }}</p>
