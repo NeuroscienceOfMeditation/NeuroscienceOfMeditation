@@ -64,6 +64,8 @@ exclude:
   - SVARA-BUILD-NOTES.md
   - README.md
   - _drafts/README.md
+  # Scripts that build things for other platforms; not part of the website
+  - tools
   # UGC NET dashboard: only index.html, assets/, data/ and js/ are published
   - ugc-net-pyq/README.md
   - ugc-net-pyq/package.json
