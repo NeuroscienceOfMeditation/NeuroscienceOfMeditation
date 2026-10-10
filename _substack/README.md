@@ -1,5 +1,9 @@
 # Substack
 
+**The quick version: open the `.html` file for the article, select all, copy,
+paste into a new Substack post. Then paste the canonical URL into the post's
+settings. About a minute.**
+
 Files here are the website's articles, converted into something you can paste
 straight into Substack. Anything in a folder starting with `_` stays off the
 site, so nothing in here is public.
@@ -47,10 +51,11 @@ intact.
 
 ## Making the file for a new article
 
-The weekly task does this for you. To do it by hand:
+The Publish button does this for you, and so does the weekly task. To do it by
+hand:
 
 ```
-python3 tools/substack-export.py _posts/2026-10-10-my-article.md
+python3 tools/substack_export.py _posts/2026-10-10-my-article.md
 ```
 
 Or convert every article at once with `--all`. It needs Python with the

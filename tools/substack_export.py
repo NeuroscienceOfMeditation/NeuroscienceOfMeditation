@@ -166,13 +166,19 @@ def strip_embeds(body):
 
 # ---------------------------------------------------------------- main convert
 
-def convert(path):
+def build(path, quiet=False):
+    """
+    Convert one post to clean, absolute-URL HTML.
+
+    Returns a dict with the pieces both Substack and the newsletter need, so
+    the figures are rendered once and the markdown converted once.
+    """
     path = Path(path)
-    raw = path.read_text(encoding="utf-8")
-    meta, body = split_front_matter(raw)
+    meta, body = split_front_matter(path.read_text(encoding="utf-8"))
     slug = re.sub(r"^\d{4}-\d{2}-\d{2}-", "", path.stem)
 
-    print(f"{path.name}")
+    if not quiet:
+        print(f"{path.name}")
     body = render_svgs(body, slug)
     body = strip_embeds(body)
 
@@ -180,18 +186,31 @@ def convert(path):
         body, extensions=["extra", "sane_lists"], output_format="html5"
     )
 
-    # Relative image and link URLs have to become absolute for Substack.
+    # Relative URLs have to become absolute: neither Substack's editor nor an
+    # email client can resolve "/img/photo.webp" on its own.
     html = re.sub(r'(<img[^>]+src=")/', rf"\1{SITE}/", html)
     html = re.sub(r'(<a[^>]+href=")/(?!/)', rf"\1{SITE}/", html)
 
-    title = meta.get("title", slug)
-    subtitle = meta.get("description", "")
-    canonical = f"{SITE}{meta.get('permalink', '/' + slug + '.html')}"
+    return {
+        "path": path,
+        "slug": slug,
+        "meta": meta,
+        "title": meta.get("title", slug),
+        "subtitle": meta.get("description", ""),
+        "takeaway": meta.get("takeaway", ""),
+        "canonical": f"{SITE}{meta.get('permalink', '/' + slug + '.html')}",
+        "image": (SITE + meta["image"]) if meta.get("image") else "",
+        "body_html": html,
+    }
 
-    out = OUT_DIR / f"{path.stem}.html"
+
+def convert(path):
+    a = build(path)
+    out = OUT_DIR / f"{a['path'].stem}.html"
     out.parent.mkdir(exist_ok=True)
     out.write_text(PAGE.format(
-        title=esc(title), subtitle=esc(subtitle), canonical=canonical, body=html
+        title=esc(a["title"]), subtitle=esc(a["subtitle"]),
+        canonical=a["canonical"], body=a["body_html"],
     ), encoding="utf-8")
     print(f"  -> {out.relative_to(REPO)}\n")
     return out
