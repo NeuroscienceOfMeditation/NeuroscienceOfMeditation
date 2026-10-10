@@ -135,9 +135,9 @@ def kit_broadcast(a, send=False):
 
 # ------------------------------------------------------------------ substack
 
-def substack(post):
+def substack(a):
     try:
-        out = sx.convert(post)
+        out = sx.write(a)
         note("Substack", "todo",
              f"paste-ready file at {out.relative_to(REPO)} "
              f"(steps in _substack/README.md, about a minute)")
@@ -223,10 +223,12 @@ def main():
         post = latest_post()
         note("Website", "done", f"using latest post {post.name}")
 
-    a = sx.build(post, quiet=True)
+    # Build once: the figures are rendered and the markdown converted a single
+    # time, then reused by both the Substack file and the newsletter.
+    a = sx.build(post)
 
     if not args.skip_substack:
-        substack(post)
+        substack(a)
     if not args.skip_newsletter:
         kit_broadcast(a, send=args.send_newsletter)
     if not args.skip_instagram:

@@ -66,10 +66,38 @@ def split_front_matter(text):
 
 # ---------------------------------------------------------------- SVG -> PNG
 
+CACHE = REPO / "_substack" / "figures.json"
+
+
+def _cache():
+    try:
+        import json
+        return json.loads(CACHE.read_text(encoding="utf-8"))
+    except Exception:                               # noqa: BLE001
+        return {}
+
+
+def _save_cache(c):
+    import json
+    CACHE.parent.mkdir(exist_ok=True)
+    CACHE.write_text(json.dumps(c, indent=2, sort_keys=True), encoding="utf-8")
+
+
 def render_svgs(body, slug):
-    """Replace each <figure> that contains an <svg> with a rendered PNG."""
+    """
+    Replace each <figure> that contains an <svg> with a rendered PNG.
+
+    Rendering is skipped when the drawing has not changed since last time.
+    Two machines never produce byte-identical PNGs from the same SVG — fonts
+    and anti-aliasing differ — so re-rendering every run would churn the repo
+    with meaningless image diffs. The cache keys on a hash of the SVG itself,
+    so an edited figure is still re-rendered.
+    """
+    import hashlib
+
     figures = re.findall(r"<figure\b.*?</figure>", body, re.S)
-    n = 0
+    cache, n = _cache(), 0
+
     for fig in figures:
         if "<svg" not in fig:
             continue
@@ -82,22 +110,37 @@ def render_svgs(body, slug):
         dest = IMG_DIR / name
         if not svg.lstrip().startswith("<svg xmlns"):
             svg = svg.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"', 1)
+
+        digest = hashlib.sha1(svg.encode("utf-8")).hexdigest()[:12]
+        if cache.get(name) == digest and dest.exists():
+            print(f"  figure {n}: unchanged, kept img/{name}")
+            body = body.replace(fig, _fig_html(name, caption))
+            continue
+
         png_ok = svg_to_png(svg, dest)
+        if png_ok:
+            cache[name] = digest
 
         if png_ok:
-            replacement = (
-                f'<figure><img src="{SITE}/img/{name}" alt="{caption[:120]}" '
-                f'style="width:100%;max-width:680px">'
-                + (f"<figcaption>{caption}</figcaption>" if caption else "")
-                + "</figure>"
-            )
+            replacement = _fig_html(name, caption)
             print(f"  figure {n}: rendered -> img/{name}")
         else:
             # Never silently drop a figure: leave the caption as a note.
             replacement = f"<p><em>[Figure: {caption}]</em></p>" if caption else ""
             print(f"  figure {n}: RENDER FAILED, left a caption placeholder")
         body = body.replace(fig, replacement)
+
+    _save_cache(cache)
     return body
+
+
+def _fig_html(name, caption):
+    return (
+        f'<figure><img src="{SITE}/img/{name}" alt="{caption[:120]}" '
+        f'style="width:100%;max-width:680px">'
+        + (f"<figcaption>{caption}</figcaption>" if caption else "")
+        + "</figure>"
+    )
 
 
 def svg_to_png(svg, dest, width=1360):
@@ -204,8 +247,8 @@ def build(path, quiet=False):
     }
 
 
-def convert(path):
-    a = build(path)
+def write(a):
+    """Write the paste-ready file from an already-built article."""
     out = OUT_DIR / f"{a['path'].stem}.html"
     out.parent.mkdir(exist_ok=True)
     out.write_text(PAGE.format(
@@ -214,6 +257,10 @@ def convert(path):
     ), encoding="utf-8")
     print(f"  -> {out.relative_to(REPO)}\n")
     return out
+
+
+def convert(path):
+    return write(build(path))
 
 
 def esc(s):
