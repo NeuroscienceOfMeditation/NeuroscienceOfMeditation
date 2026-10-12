@@ -1,0 +1,353 @@
+---
+title: "Asana & the Nervous System — an eight-week course"
+description: "Eight weeks of physical practice taught alongside what each posture does to the body. The Hatha Yoga Pradipika read next to modern physiology, with four voiced video lessons every week."
+image: /img/physicalclass.webp
+---
+{% comment %}
+  Price, length, level and the enrol link come from _data/catalog.yml (the
+  course whose page is /asana-nervous-system-course.html), so they only need
+  changing there.
+{% endcomment %}
+{% assign c = site.data.catalog.courses | where: "page", "/asana-nervous-system-course.html" | first %}
+{% capture enrol %}contact.html?reason=course&amp;item={{ c.title | url_encode }}{% endcapture %}
+{% assign price_num = c.price | remove: '₹' | remove: ',' | strip %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": {{ c.title | jsonify }},
+    "description": {{ page.description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "inLanguage": "en",
+    "educationalLevel": {{ c.level | jsonify }},
+    "timeRequired": "P8W",
+    "provider": { "@type": "Organization", "name": {{ site.title | jsonify }}, "sameAs": {{ '/' | absolute_url | jsonify }} },
+    "teaches": [
+      "A steady, comfortable seat and a restful Shavasana",
+      "How the autonomic nervous system, the vagus nerve and interoception work",
+      "Slow breathing and how it changes heart-rate variability",
+      "Forward folds, twists, backbends, supported inversions and balance, practised safely",
+      "Simple home self-measurement: breath rate, pulse and body-awareness mapping",
+      "Reading Hatha Yoga Pradipika verses against current physiology"
+    ],
+    "offers": [{
+      "@type": "Offer",
+      "category": "Paid",
+      "price": {{ price_num | jsonify }},
+      "priceCurrency": "INR",
+      "url": {{ page.url | absolute_url | jsonify }}
+    }]
+  }
+  </script>
+</head>
+
+<body>
+
+{% include header.html active="courses" %}
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="sec tight">
+  <div class="wrap">
+    <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Course</p>
+
+    <div class="eyebrow">{{ c.tag | default: 'Course' }}</div>
+
+    <h1 style="font-size:clamp(36px,5vw,58px)">Asana &amp; the Nervous System</h1>
+
+    <p class="sub">
+      Eight weeks of physical practice taught alongside what each posture does to
+      the body. Each week takes one family of postures from the <i>Hatha Yoga
+      Pradipika</i>, reads what the text says about it, and then looks at what
+      physiology and neuroscience can actually show, before you practise it and
+      measure how you respond.
+    </p>
+
+    <div class="bk-buy">
+      <span class="price">{{ c.price }}</span>
+      <a class="btn p" href="{{ enrol }}" style="text-decoration:none">Enrol</a>
+      <a class="btn s" href="#weeks" style="text-decoration:none">See the eight weeks</a>
+    </div>
+
+    <ul class="bk-facts">
+      <li><b>{{ c.length }}</b>, about an hour of video a week</li>
+      <li><b>{{ c.level }}</b>, no experience needed</li>
+      <li><b>Sources</b> for every claim</li>
+    </ul>
+  </div>
+</section>
+
+
+<!-- ============ HOW A WEEK WORKS ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="eyebrow">How each week works</div>
+    <h2>Four voiced video lessons, one idea</h2>
+
+    <div class="two" style="margin-top:28px">
+      <div class="card">
+        <h3>A · The Text <small style="font-weight:400;color:var(--ink-60)">· 12–14 min</small></h3>
+        <p>The Pradipika's verses for the week, where they come from, and how they
+          have been read, including one teacher's esoteric interpretation, clearly
+          labelled as interpretation.</p>
+      </div>
+      <div class="card">
+        <h3>B · The Science <small style="font-weight:400;color:var(--ink-60)">· 13–15 min</small></h3>
+        <p>What this family of postures does to nerves, heart, breath and brain.
+          Every claim carries an on-screen grade: established physiology, good
+          evidence, early evidence or contested.</p>
+      </div>
+      <div class="card">
+        <h3>C · The Practice <small style="font-weight:400;color:var(--ink-60)">· 13–15 min</small></h3>
+        <p>A guided, follow-along session with props, easier options, timed holds and
+          the reasons to skip a posture.</p>
+      </div>
+      <div class="card">
+        <h3>D · The Integration <small style="font-weight:400;color:var(--ink-60)">· 12–13 min</small></h3>
+        <p>A breath or rest practice and a simple home measurement, such as breath
+          rate, pulse or a body map, so you can see your own changes over eight
+          weeks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ WEEKS ============ -->
+<section class="sec" id="weeks">
+  <div class="wrap">
+    <div class="eyebrow">Week by week</div>
+    <h2>The eight weeks</h2>
+    <p class="sub">Verse numbers follow the Iyangar translation of the
+      <i>Hatha Yoga Pradipika</i> (1893, revised by the Adyar Library in 1972), so
+      you can read along.</p>
+
+    <ol class="cw-weeks">
+      <li class="cw-week">
+        <div class="cw-n">Week 1</div>
+        <div>
+          <h3>Steadiness: the seat and a map of the nervous system</h3>
+          <p>Why the text teaches asana first and promises steadiness, health and
+            lightness (1.17); why its best postures are all seats (1.19, 1.33–35);
+            Shavasana (1.32). Then the map: central and peripheral, somatic and
+            autonomic, the sympathetic–parasympathetic dial, the vagus nerve and
+            interoception.</p>
+          <p class="cw-do"><b>Practice:</b> building a seat you can stay in, and a
+            four-minute Shavasana. <b>Measure:</b> your baseline breath rate, pulse
+            and body map.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 2</div>
+        <div>
+          <h3>Breath: the bridge between voluntary and automatic</h3>
+          <p>"When the breath wanders, the mind is unsteady" (2.2); taming the breath
+            gradually (2.15–18); Ujjayi (2.51–53) and Bhramari (2.68). The science
+            of respiratory sinus arrhythmia, the baroreflex and slow breathing near
+            six breaths a minute, and why fast breathing does the opposite.</p>
+          <p class="cw-do"><b>Practice:</b> Ujjayi, humming breath and paced slow
+            breathing. <b>Measure:</b> mood and breath rate before and after.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 3</div>
+        <div>
+          <h3>Forward folds: stretch, sensation and the exhale</h3>
+          <p>Paschimottanasana, "the most excellent of asanas" (1.28–29). Muscle
+            spindles and the stretch reflex, and why most flexibility gains are
+            changes in stretch tolerance rather than longer muscles.</p>
+          <p class="cw-do"><b>Practice:</b> a back-body sequence with straps, folding
+            on the out-breath. <b>Measure:</b> a 0–10 sensation scale.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 4</div>
+        <div>
+          <h3>Twists: the gut–brain axis</h3>
+          <p>Matsyendrasana and the "gastric fire" (1.26–27). The enteric nervous
+            system and the gut's sensory nerves, why twists don't "wring out
+            toxins", and what trials of yoga for irritable bowel syndrome do and
+            don't show.</p>
+          <p class="cw-do"><b>Practice:</b> breath-led spinal rotation, with options
+            for back and pregnancy. <b>Measure:</b> gut check-ins.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 5</div>
+        <div>
+          <h3>Backbends: turning the dial up</h3>
+          <p>Dhanurasana (1.25) and Simhasana (1.50–52). Why sympathetic activation
+            is healthy, how upright posture affects mood under stress, and how to
+            come back down afterwards.</p>
+          <p class="cw-do"><b>Practice:</b> an energising extension sequence with
+            lion's breath. <b>Measure:</b> alertness before and after.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 6</div>
+        <div>
+          <h3>Inversions: gravity, blood pressure and the baroreflex</h3>
+          <p>Viparita Karani (3.77–82) and the chin lock (3.70–73). Venous return,
+            baroreceptors, and the measured rise in eye pressure in head-down poses,
+            with clear reasons to skip inversions.</p>
+          <p class="cw-do"><b>Practice:</b> supported inversions only, such as legs up
+            the wall, with no headstand. <b>Measure:</b> pulse before and after.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 7</div>
+        <div>
+          <h3>Bandhas and balance: the inner sense</h3>
+          <p>The three locks (3.55–76) and the arm balances of chapter one. How the
+            diaphragm and pelvic floor work together, balance and the cerebellum,
+            and the insula's role in body awareness.</p>
+          <p class="cw-do"><b>Practice:</b> balance and core work with gentle bandha
+            awareness. <b>Measure:</b> an eyes-closed balance test.</p>
+        </div>
+      </li>
+      <li class="cw-week">
+        <div class="cw-n">Week 8</div>
+        <div>
+          <h3>Rest and integration: what the evidence says</h3>
+          <p>Shavasana (1.32), the salt-in-water image of absorption (4.5) and
+            listening to the inner sound (4.65–95). Yoga and brain GABA, the
+            meta-analysis of stress markers, Yoga Nidra trials, and what we still
+            don't know.</p>
+          <p class="cw-do"><b>Practice:</b> the full Foundation sequence and an
+            11-minute Yoga Nidra. <b>Measure:</b> retest your Week 1 baseline.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ============ WHO ============ -->
+<section class="sec dim">
+  <div class="wrap">
+    <div class="two cw-who">
+      <div class="card">
+        <h2>Who it's for</h2>
+        <ul>
+          <li>Beginners who want a steady home practice and to understand what it
+            does</li>
+          <li>Yoga teachers who want to explain postures accurately, without
+            pseudo-science</li>
+          <li>Anyone curious how a 15th-century text compares with modern
+            physiology</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Who it isn't for</h2>
+        <ul>
+          <li>If you are looking for treatment. This is education, not medical
+            care</li>
+          <li>If you want advanced postures such as headstand. Inversions are kept
+            supported on purpose</li>
+          <li>If you want the text's promises of cures taken literally. The course
+            shows which claims hold up and which don't</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ TEACHER ============ -->
+<section class="sec">
+  <div class="wrap teacher">
+    <img src="img/aditi-600.webp" width="600" height="643" alt="Aditi" loading="lazy" decoding="async">
+    <div>
+      <div class="eyebrow">Your teacher</div>
+      <h2>{{ site.data.about.name }}</h2>
+      <p class="role">{{ site.data.about.role }}</p>
+      <p class="sub" style="margin-bottom:16px">
+        Aditi teaches the <i>Hatha Yoga Pradipika</i> the way this course is built:
+        each verse read closely, each claim graded against the research, and each
+        posture taught so you can feel what it does.
+      </p>
+      {% include credentials.html %}
+      <a class="btn s" href="my-mind-and-me.html" style="text-decoration:none">About Aditi</a>
+    </div>
+  </div>
+</section>
+
+{% include testimonials.html dim=true title="What students say" %}
+
+<!-- ============ FAQ ============ -->
+<section class="sec">
+  <div class="wrap bk-faq">
+    <div class="eyebrow">Questions</div>
+    <h2>Before you enrol</h2>
+
+    <details>
+      <summary>When does it start, and how are sessions run?</summary>
+      <p>Use <a href="{{ enrol }}">the enrol form</a> and you will get a reply with
+        the next start date, how the sessions run and how to pay.</p>
+    </details>
+    <details>
+      <summary>What do I need?</summary>
+      <p>A mat or rug, a firm cushion or folded blanket, a blanket for rest, and a
+        notebook. A block and a strap help from Week 3. A heart-rate app or watch
+        is optional.</p>
+    </details>
+    <details>
+      <summary>How much time does it take?</summary>
+      <p>About an hour of video a week across four lessons, and four or five short
+        practices of 10–15 minutes.</p>
+    </details>
+    <details>
+      <summary>Do I need to read the Hatha Yoga Pradipika?</summary>
+      <p>No. Each week quotes and explains the verses it uses. The verse numbers
+        are there if you want to read along.</p>
+    </details>
+    <details>
+      <summary>Is it safe?</summary>
+      <p>Everything is taught with easier options, and inversions are supported
+        only. If you have glaucoma, high blood pressure, a heart condition, recent
+        surgery, a spinal or joint injury, or are pregnant, check with your
+        clinician first. Skip any posture that causes sharp pain, numbness,
+        dizziness or breathlessness.</p>
+    </details>
+    <details>
+      <summary>Can I get a refund?</summary>
+      <p>No. All sales are final, so you get the start date, format and price
+        before you pay, and you can ask us anything first. See
+        <a href="orders.html">how ordering works</a>.</p>
+    </details>
+    <details>
+      <summary>Can I try something first?</summary>
+      <p>Yes. <a href="free-course.html">The Quiet Mind</a> is a free film course on
+        what breathing and meditation do to the brain.</p>
+    </details>
+  </div>
+</section>
+
+
+<!-- ============ CTA ============ -->
+<section class="sec dim">
+  <div class="wrap bk-cta">
+    <div>
+      <h2>Asana &amp; the Nervous System</h2>
+      <p class="sub" style="margin:0">{{ c.length }} · {{ c.level }} · {{ c.price }}</p>
+    </div>
+    <div class="bk-buy" style="margin:0">
+      <a class="btn p" href="{{ enrol }}" style="text-decoration:none">Enrol</a>
+      <a class="btn s" href="free-course.html" style="text-decoration:none">Watch the free course</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+</body>
+</html>

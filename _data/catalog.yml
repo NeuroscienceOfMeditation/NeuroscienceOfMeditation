@@ -37,6 +37,7 @@ courses:
     length: "8 weeks"
     level: "Beginner"
     price: "₹3,400"
+    page: /asana-nervous-system-course.html
 
   - title: "Neuroscience of Meditation"
     tag: "Theory · Self-paced"
