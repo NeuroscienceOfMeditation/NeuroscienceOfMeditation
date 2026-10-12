@@ -1,7 +1,7 @@
 ---
 title: "The Shiva Svarodaya: What Holds Up, and the Verse That Does Not"
 description: "I have been building a tool from a tantric manual on nasal breathing. The text is a better observer than I expected, and the one verse the whole tool depends on is the one the evidence contradicts."
-date: 2026-10-12 08:45:00 +0530
+date: 2026-10-12 11:08:02 +0530
 pillar: Swar Yoga
 cover: breath
 image: /img/og-svarodaya.jpg
