@@ -1,6 +1,7 @@
 ---
+published: false
 title: "The Quiet Mind — a free film course on meditation and the brain"
-description: "Seven short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free, no sign-up, with captions, transcripts and sources for every claim."
+description: "Six short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free, no sign-up, with transcripts and sources for every claim."
 image: /films/the-network-that-never-rests.jpg
 ---
 {% comment %}
@@ -40,10 +41,10 @@ image: /films/the-network-that-never-rests.jpg
 <section class="sec tight">
   <div class="wrap">
     <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Free course</p>
-    <div class="eyebrow">Free · 7 short films · about 11 minutes</div>
+    <div class="eyebrow">Free · 6 short films · about 10 minutes</div>
     <h1 style="font-size:clamp(36px,5vw,58px)">The Quiet Mind</h1>
     <p class="sub">
-      Seven short films on what meditation, breathing and sleep actually do to the
+      Six short films on what meditation, breathing and sleep actually do to the
       brain, built from the studies themselves. Every number on screen is checked
       against its source, and every lesson ends with something to try today.
       Free, with no sign-up.
@@ -54,8 +55,8 @@ image: /films/the-network-that-never-rests.jpg
       <a class="btn s" href="#lessons" style="text-decoration:none">See all lessons</a>
     </div>
     <ul class="bk-facts">
-      <li><b>7 films</b>, 1 to 3 minutes each</li>
-      <li><b>Captions</b> and full transcripts</li>
+      <li><b>6 films</b>, 1 to 3 minutes each</li>
+      <li><b>Transcripts</b> for every film</li>
       <li><b>Sources</b> for every claim</li>
       <li id="fc-progress" hidden></li>
     </ul>
@@ -68,10 +69,10 @@ image: /films/the-network-that-never-rests.jpg
     <h2>Watch in order, or jump in anywhere</h2>
 
     <ol class="fc-grid" style="margin-top:30px">
-      {% for l in all %}
+      {% for l in all %}{% if l.youtube and l.youtube != "" %}
       <li>
         <a class="fc-card" href="free-course/{{ l.slug }}.html" data-lesson="{{ l.slug }}">
-          <span class="fc-thumb{% if l.vertical %} fc-thumb-v{% endif %}">
+          <span class="fc-thumb">
             <img src="{{ l.poster | relative_url }}" alt="" loading="lazy" width="640" height="360">
             <span class="fc-dur">{{ l.minutes }}</span>
             <span class="fc-tick" aria-hidden="true">✓</span>
@@ -83,7 +84,7 @@ image: /films/the-network-that-never-rests.jpg
           </span>
         </a>
       </li>
-      {% endfor %}
+      {% endif %}{% endfor %}
     </ol>
   </div>
 </section>

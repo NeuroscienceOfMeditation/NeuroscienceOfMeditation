@@ -911,9 +911,9 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 /* ============ The Quiet Mind: free film course ============ */
 .fc-title{font-size:clamp(32px,4.4vw,52px);margin-bottom:12px}
 .fc-player{margin:8px 0 0;border-radius:20px;overflow:hidden;background:#05070d;box-shadow:0 18px 50px rgba(20,24,15,.22)}
-.fc-player video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#05070d}
-.fc-player.fc-vertical{max-width:420px;margin-left:auto;margin-right:auto}
-.fc-player.fc-vertical video{aspect-ratio:9/16}
+.fc-player{position:relative}
+.fc-player iframe,.fc-player img{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;background:#05070d}
+.fc-soon{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);margin:0;background:rgba(5,7,13,.8);color:#F4F0E2;font-size:14px;font-weight:600;padding:8px 16px;border-radius:999px}
 .fc-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:14px;color:var(--ink-60)}
 .fc-done{display:inline-flex;align-items:center;gap:10px;cursor:pointer;color:var(--ink);font-weight:600}
 .fc-done input{width:20px;height:20px;accent-color:var(--forest)}
@@ -934,7 +934,6 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .fc-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(20,24,15,.14)}
 .fc-thumb{position:relative;display:block;aspect-ratio:16/9;background:#05070d;overflow:hidden}
 .fc-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.fc-thumb-v img{object-fit:contain}
 .fc-dur{position:absolute;right:10px;bottom:10px;background:rgba(5,7,13,.78);color:#F4F0E2;font-size:12px;font-weight:600;padding:4px 9px;border-radius:999px}
 .fc-tick{position:absolute;left:10px;top:10px;width:28px;height:28px;border-radius:50%;background:var(--neon);color:var(--char);display:none;align-items:center;justify-content:center;font-weight:700;font-size:15px}
 .fc-card.is-done .fc-tick{display:flex}

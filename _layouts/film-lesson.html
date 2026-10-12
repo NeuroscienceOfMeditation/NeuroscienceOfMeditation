@@ -24,7 +24,7 @@
     "name": {{ l.title | jsonify }},
     "description": {{ l.summary | jsonify }},
     "thumbnailUrl": {{ l.poster | absolute_url | jsonify }},
-    "contentUrl": {{ l.video | absolute_url | jsonify }},
+    "embedUrl": {{ "https://www.youtube-nocookie.com/embed/" | append: l.youtube | jsonify }},
     "uploadDate": "2026-10-12",
     "isAccessibleForFree": true,
     "isPartOf": { "@type": "Course", "name": "The Quiet Mind", "url": {{ '/free-course.html' | absolute_url | jsonify }} }
@@ -48,17 +48,20 @@
     <h1 class="fc-title">{{ l.title }}</h1>
     <p class="sub">{{ l.summary }}</p>
 
-    <div class="fc-player{% if l.vertical %} fc-vertical{% endif %}">
-      <video id="fc-video" controls playsinline preload="metadata"
-             poster="{{ l.poster | relative_url }}" data-lesson="{{ l.slug }}">
-        <source src="{{ l.video | relative_url }}" type="video/mp4">
-        <track kind="captions" src="{{ l.captions | relative_url }}" srclang="en" label="English">
-        Your browser can't play this video. <a href="{{ l.video | relative_url }}">Download it instead</a>.
-      </video>
+    <div class="fc-player">
+      {% if l.youtube and l.youtube != "" %}
+      <iframe src="https://www.youtube-nocookie.com/embed/{{ l.youtube }}?rel=0&amp;cc_load_policy=1"
+              title="{{ l.title | escape }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+      {% else %}
+      <img src="{{ l.poster | relative_url }}" alt="" width="1280" height="720">
+      <p class="fc-soon">Coming soon on YouTube</p>
+      {% endif %}
     </div>
 
     <div class="fc-bar">
-      <span class="fc-len">{{ l.minutes }} · captions available (CC)</span>
+      <span class="fc-len">{{ l.minutes }}{% if l.youtube and l.youtube != "" %} · <a href="https://www.youtube.com/watch?v={{ l.youtube }}" rel="noopener" target="_blank">Watch on YouTube</a>{% endif %}</span>
       <label class="fc-done">
         <input type="checkbox" id="fc-done-box" data-lesson="{{ l.slug }}">
         <span>Mark as watched</span>
@@ -115,19 +118,16 @@
 {% include footer.html %}
 
 <script>
-  // "Mark as watched": remembered in this browser only. Ticks itself near the end of the film.
+  // "Mark as watched": remembered in this browser only.
   (function () {
     var KEY = 'quiet-mind-watched';
     function load() { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { return {}; } }
     function save(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
-    var box = document.getElementById('fc-done-box'), vid = document.getElementById('fc-video');
+    var box = document.getElementById('fc-done-box');
     if (!box) return;
     var slug = box.getAttribute('data-lesson'), state = load();
     box.checked = !!state[slug];
     box.addEventListener('change', function () { var s = load(); s[slug] = box.checked; save(s); });
-    if (vid) vid.addEventListener('timeupdate', function () {
-      if (!box.checked && vid.duration && vid.currentTime / vid.duration > 0.9) { box.checked = true; var s = load(); s[slug] = true; save(s); }
-    });
   })();
 </script>
 

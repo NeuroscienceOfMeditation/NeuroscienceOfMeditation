@@ -2,14 +2,20 @@
 #
 # Each lesson below becomes a page at /free-course/<slug>.html, built by
 # _layouts/film-lesson.html. The course home page is /free-course.html.
-# Video, poster and captions files live in /films/ and share the lesson's slug.
 #
-# To add a lesson: put <slug>.mp4, <slug>.jpg and <slug>.vtt in /films/,
-# copy a block below (from the dash to the next one), change the words, and add
-# a page in /free-course/ copied from an existing one with the new slug.
+# The films play from YouTube. Paste each video's ID into `youtube:` (the part
+# after "watch?v=" in its link, e.g. dQw4w9WgXcQ). Only lessons with an ID are
+# shown on the course page.
+#
+# The whole course stays off the website while free-course.html and the pages
+# in /free-course/ say `published: false`. Delete that line to put it live,
+# and add "The Quiet Mind" back to _data/catalog.yml.
+#
+# Poster images live in /films/<slug>.jpg.
 
 lessons:
 - slug: mindfulness-is-about-your-life
+  youtube: ''
   module: Start here
   title: Mindfulness Is About Your Life
   minutes: 1 min
@@ -35,10 +41,9 @@ lessons:
   - while they're still happening.
   - Mindfulness isn't about your mind.
   - It's about your life.
-  video: /films/mindfulness-is-about-your-life.mp4
   poster: /films/mindfulness-is-about-your-life.jpg
-  captions: /films/mindfulness-is-about-your-life.vtt
 - slug: where-is-your-mind-right-now
+  youtube: ''
   module: The wandering mind
   title: Where Is Your Mind Right Now?
   minutes: 1 min
@@ -69,10 +74,9 @@ lessons:
   - Meditation doesn’t stop your mind from wandering.
   - It trains you to notice, and come back.
   - So, where is your mind right now?
-  video: /films/where-is-your-mind-right-now.mp4
   poster: /films/where-is-your-mind-right-now.jpg
-  captions: /films/where-is-your-mind-right-now.vtt
 - slug: the-network-that-never-rests
+  youtube: ''
   module: The wandering mind
   title: The Network That Never Rests
   minutes: 3 min
@@ -122,10 +126,9 @@ lessons:
   - Meditation doesn’t switch off the default mode.
   - 'It may change your relationship with it: noticing sooner, and coming back.'
   - Your mind will wander. That’s the default. Coming back is the practice.
-  video: /films/the-network-that-never-rests.mp4
   poster: /films/the-network-that-never-rests.jpg
-  captions: /films/the-network-that-never-rests.vtt
 - slug: your-heart-slows-when-you-breathe-out
+  youtube: ''
   module: Breath
   title: Your Heart Slows When You Breathe Out
   minutes: 1 min
@@ -151,10 +154,9 @@ lessons:
   - Breathing isn't just keeping you alive.
   - It's how you come back.
   - 'Try it now: breathe out slower than you breathe in.'
-  video: /films/your-heart-slows-when-you-breathe-out.mp4
   poster: /films/your-heart-slows-when-you-breathe-out.jpg
-  captions: /films/your-heart-slows-when-you-breathe-out.vtt
 - slug: your-breath-is-a-door
+  youtube: ''
   module: Breath
   title: Your Breath Is a Door
   minutes: 3 min
@@ -208,10 +210,9 @@ lessons:
   - Breathing in sharpens what you notice.
   - Breathing out slows you down.
   - Your breath is the one door into your nervous system that you can open on purpose.
-  video: /films/your-breath-is-a-door.mp4
   poster: /films/your-breath-is-a-door.jpg
-  captions: /films/your-breath-is-a-door.vtt
 - slug: sleep-is-how-you-begin-again
+  youtube: ''
   module: Rest
   title: Sleep Is How You Begin Again
   minutes: 1 min
@@ -240,34 +241,4 @@ lessons:
   - Sleep isn't time you lose.
   - It's how you begin again.
   - 'Tonight: phone down 30 minutes before bed.'
-  video: /films/sleep-is-how-you-begin-again.mp4
   poster: /films/sleep-is-how-you-begin-again.jpg
-  captions: /films/sleep-is-how-you-begin-again.vtt
-- slug: forgiveness-meditation
-  module: Practice
-  title: A One-Minute Forgiveness Meditation
-  minutes: 1 min
-  vertical: true
-  summary: 'A guided minute: breathe with the circle, bring to mind a hurt that still aches, and practise putting it down.'
-  learn:
-  - Forgiveness here does not mean the hurt was okay
-  - Noticing where you carry a feeling in the body
-  - 'Two phrases to return to: "May you be at peace. May I be at peace."'
-  practice: Repeat this minute once a day for a week with the same person in mind, and notice whether anything shifts.
-  sources: []
-  n: 7
-  transcript:
-  - Breathe with the circle.
-  - Bring to mind someone who hurt you. Not the deepest wound. Just one that still aches.
-  - Notice where you carry it. Your chest. Your throat. Your hands.
-  - Breathe into that place.
-  - Forgiveness doesn't mean it was okay.
-  - It means you're ready to put it down.
-  - I see the hurt. (say it silently)
-  - I don't need to carry this anymore.
-  - May you be at peace.
-  - May I be at peace.
-  - Breathe. Let go.
-  video: /films/forgiveness-meditation.mp4
-  poster: /films/forgiveness-meditation.jpg
-  captions: /films/forgiveness-meditation.vtt
