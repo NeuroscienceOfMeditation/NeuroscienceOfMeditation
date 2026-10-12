@@ -38,7 +38,7 @@ This is true, and it was documented in the West by the rhinologist Richard Kayse
 
 So the relative openness of your two nostrils is a readout of autonomic state that you can check in about five seconds, with nothing but attention. The entire text is an elaboration of that one fact.
 
-But the modern measurements are messier than the tradition suggests. Kahana-Zweig and colleagues at the Weizmann Institute logged airflow in both nostrils of 33 healthy adults for roughly 24 hours each, and published the result in *PLOS ONE* in 2016.
+But the modern measurements are messier than the tradition suggests — with an important caveat about who was measured, which I come to next. Kahana-Zweig and colleagues at the Weizmann Institute logged airflow in both nostrils of 33 healthy adults for roughly 24 hours each, and published the result in *PLOS ONE* in 2016.
 
 <figure style="margin:28px 0">
 <svg viewBox="0 0 540 218" style="width:100%;height:auto;display:block" font-family="system-ui, sans-serif" aria-label="Bar chart of 33 adults monitored for about 24 hours: all 33 switched nostril dominance at least once, 21 showed a clear rhythm in one nostril, and only 5 showed a clear rhythm in both nostrils.">
@@ -66,14 +66,28 @@ But the modern measurements are messier than the tradition suggests. Kahana-Zwei
   <text x="462" y="194" text-anchor="middle" font-size="12" fill="#5E6F68">30</text>
   <text x="368" y="213" text-anchor="middle" font-size="12" fill="#5E6F68">Number of the 33 adults monitored</text>
 </svg>
-<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">Kahana-Zweig and colleagues (2016), 33 adults recorded for about 24 hours each. Everyone switched sides. Far fewer did so as a clean, regular oscillation, and the two nostrils often did not behave as mirror images of each other.</figcaption>
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">Kahana-Zweig and colleagues (2016), 33 adults recorded for about 24 hours each. Everyone switched sides. Far fewer did so as a clean, regular oscillation, and the two nostrils often did not behave as mirror images of each other. These were ordinary volunteers, not trained breathers — a distinction the next section turns on.</figcaption>
 </figure>
 
 The average dominance period was 2.15 hours, which sits neatly inside the one-to-three-hour window the text describes. For a document composed without a clock, that is a genuinely impressive piece of observation.
 
 The honest caveat is the rest of the finding. The classical picture — two nostrils trading places on one shared, regular rhythm — fitted only a minority of the sample. Congestion sometimes rose on both sides at once. The authors concluded that each nostril may oscillate somewhat independently.
 
-So the rhythm is real. Its reliability is not what the tradition implies, and not what I had assumed when I started.
+## The objection that the text deserves
+
+There is an obvious reply to all that, and I think it is a fair one.
+
+Those 33 people were ordinary adults. The *Śiva Svarodaya* is not describing ordinary adults. It describes a practitioner — someone whose breath has been worked on for years. And the mechanism is not far-fetched. The nasal cycle is driven by the autonomic nervous system, and sustained slow breathing demonstrably shifts autonomic balance. It is entirely coherent that a trained practitioner would show the clean, reciprocal rhythm that an untrained sample does not.
+
+That is a real prediction, and it is the most interesting thing in this article: **if the tradition is right, experienced practitioners should show a more regular nasal cycle than matched non-practitioners.**
+
+Nobody has tested it. I went looking. The studies that recruit experienced practitioners measure what happens *during* a breathing practice — EEG, heart rate, performance — not whether the spontaneous cycle is more regular across an ordinary day. The 24-hour logging study used untrained volunteers. The comparison that would settle the question, a day of recording in trained practitioners against matched controls, does not appear to have been run.
+
+So the position is not that the text is wrong about the rhythm. It is that the strongest version of the text's claim has never been put to the test. That is a better place for it than I expected to be able to report, and it is a standing invitation, because this is a cheap study: two nasal cannulae, a day, and two groups.
+
+One discipline is worth keeping if anyone does run it. Say beforehand what result would count against the claim. “They had not mastered it” can absorb any disconfirming data at all, and a claim defended that way quietly stops being a claim about the body and becomes a claim about who counts as a master. Naming the prediction in advance — this many practitioners, this many hours, this much more regular — is what keeps it a claim about noses.
+
+So: the rhythm is real. Whether it is as regular as the text implies is, for the trained practitioner, still an open question.
 
 ## What holds up: the nose is wired into the brain
 
@@ -121,7 +135,9 @@ It has not held up.
 <figcaption style="font-size:13px;color:#5E6F68;margin-top:10px">The 1983 result and the two more careful tests I could find. Both later studies are small, and the 2025 authors say their own finding needs replicating. But neither supports the claim as it is usually repeated, and the 2025 one points the opposite way.</figcaption>
 </figure>
 
-Telles and colleagues tested it directly in *BMC Research Notes* in 2017, with thirteen experienced practitioners doing alternate nostril breathing. They expected hemispheric symmetry to change. It did not. They said so.
+Telles and colleagues tested it directly in *BMC Research Notes* in 2017, with thirteen practitioners who practised breathing regularly at a yoga centre in north India. They expected hemispheric symmetry to change. It did not. They said so.
+
+That detail matters, and it is why I treat this claim differently from the one above. The objection that an effect will only appear in trained breathers is a fair challenge to the nasal-cycle data, where the volunteers were untrained. Here it has already been met: these were trained breathers, and the effect still did not appear.
 
 Frohlich, Frohlich and Sklerov ran the best-powered test I could find, in *PLOS ONE* in 2025: nineteen people, 128-channel EEG, left-, right- and alternate-nostril breathing in random order. There was no lateralisation of power. There was a lateralised connectivity effect, but it ran *ipsilaterally* — stronger on the same side as the nostril in use, which is the opposite of what the 1983 result described. Heart rate, heart-rate variability and working memory did not differ between conditions at all.
 
@@ -217,7 +233,9 @@ A fair amount, as it turns out.
 
 **Nasal breathing rather than mouth breathing.** This is the claim here with the clearest mechanism behind it. Though note what Zelano’s work actually shows: that the brain’s rhythm follows nasal airflow, not that breathing through your nose will make you calmer or happier.
 
-What I am not keeping is the claim that any of this balances your hemispheres. On present evidence it does not, and the one modern, well-instrumented test points the other way.
+**The open question, held open.** Whether a trained practitioner's cycle is more regular than an untrained one's is untested, and worth testing. I would rather say that than either assume it or dismiss it.
+
+What I am not keeping is the claim that any of this balances your hemispheres. On present evidence it does not, the one modern well-instrumented test points the other way, and in the study that did recruit regular practitioners the effect still failed to appear.
 
 ## What the tradition is actually offering
 
