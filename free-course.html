@@ -1,0 +1,128 @@
+---
+title: "The Quiet Mind — a free film course on meditation and the brain"
+description: "Seven short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free, no sign-up, with captions, transcripts and sources for every claim."
+image: /films/the-network-that-never-rests.jpg
+---
+{% comment %}
+  The Quiet Mind: free film course home page. Lessons, wording and sources come
+  from _data/free_course.yml; edit them there.
+{% endcomment %}
+{% assign all = site.data.free_course.lessons %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "The Quiet Mind",
+    "description": {{ page.description | jsonify }},
+    "url": {{ page.url | absolute_url | jsonify }},
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "educationalLevel": "Beginner",
+    "provider": { "@type": "Organization", "name": {{ site.title | jsonify }}, "sameAs": {{ '/' | absolute_url | jsonify }} },
+    "hasCourseInstance": { "@type": "CourseInstance", "courseMode": "Online", "courseWorkload": "PT10M" },
+    "offers": [{ "@type": "Offer", "category": "Free", "price": "0", "priceCurrency": "INR", "url": {{ page.url | absolute_url | jsonify }} }]
+  }
+  </script>
+</head>
+
+<body>
+
+{% include header.html active="courses" %}
+
+<main id="main">
+
+<section class="sec tight">
+  <div class="wrap">
+    <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Free course</p>
+    <div class="eyebrow">Free · 7 short films · about 11 minutes</div>
+    <h1 style="font-size:clamp(36px,5vw,58px)">The Quiet Mind</h1>
+    <p class="sub">
+      Seven short films on what meditation, breathing and sleep actually do to the
+      brain, built from the studies themselves. Every number on screen is checked
+      against its source, and every lesson ends with something to try today.
+      Free, with no sign-up.
+    </p>
+    <div class="bk-buy">
+      <span class="price">Free</span>
+      <a class="btn p" href="free-course/{{ all[0].slug }}.html" style="text-decoration:none">Start lesson 1</a>
+      <a class="btn s" href="#lessons" style="text-decoration:none">See all lessons</a>
+    </div>
+    <ul class="bk-facts">
+      <li><b>7 films</b>, 1 to 3 minutes each</li>
+      <li><b>Captions</b> and full transcripts</li>
+      <li><b>Sources</b> for every claim</li>
+      <li id="fc-progress" hidden></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec dim" id="lessons">
+  <div class="wrap">
+    <div class="eyebrow">Lessons</div>
+    <h2>Watch in order, or jump in anywhere</h2>
+
+    <ol class="fc-grid" style="margin-top:30px">
+      {% for l in all %}
+      <li>
+        <a class="fc-card" href="free-course/{{ l.slug }}.html" data-lesson="{{ l.slug }}">
+          <span class="fc-thumb{% if l.vertical %} fc-thumb-v{% endif %}">
+            <img src="{{ l.poster | relative_url }}" alt="" loading="lazy" width="640" height="360">
+            <span class="fc-dur">{{ l.minutes }}</span>
+            <span class="fc-tick" aria-hidden="true">✓</span>
+          </span>
+          <span class="fc-meta">
+            <small>Lesson {{ l.n }} · {{ l.module }}</small>
+            <b>{{ l.title }}</b>
+            <span>{{ l.summary | truncatewords: 26 }}</span>
+          </span>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="two">
+      <div class="card">
+        <h3>How these films are made</h3>
+        <p>Each film starts from the published studies, not from summaries of them.
+          The numbers are checked against the papers, the limits of each study are
+          said out loud (a mouse study is called a mouse study), and simplified
+          diagrams are labelled as simplified.</p>
+      </div>
+      <div class="card">
+        <h3>Want to go deeper?</h3>
+        <p>The films are a starting point. The full <a href="courses-books.html#courses">courses</a>
+          go further, with practice, and the <a href="words-of-yoga.html">articles</a>
+          take one claim at a time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+<script>
+  // Show which films this visitor has watched (stored in this browser only).
+  (function () {
+    var s = {};
+    try { s = JSON.parse(localStorage.getItem('quiet-mind-watched') || '{}') || {}; } catch (e) {}
+    var cards = document.querySelectorAll('.fc-card'), done = 0;
+    cards.forEach(function (c) { if (s[c.getAttribute('data-lesson')]) { c.classList.add('is-done'); done++; } });
+    var p = document.getElementById('fc-progress');
+    if (p && done) { p.hidden = false; p.innerHTML = '<b>' + done + ' of ' + cards.length + '</b> watched'; }
+  })();
+</script>
+
+</body>
+</html>

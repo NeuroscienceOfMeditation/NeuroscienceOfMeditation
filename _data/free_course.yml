@@ -1,0 +1,273 @@
+# The Quiet Mind: a free film course. The one place to edit it.
+#
+# Each lesson below becomes a page at /free-course/<slug>.html, built by
+# _layouts/film-lesson.html. The course home page is /free-course.html.
+# Video, poster and captions files live in /films/ and share the lesson's slug.
+#
+# To add a lesson: put <slug>.mp4, <slug>.jpg and <slug>.vtt in /films/,
+# copy a block below (from the dash to the next one), change the words, and add
+# a page in /free-course/ copied from an existing one with the new slug.
+
+lessons:
+- slug: mindfulness-is-about-your-life
+  module: Start here
+  title: Mindfulness Is About Your Life
+  minutes: 1 min
+  summary: 'A short film about what mindfulness is actually for: not an empty mind, but the ordinary moments you get to be present for.'
+  learn:
+  - Mindfulness is about where your attention is, not about stopping thoughts
+  - The small, everyday moments it makes room for
+  - The pause between what you feel and what you say
+  practice: At one meal today, put your phone face-down and taste the first three bites on purpose.
+  sources: []
+  n: 1
+  transcript:
+  - It's easy to think mindfulness is about your mind.
+  - Mindfulness is about putting the phone down
+  - when someone small has something big to say.
+  - It's tasting your mother's cooking
+  - like it's the first time.
+  - It's feeling the first rain
+  - instead of rushing to get out of it.
+  - It's the breath between what you feel and what you say.
+  - None of us get these moments twice.
+  - But we all deserve to actually be there for them,
+  - while they're still happening.
+  - Mindfulness isn't about your mind.
+  - It's about your life.
+  video: /films/mindfulness-is-about-your-life.mp4
+  poster: /films/mindfulness-is-about-your-life.jpg
+  captions: /films/mindfulness-is-about-your-life.vtt
+- slug: where-is-your-mind-right-now
+  module: The wandering mind
+  title: Where Is Your Mind Right Now?
+  minutes: 1 min
+  summary: In 2010, Harvard researchers pinged 2,250 people at random moments of their day. Nearly half the time, their minds were somewhere else, and that mattered more for their happiness than what they were doing.
+  learn:
+  - Minds wandered in 46.9% of sampled moments
+  - In every activity tracked but one, minds wandered at least 30% of the time
+  - Pleasant daydreams were no happier than being present; neutral and unpleasant ones were less happy
+  - Where the mind was explained 10.8% of moment-to-moment happiness, versus 4.6% for the activity
+  - Wandering tended to come first, and lower happiness followed
+  practice: 'Set three random alarms on your phone today. When one rings, ask: what am I doing, and where is my mind?'
+  sources:
+  - &id001
+    title: Killingsworth & Gilbert (2010), "A Wandering Mind Is an Unhappy Mind", Science
+    url: https://www.colegiomedico.cl/wp-content/uploads/2023/07/Killingsworth-and-Gilbert-2010-A-wandering-mind-is-an-unhappy-mind.pdf
+  - title: 'Harvard Gazette: "Wandering mind not a happy mind"'
+    url: https://news.harvard.edu/gazette/story/2010/11/wandering-mind-not-a-happy-mind/
+  n: 2
+  transcript:
+  - In 2010, two Harvard psychologists asked a simple question.
+  - They interrupted 2,250 people at random moments of their day.
+  - Nearly half the time, their minds were somewhere else.
+  - In every activity they tracked but one, minds wandered at least 30% of the time.
+  - Even happy daydreams didn’t make people happier than being present.
+  - Where their mind was predicted happiness more than twice as well as what they were doing.
+  - And the wandering came first. The unhappiness followed.
+  - “A human mind is a wandering mind, and a wandering mind is an unhappy mind.” — Killingsworth & Gilbert, Science, 2010
+  - Meditation doesn’t stop your mind from wandering.
+  - It trains you to notice, and come back.
+  - So, where is your mind right now?
+  video: /films/where-is-your-mind-right-now.mp4
+  poster: /films/where-is-your-mind-right-now.jpg
+  captions: /films/where-is-your-mind-right-now.vtt
+- slug: the-network-that-never-rests
+  module: The wandering mind
+  title: The Network That Never Rests
+  minutes: 3 min
+  summary: 'What your brain does when you are doing nothing: the default mode network, how it was discovered, and what four studies show meditation does to it.'
+  learn:
+  - The brain is about 2% of body weight but uses about 20% of its energy, and tasks barely change that
+  - 'The default mode network: regions more active at rest, with hubs in the medial prefrontal and posterior cingulate cortex'
+  - 'In 14 meditators, each catch of a wandering mind moved through four phases: wandering, noticing, shifting, staying'
+  - In 12 experienced meditators (about 10,565 hours on average), default mode hubs were quieter than in 12 beginners
+  - That comparison is a correlation, not proof that meditation caused the difference
+  practice: Sit for five minutes with your attention on the breath. Each time you notice your mind has wandered, count one "rep" and come back.
+  sources:
+  - title: Raichle et al. (2001), "A default mode of brain function", PNAS; background from the US National Science Foundation
+    url: https://www.nsf.gov/news/what-happens-your-brain-when-your-mind-rest
+  - *id001
+  - title: Hasenkamp et al. (2012), "Mind wandering and attention during focused meditation", NeuroImage
+    url: https://sources.mandala.library.virginia.edu/node/22121
+  - title: Brewer et al. (2011), "Meditation experience is associated with differences in default mode network activity and connectivity", PNAS
+    url: https://community.cfmhome.org/uploads/default/510/0af2e6a33f4f1c66.pdf
+  - title: 'Yale News: "Tuning out: How brains benefit from meditation"'
+    url: https://news.yale.edu/2011/11/21/tuning-out-how-brains-benefit-meditation
+  n: 3
+  transcript:
+  - What is your brain doing when you’re doing nothing?
+  - Your brain is about 2% of your body’s weight, but uses about 20% of its energy.
+  - And starting a task barely changes that.
+  - Brain scanners in the 1990s showed something strange.
+  - When people stopped a task and rested, some regions became more active, not less.
+  - In 2001, Marcus Raichle called it the brain’s “default mode”.
+  - 'Its main hubs sit along the midline: medial prefrontal and posterior cingulate cortex.'
+  - 'It’s the network behind your inner monologue: memories, plans, and thoughts about yourself and others.'
+  - It’s how you plan a life and understand people.
+  - But it runs a lot. In one Harvard study, minds wandered in 46.9% of moments.
+  - And wandering minds were less happy.
+  - So what happens when you try to sit with your breath?
+  - In 2012, Wendy Hasenkamp scanned 14 meditators focusing on the breath.
+  - Each time they caught their mind wandering, they pressed a button.
+  - Around each press, the brain moved through four phases.
+  - Wandering. Noticing. Shifting. Staying.
+  - Every catch is one repetition. Like a curl at the gym, for attention.
+  - In 2011, Judson Brewer’s team compared 12 experienced meditators with 12 beginners.
+  - The meditators averaged over 10,000 hours of practice.
+  - Across three styles of meditation, their default mode hubs were quieter.
+  - And those hubs were more tightly linked to regions for self-monitoring and control, even at rest.
+  - 'One caution: this compared two groups of people.'
+  - It can’t prove meditation caused the difference.
+  - Meditation doesn’t switch off the default mode.
+  - 'It may change your relationship with it: noticing sooner, and coming back.'
+  - Your mind will wander. That’s the default. Coming back is the practice.
+  video: /films/the-network-that-never-rests.mp4
+  poster: /films/the-network-that-never-rests.jpg
+  captions: /films/the-network-that-never-rests.vtt
+- slug: your-heart-slows-when-you-breathe-out
+  module: Breath
+  title: Your Heart Slows When You Breathe Out
+  minutes: 1 min
+  summary: Your heart speeds up a little as you breathe in and slows a little as you breathe out. A long exhale is a brake you have carried your whole life.
+  learn:
+  - 'Respiratory sinus arrhythmia: heart rate rises on the in-breath and falls on the out-breath'
+  - The slowing comes through the vagus nerve, the body's main "rest and digest" pathway
+  - A slow, long exhale presses that brake on purpose
+  practice: 'For one minute, breathe out slower than you breathe in: in for about four, out for about six.'
+  sources: []
+  n: 4
+  transcript:
+  - It's easy to think breathing just keeps you alive.
+  - Before the exam,
+  - before the hard conversation,
+  - at 3 a.m., when nothing else is working,
+  - in the corridor, waiting for news,
+  - we all do the same thing. Nobody taught us.
+  - Every time you breathe out, your heart slows down a little.
+  - It's a brake you've carried your whole life.
+  - You've been using it since your first birthday candle.
+  - You just never knew it was there.
+  - Breathing isn't just keeping you alive.
+  - It's how you come back.
+  - 'Try it now: breathe out slower than you breathe in.'
+  video: /films/your-heart-slows-when-you-breathe-out.mp4
+  poster: /films/your-heart-slows-when-you-breathe-out.jpg
+  captions: /films/your-heart-slows-when-you-breathe-out.vtt
+- slug: your-breath-is-a-door
+  module: Breath
+  title: Your Breath Is a Door
+  minutes: 3 min
+  summary: Breathing is the one automatic rhythm you can also steer. Three studies show how it talks back to the brain, and the film ends with a guided breath you do along with it.
+  learn:
+  - About 175 brainstem neurons report on breathing to an arousal hub; mice without them breathed slowly and were unusually calm (a mouse study)
+  - Amygdala and hippocampus activity rises and falls with breathing through the nose
+  - Fearful faces were spotted faster, and objects remembered better, on the in-breath; the effect faded with mouth breathing
+  - In a month-long study, 5 minutes a day of exhale-focused "cyclic sighing" improved mood more than mindfulness meditation
+  practice: 'Three cyclic sighs: breathe in through the nose, take one more short sip of air, then a long, slow exhale through the mouth.'
+  sources:
+  - title: Yackle et al. (2017), Science; Stanford Medicine summary
+    url: https://med.stanford.edu/news/all-news/2017/03/study-discovers-how-slow-breathing-induces-tranquility.html
+  - title: Zelano et al. (2016), Journal of Neuroscience; Northwestern summary
+    url: https://news.northwestern.edu/stories/2016/12/rhythm-of-breathing-affects-memory-and-fear
+  - title: Balban et al. (2023), "Brief structured respiration practices enhance mood and reduce physiological arousal", Cell Reports Medicine
+    url: https://hubermanlab.stanford.edu/publications/brief-structured-respiration-practices-enhance-mood-and-reduce-physiological-arousal
+  n: 5
+  transcript:
+  - Thousands of times a day, you breathe without thinking about it.
+  - Breathing is automatic.
+  - But it’s the one automatic rhythm you can also take over, any time you choose.
+  - You can’t steer your heartbeat or your stress hormones directly.
+  - Your breath, you can. And it talks back to your brain.
+  - Deep in the brainstem, a small cluster of cells keeps the rhythm.
+  - In 2017, Stanford scientists found about 175 neurons there that report on breathing to the locus coeruleus, an arousal hub.
+  - It sends signals across the whole brain.
+  - When those neurons were removed, mice breathed more slowly and became unusually calm.
+  - That was in mice, but humans have the same breathing pacemaker.
+  - Breathing in changes what your brain notices.
+  - In 2016, researchers recorded inside the brains of 7 people who had electrodes placed for epilepsy surgery.
+  - With each in-breath through the nose, activity in the amygdala and hippocampus rose and fell.
+  - In about 60 more people, fearful faces were spotted faster during an in-breath, and objects were remembered better.
+  - Through the mouth, the effect faded.
+  - 'Breathing out does something else: it slows your heart a little, every time.'
+  - A brake you carry everywhere.
+  - In 2023, Stanford researchers had people practise for 5 minutes a day, for a month.
+  - They compared three breathing techniques with mindfulness meditation.
+  - The biggest mood boost came from an exhale-focused breath called the cyclic sigh.
+  - It also lowered resting breathing rate more than meditation did.
+  - Try it with me.
+  - Breathe in through your nose
+  - One more short sip of air
+  - Long, slow exhale through your mouth
+  - Breathe in through your nose
+  - One more short sip of air
+  - Long, slow exhale through your mouth
+  - Breathe in through your nose
+  - One more short sip of air
+  - Long, slow exhale through your mouth
+  - Breathing in sharpens what you notice.
+  - Breathing out slows you down.
+  - Your breath is the one door into your nervous system that you can open on purpose.
+  video: /films/your-breath-is-a-door.mp4
+  poster: /films/your-breath-is-a-door.jpg
+  captions: /films/your-breath-is-a-door.vtt
+- slug: sleep-is-how-you-begin-again
+  module: Rest
+  title: Sleep Is How You Begin Again
+  minutes: 1 min
+  summary: In deep sleep, slow waves of fluid wash through the brain. Scientists think this may help clear away the day.
+  learn:
+  - A 2019 study watched cerebrospinal fluid pulse through the brains of 13 sleeping adults
+  - The waves followed slow brain waves in deep, non-REM sleep
+  - The study did not measure waste clearance, so "cleaning" is still a hypothesis
+  practice: Tonight, put your phone down 30 minutes before bed.
+  sources:
+  - title: Fultz et al. (2019), "Coupled electrophysiological, hemodynamic, and cerebrospinal fluid oscillations in human sleep", Science
+    url: https://ucyweb.ucy.ac.cy/neurology/documents/brain_oscillations_and_sleep_Fultz_et_al_2019.pdf
+  - title: 'Neuroscience News: "Are we brainwashed during sleep?"'
+    url: https://neurosciencenews.com/sleep-cerebrospinal-fluid-15153/
+  n: 6
+  transcript:
+  - It's easy to think sleep is time you lose.
+  - One more video.
+  - One more hour.
+  - One more thing to finish.
+  - But while you sleep, your brain is still working.
+  - In deep sleep, slow waves of fluid wash through your brain.
+  - Scientists think this helps clear away the day.
+  - So you can meet the morning as someone new.
+  - Tonight, put the phone down a little earlier.
+  - Sleep isn't time you lose.
+  - It's how you begin again.
+  - 'Tonight: phone down 30 minutes before bed.'
+  video: /films/sleep-is-how-you-begin-again.mp4
+  poster: /films/sleep-is-how-you-begin-again.jpg
+  captions: /films/sleep-is-how-you-begin-again.vtt
+- slug: forgiveness-meditation
+  module: Practice
+  title: A One-Minute Forgiveness Meditation
+  minutes: 1 min
+  vertical: true
+  summary: 'A guided minute: breathe with the circle, bring to mind a hurt that still aches, and practise putting it down.'
+  learn:
+  - Forgiveness here does not mean the hurt was okay
+  - Noticing where you carry a feeling in the body
+  - 'Two phrases to return to: "May you be at peace. May I be at peace."'
+  practice: Repeat this minute once a day for a week with the same person in mind, and notice whether anything shifts.
+  sources: []
+  n: 7
+  transcript:
+  - Breathe with the circle.
+  - Bring to mind someone who hurt you. Not the deepest wound. Just one that still aches.
+  - Notice where you carry it. Your chest. Your throat. Your hands.
+  - Breathe into that place.
+  - Forgiveness doesn't mean it was okay.
+  - It means you're ready to put it down.
+  - I see the hurt. (say it silently)
+  - I don't need to carry this anymore.
+  - May you be at peace.
+  - May I be at peace.
+  - Breathe. Let go.
+  video: /films/forgiveness-meditation.mp4
+  poster: /films/forgiveness-meditation.jpg
+  captions: /films/forgiveness-meditation.vtt

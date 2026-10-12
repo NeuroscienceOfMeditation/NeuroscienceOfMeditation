@@ -1,0 +1,135 @@
+{% comment %}
+  One lesson of The Quiet Mind (free film course). Everything on the page comes
+  from _data/free_course.yml: the lesson whose slug matches `lesson:` in the
+  page's front matter. To change words, edit that file, not this one.
+{% endcomment %}
+{% assign all = site.data.free_course.lessons %}
+{% assign l = all | where: "slug", page.lesson | first %}
+{% assign idx = l.n | minus: 1 %}
+{% assign prev_i = idx | minus: 1 %}
+{% assign next_i = idx | plus: 1 %}
+{% if idx > 0 %}{% assign prev = all[prev_i] %}{% endif %}
+{% assign last_i = all.size | minus: 1 %}
+{% if idx < last_i %}{% assign next = all[next_i] %}{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": {{ l.title | jsonify }},
+    "description": {{ l.summary | jsonify }},
+    "thumbnailUrl": {{ l.poster | absolute_url | jsonify }},
+    "contentUrl": {{ l.video | absolute_url | jsonify }},
+    "uploadDate": "2026-10-12",
+    "isAccessibleForFree": true,
+    "isPartOf": { "@type": "Course", "name": "The Quiet Mind", "url": {{ '/free-course.html' | absolute_url | jsonify }} }
+  }
+  </script>
+</head>
+
+<body>
+
+{% include header.html active="courses" %}
+
+<main id="main">
+
+<section class="sec tight">
+  <div class="wrap fc-lesson">
+    <p class="crumbs">
+      <a href="{{ '/free-course.html' | relative_url }}">The Quiet Mind</a>
+      <span aria-hidden="true">/</span> Lesson {{ l.n }} of {{ all.size }} · {{ l.module }}
+    </p>
+
+    <h1 class="fc-title">{{ l.title }}</h1>
+    <p class="sub">{{ l.summary }}</p>
+
+    <div class="fc-player{% if l.vertical %} fc-vertical{% endif %}">
+      <video id="fc-video" controls playsinline preload="metadata"
+             poster="{{ l.poster | relative_url }}" data-lesson="{{ l.slug }}">
+        <source src="{{ l.video | relative_url }}" type="video/mp4">
+        <track kind="captions" src="{{ l.captions | relative_url }}" srclang="en" label="English">
+        Your browser can't play this video. <a href="{{ l.video | relative_url }}">Download it instead</a>.
+      </video>
+    </div>
+
+    <div class="fc-bar">
+      <span class="fc-len">{{ l.minutes }} · captions available (CC)</span>
+      <label class="fc-done">
+        <input type="checkbox" id="fc-done-box" data-lesson="{{ l.slug }}">
+        <span>Mark as watched</span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<section class="sec dim">
+  <div class="wrap">
+    <div class="two fc-cols">
+      <div class="card">
+        <div class="eyebrow">In this film</div>
+        <ul class="fc-list">
+          {% for item in l.learn %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+      </div>
+      <div class="card fc-practice">
+        <div class="eyebrow">Try this today</div>
+        <p>{{ l.practice }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap fc-narrow">
+    <details class="fc-transcript">
+      <summary>Read the transcript</summary>
+      {% for line in l.transcript %}<p>{{ line }}</p>{% endfor %}
+    </details>
+
+    {% if l.sources.size > 0 %}
+    <div class="fc-sources">
+      <div class="eyebrow">Sources</div>
+      <ul>
+        {% for s in l.sources %}<li><a href="{{ s.url }}" rel="noopener" target="_blank">{{ s.title }}</a></li>{% endfor %}
+      </ul>
+      <p class="fc-note">Every number in the film is checked against these sources. Diagrams are simplified, and
+        charts marked "schematic" show the shape of a finding, not its exact values.</p>
+    </div>
+    {% endif %}
+
+    <nav class="fc-pager" aria-label="Lessons">
+      {% if prev %}<a class="btn s" href="{{ '/free-course/' | append: prev.slug | append: '.html' | relative_url }}" style="text-decoration:none">← {{ prev.title }}</a>{% else %}<span></span>{% endif %}
+      {% if next %}<a class="btn p" href="{{ '/free-course/' | append: next.slug | append: '.html' | relative_url }}" style="text-decoration:none">Next: {{ next.title }} →</a>
+      {% else %}<a class="btn p" href="{{ '/free-course.html' | relative_url }}" style="text-decoration:none">Back to the course</a>{% endif %}
+    </nav>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+
+<script>
+  // "Mark as watched": remembered in this browser only. Ticks itself near the end of the film.
+  (function () {
+    var KEY = 'quiet-mind-watched';
+    function load() { try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { return {}; } }
+    function save(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) {} }
+    var box = document.getElementById('fc-done-box'), vid = document.getElementById('fc-video');
+    if (!box) return;
+    var slug = box.getAttribute('data-lesson'), state = load();
+    box.checked = !!state[slug];
+    box.addEventListener('change', function () { var s = load(); s[slug] = box.checked; save(s); });
+    if (vid) vid.addEventListener('timeupdate', function () {
+      if (!box.checked && vid.duration && vid.currentTime / vid.duration > 0.9) { box.checked = true; var s = load(); s[slug] = true; save(s); }
+    });
+  })();
+</script>
+
+</body>
+</html>
