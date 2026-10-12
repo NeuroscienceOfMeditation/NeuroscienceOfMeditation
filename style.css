@@ -943,3 +943,21 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .fc-meta span{font-size:13.5px;line-height:1.6;color:var(--ink-60)}
 @media (max-width:900px){.fc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.fc-grid{grid-template-columns:1fr}.fc-cols{grid-template-columns:1fr}.fc-player{border-radius:14px}.fc-pager .btn{width:100%;text-align:center}}
+
+/* Course sign-up gate */
+.fc-gate{background:var(--forest);color:var(--paper);border-radius:20px;padding:34px 36px}
+.fc-player .fc-gate{border-radius:0;min-height:100%;display:flex;flex-direction:column;justify-content:center;aspect-ratio:16/9;padding:clamp(22px,5vw,60px)}
+.fc-player .fc-gate[hidden]{display:none}
+.fc-gate .eyebrow{color:var(--neon)}
+.fc-gate-title{font-size:clamp(24px,3vw,34px);margin:0 0 10px;color:var(--paper)}
+.fc-gate-text{font-size:15px;line-height:1.7;color:rgba(244,240,226,.82);margin:0 0 20px;max-width:56ch}
+.fc-gate-form{display:flex;flex-wrap:wrap;gap:10px;max-width:560px}
+.fc-gate-form input{flex:1 1 240px;padding:15px 18px;border-radius:999px;border:0;background:var(--paper);color:var(--char);font-family:var(--sans);font-size:15px}
+.fc-gate-form .btn.p{background:var(--neon);color:var(--char)}
+.fc-gate-note{font-size:12.5px;line-height:1.6;color:rgba(244,240,226,.65);margin:14px 0 0}
+.fc-gate-note a{color:var(--paper)}
+.fc-gate-done{font-size:14px;color:var(--forest-ink);font-weight:600;margin:14px 0 0}
+.fc-hero-gate{margin:26px 0 22px;max-width:720px}
+@media (max-width:640px){.fc-player .fc-gate{aspect-ratio:auto}.fc-gate{padding:26px 22px}}
+.fc-player .fc-gate-done{position:absolute;top:14px;left:14px;right:14px;z-index:2;margin:0;background:var(--neon);color:var(--char);padding:12px 16px;border-radius:14px;font-size:14px;transition:opacity .6s}
+.fc-player .fc-gate-done.is-fading{opacity:0}

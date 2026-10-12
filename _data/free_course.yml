@@ -7,15 +7,17 @@
 # after "watch?v=" in its link, e.g. dQw4w9WgXcQ). Only lessons with an ID are
 # shown on the course page.
 #
-# The whole course stays off the website while free-course.html and the pages
-# in /free-course/ say `published: false`. Delete that line to put it live,
-# and add "The Quiet Mind" back to _data/catalog.yml.
+# A lesson's page stays off the website while its file in /free-course/ says
+# `published: false`. When its YouTube ID is in, delete that line.
+#
+# Visitors sign up with their email to watch (Kit form 9927031, the same list
+# as the newsletter): see _includes/course-signup.html.
 #
 # Poster images live in /films/<slug>.jpg.
 
 lessons:
 - slug: mindfulness-is-about-your-life
-  youtube: ''
+  youtube: mxqL16ifcoM
   module: Start here
   title: Mindfulness Is About Your Life
   minutes: 1 min
@@ -128,7 +130,7 @@ lessons:
   - Your mind will wander. That’s the default. Coming back is the practice.
   poster: /films/the-network-that-never-rests.jpg
 - slug: your-heart-slows-when-you-breathe-out
-  youtube: ''
+  youtube: jUO3wI35WPI
   module: Breath
   title: Your Heart Slows When You Breathe Out
   minutes: 1 min

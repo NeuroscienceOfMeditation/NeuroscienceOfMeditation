@@ -1,0 +1,40 @@
+{% comment %}
+  Shared script for the course sign-up gate. Include once per page, after the
+  page content. Marks this browser as signed up after the form is sent, then
+  reveals everything marked data-fc-locked and loads any YouTube player waiting
+  in a data-src attribute.
+{% endcomment %}
+<script>
+(function () {
+  var KEY = 'quiet-mind-member';
+  function isMember() { try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+  function remember() { try { localStorage.setItem(KEY, '1'); } catch (e) {} }
+
+  function unlock(justJoined) {
+    document.querySelectorAll('[data-fc-gate]').forEach(function (g) { g.hidden = true; });
+    document.querySelectorAll('[data-fc-locked]').forEach(function (el) { el.hidden = false; });
+    document.querySelectorAll('iframe[data-src]').forEach(function (f) { f.src = f.getAttribute('data-src'); f.removeAttribute('data-src'); });
+    if (justJoined) document.querySelectorAll('[data-fc-done]').forEach(function (d) {
+      d.hidden = false;
+      if (d.closest('.fc-player')) {
+        setTimeout(function () { d.classList.add('is-fading'); }, 7000);
+        setTimeout(function () { d.hidden = true; }, 7700);
+      }
+    });
+  }
+
+  if (isMember()) { unlock(false); return; }
+
+  document.querySelectorAll('[data-fc-gate]').forEach(function (g) { g.hidden = false; });
+  document.querySelectorAll('[data-fc-form]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button'), body = new URLSearchParams(new FormData(form));
+      btn.disabled = true; btn.textContent = 'Unlocking…';
+      fetch(form.action, { method: 'POST', mode: 'no-cors', body: body })
+        .then(function () { remember(); unlock(true); })
+        .catch(function () { remember(); form.submit(); }); // offline or blocked: send the normal way
+    });
+  });
+})();
+</script>

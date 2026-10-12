@@ -1,7 +1,6 @@
 ---
-published: false
 title: "The Quiet Mind — a free film course on meditation and the brain"
-description: "Six short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free, no sign-up, with transcripts and sources for every claim."
+description: "Six short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free with email sign-up, with transcripts and sources for every claim."
 image: /films/the-network-that-never-rests.jpg
 ---
 {% comment %}
@@ -9,6 +8,7 @@ image: /films/the-network-that-never-rests.jpg
   from _data/free_course.yml; edit them there.
 {% endcomment %}
 {% assign all = site.data.free_course.lessons %}
+{% assign live = all | where_exp: "x", "x.youtube != ''" %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,21 +41,22 @@ image: /films/the-network-that-never-rests.jpg
 <section class="sec tight">
   <div class="wrap">
     <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Free course</p>
-    <div class="eyebrow">Free · 6 short films · about 10 minutes</div>
+    <div class="eyebrow">Free · {{ live.size }} of {{ all.size }} films out now · new films added as they're released</div>
     <h1 style="font-size:clamp(36px,5vw,58px)">The Quiet Mind</h1>
     <p class="sub">
       Six short films on what meditation, breathing and sleep actually do to the
       brain, built from the studies themselves. Every number on screen is checked
       against its source, and every lesson ends with something to try today.
-      Free, with no sign-up.
+      Free: just sign up with your email.
     </p>
-    <div class="bk-buy">
-      <span class="price">Free</span>
-      <a class="btn p" href="free-course/{{ all[0].slug }}.html" style="text-decoration:none">Start lesson 1</a>
-      <a class="btn s" href="#lessons" style="text-decoration:none">See all lessons</a>
+    <div class="fc-hero-gate">{% include course-signup.html %}</div>
+    <div class="bk-buy" data-fc-locked hidden>
+      <span class="price">You're in</span>
+      <a class="btn p" href="free-course/{{ live[0].slug }}.html" style="text-decoration:none">Start watching</a>
+      <a class="btn s" href="#lessons" style="text-decoration:none">See the lessons</a>
     </div>
     <ul class="bk-facts">
-      <li><b>6 films</b>, 1 to 3 minutes each</li>
+      <li><b>{{ all.size }} films</b>, 1 to 3 minutes each</li>
       <li><b>Transcripts</b> for every film</li>
       <li><b>Sources</b> for every claim</li>
       <li id="fc-progress" hidden></li>
@@ -113,6 +114,7 @@ image: /films/the-network-that-never-rests.jpg
 
 {% include footer.html %}
 
+{% include course-signup-script.html %}
 <script>
   // Show which films this visitor has watched (stored in this browser only).
   (function () {

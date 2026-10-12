@@ -2,23 +2,25 @@
 
 Source for [neuroscienceofmeditation.in](https://neuroscienceofmeditation.in): evidence-checked yoga, breathwork and meditation.
 
-## The Quiet Mind: a free film course (in preparation)
+## The Quiet Mind: a free film course
 
-Six short, evidence-checked films on what meditation, breathing and sleep do to the brain. They are being re-released on YouTube with voiceover first; the course pages on the website will embed those YouTube videos and go live afterwards.
+Short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free with an email sign-up, which also subscribes people to the articles newsletter (Kit). Films are released on YouTube first and added to the course as they come out.
 
-| # | Lesson | Length |
-|---|---|---|
-| 1 | Mindfulness Is About Your Life | 1 min |
-| 2 | Where Is Your Mind Right Now? | 1 min |
-| 3 | The Network That Never Rests | 3 min |
-| 4 | Your Heart Slows When You Breathe Out | 1 min |
-| 5 | Your Breath Is a Door | 3 min |
-| 6 | Sleep Is How You Begin Again | 1 min |
+**Course page:** [neuroscienceofmeditation.in/free-course.html](https://neuroscienceofmeditation.in/free-course.html)
+
+| # | Lesson | Length | YouTube |
+|---|---|---|---|
+| 1 | Mindfulness Is About Your Life | 1 min | [watch](https://youtu.be/mxqL16ifcoM) |
+| 2 | Where Is Your Mind Right Now? | 1 min | coming soon |
+| 3 | The Network That Never Rests | 3 min | coming soon |
+| 4 | Your Heart Slows When You Breathe Out | 1 min | [watch](https://youtu.be/jUO3wI35WPI) |
+| 5 | Your Breath Is a Door | 3 min | coming soon |
+| 6 | Sleep Is How You Begin Again | 1 min | coming soon |
 
 ### Editing the course
 
 - Words, sources, practices, transcripts and each lesson's YouTube ID: `_data/free_course.yml`
-- Lesson page design: `_layouts/film-lesson.html`
-- Course home page: `free-course.html`
+- To release a lesson: paste its YouTube ID into `youtube:` in that file, and delete `published: false` from its page in `free-course/`
+- Email sign-up box: `_includes/course-signup.html` (Kit form 9927031, the newsletter list)
+- Lesson page design: `_layouts/film-lesson.html`; course home page: `free-course.html`
 - Poster images: `films/` (named after each lesson's slug)
-- To put the course live: delete `published: false` from `free-course.html` and the pages in `free-course/`, and add it back to `_data/catalog.yml`.

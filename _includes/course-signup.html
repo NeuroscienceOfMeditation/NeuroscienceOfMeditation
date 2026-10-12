@@ -1,0 +1,20 @@
+{% comment %}
+  Sign-up gate for The Quiet Mind (free film course).
+  Emails go to the same Kit form as the newsletter (9927031), so everyone who
+  signs up for the course also gets the articles. Kit sends its usual
+  confirmation email. The course unlocks in this browser straight away.
+  Use: include course-signup.html
+{% endcomment %}
+<div class="fc-gate" data-fc-gate hidden>
+  <div class="eyebrow">Free · sign up to watch</div>
+  <h3 class="fc-gate-title">Unlock all the films with your email</h3>
+  <p class="fc-gate-text">You get every film in The Quiet Mind as it comes out, plus evidence-checked
+    articles on meditation and breathing by email. No payment. Unsubscribe any time.</p>
+  <form class="fc-gate-form" action="https://app.kit.com/forms/9927031/subscriptions" method="post" data-fc-form>
+    <input type="email" name="email_address" required placeholder="Your email address" autocomplete="email" aria-label="Email address">
+    <button class="btn p" type="submit">Unlock the course</button>
+  </form>
+  <p class="fc-gate-note">Your email is kept by Kit, the service that sends our newsletter.
+    See the <a href="{{ '/privacy.html' | relative_url }}">privacy page</a>.</p>
+</div>
+<p class="fc-gate-done" data-fc-done hidden>You're in. Check your inbox and click Kit's confirmation link, so the articles reach you too.</p>

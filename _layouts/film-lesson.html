@@ -5,12 +5,14 @@
 {% endcomment %}
 {% assign all = site.data.free_course.lessons %}
 {% assign l = all | where: "slug", page.lesson | first %}
-{% assign idx = l.n | minus: 1 %}
+{% comment %} Previous / next only step through lessons that are out on YouTube. {% endcomment %}
+{% assign live = all | where_exp: "x", "x.youtube != ''" %}
+{% for x in live %}{% if x.slug == l.slug %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
 {% assign prev_i = idx | minus: 1 %}
 {% assign next_i = idx | plus: 1 %}
-{% if idx > 0 %}{% assign prev = all[prev_i] %}{% endif %}
-{% assign last_i = all.size | minus: 1 %}
-{% if idx < last_i %}{% assign next = all[next_i] %}{% endif %}
+{% if idx > 0 %}{% assign prev = live[prev_i] %}{% endif %}
+{% assign last_i = live.size | minus: 1 %}
+{% if idx < last_i %}{% assign next = live[next_i] %}{% endif %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,10 +52,12 @@
 
     <div class="fc-player">
       {% if l.youtube and l.youtube != "" %}
-      <iframe src="https://www.youtube-nocookie.com/embed/{{ l.youtube }}?rel=0&amp;cc_load_policy=1"
+      {% include course-signup.html %}
+      <iframe data-fc-locked hidden data-src="https://www.youtube-nocookie.com/embed/{{ l.youtube }}?rel=0"
               title="{{ l.title | escape }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
+      <noscript><a href="https://www.youtube.com/watch?v={{ l.youtube }}"><img src="{{ l.poster | relative_url }}" alt="Watch on YouTube" width="1280" height="720"></a></noscript>
       {% else %}
       <img src="{{ l.poster | relative_url }}" alt="" width="1280" height="720">
       <p class="fc-soon">Coming soon on YouTube</p>
@@ -61,7 +65,7 @@
     </div>
 
     <div class="fc-bar">
-      <span class="fc-len">{{ l.minutes }}{% if l.youtube and l.youtube != "" %} · <a href="https://www.youtube.com/watch?v={{ l.youtube }}" rel="noopener" target="_blank">Watch on YouTube</a>{% endif %}</span>
+      <span class="fc-len">{{ l.minutes }}</span>
       <label class="fc-done">
         <input type="checkbox" id="fc-done-box" data-lesson="{{ l.slug }}">
         <span>Mark as watched</span>
@@ -117,6 +121,7 @@
 
 {% include footer.html %}
 
+{% include course-signup-script.html %}
 <script>
   // "Mark as watched": remembered in this browser only.
   (function () {
