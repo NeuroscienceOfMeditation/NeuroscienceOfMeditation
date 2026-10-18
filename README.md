@@ -11,8 +11,8 @@ Short, evidence-checked films on what meditation, breathing and sleep do to the 
 | # | Lesson | Length | YouTube |
 |---|---|---|---|
 | 1 | Mindfulness Is About Your Life | 1 min | [watch](https://youtu.be/mxqL16ifcoM) |
-| 2 | Where Is Your Mind Right Now? | 1 min | coming soon |
-| 3 | The Network That Never Rests | 3 min | coming soon |
+| 2 | Where Is Your Mind Right Now? | 1 min | [watch](https://youtu.be/tyCX-OuXxDM) |
+| 3 | The Network That Never Rests | 3 min | [watch](https://youtu.be/MmfngOMQYNk) |
 | 4 | Your Heart Slows When You Breathe Out | 1 min | [watch](https://youtu.be/jUO3wI35WPI) |
 | 5 | Your Breath Is a Door | 3 min | coming soon |
 | 6 | Sleep Is How You Begin Again | 1 min | coming soon |
