@@ -48,8 +48,10 @@ image: /films/the-network-that-never-rests.jpg
       your brain. Free: just sign up with your email.
     </p>
 
-    {% comment %} Course ad video: landscape on computers, the reel on phones.
-       Set the YouTube IDs in _data/free_course.yml (ad_landscape, ad_reel). {% endcomment %}
+    {% comment %} Course trailer: landscape on computers, the reel on phones.
+       Set in _data/free_course.yml (ad_landscape, ad_reel): a YouTube ID, or a
+       video file on this site such as /films/trailer-reel.mp4 (with a .jpg poster
+       of the same name next to it). {% endcomment %}
     {% assign ad_l = site.data.free_course.ad_landscape %}
     {% assign ad_r = site.data.free_course.ad_reel %}
     {% assign has_l = false %}{% if ad_l and ad_l != "" %}{% assign has_l = true %}{% endif %}
@@ -57,10 +59,10 @@ image: /films/the-network-that-never-rests.jpg
     {% if has_l or has_r %}
     <div class="fc-ad{% if has_l and has_r %} fc-ad-both{% endif %}">
       {% if has_l %}
-      <div class="fc-ad-land"><iframe src="https://www.youtube-nocookie.com/embed/{{ ad_l }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="fc-ad-land">{% if ad_l contains ".mp4" %}<video controls playsinline preload="none" poster="{{ ad_l | replace: '.mp4', '.jpg' | relative_url }}"><source src="{{ ad_l | relative_url }}" type="video/mp4"></video>{% else %}<iframe src="https://www.youtube-nocookie.com/embed/{{ ad_l }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>{% endif %}</div>
       {% endif %}
       {% if has_r %}
-      <div class="fc-ad-reel"><iframe src="https://www.youtube-nocookie.com/embed/{{ ad_r }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      <div class="fc-ad-reel">{% if ad_r contains ".mp4" %}<video controls playsinline preload="none" poster="{{ ad_r | replace: '.mp4', '.jpg' | relative_url }}"><source src="{{ ad_r | relative_url }}" type="video/mp4"></video>{% else %}<iframe src="https://www.youtube-nocookie.com/embed/{{ ad_r }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>{% endif %}</div>
       {% endif %}
     </div>
     {% endif %}
