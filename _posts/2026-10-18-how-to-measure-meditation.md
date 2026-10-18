@@ -1,7 +1,7 @@
 ---
 title: "How to Measure Meditation"
 description: "A new EEG study finds that a month of OM meditation speeds up responses and shifts one brain component — but only under moderate cognitive load. Working out what that actually shows is the whole problem."
-date: 2026-10-19 09:00:00 +0530
+date: 2026-10-18 11:28:16 +0530
 pillar: Research
 cover: cycle
 sources: 4
