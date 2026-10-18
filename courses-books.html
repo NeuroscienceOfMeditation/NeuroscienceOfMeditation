@@ -48,7 +48,9 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
     </h2>
 
     {% comment %} Courses come from _data/catalog.yml — edit them there. {% endcomment %}
-    <div class="three" style="margin-bottom:22px">
+    <div class="hs hs-courses" style="margin-bottom:22px">
+    <button class="hs-arrow hs-prev" type="button" aria-label="Scroll left">‹</button>
+    <div class="hs-row">
       {% for c in site.data.catalog.courses %}
       <article class="ccard">
 
@@ -85,6 +87,8 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
 
       </article>
       {% endfor %}
+    </div>
+    <button class="hs-arrow hs-next" type="button" aria-label="Scroll right">›</button>
     </div>
 
 
@@ -143,7 +147,9 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
 
 
     {% comment %} Books come from _data/catalog.yml — edit them there. {% endcomment %}
-    <div class="two">
+    <div class="hs hs-books">
+    <button class="hs-arrow hs-prev" type="button" aria-label="Scroll left">‹</button>
+    <div class="hs-row">
       {% for bk in site.data.catalog.books %}
       <article class="book">
 
@@ -183,15 +189,17 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
       </article>
       {% endfor %}
     </div>
+    <button class="hs-arrow hs-next" type="button" aria-label="Scroll right">›</button>
+    </div>
 
 
     {% if site.data.catalog.recommended %}
     <!-- RECOMMENDED READING (books by other authors; from _data/catalog.yml) -->
     <h2 style="font-size:26px;margin:44px 0 8px" id="recommended">Recommended Reading</h2>
     <p class="sub">Books by other authors that we return to, and recommend to anyone serious about practice.</p>
-    <div class="rec-scroller">
-    <button class="rec-arrow rec-prev" type="button" aria-label="Scroll left">‹</button>
-    <ul class="rec-grid" id="rec-row">
+    <div class="hs hs-rec">
+    <button class="hs-arrow hs-prev" type="button" aria-label="Scroll left">‹</button>
+    <ul class="rec-grid hs-row">
       {% for bk in site.data.catalog.recommended %}
       <li class="rec-tile">
         <img class="rec-tile-cover" src="{{ bk.image | relative_url }}" alt="Cover of {{ bk.title | escape }}" loading="lazy">
@@ -202,7 +210,7 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
       </li>
       {% endfor %}
     </ul>
-    <button class="rec-arrow rec-next" type="button" aria-label="Scroll right">›</button>
+    <button class="hs-arrow hs-next" type="button" aria-label="Scroll right">›</button>
     </div>
     {% include book-request.html %}
     {% endif %}
@@ -235,5 +243,16 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
 
 {% include footer.html %}
 
+<script>
+// Sideways-scrolling rows (classes, digital copies, recommended reading)
+document.querySelectorAll('.hs').forEach(function (hs) {
+  var row = hs.querySelector('.hs-row'), prev = hs.querySelector('.hs-prev'), next = hs.querySelector('.hs-next');
+  function step() { return Math.max(row.clientWidth * 0.8, 240); }
+  function upd() { prev.disabled = row.scrollLeft < 8; next.disabled = row.scrollLeft + row.clientWidth > row.scrollWidth - 8; }
+  prev.addEventListener('click', function () { row.scrollBy({ left: -step(), behavior: 'smooth' }); });
+  next.addEventListener('click', function () { row.scrollBy({ left: step(), behavior: 'smooth' }); });
+  row.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+});
+</script>
 </body>
 </html>

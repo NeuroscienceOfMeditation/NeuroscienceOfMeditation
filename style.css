@@ -1008,15 +1008,27 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .rq-x{position:absolute;top:12px;right:14px;border:0;background:none;font-size:26px;line-height:1;cursor:pointer;color:var(--ink-60)}
 .rq .btn{align-self:flex-start}
 
-/* Recommended reading: horizontal scrolling row */
-.rec-scroller{position:relative;margin-top:26px}
-.rec-grid{display:flex;grid-template-columns:none;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;margin:0 calc(50% - 50vw);padding:6px max(16px,calc(50vw - 50%)) 26px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--sage) transparent}
-.rec-grid::-webkit-scrollbar{height:6px}
-.rec-grid::-webkit-scrollbar-thumb{background:var(--sage);border-radius:3px}
-.rec-tile{flex:0 0 230px;scroll-snap-align:start}
+/* Sideways-scrolling rows: classes, digital copies, recommended reading.
+   The row stays inside the page margins, equal on both sides. */
+.hs{position:relative}
+.hs-row{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 2px 22px;margin:0;list-style:none;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--sage) transparent}
+.hs-row::-webkit-scrollbar{height:6px}
+.hs-row::-webkit-scrollbar-thumb{background:var(--sage);border-radius:3px}
+.hs-row>*{scroll-snap-align:start;flex:none}
+.hs-courses .hs-row>.ccard{width:calc((100% - 44px)/3);min-width:300px}
+.hs-books .hs-row>.book{width:calc((100% - 22px)/2);min-width:320px;box-sizing:border-box}
+.hs-rec .hs-row{margin-top:26px}
+.hs-rec .hs-row>.rec-tile{width:calc((100% - 88px)/5);min-width:190px}
 .rec-tile-blurb{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
-.rec-arrow{position:absolute;top:150px;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--paper);color:var(--forest);font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;padding-bottom:4px;transition:opacity .2s}
-.rec-prev{left:-22px}.rec-next{right:-22px}
-.rec-arrow[disabled]{opacity:0;pointer-events:none}
-@media (max-width:1000px){.rec-grid{grid-template-columns:none}}
-@media (max-width:700px){.rec-grid{gap:16px}.rec-tile{flex-basis:62vw}.rec-tile-blurb{display:none}.rec-arrow{display:none}}
+.hs-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--paper);color:var(--forest);font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;padding-bottom:4px;transition:opacity .2s}
+.hs-rec .hs-arrow{top:calc(26px + 150px)}
+.hs-prev{left:-22px}.hs-next{right:-22px}
+.hs-arrow[disabled]{opacity:0;pointer-events:none}
+@media (max-width:700px){
+  .hs-row{gap:14px}
+  .hs-courses .hs-row>.ccard{width:82%;min-width:0}
+  .hs-books .hs-row>.book{width:86%;min-width:0}
+  .hs-rec .hs-row>.rec-tile{width:62%;min-width:0}
+  .rec-tile-blurb{display:none}
+  .hs-arrow{display:none}
+}
