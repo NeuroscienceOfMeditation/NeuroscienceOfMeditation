@@ -4,7 +4,7 @@ Source for [neuroscienceofmeditation.in](https://neuroscienceofmeditation.in): e
 
 ## The Quiet Mind: a free film course
 
-Short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free with an email sign-up, which also subscribes people to the articles newsletter (Kit). Films are released on YouTube first and added to the course as they come out.
+Short, evidence-checked films on what meditation, breathing and sleep do to the brain. Free with an email sign-up, which also subscribes people to the articles newsletter (Kit). All six films are on YouTube and in the course.
 
 **Course page:** [neuroscienceofmeditation.in/free-course.html](https://neuroscienceofmeditation.in/free-course.html)
 
@@ -14,8 +14,8 @@ Short, evidence-checked films on what meditation, breathing and sleep do to the 
 | 2 | Where Is Your Mind Right Now? | 1 min | [watch](https://youtu.be/tyCX-OuXxDM) |
 | 3 | The Network That Never Rests | 3 min | [watch](https://youtu.be/MmfngOMQYNk) |
 | 4 | Your Heart Slows When You Breathe Out | 1 min | [watch](https://youtu.be/jUO3wI35WPI) |
-| 5 | Your Breath Is a Door | 3 min | coming soon |
-| 6 | Sleep Is How You Begin Again | 1 min | coming soon |
+| 5 | Your Breath Is a Door | 3 min | [watch](https://youtu.be/sWvsucvu8yQ) |
+| 6 | Sleep Is How You Begin Again | 1 min | [watch](https://youtu.be/yfMOEK7Hjww) |
 
 ### Editing the course
 

@@ -41,7 +41,7 @@ image: /films/the-network-that-never-rests.jpg
 <section class="sec tight">
   <div class="wrap">
     <p class="crumbs"><a href="courses-books.html#courses">Courses &amp; Books</a> <span aria-hidden="true">/</span> Free course</p>
-    <div class="eyebrow">Free · {{ live.size }} of {{ all.size }} films out now · new films added as they're released</div>
+    <div class="eyebrow">{% if live.size < all.size %}Free · {{ live.size }} of {{ all.size }} films out now · new films added as they're released{% else %}Free · {{ all.size }} short films · about 10 minutes{% endif %}</div>
     <h1 style="font-size:clamp(36px,5vw,58px)">The Quiet Mind</h1>
     <p class="sub">
       Six short films on what meditation, breathing and sleep actually do to the
