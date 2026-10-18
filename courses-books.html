@@ -185,6 +185,26 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
     </div>
 
 
+    {% if site.data.catalog.recommended %}
+    <!-- RECOMMENDED READING (books by other authors; from _data/catalog.yml) -->
+    <h2 style="font-size:26px;margin:44px 0 8px" id="recommended">Recommended Reading</h2>
+    <p class="sub">Books by other authors that we return to, and recommend to anyone serious about practice.</p>
+    <div class="two">
+      {% for bk in site.data.catalog.recommended %}
+      <article class="book rec-book">
+        <img class="rec-cover" src="{{ bk.image | relative_url }}" alt="Cover of {{ bk.title | escape }}" width="98" height="152" loading="lazy">
+        <div>
+          <div class="book-tag">Recommended read</div>
+          <h3>{{ bk.title }}</h3>
+          {% if bk.by %}<p class="rec-by">{{ bk.by }}</p>{% endif %}
+          <p>{{ bk.blurb }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
     <!-- FLEXIBLE ORDERS NOTE -->
     <div class="card"
          style="margin-top:22px;display:flex;gap:14px;align-items:center">

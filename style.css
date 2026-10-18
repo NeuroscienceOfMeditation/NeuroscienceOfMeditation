@@ -981,3 +981,8 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .fc-end-title{font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 24px;max-width:22ch}
 .fc-end-btns{display:flex;flex-wrap:wrap;gap:12px}
 .fc-len a{color:var(--forest-ink);font-weight:600;text-underline-offset:3px}
+
+/* Recommended reading (books by other authors) */
+.rec-book{align-items:flex-start}
+.rec-cover{width:98px;height:auto;flex:none;border-radius:6px;box-shadow:0 8px 22px rgba(0,0,0,.16);display:block}
+.book p.rec-by{font-size:12.5px;font-style:italic;margin:-2px 0 10px}

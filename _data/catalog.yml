@@ -81,3 +81,15 @@ books:
     price: "Free"
     link: /anuttara/issue-01/
     button: "Read now"
+
+# Recommended reading: books by other authors that we suggest, shown on the
+# Courses & Books page under our own books. Only a recommendation: no price,
+# no shop link.
+#   title, by, image (cover picture in /img/books/), blurb
+
+recommended:
+
+  - title: "Abhinavagupta's Commentary on the Bhagavad Gita (Gītārtha Saṃgraha)"
+    by: "Translated from Sanskrit, with introduction and notes, by Boris Marjanovic"
+    image: /img/books/abhinavagupta-gita-commentary.jpg
+    blurb: "The great Kashmiri master of the 10th–11th century reads the Gita as a guide to the inner life: the mind, the senses, and how stillness is found in the middle of action. A careful translation with the Sanskrit alongside, and a good companion to any meditation practice."
