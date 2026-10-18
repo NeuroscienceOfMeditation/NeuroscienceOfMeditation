@@ -986,3 +986,14 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .rec-book{align-items:flex-start}
 .rec-cover{width:98px;height:auto;flex:none;border-radius:6px;box-shadow:0 8px 22px rgba(0,0,0,.16);display:block}
 .book p.rec-by{font-size:12.5px;font-style:italic;margin:-2px 0 10px}
+
+/* Recommended reading as tiles */
+.rec-grid{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 24px}
+.rec-tile{display:flex;flex-direction:column}
+.rec-tile-cover{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:8px;box-shadow:0 12px 28px rgba(20,24,15,.22);background:var(--cream);margin-bottom:16px;transition:transform .2s}
+.rec-tile:hover .rec-tile-cover{transform:translateY(-3px)}
+.rec-tile-title{font-size:17px;line-height:1.3;margin:0 0 6px}
+.rec-tile-by{font-size:12.5px;font-style:italic;color:var(--ink-60);margin:0 0 8px;line-height:1.5}
+.rec-tile-blurb{font-size:13px;line-height:1.6;color:var(--ink-60);margin:0}
+@media (max-width:1000px){.rec-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.rec-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 16px}.rec-tile-title{font-size:15px}.rec-tile-blurb{display:none}}
