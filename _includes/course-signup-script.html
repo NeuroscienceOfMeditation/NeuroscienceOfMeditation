@@ -14,6 +14,7 @@
     document.querySelectorAll('[data-fc-gate]').forEach(function (g) { g.hidden = true; });
     document.querySelectorAll('[data-fc-locked]').forEach(function (el) { el.hidden = false; });
     document.querySelectorAll('iframe[data-src]').forEach(function (f) { f.src = f.getAttribute('data-src'); f.removeAttribute('data-src'); });
+    document.dispatchEvent(new Event('fc-unlocked'));
     if (justJoined) document.querySelectorAll('[data-fc-done]').forEach(function (d) {
       d.hidden = false;
       if (d.closest('.fc-player')) {

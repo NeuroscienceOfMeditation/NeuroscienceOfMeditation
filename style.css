@@ -973,3 +973,11 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .fc-ad video{display:block;width:100%;border-radius:18px;background:#05070d;box-shadow:0 18px 50px rgba(20,24,15,.2)}
 .fc-ad-land video{aspect-ratio:16/9}
 .fc-ad-reel video{aspect-ratio:9/16;max-width:360px;margin:0 auto}
+
+/* "Up next" panel when a lesson film ends */
+.fc-end{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(22px,6vw,70px);background:rgba(11,31,22,.93);color:var(--paper)}
+.fc-end[hidden]{display:none}
+.fc-end .eyebrow{color:var(--neon)}
+.fc-end-title{font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);line-height:1.15;margin:0 0 24px;max-width:22ch}
+.fc-end-btns{display:flex;flex-wrap:wrap;gap:12px}
+.fc-len a{color:var(--forest-ink);font-weight:600;text-underline-offset:3px}

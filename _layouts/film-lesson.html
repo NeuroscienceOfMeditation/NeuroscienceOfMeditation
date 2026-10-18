@@ -53,10 +53,27 @@
     <div class="fc-player">
       {% if l.youtube and l.youtube != "" %}
       {% include course-signup.html %}
-      <iframe data-fc-locked hidden data-src="https://www.youtube-nocookie.com/embed/{{ l.youtube }}?rel=0"
+      <iframe id="fc-yt" data-fc-locked hidden data-src="https://www.youtube-nocookie.com/embed/{{ l.youtube }}?rel=0&amp;enablejsapi=1&amp;playsinline=1"
               title="{{ l.title | escape }}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
+      <div class="fc-end" id="fc-end" hidden>
+        {% if next %}
+        <div class="eyebrow">Up next · Lesson {{ next.n }}</div>
+        <p class="fc-end-title">{{ next.title }}</p>
+        <div class="fc-end-btns">
+          <a class="btn n" href="{{ '/free-course/' | append: next.slug | append: '.html' | relative_url }}" style="text-decoration:none">Next lesson →</a>
+          <button class="btn g" type="button" data-fc-replay>Watch again</button>
+        </div>
+        {% else %}
+        <div class="eyebrow">You've finished The Quiet Mind</div>
+        <p class="fc-end-title">That was the last film. Thank you for watching.</p>
+        <div class="fc-end-btns">
+          <a class="btn n" href="{{ '/free-course.html' | relative_url }}" style="text-decoration:none">Back to the course</a>
+          <button class="btn g" type="button" data-fc-replay>Watch again</button>
+        </div>
+        {% endif %}
+      </div>
       <noscript><a href="https://www.youtube.com/watch?v={{ l.youtube }}"><img src="{{ l.poster | relative_url }}" alt="Watch on YouTube" width="1280" height="720"></a></noscript>
       {% else %}
       <img src="{{ l.poster | relative_url }}" alt="" width="1280" height="720">
@@ -65,7 +82,7 @@
     </div>
 
     <div class="fc-bar">
-      <span class="fc-len">{{ l.minutes }}</span>
+      <span class="fc-len">{{ l.minutes }}{% if next %} · <a href="{{ '/free-course/' | append: next.slug | append: '.html' | relative_url }}">Next lesson: {{ next.title }} →</a>{% endif %}</span>
       <label class="fc-done">
         <input type="checkbox" id="fc-done-box" data-lesson="{{ l.slug }}">
         <span>Mark as watched</span>
@@ -122,6 +139,35 @@
 {% include footer.html %}
 
 {% include course-signup-script.html %}
+<script>
+  // When the film ends, show the "Up next" panel over the player and tick the lesson as watched.
+  (function () {
+    var frame = document.getElementById('fc-yt'), end = document.getElementById('fc-end');
+    if (!frame || !end) return;
+    var player = null;
+    function markWatched() {
+      try { var s = JSON.parse(localStorage.getItem('quiet-mind-watched') || '{}') || {}; s[{{ l.slug | jsonify }}] = true; localStorage.setItem('quiet-mind-watched', JSON.stringify(s)); } catch (e) {}
+      var box = document.getElementById('fc-done-box'); if (box) box.checked = true;
+    }
+    function attach() {
+      if (player || !frame.getAttribute('src')) return;
+      player = new YT.Player('fc-yt', { events: { onStateChange: function (e) {
+        if (e.data === 0) { end.hidden = false; markWatched(); }
+        if (e.data === 1) end.hidden = true;
+      } } });
+    }
+    end.querySelectorAll('[data-fc-replay]').forEach(function (b) {
+      b.addEventListener('click', function () { end.hidden = true; if (player && player.seekTo) { player.seekTo(0); player.playVideo(); } });
+    });
+    window.onYouTubeIframeAPIReady = attach;
+    function loadApi() {
+      if (window.YT && window.YT.Player) { attach(); return; }
+      var t = document.createElement('script'); t.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(t);
+    }
+    if (frame.getAttribute('src')) loadApi();
+    document.addEventListener('fc-unlocked', loadApi);
+  })();
+</script>
 <script>
   // "Mark as watched": remembered in this browser only.
   (function () {
