@@ -196,9 +196,11 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
         <h3 class="rec-tile-title">{{ bk.title }}</h3>
         {% if bk.by %}<p class="rec-tile-by">{{ bk.by }}</p>{% endif %}
         <p class="rec-tile-blurb">{{ bk.blurb }}</p>
+        <button class="btn s rec-ask" type="button" data-book="{{ bk.title | escape }}">Request this book</button>
       </li>
       {% endfor %}
     </ul>
+    {% include book-request.html %}
     {% endif %}
 
 

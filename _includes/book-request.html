@@ -1,0 +1,60 @@
+{% comment %}
+  "Request this book" pop-up for Recommended Reading (courses-books.html).
+  Each request is emailed to adiyogistudios@gmail.com through FormSubmit
+  (formsubmit.co). The first request triggers an activation email to that
+  address: click "Activate Form" once, and requests arrive from then on.
+  The visitor is also signed up to the newsletter (Kit form 9927031).
+{% endcomment %}
+<dialog class="rq" id="rq">
+  <form class="rq-form" id="rq-form">
+    <button class="rq-x" type="button" aria-label="Close" data-rq-close>×</button>
+    <div class="eyebrow">Request a book</div>
+    <h3 class="rq-title" id="rq-book">Book</h3>
+    <p class="rq-text">Tell us you'd like to read this one and we'll write back to you personally.
+      You'll also get our evidence-checked articles by email. Unsubscribe any time.</p>
+    <input type="text" name="name" placeholder="Your name (optional)" autocomplete="name" aria-label="Your name">
+    <input type="email" name="email" required placeholder="Your email address" autocomplete="email" aria-label="Email address">
+    <textarea name="message" rows="3" placeholder="Anything you'd like to tell us (optional)" aria-label="Message"></textarea>
+    <button class="btn p" type="submit">Send request</button>
+    <p class="rq-note">Your email goes to us and to Kit, the service that sends our newsletter.
+      See the <a href="{{ '/privacy.html' | relative_url }}">privacy page</a>.</p>
+  </form>
+  <div class="rq-done" id="rq-done" hidden>
+    <button class="rq-x" type="button" aria-label="Close" data-rq-close>×</button>
+    <h3 class="rq-title">Request sent</h3>
+    <p class="rq-text">Thank you. We'll reply to you by email soon. Please also check your inbox
+      for Kit's confirmation link, so our articles reach you.</p>
+    <button class="btn s" type="button" data-rq-close>Close</button>
+  </div>
+</dialog>
+<script>
+(function () {
+  var dlg = document.getElementById('rq'), form = document.getElementById('rq-form'),
+      done = document.getElementById('rq-done'), title = document.getElementById('rq-book'), book = '';
+  if (!dlg || !dlg.showModal) return;
+  document.querySelectorAll('.rec-ask').forEach(function (b) {
+    b.addEventListener('click', function () {
+      book = b.getAttribute('data-book'); title.textContent = book;
+      form.hidden = false; done.hidden = true; dlg.showModal();
+    });
+  });
+  dlg.querySelectorAll('[data-rq-close]').forEach(function (b) { b.addEventListener('click', function () { dlg.close(); }); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type=submit]'), d = new FormData(form);
+    btn.disabled = true; btn.textContent = 'Sending…';
+    var kit = new URLSearchParams(); kit.append('email_address', d.get('email'));
+    fetch('https://app.kit.com/forms/9927031/subscriptions', { method: 'POST', mode: 'no-cors', body: kit }).catch(function () {});
+    fetch('https://formsubmit.co/ajax/adiyogistudios@gmail.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ _subject: 'Book request: ' + book, _template: 'table', _captcha: 'false',
+        book: book, name: d.get('name') || '', email: d.get('email'), message: d.get('message') || '',
+        page: location.href })
+    }).then(function (r) { if (!r.ok) throw 0; ok(); })
+      .catch(function () { btn.disabled = false; btn.textContent = 'Send request';
+        alert('Sorry, that did not send. Please email adiyogistudios@gmail.com with the book name.'); });
+    function ok() { form.reset(); btn.disabled = false; btn.textContent = 'Send request'; form.hidden = true; done.hidden = false; }
+  });
+})();
+</script>
