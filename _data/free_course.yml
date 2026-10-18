@@ -15,6 +15,12 @@
 #
 # Poster images live in /films/<slug>.jpg.
 
+# Course trailer shown above the sign-up box on /free-course.html.
+# YouTube IDs: ad_landscape plays on computers, ad_reel (the vertical Short)
+# on phones. If only one is set, it plays everywhere.
+ad_landscape: ''
+ad_reel: ''
+
 lessons:
 - slug: mindfulness-is-about-your-life
   youtube: mxqL16ifcoM

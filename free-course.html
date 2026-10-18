@@ -44,18 +44,34 @@ image: /films/the-network-that-never-rests.jpg
     <div class="eyebrow">{% if live.size < all.size %}Free · {{ live.size }} of {{ all.size }} films out now · new films added as they're released{% else %}Free · {{ all.size }} short films · about 10 minutes{% endif %}</div>
     <h1 style="font-size:clamp(36px,5vw,58px)">The Quiet Mind</h1>
     <p class="sub">
-      Six short films on what meditation, breathing and sleep actually do to the
-      brain, built from the studies themselves. Every number on screen is checked
-      against its source, and every lesson ends with something to try today.
-      Free: just sign up with your email.
+      Six short films on what meditation, breathing and sleep actually do to
+      your brain. Free: just sign up with your email.
     </p>
+
+    {% comment %} Course ad video: landscape on computers, the reel on phones.
+       Set the YouTube IDs in _data/free_course.yml (ad_landscape, ad_reel). {% endcomment %}
+    {% assign ad_l = site.data.free_course.ad_landscape %}
+    {% assign ad_r = site.data.free_course.ad_reel %}
+    {% assign has_l = false %}{% if ad_l and ad_l != "" %}{% assign has_l = true %}{% endif %}
+    {% assign has_r = false %}{% if ad_r and ad_r != "" %}{% assign has_r = true %}{% endif %}
+    {% if has_l or has_r %}
+    <div class="fc-ad{% if has_l and has_r %} fc-ad-both{% endif %}">
+      {% if has_l %}
+      <div class="fc-ad-land"><iframe src="https://www.youtube-nocookie.com/embed/{{ ad_l }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      {% endif %}
+      {% if has_r %}
+      <div class="fc-ad-reel"><iframe src="https://www.youtube-nocookie.com/embed/{{ ad_r }}?rel=0" title="The Quiet Mind: course trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      {% endif %}
+    </div>
+    {% endif %}
+
     <div class="fc-hero-gate">{% include course-signup.html %}</div>
     <div class="bk-buy" data-fc-locked hidden>
       <span class="price">You're in</span>
       <a class="btn p" href="free-course/{{ live[0].slug }}.html" style="text-decoration:none">Start watching</a>
       <a class="btn s" href="#lessons" style="text-decoration:none">See the lessons</a>
     </div>
-    <ul class="bk-facts">
+    <ul class="bk-facts" data-fc-locked hidden>
       <li><b>{{ all.size }} films</b>, 1 to 3 minutes each</li>
       <li><b>Transcripts</b> for every film</li>
       <li><b>Sources</b> for every claim</li>
@@ -64,7 +80,7 @@ image: /films/the-network-that-never-rests.jpg
   </div>
 </section>
 
-<section class="sec dim" id="lessons">
+<section class="sec dim" id="lessons" data-fc-locked hidden>
   <div class="wrap">
     <div class="eyebrow">Lessons</div>
     <h2>Watch in order, or jump in anywhere</h2>
@@ -90,7 +106,7 @@ image: /films/the-network-that-never-rests.jpg
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" data-fc-locked hidden>
   <div class="wrap">
     <div class="two">
       <div class="card">
