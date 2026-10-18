@@ -58,3 +58,16 @@
   });
 })();
 </script>
+<script>
+(function () {
+  var row = document.getElementById('rec-row'); if (!row) return;
+  var prev = document.querySelector('.rec-prev'), next = document.querySelector('.rec-next');
+  function step() { var t = row.querySelector('.rec-tile'); return t ? (t.offsetWidth + 24) * 2 : 300; }
+  function pad() { var pl = getComputedStyle(row).paddingLeft; row.style.scrollPaddingLeft = pl; row.style.scrollPaddingRight = pl; }
+  pad(); row.scrollLeft = 0;
+  function upd() { prev.disabled = row.scrollLeft < 8; next.disabled = row.scrollLeft + row.clientWidth > row.scrollWidth - 8; }
+  prev.addEventListener('click', function () { row.scrollBy({ left: -step() }); });
+  next.addEventListener('click', function () { row.scrollBy({ left: step() }); });
+  row.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', function () { pad(); upd(); }); upd();
+})();
+</script>
