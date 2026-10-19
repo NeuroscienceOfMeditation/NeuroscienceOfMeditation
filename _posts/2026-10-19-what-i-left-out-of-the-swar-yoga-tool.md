@@ -1,9 +1,10 @@
 ---
 title: "What I Left Out of the Swar Yoga Tool, and Why"
 description: "I built a tool from a tantric manual on the breath in the nostrils. Four things the text teaches are not in it. Here is what each one would have required me to assert, and what the evidence actually supports."
-date: 2026-10-19 09:37:31 +0530
+date: 2026-10-19 15:48:03 +0530
 pillar: Swar Yoga
 cover: breath
+image: /img/og-what-i-left-out.jpg
 sources: 6
 takeaway: "The four things I left out are not the ones the text treats as advanced. They are the ones where either the body can be harmed, or the method is built so that it cannot be wrong."
 permalink: /what-i-left-out-of-the-swar-yoga-tool.html
@@ -15,6 +16,11 @@ I have spent the last few weeks building a tool from the Shiva Svarodaya, a tant
 The decisions I keep thinking about are the other ones. Four things the text teaches are not in the tool. I did not leave them out because they are old, or because they come wrapped in cosmology. I left them out because building each one would have required me to assert something I cannot support — and in two cases, something that could hurt someone.
 
 This is a post about those four. It is probably the most honest thing I can show you about how the tool was made.
+
+<figure style="margin:32px 0">
+<img src="/img/monk-rainbow-halo.webp" alt="A painting of a monk in orange robes sitting cross-legged in meditation on bare desert ground, with a large gold disc behind his head, a rainbow arc above that, a pale pink outline around his body, and a dark starry sky behind." width="750" height="930" style="width:100%;max-width:470px;height:auto;border-radius:14px;display:block;margin:0 auto">
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px;text-align:center">Painting by Aditi. The halo is iconography rather than anything anyone measured — which is a distinction this piece keeps returning to.</figcaption>
+</figure>
 
 ## The four, before the detail
 
