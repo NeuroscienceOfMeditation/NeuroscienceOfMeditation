@@ -4,6 +4,7 @@ description: "The Shiva Svarodaya sets out an eightfold scheme for reading the b
 date: 2026-10-27 11:53:03 +0530
 pillar: Swar Yoga
 cover: breath
+image: /img/og-seven-things-to-measure.jpg
 sources: 7
 takeaway: "The problem with the eightfold scheme is not its soft dimensions. It is that the soft ones and the checkable ones are merged into a single reading, which is the one arrangement that makes the whole thing untestable."
 permalink: /seven-things-to-measure.html
@@ -15,6 +16,11 @@ Verses 145 to 148 of the *Śiva Svarodaya* set out something I did not expect to
 I spent a fortnight building this part of the tool and most of that time was spent on one question. The scheme asks you to combine seven observations into a single reading. Three of those seven cannot be checked by anyone, including you. So what does the combined reading mean?
 
 The answer, I think, is that it means less than any one of its parts. That is not a complaint about old texts. It is the same structural problem that clinical trials have been criticised for since the 1990s, and the fix is identical in both cases.
+
+<figure style="margin:32px 0">
+<img src="/img/tigers-solar-lunar.webp" alt="A collage of two tigers, one orange and one white, walking side by side over the curve of a moon, beneath a pink rose with a crescent moon set in a heart-shaped opening, with bands of colour rising behind it." width="900" height="1063" style="width:100%;max-width:470px;height:auto;border-radius:14px;display:block;margin:0 auto">
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px;text-align:center">Collage by Aditi. The bright channel and the pale one — which side is open is the first of the four things in this piece you can actually check.</figcaption>
+</figure>
 
 ## The scheme is better built than its reputation
 

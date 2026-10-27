@@ -17,11 +17,6 @@ The register is completely different from the one you meet in an article about m
 
 That is a healthy field doing its job. It is also, if you only ever read the press coverage, completely invisible to you.
 
-<figure style="margin:32px 0">
-<img src="/img/researchers-tigers.webp" alt="A collage of two tigers, one orange and one white, walking side by side over the curve of a moon, beneath a pink rose with a crescent moon set in a heart-shaped opening, with bands of colour rising behind it." width="900" height="1063" style="width:100%;max-width:470px;height:auto;border-radius:14px;display:block;margin:0 auto">
-<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px;text-align:center">Collage by Aditi. The solar tiger and the lunar one, walking together — which is roughly what the last section of this piece turns out to be about.</figcaption>
-</figure>
-
 ## The published record is 87% positive
 
 Start with the number that frames everything else.
