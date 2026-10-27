@@ -1,6 +1,7 @@
 ---
 title: "The Text Names Seven Things to Measure. Four of Them Are Measurements."
 description: "The Shiva Svarodaya sets out an eightfold scheme for reading the breath. The scheme is better built than I expected. The flaw is not that three of its dimensions are unverifiable — it is that all seven are collapsed into one verdict."
+date: 2026-10-27 11:53:03 +0530
 pillar: Swar Yoga
 cover: breath
 sources: 7
