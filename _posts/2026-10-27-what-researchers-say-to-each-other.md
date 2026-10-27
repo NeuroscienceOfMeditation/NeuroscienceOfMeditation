@@ -4,6 +4,7 @@ description: "I spent two days listening to meditation researchers present to ot
 date: 2026-10-27 12:02:39 +0530
 pillar: Research
 cover: cycle
+image: /img/og-what-researchers-say.jpg
 sources: 7
 takeaway: "Inside the room the field is careful, null-friendly and openly unsure. In the published record, 87% of mindfulness trials report a positive result where about 53% should."
 permalink: /what-researchers-say-to-each-other.html
@@ -15,6 +16,11 @@ I spent two days this month listening to meditation researchers talk to each oth
 The register is completely different from the one you meet in an article about meditation, and I think the difference is worth writing down. In public the field speaks in findings. Among themselves they spend a surprising amount of time on what did not work, what did not replicate, and what their instruments cannot see. Several of the talks I found most useful led with a null.
 
 That is a healthy field doing its job. It is also, if you only ever read the press coverage, completely invisible to you.
+
+<figure style="margin:32px 0">
+<img src="/img/researchers-tigers.webp" alt="A collage of two tigers, one orange and one white, walking side by side over the curve of a moon, beneath a pink rose with a crescent moon set in a heart-shaped opening, with bands of colour rising behind it." width="900" height="1063" style="width:100%;max-width:470px;height:auto;border-radius:14px;display:block;margin:0 auto">
+<figcaption style="font-size:13px;color:#5E6F68;margin-top:10px;text-align:center">Collage by Aditi. The solar tiger and the lunar one, walking together — which is roughly what the last section of this piece turns out to be about.</figcaption>
+</figure>
 
 ## The published record is 87% positive
 
