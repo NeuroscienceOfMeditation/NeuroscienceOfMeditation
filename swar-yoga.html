@@ -43,7 +43,12 @@ image: /img/og-swar-yoga.jpg
         </p>
 
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <a class="btn p" href="#svara" style="text-decoration:none">
+          <button class="btn p sj-start" type="button" data-sj-start>
+            <img src="{{ '/img/guide/sadhu-face.jpg' | relative_url }}" alt="" width="30" height="30">
+            Walk through it with Sadhu ji
+          </button>
+
+          <a class="btn s" href="#svara" style="text-decoration:none">
             Observe your svara
           </a>
 
@@ -1068,6 +1073,8 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 <script src="svara-ui.js?v={{ site.time | date: '%s' }}"></script>
 <script src="svara-record.js?v={{ site.time | date: '%s' }}"></script>
 <script src="svara-guide.js?v={{ site.time | date: '%s' }}"></script>
+{% include sadhu-journey.html %}
+<script src="svara-journey.js?v={{ site.time | date: '%s' }}"></script>
 
 </body>
 </html>

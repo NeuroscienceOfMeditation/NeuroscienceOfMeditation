@@ -1,0 +1,53 @@
+{% comment %}
+  Sadhu ji's guided journey (full-screen, step by step) and the corner
+  companion that explains each section while scrolling. Used on swar-yoga.html.
+  Lessons: _data/sadhu_journey.yml. Behaviour: svara-journey.js.
+{% endcomment %}
+{% assign sj_vid = '/img/guide/sadhu-loop' | relative_url %}
+<div class="sj" data-sj hidden role="dialog" aria-modal="true" aria-labelledby="sj-title">
+  <div class="sj-card">
+    <div class="sj-top">
+      <span class="sj-chap" data-sj-chap></span>
+      <button class="sj-x" type="button" data-sj-close>Explore on my own <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="sj-progress" aria-hidden="true"><i data-sj-bar></i></div>
+    <div class="sj-body">
+      <div class="sj-face">
+        <video muted loop playsinline preload="none" poster="{{ sj_vid }}.jpg" aria-hidden="true">
+          <source src="{{ sj_vid }}.webm" type="video/webm"><source src="{{ sj_vid }}.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="sj-talk">
+        <div class="sj-count" data-sj-count></div>
+        <h2 class="sj-title" id="sj-title" data-sj-title></h2>
+        <div class="sj-bubble" data-sj-bubble>
+          <b class="sj-who">Sadhu ji</b>
+          <p class="sj-say" data-sj-say aria-live="polite"></p>
+        </div>
+        <ul class="sj-points" data-sj-points></ul>
+        <button class="btn s sj-try" type="button" data-sj-try hidden></button>
+      </div>
+    </div>
+    <div class="sj-foot">
+      <button class="btn s sj-back" type="button" data-sj-back>← Back</button>
+      <div class="sj-dots" data-sj-dots aria-hidden="true"></div>
+      <button class="btn p sj-next" type="button" data-sj-next>Next →</button>
+    </div>
+  </div>
+</div>
+
+<div class="sc" data-sc hidden>
+  <div class="sc-bubble" data-sc-bubble>
+    <button class="sc-min" type="button" data-sc-min aria-label="Hide Sadhu ji's message">–</button>
+    <b class="sc-who">Sadhu ji</b>
+    <p class="sc-say" data-sc-say aria-live="polite"></p>
+    <div class="sc-acts" data-sc-acts></div>
+  </div>
+  <button class="sc-face" type="button" data-sc-face aria-label="Talk to Sadhu ji">
+    <video muted loop playsinline preload="none" poster="{{ sj_vid }}.jpg" aria-hidden="true">
+      <source src="{{ sj_vid }}.webm" type="video/webm"><source src="{{ sj_vid }}.mp4" type="video/mp4">
+    </video>
+  </button>
+</div>
+
+<script>window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};</script>

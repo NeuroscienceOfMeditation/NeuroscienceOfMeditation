@@ -1,0 +1,151 @@
+# Sadhu ji's guided journey through the Swar Yoga page (swar-yoga.html).
+# One step = one point. "say" is what he types in his text box; "points" (optional)
+# appear underneath as a short list; "action" (optional) is a "Try it now" button.
+#
+# action.go can be:
+#   tool:observe   open the Svara tab of the breath tool
+#   tool:remind    the morning reminder in the breath tool
+#   tool:tattva    open the Tattva tab and start the measurement walkthrough
+#   tool:practice  open the Practice tab
+#   tool:ask       open the Ask the text tab
+#   #some-id       scroll to that part of the page
+# Content comes from the page itself and The Respiratory Codex; keep it that way.
+
+chapters:
+  - Welcome
+  - The three channels
+  - Observe your breath
+  - The tattvas
+  - Practice, safely
+  - Your part
+
+steps:
+  # ---------- 1. Welcome ----------
+  - chapter: 1
+    title: Namaste
+    say: "Namaste. I am Sadhu ji. I will walk you through Swar Yoga one small step at a time. It takes about ten minutes. You can stop whenever you like, and I will remember where we were."
+
+  - chapter: 1
+    title: What svara means
+    say: "Svara is the breath as it flows through the nostrils. Right now, one nostril is a little more open than the other. The Shiva Svarodaya says this side changes roughly every hour, all day long."
+
+  - chapter: 1
+    title: What science says
+    say: "Today this is called the nasal cycle. It is real, and it is driven by the brain, not the nose. The text described it centuries before Western medicine wrote it down in 1895."
+    points:
+      - "The old texts also say the turning follows the lunar day."
+      - "Physiology still argues about what drives it."
+      - "Nobody has measured it properly. That is why we are asking practitioners to log theirs."
+
+  # ---------- 2. The three channels ----------
+  - chapter: 2
+    title: "Ida, the left"
+    say: "When the left side flows, it is Ida, the moon channel, Chandra svara. The texts call it cooling, and give it the quiet work."
+    points:
+      - "Study, writing, planning"
+      - "Meditation and long sitting"
+      - "Water, gentle food"
+      - "Setting out on a journey"
+
+  - chapter: 2
+    title: "Pingala, the right"
+    say: "When the right side flows, it is Pingala, the sun channel, Surya svara. The texts call it heating, and give it the work that needs force."
+    points:
+      - "Physical work and exercise"
+      - "Digestion, the heavier meal"
+      - "Tasks needing drive"
+      - "Difficult conversations"
+
+  - chapter: 2
+    title: "Sushumna, both"
+    say: "When both sides flow, it is Sushumna, the turning point. It is brief, often only minutes, and it marks the change from one side to the other. The texts keep it for sitting, not for worldly business."
+
+  - chapter: 2
+    title: "The honest truth"
+    say: "These lists are tradition, and here we treat them as a hypothesis to test, not a rule. The Respiratory Codex finds the idea underneath sound: careful, precise work goes better when you are settled, and effortful work when you are mobilised. But which nostril is open is not what decides it."
+    action: { label: "See the full lists", go: "#method" }
+
+  # ---------- 3. Observe your breath ----------
+  - chapter: 3
+    title: "How to observe"
+    say: "Now let us look at your own breath. Sit comfortably and breathe normally for a few breaths. Then breathe out gently onto the back of your hand, or a cool mirror, just below the nose. The larger patch of mist marks the open side."
+    points:
+      - "Go by what you feel, not by what you expect."
+      - "The mirror is verse 153, the only instrument in the whole treatise."
+    action: { label: "Try it now in the breath tool", go: "tool:observe" }
+
+  - chapter: 3
+    title: "Compare with the text"
+    say: "Tell the tool which side is flowing, and roughly where you are. The Svarodaya counts the cycle from sunrise, so the tool can show you what the text expected at this hour, next to what you noticed. If they differ, that is not a mistake. It is information."
+    action: { label: "Open the breath tool", go: "tool:observe" }
+
+  - chapter: 3
+    title: "The morning check"
+    say: "The one practice the text calls most important is verse 149: examine the breath every day at daybreak. One minute, before you rise, before you touch any device."
+    points:
+      - "Which side is flowing"
+      - "The rough rate and depth of the breath"
+      - "One word for your state"
+      - "Thirty mornings make a baseline. Sixty reveal a pattern."
+    action: { label: "Set a morning reminder", go: "tool:remind" }
+
+  # ---------- 4. The tattvas ----------
+  - chapter: 4
+    title: "Reading the tattva"
+    say: "The text says each breath also carries one of the five elements, the tattvas. Verses 145 to 147 describe them in eight ways. Four of these you can measure yourself, like how far the out-breath reaches on your hand. Three you can only report."
+    points:
+      - "Only the measured ones decide the answer here."
+      - "Otherwise the guesswork borrows trust from the measurements, and tells you what you already expected."
+    action: { label: "Walk me through the measurements", go: "tool:tattva" }
+
+  # ---------- 5. Practice, safely ----------
+  - chapter: 5
+    title: "What actually works"
+    say: "Here is what The Respiratory Codex finds really helps. None of it requires you to believe in nadis or tattvas."
+    points:
+      - "Slow breathing, about six breaths a minute, with a longer out-breath, for three to five minutes"
+      - "Breathing through the nose, not the mouth"
+      - "Sleeping on the left side"
+      - "The one-minute morning check"
+      - "A short, fixed routine before demanding tasks"
+      - "Ten to fifteen minutes of attention to the breath, returning each time it wanders"
+
+  - chapter: 5
+    title: "Switching sides"
+    say: "Want to open the other side? Lie on one side for five to ten minutes, or press a fist gently under the opposite armpit. It will usually open the other nostril. Every practice in the tool comes from the text, with its verse beside it."
+    action: { label: "Open the practices", go: "tool:practice" }
+
+  - chapter: 5
+    title: "Before you practise"
+    say: "Please listen carefully to this one. The breath is a friend, never a battle."
+    points:
+      - "No breath-holding with high blood pressure, a heart rhythm problem, glaucoma or retinal disease, or in pregnancy."
+      - "When covering the eyes, touch lightly. Never press on the eyeballs."
+      - "Never gaze at the sun, even briefly."
+      - "Don't tape your mouth for sleep. It can be dangerous with sleep apnoea or a blocked nose."
+      - "Stop if you feel dizzy or breathless, or get chest discomfort, a headache or changes in vision."
+
+  - chapter: 5
+    title: "What does not hold up"
+    say: "And I must be honest about what the old text gets wrong."
+    points:
+      - "The moon's phase and the day of the week do not change which side flows."
+      - "The breath does not predict journeys, lost objects, contests or the sex of a child."
+      - "A side that stays blocked has ordinary causes, such as a deviated septum or sinusitis. See an ENT doctor."
+      - "The death timetables are not just wrong but harmful. If omens leave you checking your body again and again, that worry is the thing to get help with."
+
+  # ---------- 6. Your part ----------
+  - chapter: 6
+    title: "The open record"
+    say: "Now, your part. If you wish, you can add your morning observations to the open record. It is off by default, and you can ask for your data to be deleted at any time. When there is enough, we will publish what it shows, even where it disagrees with the texts."
+    points:
+      - "Does the turn really take about an hour?"
+      - "Does the lunar day predict the sunrise side?"
+      - "Does the active side track energy and mood?"
+      - "Do the text's practices actually switch the side?"
+    action: { label: "See the record", go: "#open-record" }
+
+  - chapter: 6
+    title: "Go well"
+    say: "That is the whole path. Observe each morning, practise gently, and keep what you notice honestly. Whenever you have a question, ask the text and I will answer only from the verses. Come back tomorrow at daybreak."
+    action: { label: "Ask the text a question", go: "tool:ask" }

@@ -1053,3 +1053,79 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   .sg-text{font-size:15.5px}
 }
 @media (prefers-reduced-motion:reduce){.sg.is-new .sg-bubble{animation:none}}
+
+/* ===== Sadhu ji: guided journey (svara-journey.js) ===== */
+.sj-start{display:inline-flex;align-items:center;gap:10px;padding-left:8px}
+.sj-start img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #C2611F;background:#E9DCC0}
+html.sj-lock{overflow:hidden}
+.sj{position:fixed;inset:0;z-index:1000;background:rgba(11,31,22,.62);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
+.sj[hidden]{display:none}
+.sj-card{position:relative;width:min(980px,100%);max-height:calc(100vh - 48px);display:flex;flex-direction:column;background:#FBF7EC;border-radius:24px;box-shadow:0 40px 100px rgba(0,0,0,.4);overflow:hidden}
+.sj-card.turn .sj-talk{animation:sj-in .4s ease-out}
+@keyframes sj-in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.sj-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px 12px}
+.sj-chap{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F}
+.sj-x{border:0;background:none;font:500 13px var(--sans);color:var(--ink-60);cursor:pointer;padding:6px 4px}
+.sj-x span{font-size:20px;vertical-align:-2px;margin-left:4px}
+.sj-x:hover{color:var(--forest)}
+.sj-progress{height:3px;background:rgba(194,97,31,.15)}
+.sj-progress i{display:block;height:100%;width:0;background:#C2611F;transition:width .45s ease}
+.sj-body{display:flex;gap:30px;padding:26px 30px 10px;min-height:0;flex:1}
+.sj-face{flex:none;width:260px;height:300px;border-radius:22px;overflow:hidden;background:#E9DCC0;border:3px solid #C2611F;box-shadow:0 14px 34px rgba(120,70,20,.25)}
+.sj-face video{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.sj-talk{flex:1;min-width:0;overflow-y:auto;padding-right:4px}
+.sj-count{font:500 12.5px var(--sans);color:var(--ink-60);margin-bottom:6px}
+.sj-title{font-size:clamp(24px,3vw,32px);line-height:1.15;margin:0 0 14px;color:#1B4332}
+.sj-bubble{position:relative;background:#fff;border-left:4px solid #C2611F;border-radius:16px;padding:14px 20px 16px;box-shadow:0 8px 24px rgba(20,24,15,.08);cursor:text}
+.sj-who{display:block;font:600 10.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F;margin-bottom:5px}
+.sj-say{margin:0;font-family:var(--serif);font-size:19px;line-height:1.55;color:#1B4332;min-height:3.1em}
+.sj-say.typing:after,.sc-say.typing:after{content:"";display:inline-block;width:2px;height:1em;background:#C2611F;margin-left:3px;vertical-align:-2px;animation:sg-caret .8s steps(1) infinite}
+.sj-points{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.sj-points li{position:relative;padding:9px 14px 9px 34px;background:rgba(194,97,31,.07);border-radius:10px;font:15px/1.5 var(--sans);color:#2a2f22;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.sj-points li:before{content:"";position:absolute;left:14px;top:16px;width:7px;height:7px;border-radius:50%;background:#C2611F}
+.sj-points.show li{opacity:1;transform:none}
+.sj-try{margin-top:16px;border-color:#C2611F;color:#8a420f}
+.sj-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 30px 20px;border-top:1px solid rgba(20,24,15,.08)}
+.sj-foot .btn{min-width:118px}
+.sj-back[disabled]{opacity:.35;pointer-events:none}
+.sj-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.sj-dots i{width:7px;height:7px;border-radius:50%;background:rgba(27,67,50,.18);transition:background .3s,transform .3s}
+.sj-dots i.done{background:rgba(194,97,31,.55)}
+.sj-dots i.on{background:#C2611F;transform:scale(1.35)}
+@media (max-width:760px){
+  .sj{padding:0;align-items:stretch}
+  .sj-card{max-height:none;height:100%;border-radius:0}
+  .sj-top{padding:12px 16px 10px}
+  .sj-body{flex-direction:column;gap:14px;padding:16px 18px 8px;overflow-y:auto}
+  .sj-face{width:120px;height:120px;border-radius:50%;align-self:flex-start}
+  .sj-talk{overflow:visible}
+  .sj-say{font-size:17px}
+  .sj-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom))}
+  .sj-foot .btn{min-width:0;padding:11px 16px}
+  .sj-dots{display:none}
+}
+
+/* ===== Sadhu ji: corner companion ===== */
+.sc{position:fixed;left:22px;bottom:22px;z-index:900;display:flex;align-items:flex-end;gap:12px;max-width:min(400px,calc(100vw - 32px))}
+.sc[hidden]{display:none}
+.sc-face{flex:none;width:76px;height:76px;padding:0;border-radius:50%;overflow:hidden;border:3px solid #C2611F;background:#E9DCC0;box-shadow:0 10px 26px rgba(0,0,0,.25);cursor:pointer;order:-1}
+.sc-face video{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
+.sc-bubble{position:relative;background:#FBF7EC;border-left:4px solid #C2611F;border-radius:16px;padding:12px 16px 14px;box-shadow:0 14px 40px rgba(0,0,0,.22);margin-bottom:8px;animation:sg-pop .3s ease-out}
+.sc-who{display:block;font:600 10.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F;margin-bottom:4px}
+.sc-say{margin:0;font-family:var(--serif);font-size:15.5px;line-height:1.5;color:#1B4332}
+.sc-min{position:absolute;top:6px;right:8px;border:0;background:none;font-size:20px;line-height:1;color:var(--ink-60);cursor:pointer;padding:2px 6px}
+.sc-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sc-acts:empty{display:none}
+.sc-acts .btn{padding:8px 14px;font-size:13px}
+.sc.min .sc-bubble{display:none}
+.sc.min .sc-face{width:62px;height:62px}
+@media (max-width:700px){
+  .sc{right:12px;bottom:12px;left:12px;max-width:none}
+  .sc.min{right:auto}
+  html.sc-open .fab-wrap{opacity:0;visibility:hidden}
+  .sc-face{width:60px;height:60px}
+  .sc-bubble{flex:1;padding:10px 14px 12px}
+  .sc-say{font-size:14.5px}
+}
+@media (prefers-reduced-motion:reduce){.sj-card.turn .sj-talk,.sc-bubble{animation:none}.sj-points li{transition:none}}
+@media print{.sj,.sc{display:none!important}}
