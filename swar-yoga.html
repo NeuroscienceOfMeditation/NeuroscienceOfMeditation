@@ -181,6 +181,20 @@ image: /img/og-swar-yoga.jpg
       <button class="sv-tab" role="tab" aria-selected="false" data-tab="ask">Ask the text</button>
     </div>
 
+    <!-- Sadhu ji, the guide. His words come from svara-guide.js -->
+    <div class="sg" data-sg>
+      <div class="sg-face">
+        <video autoplay muted loop playsinline preload="auto" poster="{{ '/img/guide/sadhu-loop.jpg' | relative_url }}" aria-hidden="true">
+          <source src="{{ '/img/guide/sadhu-loop.webm' | relative_url }}" type="video/webm">
+          <source src="{{ '/img/guide/sadhu-loop.mp4' | relative_url }}" type="video/mp4">
+        </video>
+      </div>
+      <div class="sg-bubble">
+        <b class="sg-who">Sadhu ji</b>
+        <p class="sg-text" data-sg-text aria-live="polite">Namaste. Before we change the breath, let us first come to know it.</p>
+      </div>
+    </div>
+
     <!-- ================= SVARA ================= -->
     <div class="sv-pane on" data-pane="observe">
     <ol class="sv-progress" data-progress aria-label="Steps">
@@ -1053,6 +1067,7 @@ document.querySelectorAll('.wcheck').forEach(function(w) {
 <script src="svara-practice-view.js?v={{ site.time | date: '%s' }}"></script>
 <script src="svara-ui.js?v={{ site.time | date: '%s' }}"></script>
 <script src="svara-record.js?v={{ site.time | date: '%s' }}"></script>
+<script src="svara-guide.js?v={{ site.time | date: '%s' }}"></script>
 
 </body>
 </html>
