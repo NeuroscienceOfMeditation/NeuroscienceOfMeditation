@@ -54,15 +54,39 @@ description: "Evidence-checked yoga, breathwork and meditation by Aditi, a docto
       </div>
 
 
-      <div class="hero-image">
-  <img
-    src="img/myphoto-640.webp"
-    srcset="img/myphoto-640.webp 640w, img/myphoto-1200.webp 1200w"
-    sizes="(max-width: 900px) calc(100vw - 40px), 560px"
-    width="1200" height="1363"
-    alt="Aditi meditating"
-    fetchpriority="high"
-  >
+      <div class="hero-image hero-motion">
+  {% comment %} Aditi settles into meditation once, then stays still on the final pose.
+     With "reduce motion" on, only the still is shown. {% endcomment %}
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="img/hero-aditi-still-640.webp 640w, img/hero-aditi-still-1200.webp 1200w" sizes="(max-width: 900px) calc(100vw - 40px), 560px">
+    <img
+      class="hero-still"
+      src="img/hero-aditi-start-640.webp"
+      srcset="img/hero-aditi-start-640.webp 640w, img/hero-aditi-start-1200.webp 1200w"
+      sizes="(max-width: 900px) calc(100vw - 40px), 560px"
+      width="1488" height="2160"
+      alt="Aditi meditating"
+      fetchpriority="high"
+    >
+  </picture>
+  <video class="hero-vid" muted playsinline preload="auto" aria-hidden="true" tabindex="-1" data-hero-vid>
+    <source src="img/hero-aditi.webm" type="video/webm">
+    <source src="img/hero-aditi.mp4" type="video/mp4">
+  </video>
+  <script>
+    (function () {
+      var v = document.querySelector('[data-hero-vid]'); if (!v) return;
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); return; }
+      v.addEventListener('playing', function () { v.classList.add('on'); });
+      v.addEventListener('error', function () { v.remove(); }, true);
+      function go() { var p = v.play(); if (p && p.catch) p.catch(function () { v.remove(); }); }
+      // Play when she comes into view (on phones she is below the first screen)
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) { if (es[0].intersectionRatio > 0.5) { io.disconnect(); go(); } }, { threshold: [0, 0.5, 0.75] });
+        io.observe(v);
+      } else go();
+    })();
+  </script>
 </div>
 
     </div>
