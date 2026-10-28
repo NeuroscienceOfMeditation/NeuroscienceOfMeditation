@@ -21,7 +21,7 @@ image: /img/og-swar-yoga.jpg
 {% include sadhu-chat.html %}
 
 <div id="full-page" class="full-page" hidden>
-<div class="full-head"><div class="wrap"><span>The full page</span><a href="#main" data-chat-back>← Back to Sadhu ji</a></div></div>
+<div class="full-head"><div class="wrap"><span>The full page</span><a href="#main" data-chat-back>← Back to {{ site.data.sadhu_journey.guide_name | default: 'Sadhu ji' }}</a></div></div>
 
 
 <section class="sec" style="padding-top:70px">
@@ -50,7 +50,7 @@ image: /img/og-swar-yoga.jpg
         <div style="display:flex;gap:12px;flex-wrap:wrap">
           <a class="btn p sj-start" href="#main" data-chat-back>
             <img src="{{ '/img/guide/sadhu-face.jpg' | relative_url }}" alt="" width="30" height="30">
-            Talk with Sadhu ji
+            Talk with {{ site.data.sadhu_journey.guide_name | default: 'Sadhu ji' }}
           </a>
 
           <a class="btn s" href="#svara" style="text-decoration:none">
@@ -200,7 +200,7 @@ image: /img/og-swar-yoga.jpg
         </video>
       </div>
       <div class="sg-bubble">
-        <b class="sg-who">Sadhu ji <span class="sg-tag" data-sg-tag>Svara · Step 1 of 4 · Settle</span></b>
+        <b class="sg-who">{{ site.data.sadhu_journey.guide_name | default: 'Sadhu ji' }} <span class="sg-tag" data-sg-tag>Svara · Step 1 of 4 · Settle</span></b>
         <p class="sg-text" data-sg-text aria-live="polite">Namaste. Before we change the breath, let us first come to know it.</p>
         <ol class="sg-todo" data-sg-todo></ol>
         <button class="sg-show" type="button" data-sg-show hidden>Show me where ↓</button>

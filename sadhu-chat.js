@@ -21,6 +21,7 @@
   var log = $('[data-chat-log]', chat), chipsEl = $('[data-chat-chips]', chat);
   var form = $('[data-chat-form]', chat), input = $('[data-chat-input]', chat);
   var FACE = chat.getAttribute('data-face');
+  var NAME = chat.getAttribute('data-name') || 'Sadhu ji';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- memory (this browser only) ---------- */
@@ -29,80 +30,96 @@
   try { mem = JSON.parse(localStorage.getItem(MEM_KEY) || '{}') || {}; } catch (e) {}
   function remember(k, v) { mem[k] = v; try { localStorage.setItem(MEM_KEY, JSON.stringify(mem)); } catch (e) {} }
 
-  /* ---------- rendering ---------- */
+  /* ---------- rendering: one scene at a time ----------
+     A scene is what Sadhu ji says (lines appear one by one) plus the choices
+     for what to do next. Choosing opens the next scene. Back restores the
+     previous one exactly as it was. */
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function md(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }   // **bold** only
-  function scrollDown() { log.scrollTo({ top: log.scrollHeight, behavior: reduce ? 'auto' : 'smooth' }); }
-
-  var lastWasBot = false;
-  function row(who, inner) {
-    var r = document.createElement('div');
-    r.className = 'cm ' + who + (who === 'bot' && lastWasBot ? ' cont' : '');
-    if (who === 'bot') r.innerHTML = '<img class="cm-face" src="' + FACE + '" alt="" aria-hidden="true">';
-    var b = document.createElement('div'); b.className = 'cm-b';
-    if (typeof inner === 'string') b.innerHTML = inner; else b.appendChild(inner);
-    r.appendChild(b); log.appendChild(r);
-    lastWasBot = who === 'bot';
-    scrollDown();
-    return b;
-  }
-
-  // Everything Sadhu ji says goes through one queue, so messages arrive in
-  // order with a "typing" pause, like a person talking.
+  var crumbEl = $('[data-crumb]', chat), sceneEl = $('[data-scene]', chat);
+  var backBtn = $('[data-back]', chat), homeBtn = $('[data-home]', chat);
+  var token = 0, hist = [], curOpts = null;
   var Q = Promise.resolve();
   function wait(ms) { return new Promise(function (r) { setTimeout(r, reduce ? 0 : ms); }); }
+
+  function row(who, inner) {
+    if (who === 'me') return null;
+    var d = document.createElement('div'); d.className = 'ch-line';
+    if (typeof inner === 'string') d.innerHTML = inner; else d.appendChild(inner);
+    log.appendChild(d);
+    return d;
+  }
   function typing(ms) {
-    var t = document.createElement('div');
-    t.className = 'cm bot typing' + (lastWasBot ? ' cont' : '');
-    t.innerHTML = '<img class="cm-face" src="' + FACE + '" alt="" aria-hidden="true"><div class="cm-b"><i></i><i></i><i></i></div>';
-    log.appendChild(t); scrollDown();
-    return wait(ms).then(function () { t.remove(); });
+    var my = token;
+    var t = document.createElement('div'); t.className = 'ch-line ch-dots'; t.innerHTML = '<i></i><i></i><i></i>';
+    log.appendChild(t);
+    return wait(ms).then(function () { t.remove(); if (my !== token) throw new Error('stale'); });
+  }
+  function enqueue(fn) {
+    var my = token;
+    Q = Q.then(function () { if (my === token) return fn(); }).catch(function () {});
+    return Q;
   }
   function say(text, opt) {
     opt = opt || {};
-    Q = Q.then(function () {
+    return enqueue(function () {
       var plain = String(text).replace(/<[^>]+>/g, '');
-      return typing(Math.min(1500, 380 + plain.length * 12)).then(function () {
+      return typing(Math.min(1300, 300 + plain.length * 10)).then(function () {
         var b = row('bot', opt.html ? text : md(text));
         if (opt.cls) b.classList.add(opt.cls);
       });
     });
-    return Q;
   }
   function list(items, title) {
-    Q = Q.then(function () {
-      return typing(450).then(function () {
-        row('bot', (title ? '<b>' + md(title) + '</b>' : '') +
-          '<ol class="cm-list">' + items.map(function (x) { return '<li>' + md(x) + '</li>'; }).join('') + '</ol>');
+    return enqueue(function () {
+      return typing(380).then(function () {
+        row('bot', (title ? '<b class="ch-lt">' + md(title) + '</b>' : '') +
+          '<ol class="cm-list">' + items.map(function (x) { return '<li>' + md(x) + '</li>'; }).join('') + '</ol>').classList.add('list');
       });
     });
-    return Q;
   }
   function widget(build) {
-    Q = Q.then(function () { return new Promise(function (done) { var el = build(done); row('bot', el); }); });
-    return Q;
+    return enqueue(function () { return new Promise(function (done) { row('bot', build(done)).classList.add('wide'); }); });
   }
-  function me(text) { row('me', esc(text)); }
+  function me() {}
 
-  // Reply buttons. Each option: [label, handler, isPrimary]
-  function ask(opts) {
-    Q = Q.then(function () {
-      chipsEl.innerHTML = '';
-      opts.forEach(function (o) {
-        var b = document.createElement('button');
-        b.type = 'button'; b.className = 'chip' + (o[2] ? ' p' : '');
-        b.textContent = o[0];
-        b.addEventListener('click', function () {
-          chipsEl.innerHTML = '';
-          if (!o[3]) me(o[0]);       // o[3] = don't echo
-          o[1]();
-        });
-        chipsEl.appendChild(b);
-      });
-      scrollDown();
+  function renderChoices(opts) {
+    curOpts = opts; chipsEl.innerHTML = '';
+    opts.forEach(function (o, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip' + (o[2] ? ' p' : '');
+      b.innerHTML = '<span>' + esc(o[0]) + '</span><i aria-hidden="true">→</i>';
+      b.style.animationDelay = (reduce ? 0 : i * 0.05) + 's';
+      b.addEventListener('click', function () { go(o[1], o[3] ? '' : o[0]); });
+      chipsEl.appendChild(b);
     });
+    backBtn.disabled = hist.length === 0;
   }
+  function ask(opts) { enqueue(function () { renderChoices(opts); }); }
   function clearChips() { chipsEl.innerHTML = ''; }
+
+  function newScene() {
+    token++; Q = Promise.resolve();
+    log.innerHTML = ''; chipsEl.innerHTML = ''; form.hidden = true; curOpts = null;
+    sceneEl.classList.remove('turn'); void sceneEl.offsetWidth; sceneEl.classList.add('turn');
+    var top = chat.getBoundingClientRect().top;
+    if (top < -40) window.scrollTo({ top: window.scrollY + top - 10, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  function setCrumb(t) { crumbEl.hidden = !t; crumbEl.textContent = t ? 'You chose: ' + t : ''; }
+  function snapshot() { return { html: log.innerHTML, opts: curOpts, crumb: crumbEl.hidden ? '' : crumbEl.textContent, form: !form.hidden }; }
+  // Move to the next scene
+  function go(fn, crumb) {
+    hist.push(snapshot()); if (hist.length > 40) hist.shift();
+    newScene(); setCrumb(crumb); fn();
+  }
+  backBtn.addEventListener('click', function () {
+    var s = hist.pop(); if (!s) return;
+    newScene();
+    log.innerHTML = s.html; crumbEl.hidden = !s.crumb; crumbEl.textContent = s.crumb; form.hidden = !s.form;
+    if (s.opts) renderChoices(s.opts);
+    backBtn.disabled = hist.length === 0;
+  });
+  homeBtn.addEventListener('click', function () { go(function () { menu('Where shall we go?'); }, ''); });
 
   /* ---------- the main menu ---------- */
   function lessonLabel() {
@@ -284,14 +301,14 @@
   // The full-screen practice view (svara-practice-view.js)
   function guide(method, target, after) {
     var finished = false;
-    function done() { if (finished) return; finished = true; clearChips(); after(); }
+    function done() { if (finished) return; finished = true; go(after, 'I’ve finished'); }
     if (window.SvaraPracticeView) {
       say('I will guide you on the full screen. Come back here when you are done.');
-      Q = Q.then(function () { window.SvaraPracticeView.open({ method: method, target: target || {}, onObserveAgain: function () { me('I’ve finished'); done(); } }); });
-      ask([['I’ve finished', done, true]]);
+      Q = Q.then(function () { window.SvaraPracticeView.open({ method: method, target: target || {}, onObserveAgain: function () { done(); } }); });
+      ask([['I’ve finished', function () { finished = true; after(); }, true, true]]);
     } else {
       list(method.steps, method.name);
-      ask([['I’ve finished', done, true]]);
+      ask([['I’ve finished', function () { finished = true; after(); }, true]]);
     }
   }
 
@@ -430,7 +447,7 @@
   function askPrompt() {
     say('Ask me anything about the breath and the Svarodaya. Type it below. I answer only from the text, with the verse, and if the book does not speak of it, I will tell you so.');
     ask(SUGGEST.map(function (q) { return [q, function () { answer(q); }]; }).concat([['Back', function () { menu('Of course.'); }]]));
-    Q = Q.then(function () { input.focus({ preventScroll: true }); });
+    enqueue(function () { form.hidden = false; input.focus({ preventScroll: true }); });
   }
   var corpusP = null;
   function corpus() {
@@ -470,6 +487,7 @@
       });
     });
     say('Ask me something else, or choose below.');
+    enqueue(function () { form.hidden = false; });
     more();
   }
 
@@ -504,25 +522,21 @@
   });
   if (location.hash && location.hash !== '#main' && document.querySelector(location.hash) && document.getElementById('full-page').contains(document.querySelector(location.hash))) openFull(location.hash);
   document.querySelectorAll('[data-chat-back]').forEach(function (a) {
-    a.addEventListener('click', function (e) { e.preventDefault(); chat.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(function () { input.focus({ preventScroll: true }); }, 500); });
+    a.addEventListener('click', function (e) { e.preventDefault(); chat.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
   });
-  var restart = $('[data-chat-restart]', chat);
-  restart && restart.addEventListener('click', function () { clearChips(); log.innerHTML = ''; lastWasBot = false; Q = Promise.resolve(); hello(); });
 
   /* ---------- typing a message ---------- */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var q = input.value.trim(); if (!q) return;
-    input.value = ''; clearChips(); me(q);
-    var l = q.toLowerCase();
-    if (/^(hi|hello|hey|namaste|namaskar|pranam)\b/.test(l)) { say('Namaste.'); menu('What would you like to do?'); }
-    else if (/^(menu|start|help)$/.test(l)) menu('Here is what we can do together.');
-    else if (/^(check|check my breath|my breath)$/.test(l)) checkBreath();
-    else answer(q);
+    input.value = '';
+    hist.push(snapshot()); newScene(); crumbEl.hidden = false; crumbEl.textContent = 'You asked: ' + q;
+    answer(q);
   });
 
   /* ---------- hello ---------- */
   function hello() {
+    newScene(); setCrumb(''); backBtn.disabled = true;
     if (!E || !K) { say('Namaste. Something did not load properly. Please refresh the page.'); return; }
     if (mem.met) {
       say('Namaste. Welcome back.');
@@ -533,7 +547,7 @@
       menu('What would you like to do?');
     } else {
       remember('met', 1);
-      say('Namaste. I am Sadhu ji.');
+      say('Namaste. I am ' + NAME + '.');
       say('Your breath is changing sides even now, and most people never notice it. I can help you watch it, understand it, and work with it, gently.');
       say('Everything I tell you comes from the Shiva Svarodaya and The Respiratory Codex, with the verse, and with an honest word on what science says.');
       menu('Where shall we begin?');

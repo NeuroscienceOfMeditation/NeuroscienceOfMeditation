@@ -11,6 +11,9 @@
 #   #some-id       scroll to that part of the page
 # Content comes from the page itself and The Respiratory Codex; keep it that way.
 
+# The guide's name, shown everywhere on the Swar Yoga page.
+guide_name: Sadhu ji
+
 chapters:
   - Welcome
   - The three channels
