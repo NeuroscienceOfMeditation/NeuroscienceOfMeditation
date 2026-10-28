@@ -14,6 +14,53 @@
 # The guide's name, shown everywhere on the Swar Yoga page.
 guide_name: Swami Neurananda
 
+# Extra video loops for his moods. Put the mp4 in img/guide/ and its path here.
+# Until a clip is set, his normal loop plays (slowed down while you settle).
+guide_moods:
+  meditate: ""   # eyes closed, slow breathing, used during the 15-second settle
+  listen: ""     # attentive, slight nod, used when he asks you something
+  explain: ""    # gentle hand gesture, used in lessons
+  smile: ""      # warm smile, used for good news
+
+# "How sure is this?" — evidence shown as a chip on a lesson. Grades follow
+# The Respiratory Codex: E established, S suggestive, X speculative,
+# C contradicted, T tradition (stated by the text, not tested).
+# Only link studies that have been checked to say what the note says.
+evidence:
+  nasal_cycle:
+    grade: E
+    note: "The nasal cycle is real and is controlled by the autonomic nervous system; the hypothalamus is thought to set its rhythm. In one study of 33 people, everyone alternated, but a switch took about 2 hours on average, from 15 minutes to over 10 hours, not one hour."
+    refs:
+      - { label: "Kahana-Zweig et al., PLoS ONE 2016", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5053491/" }
+      - { label: "Pendolino et al., Rhinology Online 2018 (review)", url: "https://www.rhinologyonline.org/Rhinology_online_issues/manuscript_16.pdf" }
+  hourly_turn:
+    grade: C
+    note: "Measured cycles are rarely hourly. They average about 2 hours, vary widely, and a regular clockwork pattern is seen in only about 21–39% of people."
+    refs:
+      - { label: "Kahana-Zweig et al., PLoS ONE 2016", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5053491/" }
+      - { label: "Pendolino et al., Rhinology Online 2018 (review)", url: "https://www.rhinologyonline.org/Rhinology_online_issues/manuscript_16.pdf" }
+  tradition_uses:
+    grade: T
+    note: "These uses come from the Shiva Svarodaya. They have not been tested. We record them as tradition, and the open record is one way to test them."
+  side_lying:
+    grade: E
+    note: "Lying on one side tends to congest the lower nostril, so the upper one opens. Body position, not just head position, matters most."
+    refs:
+      - { label: "Pendolino et al., Rhinology Online 2018 (review)", url: "https://www.rhinologyonline.org/Rhinology_online_issues/manuscript_16.pdf" }
+  slow_breathing:
+    grade: E
+    note: "Slow breathing, around six breaths a minute, is linked with higher heart-rate variability and feeling calmer. Most studies are small, so the size of the effect is still uncertain."
+    refs:
+      - { label: "Zaccaro et al., Frontiers in Human Neuroscience 2018 (systematic review)", url: "https://www.frontiersin.org/articles/10.3389/fnhum.2018.00353/full" }
+  left_side_sleep:
+    grade: E
+    note: "Lying on the right side was linked with more night-time acid reflux than the left side. The study was small, ten patients with reflux disease."
+    refs:
+      - { label: "Khoury et al., Am J Gastroenterol 1999", url: "https://doi.org/10.1111/j.1572-0241.1999.01279.x" }
+  omens:
+    grade: C
+    note: "There is no evidence that the breath predicts outside events. A side that stays blocked has ordinary medical causes."
+
 chapters:
   - Welcome
   - The three channels
@@ -31,14 +78,17 @@ steps:
   - chapter: 1
     title: What svara means
     say: "Svara is the breath as it flows through the nostrils. Right now, one nostril is a little more open than the other. The Shiva Svarodaya says this side changes roughly every hour, all day long."
+    evidence: hourly_turn
 
   - chapter: 1
     title: What science says
-    say: "Today this is called the nasal cycle. It is real, and it is driven by the brain, not the nose. The text described it centuries before Western medicine wrote it down in 1895."
+    say: "Today this is called the nasal cycle. It is real. The tissue inside one nostril swells while the other shrinks, controlled by the autonomic nervous system. The text described it centuries before Western medicine wrote it down in 1895."
+    diagram: nasal-cycle
+    evidence: nasal_cycle
     points:
-      - "The old texts also say the turning follows the lunar day."
-      - "Physiology still argues about what drives it."
-      - "Nobody has measured it properly. That is why we are asking practitioners to log theirs."
+      - "Measured switches take about 2 hours on average, not one, and vary a lot from person to person."
+      - "The old texts also say the turning follows the lunar day. That has not held up."
+      - "Few people have tracked it in daily life. That is why we ask practitioners to log theirs."
 
   # ---------- 2. The three channels ----------
   - chapter: 2
@@ -49,6 +99,7 @@ steps:
       - "Meditation and long sitting"
       - "Water, gentle food"
       - "Setting out on a journey"
+    evidence: tradition_uses
 
   - chapter: 2
     title: "Pingala, the right"
@@ -58,10 +109,12 @@ steps:
       - "Digestion, the heavier meal"
       - "Tasks needing drive"
       - "Difficult conversations"
+    evidence: tradition_uses
 
   - chapter: 2
     title: "Sushumna, both"
     say: "When both sides flow, it is Sushumna, the turning point. It is brief, often only minutes, and it marks the change from one side to the other. The texts keep it for sitting, not for worldly business."
+    evidence: tradition_uses
 
   - chapter: 2
     title: "The honest truth"
@@ -81,6 +134,8 @@ steps:
     title: "Compare with the text"
     say: "Tell the tool which side is flowing, and roughly where you are. The Svarodaya counts the cycle from sunrise, so the tool can show you what the text expected at this hour, next to what you noticed. If they differ, that is not a mistake. It is information."
     action: { label: "Open the breath tool", go: "tool:observe" }
+    diagram: sunrise-clock
+    evidence: hourly_turn
 
   - chapter: 3
     title: "The morning check"
@@ -100,6 +155,7 @@ steps:
       - "Only the measured ones decide the answer here."
       - "Otherwise the guesswork borrows trust from the measurements, and tells you what you already expected."
     action: { label: "Walk me through the measurements", go: "tool:tattva" }
+    diagram: tattvas
 
   # ---------- 5. Practice, safely ----------
   - chapter: 5
@@ -112,11 +168,13 @@ steps:
       - "The one-minute morning check"
       - "A short, fixed routine before demanding tasks"
       - "Ten to fifteen minutes of attention to the breath, returning each time it wanders"
+    evidence: [slow_breathing, left_side_sleep]
 
   - chapter: 5
     title: "Switching sides"
-    say: "Want to open the other side? Lie on one side for five to ten minutes, or press a fist gently under the opposite armpit. It will usually open the other nostril. Every practice in the tool comes from the text, with its verse beside it."
+    say: "Want to open the other side? Lie on your side for five to ten minutes. The lower nostril tends to close and the upper one opens, so lie on the side opposite the nostril you want to open. The text also gives pressing a fist under the armpit; that one has been studied less."
     action: { label: "Open the practices", go: "tool:practice" }
+    evidence: side_lying
 
   - chapter: 5
     title: "Before you practise"
@@ -136,6 +194,7 @@ steps:
       - "The breath does not predict journeys, lost objects, contests or the sex of a child."
       - "A side that stays blocked has ordinary causes, such as a deviated septum or sinusitis. See an ENT doctor."
       - "The death timetables are not just wrong but harmful. If omens leave you checking your body again and again, that worry is the thing to get help with."
+    evidence: omens
 
   # ---------- 6. Your part ----------
   - chapter: 6

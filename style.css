@@ -1159,6 +1159,47 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .full-head a{color:#D6F53B;text-transform:none;letter-spacing:0;font-size:14px}
 .vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .ch-sound{margin-top:14px;display:inline-flex;align-items:center;gap:7px;font:600 13px var(--sans);color:#1B4332;background:#fff;border:1.5px solid rgba(27,67,50,.25);border-radius:99px;padding:7px 14px;cursor:pointer}
-.ch-sound[aria-pressed="true"] .x,.ch-sound[aria-pressed="false"] .w{display:none}
+.ch-sound[aria-pressed="true"] .x,.ch-sound[aria-pressed="false"] .w{display:none!important}
 .ch-sound[aria-pressed="false"]{color:var(--ink-60)}
 @media (max-width:900px){.ch-guide{flex-wrap:wrap}.ch-sound{order:3;margin:0 0 0 auto;align-self:center;padding:6px 11px;font-size:12px}}
+
+/* Evidence chips: "How sure is this?" */
+.ch-line.ev-line{font-family:var(--sans);font-size:14px}
+.ev-chip{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;font:500 13px var(--sans);color:#3b3a2e;background:#fff;border:1px solid rgba(20,24,15,.15);border-radius:99px;padding:6px 12px;cursor:pointer;text-align:left}
+.ev-chip i{width:9px;height:9px;border-radius:50%;background:#999}
+.ev-chip b{font-weight:600}
+.ev-chip span{color:#7a6a58}
+.ev-chip[aria-expanded="true"]{border-color:#C2611F}
+.ev-E i{background:#2F8F5B}.ev-S i{background:#D9A520}.ev-X i{background:#9A8F80}.ev-C i{background:#C8432B}.ev-T i{background:#7D6BB0}
+.ev-more{margin:8px 0 2px;padding:10px 14px;background:#fff;border-radius:12px;border:1px solid rgba(20,24,15,.1);font:14px/1.55 var(--sans);color:#2a2f22}
+.ev-more p{margin:0 0 6px}
+.ev-refs{display:flex;flex-direction:column;gap:3px}
+.ev-refs a{color:#1B4332;font-weight:600}
+.ev-scale{font-size:12.5px;color:#7a6a58;margin:0!important}
+
+/* Lesson diagrams */
+.dg{margin:4px 0 0;background:#fff;border-radius:16px;padding:14px 14px 10px;border:1px solid rgba(194,97,31,.18)}
+.dg svg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}
+.dg .t{font:600 11px var(--sans);fill:#5a4a3a;text-anchor:middle}
+.dg-nasal .t,.dg-clock .t{text-anchor:start}
+.dg figcaption{font:13.5px/1.5 var(--sans);color:#6b5a48;margin-top:8px}
+.dg-nasal .nL,.dg-nasal .fL{animation:dg-l 8s ease-in-out infinite}
+.dg-nasal .nR,.dg-nasal .fR{animation:dg-r 8s ease-in-out infinite}
+.dg-nasal .nL,.dg-nasal .nR{transform-box:fill-box;transform-origin:center}
+@keyframes dg-l{0%,40%{opacity:1;transform:scale(1)}50%,90%{opacity:.25;transform:scale(.55)}100%{opacity:1;transform:scale(1)}}
+@keyframes dg-r{0%,40%{opacity:.25;transform:scale(.55)}50%,90%{opacity:1;transform:scale(1)}100%{opacity:.25;transform:scale(.55)}}
+.dg-clock .hand{animation:dg-spin 12s linear infinite;transform-origin:0 0}
+@keyframes dg-spin{to{transform:rotate(360deg)}}
+.dg-tattva .tv{animation:dg-pulse 2.5s ease-in-out infinite;animation-delay:var(--d);transform-box:fill-box;transform-origin:center}
+@keyframes dg-pulse{0%,100%{opacity:.55}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dg *{animation:none!important}}
+
+/* Breath card + guide video behaviour */
+.card-img{display:block;width:100%;max-width:360px;border-radius:14px;box-shadow:0 10px 30px rgba(20,24,15,.18)}
+.ch-video video{transition:opacity .25s}
+.ch-video video.swap{opacity:.2}
+.ch.settling .ch-video{box-shadow:0 0 0 10px rgba(194,97,31,.12),0 20px 50px rgba(120,70,20,.3);transition:box-shadow 1s}
+.ch-sound .x{display:none}
+.ch-sound[aria-pressed="false"] .x{display:inline}
+.ch-guide .ch-sound+.ch-sound{margin-top:8px}
+@media (max-width:900px){.ch-guide .ch-sound+.ch-sound{margin:0 0 0 6px}}

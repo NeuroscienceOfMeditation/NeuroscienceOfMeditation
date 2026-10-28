@@ -17,6 +17,14 @@
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path class="w" d="M15.8 9.2a4 4 0 0 1 0 5.6M18.4 6.8a7.6 7.6 0 0 1 0 10.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="x" d="M16 9.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       <span data-sound-label>Sound on</span>
     </button>
+    <button type="button" class="ch-sound" data-music-btn aria-pressed="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M9 18V6l10-2v12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="16.5" cy="16" r="2.5" stroke="currentColor" stroke-width="1.6"/><path class="x" d="M3 3l18 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span data-music-label>Music on</span>
+    </button>
+    <audio data-music loop preload="none">
+      <source src="{{ '/img/guide/music-tanpura.webm' | relative_url }}" type="audio/webm">
+      <source src="{{ '/img/guide/music-tanpura.m4a' | relative_url }}" type="audio/mp4">
+    </audio>
     <audio data-ambient loop preload="none">
       <source src="{{ '/img/guide/sadhu-ambient.webm' | relative_url }}" type="audio/webm">
       <source src="{{ '/img/guide/sadhu-ambient.m4a' | relative_url }}" type="audio/mp4">
@@ -47,5 +55,7 @@
 </section>
 <script>
 window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};
-window.SVARA_GUIDE = { name: {{ gname | jsonify }}, poster: {{ sv | append: '.jpg' | jsonify }}, webm: {{ sv | append: '.webm' | jsonify }}, mp4: {{ sv | append: '.mp4' | jsonify }} };
+window.SVARA_GUIDE = { name: {{ gname | jsonify }}, poster: {{ sv | append: '.jpg' | jsonify }}, webm: {{ sv | append: '.webm' | jsonify }}, mp4: {{ sv | append: '.mp4' | jsonify }},
+  // Extra mood loops (mp4). Leave empty until a clip exists: meditate (eyes closed), listen, explain, smile
+  moods: {{ site.data.sadhu_journey.guide_moods | default: '{}' | jsonify }} };
 </script>

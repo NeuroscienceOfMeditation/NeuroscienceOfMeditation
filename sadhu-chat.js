@@ -30,6 +30,42 @@
   try { mem = JSON.parse(localStorage.getItem(MEM_KEY) || '{}') || {}; } catch (e) {}
   function remember(k, v) { mem[k] = v; try { localStorage.setItem(MEM_KEY, JSON.stringify(mem)); } catch (e) {} }
 
+  // Every check is kept in this browser only, so he can remember your pattern.
+  function logSide(side) {
+    var h = (mem.hist || []).concat([{ t: Date.now(), s: side }]);
+    remember('hist', h.slice(-200)); remember('lastSide', side); remember('lastTime', Date.now());
+  }
+  function weekly() {
+    var since = Date.now() - 7 * 864e5;
+    var h = (mem.hist || []).filter(function (x) { return x.t > since; });
+    var morn = h.filter(function (x) { var hr = new Date(x.t).getHours(); return hr >= 4 && hr < 11; });
+    var set = morn.length >= 3 ? morn : h;
+    if (set.length < 3) return null;
+    var c = { ida: 0, pingala: 0, sushumna: 0 };
+    set.forEach(function (x) { c[x.s] = (c[x.s] || 0) + 1; });
+    var top = Object.keys(c).sort(function (a, b) { return c[b] - c[a]; })[0];
+    return { n: set.length, c: c, top: c[top] > set.length / 2 ? top : null, mornings: set === morn };
+  }
+
+  // Anonymous step counts (no name, no ID, nothing about the visitor):
+  // a row like "check_result" in the sadhu_steps table. See supabase-sadhu-steps.sql.
+  var DB = { url: 'https://neinmntlyiszfmkeeyoo.supabase.co', key: 'sb_publishable_xqK97lVzGEzvTEItzC9REQ_QIp9U-Nl' };
+  var counted = {};
+  function count(step) {
+    if (counted[step] || navigator.doNotTrack === '1') return; counted[step] = 1;
+    try {
+      fetch(DB.url + '/rest/v1/sadhu_steps', { method: 'POST', keepalive: true,
+        headers: { apikey: DB.key, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({ step: step }) }).catch(function () {});
+    } catch (e) {}
+  }
+  // The open record's totals (the same numbers shown on the full page)
+  var recordStats = null;
+  try {
+    fetch(DB.url + '/rest/v1/rpc/open_record_stats', { method: 'POST', headers: { apikey: DB.key, 'Content-Type': 'application/json' }, body: '{}' })
+      .then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { recordStats = d; }).catch(function () {});
+  } catch (e) {}
+
   /* ---------- rendering: one scene at a time ----------
      A scene is what Sadhu ji says (lines appear one by one) plus the choices
      for what to do next. Choosing opens the next scene. Back restores the
@@ -121,6 +157,101 @@
   });
   homeBtn.addEventListener('click', function () { go(function () { menu('Where shall we go?'); }, ''); });
 
+  /* ---------- "How sure is this?" ----------
+     A small chip on a claim. Tap it for two lines on the evidence and, where
+     we have checked one, a study link. Grades as in The Respiratory Codex. */
+  var GRADE = {
+    E: ['Established', 'Supported by replicated human studies, physiological measurement or anatomy.'],
+    S: ['Suggestive', 'Some human evidence, often small studies. Promising, not settled.'],
+    X: ['Speculative', 'Little or no direct evidence either way.'],
+    C: ['Contradicted', 'The evidence goes against this claim.'],
+    T: ['Tradition', 'Stated by the text. Not tested yet.']
+  };
+  function gradeKey(g) { g = String(g || ''); return g === 'EN' || g.indexOf('negative') > -1 ? 'C' : (GRADE[g] ? g : 'X'); }
+  var EVID = (window.SADHU_JOURNEY && window.SADHU_JOURNEY.evidence) || {};
+  function evChip(g, about, note, refs) {
+    var G = GRADE[g] || GRADE.X;
+    var w = document.createElement('div'); w.className = 'ev';
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'ev-chip ev-' + g;
+    b.setAttribute('aria-expanded', 'false');
+    b.innerHTML = '<i aria-hidden="true"></i>How sure is this? <b>' + G[0] + '</b>' + (about ? '<span>· ' + esc(about) + '</span>' : '');
+    var d = document.createElement('div'); d.className = 'ev-more'; d.hidden = true;
+    d.innerHTML = '<p>' + esc(note || G[1]) + '</p>' +
+      (refs && refs.length ? '<p class="ev-refs">' + refs.map(function (r) { return '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.label) + ' ↗</a>'; }).join('') + '</p>' : '') +
+      '<p class="ev-scale">' + esc(G[0]) + ': ' + esc(G[1]) + '</p>';
+    b.addEventListener('click', function () { d.hidden = !d.hidden; b.setAttribute('aria-expanded', String(!d.hidden)); count('evidence_open'); });
+    w.appendChild(b); w.appendChild(d);
+    return w;
+  }
+  function evidenceFor(keys) {
+    [].concat(keys || []).forEach(function (k) {
+      var e = EVID[k]; if (!e) return;
+      enqueue(function () { row('bot', evChip(gradeKey(e.grade), null, e.note, e.refs)).classList.add('ev-line'); });
+    });
+  }
+
+  /* ---------- diagrams in the lessons (simplified, and labelled so) ---------- */
+  var DIAGRAMS = {
+    'nasal-cycle':
+      '<figure class="dg dg-nasal"><svg viewBox="0 0 320 170" role="img" aria-label="The two nostrils take turns: as one opens the other narrows">' +
+      '<path d="M160 18 C150 60 120 100 112 128 C108 142 122 150 136 146 L160 140 L184 146 C198 150 212 142 208 128 C200 100 170 60 160 18Z" fill="#F3E6C8" stroke="#C2611F" stroke-width="2"/>' +
+      '<ellipse class="nL" cx="138" cy="134" rx="13" ry="7" fill="#2E7FA8"/><ellipse class="nR" cx="182" cy="134" rx="13" ry="7" fill="#E4744F"/>' +
+      '<g class="fL"><path d="M138 142 v18" stroke="#2E7FA8" stroke-width="3" stroke-linecap="round"/><path d="M130 150 v10 M146 150 v10" stroke="#2E7FA8" stroke-width="2" stroke-linecap="round" opacity=".6"/></g>' +
+      '<g class="fR"><path d="M182 142 v18" stroke="#E4744F" stroke-width="3" stroke-linecap="round"/><path d="M174 150 v10 M190 150 v10" stroke="#E4744F" stroke-width="2" stroke-linecap="round" opacity=".6"/></g>' +
+      '<text x="70" y="70" class="t">left · Ida</text><text x="208" y="70" class="t">right · Pingala</text></svg>' +
+      '<figcaption>Drawn from your own point of view. One side opens while the other narrows, then they swap. Simplified: in real life a swap takes about 2 hours on average, and is irregular for most people.</figcaption></figure>',
+    'sunrise-clock':
+      '<figure class="dg dg-clock"><svg viewBox="0 0 320 200" role="img" aria-label="The text predicts a switch every hour from sunrise; measured cycles are longer and irregular">' +
+      '<g transform="translate(160 100)">' + (function () {
+        var out = '', n = 12, r1 = 62, r2 = 82;
+        for (var i = 0; i < n; i++) {
+          var a0 = (i / n) * 2 * Math.PI - Math.PI / 2, a1 = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2;
+          var p = function (r, a) { return (r * Math.cos(a)).toFixed(1) + ' ' + (r * Math.sin(a)).toFixed(1); };
+          out += '<path d="M' + p(r1, a0) + ' L' + p(r2, a0) + ' A' + r2 + ' ' + r2 + ' 0 0 1 ' + p(r2, a1) + ' L' + p(r1, a1) + ' A' + r1 + ' ' + r1 + ' 0 0 0 ' + p(r1, a0) + 'Z" fill="' + (i % 2 ? '#E4744F' : '#2E7FA8') + '" opacity=".85" stroke="#FBF7EC" stroke-width="2"/>';
+        }
+        return out;
+      }()) +
+      '<circle r="56" fill="#FBF7EC"/><g class="hand"><path d="M0 0 L0 -54" stroke="#1B4332" stroke-width="3" stroke-linecap="round"/></g><circle r="5" fill="#1B4332"/>' +
+      '<g transform="translate(0 -96)"><circle r="9" fill="#F2B544"/><path d="M-16 0 h-6 M16 0 h6 M0 -14 v-4" stroke="#F2B544" stroke-width="2"/></g></g>' +
+      '<text x="12" y="30" class="t">sunrise ↑</text><text x="214" y="186" class="t">1 hour each?</text></svg>' +
+      '<figcaption>What the text predicts: counted from sunrise, the sides take turns about every hour. What measurement shows: turns average about 2 hours and are irregular. That gap is what the open record is testing.</figcaption></figure>',
+    'tattvas':
+      '<figure class="dg dg-tattva"><svg viewBox="0 0 340 120" role="img" aria-label="The five tattvas as their traditional symbols">' +
+      '<g class="tv" style="--d:0s"><rect x="14" y="26" width="44" height="44" fill="#E2B33C"/><text x="36" y="96" class="t">Earth</text></g>' +
+      '<g class="tv" style="--d:.5s"><path d="M86 30 a24 24 0 1 0 48 0 a24 18 0 1 1 -48 0Z" fill="#9FB8C8"/><text x="110" y="96" class="t">Water</text></g>' +
+      '<g class="tv" style="--d:1s"><path d="M182 24 L206 70 H158Z" fill="#D9472B"/><text x="182" y="96" class="t">Fire</text></g>' +
+      '<g class="tv" style="--d:1.5s"><circle cx="252" cy="48" r="23" fill="#7FA88C"/><text x="252" y="96" class="t">Air</text></g>' +
+      '<g class="tv" style="--d:2s"><circle cx="314" cy="48" r="6" fill="#5B4E86"/><circle cx="314" cy="48" r="20" fill="none" stroke="#5B4E86" stroke-dasharray="3 4"/><text x="314" y="96" class="t">Space</text></g>' +
+      '</svg><figcaption>The traditional symbols of the five elements. They are symbols, not measurements.</figcaption></figure>'
+  };
+  function diagram(name) { var h = DIAGRAMS[name]; if (h) enqueue(function () { row('bot', h).classList.add('wide', 'dg-line'); }); }
+
+  /* ---------- his video: moods, and breathing with you ----------
+     Moods are extra loops set in SVARA_GUIDE.moods (meditate, listen,
+     explain, smile). Until a clip exists, the main loop is used. */
+  var gv = $('.ch-video video', chat);
+  var MOODS = {}; (function (m) { for (var k in m) if (m[k]) MOODS[k] = m[k]; }((window.SVARA_GUIDE && window.SVARA_GUIDE.moods) || {}));
+  var mood = 'base';
+  var moodClip = null;   // the mood clip playing now, or null for his normal loop
+  function setMood(m) {
+    if (!gv || m === mood) return;
+    var want = m === 'base' ? null : (MOODS[m] || null);
+    mood = m;
+    if (want === moodClip) return;                 // nothing to change (e.g. no clip for this mood yet)
+    var rate = gv.playbackRate;
+    gv.classList.add('swap');
+    setTimeout(function () {
+      var base = window.SVARA_GUIDE || {};
+      gv.innerHTML = want ? '<source src="' + want + '" type="video/mp4">'
+        : (base.webm ? '<source src="' + base.webm + '" type="video/webm">' : '') + '<source src="' + base.mp4 + '" type="video/mp4">';
+      moodClip = want;
+      gv.load(); gv.playbackRate = rate;
+      var p = gv.play(); if (p && p.catch) p.catch(function () {});
+      gv.classList.remove('swap');
+    }, 250);
+  }
+  function breatheWith(on) { if (gv) gv.playbackRate = on ? 0.65 : 1; chat.classList.toggle('settling', !!on); }
+
   /* ---------- the main menu ---------- */
   function lessonLabel() {
     var i = mem.lesson || 0;
@@ -134,7 +265,8 @@
       ['Find my tattva', tattva],
       ['A practice for today', practiceMenu],
       ['Ask the text', askPrompt],
-      ['Morning reminder', reminder]
+      ['Morning reminder', reminder],
+      ['What everyone’s breath shows', recordStory]
     ]);
   }
   function more() {
@@ -165,6 +297,7 @@
   }
 
   function checkBreath() {
+    count('check_start');
     say('Good. First, let the breath settle.');
     say('Sit comfortably with the mouth closed. Let the shoulders soften. Nothing to do yet.');
     ask([['I’m sitting comfortably', settle, true]]);
@@ -182,12 +315,16 @@
   }
 
   function settle() {
-    say('Breathe normally and rest your eyes on this circle for fifteen seconds. Don’t change anything. Just notice.');
+    count('check_settle');
+    say('Breathe normally and rest your eyes on this circle for fifteen seconds. Don’t change anything. Just notice. I will breathe with you.');
+    enqueue(function () { setMood('meditate'); breatheWith(true); });
     widget(function (done) { return orb(15, done); });
-    say('Good.');
+    enqueue(function () { breatheWith(false); setMood('base'); });
+    say('Good' + (mem.name ? ', ' + mem.name : '') + '.');
     say('Now hold the back of your hand just under your nose and breathe out gently, two or three times. **Which side feels stronger?**');
+    enqueue(function () { setMood('listen'); });
     sideChips(function (side) {
-      remember('lastSide', side); remember('lastTime', Date.now());
+      logSide(side); count('check_side'); setMood('base');
       say(SIDES[side]);
       askPlace(function (place) { result(side, place); });
     });
@@ -260,10 +397,12 @@
     if (r.alignment === 'aligned') say('And you noticed ' + obs.name + '. Your breath and the text agree right now.');
     else if (r.alignment === 'sushumna' || side === 'sushumna') say('You noticed both sides, Sushumna, the moment of turning. The text says to sit quietly in it, not to begin worldly work.');
     else say('You noticed ' + obs.name + '. They differ. That is not a mistake, it is information. Here we are testing the text, not you.');
+    say('What measurement shows: the switch takes about two hours on average and is irregular in most people, so the text’s hourly rule often misses.');
     var pv = (r.provenance || []).slice(0, 2);
-    if (pv.length) say('<div class="cm-src">' + pv.map(function (p) {
-      return '<span><b>' + esc(p.title) + '</b> · verse ' + esc(p.verse) + ' · ' + esc(gradeText(r, p.grade)) + '</span>';
-    }).join('') + '</div>', { html: true, cls: 'src' });
+    pv.forEach(function (p) {
+      var G = r.grades && r.grades[p.grade];
+      enqueue(function () { row('bot', evChip(gradeKey(p.grade), p.title + ' · verse ' + p.verse, G && G.note, null)).classList.add('ev-line'); });
+    });
     if (r.expectedTattva && E.TATTVAS[r.expectedTattva]) {
       var t = E.TATTVAS[r.expectedTattva];
       say('The text would also say the **' + t.name + '** element, ' + t.english.toLowerCase() + ', is running now. That one you can check with your own breath, if you like.');
@@ -272,9 +411,11 @@
   }
 
   function afterResult(r, side) {
+    count('check_result');
+    lastCheck = { side: side, r: r, place: mem.place && r ? mem.place : null, t: new Date() };
     say('What would you like to do now?');
-    var opts = [];
-    if (r && r.correctivePractice) opts.push(['Help me shift the breath', function () { shift(r, side); }, true]);
+    var opts = [['Make my breath card', function () { breathCard(lastCheck); }, true]];
+    if (r && r.correctivePractice) opts.push(['Help me shift the breath', function () { shift(r, side); }]);
     opts.push(['Find my tattva', tattva]);
     opts.push(['Remind me each morning', reminder]);
     opts.push(['Something else', function () { menu('Of course. Where shall we go?'); }]);
@@ -315,7 +456,7 @@
   function observeAgain(prev) {
     say('Welcome back. Now let us look again, the same way as before. Breathe out onto your hand. **Which side is stronger now?**');
     sideChips(function (side) {
-      remember('lastSide', side); remember('lastTime', Date.now());
+      logSide(side);
       var s = E.SVARAS[side];
       if (side === prev) say('It stayed ' + s.name + '. That happens often, and it is worth recording too. The body is not a switch.');
       else say('It moved to **' + s.name + '**. You have just seen the cycle with your own breath.');
@@ -353,10 +494,13 @@
     var s = LESSONS[i]; if (!s) { menu(); return; }
     remember('lesson', i);
     say('<span class="cm-tag">Lesson ' + (i + 1) + ' of ' + LESSONS.length + '</span><b>' + esc(s.title) + '</b><br>' + md(s.say), { html: true });
+    if (s.diagram) diagram(s.diagram);
     if (s.points && s.points.length) list(s.points);
+    if (s.evidence) evidenceFor(s.evidence);
+    count('lesson_' + (i + 1));
     var last = i === LESSONS.length - 1;
     var opts = [[last ? 'Finish' : 'Next →', function () {
-      if (last) { remember('lesson', LESSONS.length); say('You have walked the whole path. Observe each morning at daybreak, and come back whenever you need me.'); menu(); }
+      if (last) { remember('lesson', LESSONS.length); count('lessons_done'); say('You have walked the whole path. Observe each morning at daybreak, and come back whenever you need me.'); offerEmail(function () { menu(); }); }
       else lesson(i + 1);
     }, true]];
     if (s.action) opts.push([s.action.label, function () { remember('lesson', i + 1); doAction(s.action.go); }]);
@@ -375,6 +519,7 @@
 
   /* ---------- 3. Tattva ---------- */
   function tattva() {
+    count('tattva_start');
     var dims = K.DIMENSIONS.filter(function (d) { return d.verifiable; }).sort(function (a, b) { return a.order - b.order; });
     var answers = {};
     say('The text says each breath carries one of five elements, the tattvas. There are four signs you can check yourself. We will take them one at a time.');
@@ -397,6 +542,7 @@
       ask(opts);
     }
     function finish() {
+      count('tattva_done');
       var res = K.scoreTattva(answers);
       if (!res.best) {
         say(res.note || 'Nothing matched clearly this time. Try the reach of the out-breath and the direction of the jet: those are the signs that count.');
@@ -424,6 +570,7 @@
     ask(ps.map(function (p) { return [p.name, function () { practice(p, purpose); }]; }).concat([['Something else', practiceMenu]]));
   }
   function practice(p, purpose) {
+    count('practice_view');
     say('<span class="cm-tag">' + esc(p.sanskrit || '') + ' · verse ' + esc(p.verse) + ' · grade ' + esc(p.grade) + '</span><b>' + esc(p.name) + '</b><br>' + md(p.effect), { html: true });
     list(p.steps, 'How to do it · about ' + p.minutes + ' min');
     if (p.safety) say('**Please note:** ' + p.safety, { cls: 'warn' });
@@ -436,7 +583,7 @@
   function feel() {
     say('How do you feel now?');
     ask([
-      ['Calmer', function () { say('Good. Remember this feeling. It is always one slow breath away.'); menu('Where next?'); }],
+      ['Calmer', function () { say('Good. Remember this feeling. It is always one slow breath away.'); offerEmail(function () { menu('Where next?'); }); }],
       ['About the same', function () { say('That is fine. The effect is often quiet, and it grows with practice, day after day.'); menu('Where next?'); }],
       ['Uneasy', function () { say('Then stop, and breathe normally. Not every practice suits every body on every day. If dizziness or discomfort continues, please see a doctor.'); menu('Where next?'); }]
     ]);
@@ -447,7 +594,7 @@
   function askPrompt() {
     say('Ask me anything about the breath and the Svarodaya. Type it below. I answer only from the text, with the verse, and if the book does not speak of it, I will tell you so.');
     ask(SUGGEST.map(function (q) { return [q, function () { answer(q); }]; }).concat([['Back', function () { menu('Of course.'); }]]));
-    enqueue(function () { form.hidden = false; input.focus({ preventScroll: true }); });
+    askInput('ask', 'Type your question…', null);
   }
   var corpusP = null;
   function corpus() {
@@ -487,7 +634,7 @@
       });
     });
     say('Ask me something else, or choose below.');
-    enqueue(function () { form.hidden = false; });
+    askInput('ask', 'Ask another question…', null);
     more();
   }
 
@@ -525,14 +672,177 @@
     a.addEventListener('click', function (e) { e.preventDefault(); chat.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
   });
 
-  /* ---------- typing a message ---------- */
+  /* ---------- the text box: a question, his name for you, or an email ---------- */
+  var formMode = 'ask', formCb = null;
+  function askInput(mode, placeholder, cb) {
+    formMode = mode; formCb = cb;
+    enqueue(function () {
+      input.value = ''; input.placeholder = placeholder;
+      input.type = mode === 'email' ? 'email' : 'text';
+      input.setAttribute('autocomplete', mode === 'email' ? 'email' : mode === 'name' ? 'given-name' : 'off');
+      form.querySelector('button').textContent = mode === 'ask' ? 'Ask' : 'Continue';
+      form.hidden = false; input.focus({ preventScroll: true });
+    });
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var q = input.value.trim(); if (!q) return;
     input.value = '';
-    hist.push(snapshot()); newScene(); crumbEl.hidden = false; crumbEl.textContent = 'You asked: ' + q;
-    answer(q);
+    if (formMode === 'ask') {
+      hist.push(snapshot()); newScene(); crumbEl.hidden = false; crumbEl.textContent = 'You asked: ' + q;
+      count('ask'); answer(q);
+    } else {
+      var cb = formCb; formMode = 'ask'; form.hidden = true;
+      go(function () { cb(q); }, '');
+    }
   });
+
+  /* ---------- your name, asked once ---------- */
+  function askName(then) {
+    say('Before we begin, what may I call you?');
+    askInput('name', 'Your first name', function (n) {
+      n = n.replace(/[^\p{L}\p{M} .'-]/gu, '').trim().slice(0, 24);
+      if (n) { remember('name', n); say('Namaste, ' + n + '. I will remember it, here in your browser only.'); }
+      then();
+    });
+    ask([['I’d rather not say', function () { remember('name', ''); formMode = 'ask'; then(); }]]);
+  }
+
+  /* ---------- time of day ---------- */
+  function timeLine() {
+    var now = new Date(), hr = now.getHours(), st = null;
+    if (mem.place && E.astro && E.astro.sunTimes) { try { st = E.astro.sunTimes(now, mem.place.lat, mem.place.lon); } catch (e) {} }
+    if (st && st.sunrise && st.sunset) {
+      var afterRise = (now - st.sunrise) / 6e4, toSet = (st.sunset - now) / 6e4;
+      if (afterRise >= -45 && afterRise <= 120) return 'You are up with the sun. Daybreak is the text’s chosen time for watching the breath, verse 149.';
+      if (Math.abs(toSet) <= 40) return 'The sun is setting. In Indian tradition this is sandhya, the joining of day and night, a time for sitting quietly.';
+    } else {
+      if (hr >= 4 && hr < 7) return 'You are up early. Daybreak is the text’s chosen time for watching the breath, verse 149.';
+    }
+    if (hr >= 22 || hr < 4) return 'It is late. Let us keep it short and gentle, and then rest.';
+    return null;
+  }
+
+  /* ---------- the breath card (an image to keep or share) ---------- */
+  var lastCheck = null;
+  function breathCard(c) {
+    if (!c) { menu(); return; }
+    count('card_made');
+    say('Here is your breath card. Keep it, or share it.');
+    enqueue(function () {
+      return drawCard(c).then(function (canvas) {
+        var img = new Image(); img.src = canvas.toDataURL('image/png'); img.alt = 'Your breath card'; img.className = 'card-img';
+        row('bot', img).classList.add('wide');
+        c.png = canvas;
+      });
+    });
+    var canShare = !!(navigator.canShare && window.File);
+    ask([
+      [canShare ? 'Share it' : 'Download it', function () { shareCard(c, canShare); }, true],
+      ['Back to the start', function () { offerEmail(function () { menu('Where shall we go next?'); }); }]
+    ]);
+  }
+  function shareCard(c, canShare) {
+    var canvas = c.png; if (!canvas) return;
+    count('card_shared');
+    canvas.toBlob(function (blob) {
+      var file = new File([blob], 'my-breath-card.png', { type: 'image/png' });
+      if (canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: 'My breath today', text: 'Which nostril is flowing? Check yours: https://neuroscienceofmeditation.in/swar-yoga.html' }).catch(function () {});
+      } else {
+        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'my-breath-card.png';
+        document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      }
+      say('Done.');
+      offerEmail(function () { menu('Where shall we go next?'); });
+    }, 'image/png');
+  }
+  function loadImg(src) { return new Promise(function (ok) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = function () { ok(null); }; i.src = src; }); }
+  function wrap(ctx, text, x, y, maxW, lh) {
+    var words = String(text).split(' '), line = '';
+    words.forEach(function (w) { var t = line ? line + ' ' + w : w; if (ctx.measureText(t).width > maxW && line) { ctx.fillText(line, x, y); y += lh; line = w; } else line = t; });
+    if (line) ctx.fillText(line, x, y); return y + lh;
+  }
+  function drawCard(c) {
+    var W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+    var g = cv.getContext('2d'), sv = E.SVARAS[c.side], serif = 'Fraunces, Georgia, serif', sans = 'Archivo, Arial, sans-serif';
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    return Promise.all([ready, loadImg((window.SVARA_GUIDE || {}).poster || '')]).then(function (r) {
+      var face = r[1];
+      g.fillStyle = '#F4EDDC'; g.fillRect(0, 0, W, H);
+      g.fillStyle = '#FBF7EC'; g.beginPath(); g.roundRect ? g.roundRect(60, 60, W - 120, H - 120, 48) : g.rect(60, 60, W - 120, H - 120); g.fill();
+      g.fillStyle = '#C2611F'; g.fillRect(60, 60, 14, H - 120);
+      g.fillStyle = '#C2611F'; g.font = '600 30px ' + sans; g.fillText((mem.name ? mem.name.toUpperCase() + '’S ' : 'MY ') + 'BREATH', 130, 170);
+      g.fillStyle = '#1B4332'; g.font = '600 96px ' + serif; g.fillText(sv.name, 130, 290);
+      g.fillStyle = sv.colour; g.font = '500 44px ' + sans;
+      g.fillText(sv.side === 'both' ? 'both nostrils open' : sv.side + ' nostril flowing', 130, 360);
+      g.fillStyle = '#5a5a4a'; g.font = '400 34px ' + sans;
+      var when = c.t.toLocaleDateString(undefined, { day: 'numeric', month: 'long' }) + ' · ' + c.t.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      g.fillText(when + (c.place && c.place.label !== 'your location' ? ' · ' + c.place.label : ''), 130, 420);
+      if (face) { g.save(); g.beginPath(); g.arc(W - 250, 270, 130, 0, Math.PI * 2); g.closePath(); g.clip();
+        var s = Math.max(260 / face.width, 260 / face.height); g.drawImage(face, W - 250 - face.width * s / 2, 270 - face.height * s * 0.38, face.width * s, face.height * s); g.restore();
+        g.strokeStyle = '#C2611F'; g.lineWidth = 8; g.beginPath(); g.arc(W - 250, 270, 130, 0, Math.PI * 2); g.stroke(); }
+      g.fillStyle = '#1B4332'; g.font = '400 40px ' + serif; var y = 560;
+      var trad = { ida: 'In the Shiva Svarodaya, the left is Ida, the moon channel: cooling, kept for quiet work.', pingala: 'In the Shiva Svarodaya, the right is Pingala, the sun channel: warming, kept for active work.', sushumna: 'In the Shiva Svarodaya, both open is Sushumna, the turning point, kept for sitting quietly.' }[c.side];
+      y = wrap(g, trad, 130, y, W - 260, 56) + 20;
+      if (c.r && c.r.expectedSvara) {
+        g.font = '400 34px ' + sans; g.fillStyle = '#5a5a4a';
+        var ruleG = gradeKey(((c.r.provenance || [])[0] || {}).grade);
+        y = wrap(g, 'The text’s timing rule expected ' + c.r.expectedSvara.name + (c.r.alignment === 'aligned' ? ', and it matched today' : ', and it did not match today') +
+          (ruleG === 'C' ? '. Measurement does not support that rule, so a match is chance, not proof.' : '.'), 130, y, W - 260, 48) + 10;
+      }
+      g.font = '400 30px ' + sans; g.fillStyle = '#8a6a4f';
+      y = wrap(g, 'Science: the nasal cycle is real, controlled by the autonomic nervous system. A switch takes about 2 hours on average, and varies a lot (Kahana-Zweig et al., 2016).', 130, y + 10, W - 260, 44);
+      g.fillStyle = '#1B4332'; g.fillRect(60, H - 230, W - 120, 170);
+      g.fillStyle = '#F4F0E2'; g.font = '600 38px ' + serif; g.fillText('Which side is yours right now?', 130, H - 150);
+      g.fillStyle = '#D6F53B'; g.font = '500 32px ' + sans; g.fillText('neuroscienceofmeditation.in/swar-yoga', 130, H - 98);
+      return cv;
+    });
+  }
+
+  /* ---------- a gentle offer: lessons and articles by email (Kit, once) ---------- */
+  function offerEmail(next) {
+    if (mem.emailAsked) { next(); return; }
+    remember('emailAsked', 1); count('email_offer');
+    go(function () {
+      say('One small thing' + (mem.name ? ', ' + mem.name : '') + '. Would you like breath lessons and new evidence-checked articles by email? No spam, and you can leave any time.');
+      ask([
+        ['Yes, send them', function () {
+          say('Wonderful. Which email should I use?');
+          askInput('email', 'Your email address', function (em) {
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { say('That doesn’t look like an email address. Let us leave it for now.'); next(); return; }
+            var body = new URLSearchParams(); body.append('email_address', em); if (mem.name) body.append('fields[first_name]', mem.name);
+            fetch('https://app.kit.com/forms/9927031/subscriptions', { method: 'POST', mode: 'no-cors', body: body }).catch(function () {});
+            remember('emailGiven', 1); count('email_given');
+            say('Thank you. Please click the confirmation link in the email from Kit, so the lessons can reach you.');
+            next();
+          });
+        }, true],
+        ['Not now', function () { next(); }]
+      ]);
+    }, '');
+  }
+
+  /* ---------- the open record, told as a story ---------- */
+  function fmtN(n) { return Number(n || 0).toLocaleString('en-IN'); }
+  function recordStory() {
+    count('record_story');
+    var s = recordStats;
+    if (!s) { say('I could not reach the open record just now. You can see it on the full page.'); more(); return; }
+    say('This is what people like you have logged, observing their own breath.');
+    say('So far, **' + fmtN(s.logs_total) + '** observations are in the open record, **' + fmtN(s.logs_last_7_days) + '** of them this week' + (s.contributors_30d ? ', from **' + fmtN(s.contributors_30d) + '** people in the last 30 days' : '') + '.');
+    if (s.enough_data && s.by_hour_30d && s.by_hour_30d.length) {
+      var t = { ida: 0, pingala: 0, sushumna: 0, n: 0 };
+      s.by_hour_30d.forEach(function (b) { t.ida += b.ida; t.pingala += b.pingala; t.sushumna += b.sushumna; t.n += b.n; });
+      var pc = function (x) { return Math.round(x / t.n * 100); };
+      say('Across the day: left ' + pc(t.ida) + '%, right ' + pc(t.pingala) + '%, both ' + pc(t.sushumna) + '%.');
+      say('These are self-reports from people who chose to take part, not a random sample, so they are a first look, not a verdict.');
+    } else {
+      say('It is too early to say anything. The chart appears once at least five people have contributed, so no one can be picked out.');
+    }
+    say('Every morning check you add makes the answer clearer, even when it disagrees with the text.');
+    ask([['Check my breath now', checkBreath, true], ['See the chart', function () { say('I have opened it below.'); enqueue(function () { openFull('#open-record'); }); more(); }], ['Back', function () { menu('Where shall we go?'); }]]);
+  }
 
   /* ---------- his sound (the audio from his video, looped) ----------
      Browsers only allow sound after the visitor does something, so it starts
@@ -576,25 +886,65 @@
     });
   } else syncSnd();
   // The guided adjustment lowers it while it speaks, and restores it after.
-  window.SadhuAmbient = { duck: function (on) { target = on ? QUIET : LOUD; if (amb && !amb.paused) fadeTo(target, 700); } };
+  // Music: an original tanpura drone, its own on/off.
+  var mus = $('[data-music]', chat), musBtn = $('[data-music-btn]', chat), musLabel = $('[data-music-label]', chat);
+  var MUS_KEY = 'sadhu-music', M_LOUD = 0.32, M_QUIET = 0.08, mTarget = M_LOUD, mFade = null;
+  var musicOn = (function () { try { return localStorage.getItem(MUS_KEY) !== 'off'; } catch (e) { return true; } }());
+  function mFadeTo(v, ms) {
+    if (!mus) return; clearInterval(mFade);
+    var from = mus.volume, steps = Math.max(1, Math.round((ms || 600) / 40)), i = 0;
+    mFade = setInterval(function () { i++; mus.volume = Math.max(0, Math.min(1, from + (v - from) * i / steps)); if (i >= steps) clearInterval(mFade); }, 40);
+  }
+  function syncMus() { if (!musBtn) return; musBtn.setAttribute('aria-pressed', String(musicOn)); musLabel.textContent = musicOn ? 'Music on' : 'Music off'; }
+  function startMusic() {
+    if (!mus || !musicOn || !mus.paused) return;
+    mus.volume = 0; var p = mus.play(); if (p && p.then) p.then(function () { mFadeTo(mTarget, 2500); }).catch(function () {});
+  }
+  if (mus) {
+    syncMus();
+    chat.addEventListener('pointerdown', function (e) { if (!e.target.closest('[data-music-btn]')) startMusic(); });
+    chat.addEventListener('keydown', startMusic);
+    musBtn.addEventListener('click', function () {
+      musicOn = !musicOn; try { localStorage.setItem(MUS_KEY, musicOn ? 'on' : 'off'); } catch (e) {}
+      syncMus(); count(musicOn ? 'music_on' : 'music_off');
+      if (musicOn) startMusic(); else { mFadeTo(0, 400); setTimeout(function () { if (!musicOn) mus.pause(); }, 450); }
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { if (!mus.paused) { mus.pause(); mus.dataset.resume = '1'; } }
+      else if (mus.dataset.resume === '1' && musicOn) { mus.dataset.resume = ''; mus.play().catch(function () {}); }
+    });
+  }
+  window.SadhuAmbient = { duck: function (on) {
+    target = on ? QUIET : LOUD; mTarget = on ? M_QUIET : M_LOUD;
+    if (amb && !amb.paused) fadeTo(target, 700); if (mus && !mus.paused) mFadeTo(mTarget, 700);
+  } };
 
   /* ---------- hello ---------- */
   function hello() {
     newScene(); setCrumb(''); backBtn.disabled = true;
     if (!E || !K) { say('Namaste. Something did not load properly. Please refresh the page.'); return; }
+    count('hello');
+    var tl = timeLine();
     if (mem.met) {
-      say('Namaste. Welcome back.');
-      if (mem.lastSide && E.SVARAS[mem.lastSide]) {
-        var days = Math.round((Date.now() - (mem.lastTime || 0)) / 86400000);
+      say('Namaste' + (mem.name ? ', ' + mem.name : '') + '. Welcome back.');
+      if (tl) say(tl);
+      var w = weekly();
+      if (w && w.top) {
+        say('This past week, your ' + (w.mornings ? 'mornings were' : 'checks were') + ' mostly **' + E.SVARAS[w.top].name + '**, the ' + E.SVARAS[w.top].side + (w.top === 'sushumna' ? ' sides' : ' side') + ' (' + w.c[w.top] + ' of ' + w.n + '). Shall we see if today is different?');
+      } else if (w) {
+        say('This past week your ' + (w.mornings ? 'mornings' : 'checks') + ' were mixed: ' + w.c.ida + ' left, ' + w.c.pingala + ' right, ' + w.c.sushumna + ' both. That is what the science would expect.');
+      } else if (mem.lastSide && E.SVARAS[mem.lastSide]) {
+        var days = Math.round((Date.now() - (mem.lastTime || 0)) / 864e5);
         say('Last time' + (days >= 1 ? ', ' + (days === 1 ? 'yesterday' : days + ' days ago') : '') + ', your ' + E.SVARAS[mem.lastSide].side + (mem.lastSide === 'sushumna' ? ' sides were' : ' side was') + ' flowing. Shall we see what it is doing now?');
       }
       menu('What would you like to do?');
     } else {
       remember('met', 1);
       say('Namaste. I am ' + NAME + '.');
+      if (tl) say(tl);
       say('Your breath is changing sides even now, and most people never notice it. I can help you watch it, understand it, and work with it, gently.');
       say('Everything I tell you comes from the Shiva Svarodaya and The Respiratory Codex, with the verse, and with an honest word on what science says.');
-      menu('Where shall we begin?');
+      askName(function () { menu('Where shall we begin' + (mem.name ? ', ' + mem.name : '') + '?'); });
     }
   }
 
