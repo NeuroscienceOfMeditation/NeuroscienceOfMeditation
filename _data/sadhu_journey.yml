@@ -12,7 +12,7 @@
 # Content comes from the page itself and The Respiratory Codex; keep it that way.
 
 # The guide's name, shown everywhere on the Swar Yoga page.
-guide_name: Sadhu ji
+guide_name: Swami Neurananda
 
 chapters:
   - Welcome
@@ -26,7 +26,7 @@ steps:
   # ---------- 1. Welcome ----------
   - chapter: 1
     title: Namaste
-    say: "Namaste. I am Sadhu ji. I will walk you through Swar Yoga one small step at a time. It takes about ten minutes. You can stop whenever you like, and I will remember where we were."
+    say: "Namaste. I am Swami Neurananda. I will walk you through Swar Yoga one small step at a time. It takes about ten minutes. You can stop whenever you like, and I will remember where we were."
 
   - chapter: 1
     title: What svara means
