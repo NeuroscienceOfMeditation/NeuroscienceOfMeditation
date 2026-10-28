@@ -36,6 +36,29 @@
   function reduceMotion() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
   /* ------------------------------------------------------------------ DOM */
+  // The guide (Swami Neurananda) beside the steps, when the page provides one:
+  // window.SVARA_GUIDE = { name, poster, webm, mp4 }
+  var G = window.SVARA_GUIDE || null, talkT = null;
+  function guideHtml() {
+    if (!G) return '';
+    return '<div class="pv-guide" data-pv-guide>' +
+      '<div class="pv-guide-face"><video muted loop playsinline preload="none" poster="' + esc(G.poster) + '" aria-hidden="true">' +
+        (G.webm ? '<source src="' + esc(G.webm) + '" type="video/webm">' : '') +
+        (G.mp4 ? '<source src="' + esc(G.mp4) + '" type="video/mp4">' : '') + '</video></div>' +
+      '<div class="pv-guide-say"><b>' + esc(G.name) + '</b><p data-pv-gsay>Sit comfortably. I am here with you.</p></div>' +
+    '</div>';
+  }
+  function guideSay(text) {
+    var g = dlg && dlg.querySelector('[data-pv-guide]'); if (!g || !text) return;
+    g.querySelector('[data-pv-gsay]').textContent = text;
+    g.classList.add('talking'); clearTimeout(talkT);
+    talkT = setTimeout(function () { g.classList.remove('talking'); }, Math.min(9000, 1500 + text.length * 55));
+  }
+  function guideVideo(play) {
+    var v = dlg && dlg.querySelector('[data-pv-guide] video'); if (!v) return;
+    if (play) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause();
+  }
+
   function build() {
     if (dlg) return;
     dlg = document.createElement('dialog');
@@ -73,7 +96,7 @@
             '<p class="pv-caption" data-pv-caption role="status" aria-live="polite"></p>' +
           '</section>' +
 
-          '<aside class="pv-side">' +
+          '<aside class="pv-side">' + guideHtml() +
             '<h3 class="pv-side-h">Steps</h3>' +
             '<ol class="pv-steps" data-pv-steps></ol>' +
             '<p class="pv-note" data-pv-note></p>' +
@@ -122,6 +145,8 @@
   function open(o) {
     if (!o || !o.method) return;
     build();
+    guideVideo(true);
+    if (window.SadhuAmbient) window.SadhuAmbient.duck(true);
     opener = document.activeElement;
     var m = o.method, t = o.target || {};
     run = {
@@ -157,9 +182,10 @@
   }
 
   function buildScript(m, t) {
-    var side = SIDE[t.key] || 'the other side';
+    var side = SIDE[t.key];
     var lines = [];
-    lines.push({ say: 'Let’s guide the breath towards the ' + side + ', using ' + m.name + '.', show: 'Guiding the breath towards the ' + side + '.', step: -1 });
+    if (side) lines.push({ say: 'Let’s guide the breath towards the ' + side + ', using ' + m.name + '.', show: 'Guiding the breath towards the ' + side + '.', step: -1 });
+    else lines.push({ say: 'Let’s begin ' + m.name + '.', show: 'Let’s begin: ' + m.name + '.', step: -1 });
     lines.push({ say: 'It takes about ' + m.minutes + ' minutes. Go at your own pace, and if anything feels uncomfortable, simply stop and breathe normally.', show: 'About ' + m.minutes + ' minutes. Stop if anything feels uncomfortable.', step: -1 });
     (m.steps || []).forEach(function (s, i) {
       var lead = i === (m.steps.length - 1) && m.steps.length > 1 ? 'Finally' : ORDINAL[Math.min(i, ORDINAL.length - 1)];
@@ -283,6 +309,7 @@
   }
 
   function setCaption(text, force) {
+    guideSay(text);
     el.caption.textContent = text || '';
     el.caption.classList.toggle('empty', !text);
     el.caption.hidden = !(prefs.captions || force) || !text;
@@ -345,6 +372,8 @@
 
   /* ----------------------------------------------------------------- exit */
   function teardown() {
+    guideVideo(false);
+    if (window.SadhuAmbient) window.SadhuAmbient.duck(false);
     clearRunTimers();
     if (V) V.cancel();
     stopCamera(true);

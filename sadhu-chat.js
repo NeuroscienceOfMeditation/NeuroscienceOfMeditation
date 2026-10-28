@@ -290,7 +290,7 @@
         if (m.note) say(m.note);
         say('Gently. Stop if you feel dizzy or breathless.');
         ask([
-          ['Guide me through it', function () { guide({ name: m.name, steps: m.steps, minutes: m.minutes, note: m.note }, { label: tgt.label, colour: tgt.colour }, function () { observeAgain(side); }); }, true],
+          ['Guide me through it', function () { guide({ name: m.name, steps: m.steps, minutes: m.minutes, note: m.note }, { key: pr.target, label: tgt.label, colour: tgt.colour }, function () { observeAgain(side); }); }, true],
           ['I’ll do it myself', function () { say('Take your time. Tell me when you have finished.'); ask([['I’ve finished', function () { observeAgain(side); }, true]]); }],
           ['Choose another way', function () { shift(r, side); }]
         ]);
@@ -533,6 +533,50 @@
     hist.push(snapshot()); newScene(); crumbEl.hidden = false; crumbEl.textContent = 'You asked: ' + q;
     answer(q);
   });
+
+  /* ---------- his sound (the audio from his video, looped) ----------
+     Browsers only allow sound after the visitor does something, so it starts
+     on their first choice or tap, unless they have turned it off. */
+  var amb = $('[data-ambient]', chat), sndBtn = $('[data-sound]', chat), sndLabel = $('[data-sound-label]', chat);
+  var SND_KEY = 'sadhu-sound', LOUD = 0.55, QUIET = 0.12;
+  var soundOn = (function () { try { return localStorage.getItem(SND_KEY) !== 'off'; } catch (e) { return true; } }());
+  var target = LOUD, fadeT = null, wantPlay = false;
+  function fadeTo(v, ms) {
+    if (!amb) return; clearInterval(fadeT);
+    var from = amb.volume, steps = Math.max(1, Math.round((ms || 600) / 40)), i = 0;
+    fadeT = setInterval(function () { i++; amb.volume = Math.max(0, Math.min(1, from + (v - from) * i / steps)); if (i >= steps) clearInterval(fadeT); }, 40);
+  }
+  function syncSnd() {
+    if (!sndBtn) return;
+    sndBtn.setAttribute('aria-pressed', String(soundOn));
+    sndLabel.textContent = soundOn ? 'Sound on' : 'Sound off';
+  }
+  function startSound() {
+    if (!amb || !soundOn) return;
+    wantPlay = true;
+    if (!amb.paused) return;
+    amb.volume = 0; var p = amb.play();
+    if (p && p.then) p.then(function () { fadeTo(target, 1200); }).catch(function () {});
+  }
+  function stopSound() { wantPlay = false; if (!amb) return; fadeTo(0, 400); setTimeout(function () { if (!wantPlay) amb.pause(); }, 450); }
+  if (amb) {
+    syncSnd();
+    chat.addEventListener('pointerdown', function first(e) {
+      if (e.target.closest('[data-sound]')) return;
+      startSound();
+    });
+    chat.addEventListener('keydown', function () { startSound(); });
+    sndBtn.addEventListener('click', function () {
+      soundOn = !soundOn; try { localStorage.setItem(SND_KEY, soundOn ? 'on' : 'off'); } catch (e) {}
+      syncSnd(); if (soundOn) startSound(); else stopSound();
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { if (!amb.paused) { amb.pause(); amb.dataset.resume = '1'; } }
+      else if (amb.dataset.resume === '1' && soundOn) { amb.dataset.resume = ''; amb.play().catch(function () {}); }
+    });
+  } else syncSnd();
+  // The guided adjustment lowers it while it speaks, and restores it after.
+  window.SadhuAmbient = { duck: function (on) { target = on ? QUIET : LOUD; if (amb && !amb.paused) fadeTo(target, 700); } };
 
   /* ---------- hello ---------- */
   function hello() {

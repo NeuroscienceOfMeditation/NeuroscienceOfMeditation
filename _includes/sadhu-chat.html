@@ -13,6 +13,14 @@
         <source src="{{ sv }}.webm" type="video/webm"><source src="{{ sv }}.mp4" type="video/mp4">
       </video>
     </div>
+    <button type="button" class="ch-sound" data-sound aria-pressed="true">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path class="w" d="M15.8 9.2a4 4 0 0 1 0 5.6M18.4 6.8a7.6 7.6 0 0 1 0 10.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="x" d="M16 9.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span data-sound-label>Sound on</span>
+    </button>
+    <audio data-ambient loop preload="none">
+      <source src="{{ '/img/guide/sadhu-ambient.webm' | relative_url }}" type="audio/webm">
+      <source src="{{ '/img/guide/sadhu-ambient.m4a' | relative_url }}" type="audio/mp4">
+    </audio>
     <div class="ch-id">
       <p class="ch-name">{{ gname }}</p>
       <p class="ch-role">Your Swar Yoga guide</p>
@@ -37,4 +45,7 @@
     </nav>
   </div>
 </section>
-<script>window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};</script>
+<script>
+window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};
+window.SVARA_GUIDE = { name: {{ gname | jsonify }}, poster: {{ sv | append: '.jpg' | jsonify }}, webm: {{ sv | append: '.webm' | jsonify }}, mp4: {{ sv | append: '.mp4' | jsonify }} };
+</script>
