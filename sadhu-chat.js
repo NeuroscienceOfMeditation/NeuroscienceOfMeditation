@@ -100,6 +100,7 @@
     opt = opt || {};
     return enqueue(function () {
       var plain = String(text).replace(/<[^>]+>/g, '');
+      if (!locked) setMood(opt.mood || 'explain');
       return typing(Math.min(1300, 300 + plain.length * 10)).then(function () {
         var b = row('bot', opt.html ? text : md(text));
         if (opt.cls) b.classList.add(opt.cls);
@@ -131,7 +132,7 @@
     });
     backBtn.disabled = hist.length === 0;
   }
-  function ask(opts) { enqueue(function () { renderChoices(opts); }); }
+  function ask(opts) { enqueue(function () { renderChoices(opts); if (!locked) setTimeout(function () { if (!locked && curOpts === opts) setMood('listen'); }, 900); }); }
   function clearChips() { chipsEl.innerHTML = ''; }
 
   function newScene() {
@@ -233,8 +234,9 @@
   var MOODS = {}; (function (m) { for (var k in m) if (m[k]) MOODS[k] = m[k]; }((window.SVARA_GUIDE && window.SVARA_GUIDE.moods) || {}));
   var mood = 'base';
   var moodClip = null;   // the mood clip playing now, or null for his normal loop
-  function setMood(m) {
-    if (!gv || m === mood) return;
+  function setMoodNow(m) { setMood(m, true); }
+  function setMood(m, force) {
+    if (!gv || m === mood || (locked && !force)) return;
     var want = m === 'base' ? null : (MOODS[m] || null);
     mood = m;
     if (want === moodClip) return;                 // nothing to change (e.g. no clip for this mood yet)
@@ -242,15 +244,16 @@
     gv.classList.add('swap');
     setTimeout(function () {
       var base = window.SVARA_GUIDE || {};
-      gv.innerHTML = want ? '<source src="' + want + '" type="video/mp4">'
+      gv.innerHTML = want ? '<source src="' + want.replace(/\.mp4$/, '.webm') + '" type="video/webm"><source src="' + want + '" type="video/mp4">'
         : (base.webm ? '<source src="' + base.webm + '" type="video/webm">' : '') + '<source src="' + base.mp4 + '" type="video/mp4">';
       moodClip = want;
-      gv.load(); gv.playbackRate = rate;
+      gv.load(); gv.playbackRate = locked ? 0.75 : rate;
       var p = gv.play(); if (p && p.catch) p.catch(function () {});
       gv.classList.remove('swap');
     }, 250);
   }
-  function breatheWith(on) { if (gv) gv.playbackRate = on ? 0.65 : 1; chat.classList.toggle('settling', !!on); }
+  var locked = false;   // true while he meditates with you
+  function breatheWith(on) { locked = !!on; if (gv) gv.playbackRate = on ? 0.75 : 1; chat.classList.toggle('settling', !!on); }
 
   /* ---------- the main menu ---------- */
   function lessonLabel() {
@@ -266,7 +269,8 @@
       ['A practice for today', practiceMenu],
       ['Ask the text', askPrompt],
       ['Morning reminder', reminder],
-      ['What everyone’s breath shows', recordStory]
+      ['What everyone’s breath shows', recordStory],
+      ['The latest research, live', research]
     ]);
   }
   function more() {
@@ -317,14 +321,14 @@
   function settle() {
     count('check_settle');
     say('Breathe normally and rest your eyes on this circle for fifteen seconds. Don’t change anything. Just notice. I will breathe with you.');
-    enqueue(function () { setMood('meditate'); breatheWith(true); });
+    enqueue(function () { breatheWith(true); mood = ''; moodClip = '__'; setMoodNow('meditate'); });
     widget(function (done) { return orb(15, done); });
-    enqueue(function () { breatheWith(false); setMood('base'); });
+    enqueue(function () { breatheWith(false); });
     say('Good' + (mem.name ? ', ' + mem.name : '') + '.');
     say('Now hold the back of your hand just under your nose and breathe out gently, two or three times. **Which side feels stronger?**');
     enqueue(function () { setMood('listen'); });
     sideChips(function (side) {
-      logSide(side); count('check_side'); setMood('base');
+      logSide(side); count('check_side');
       say(SIDES[side]);
       askPlace(function (place) { result(side, place); });
     });
@@ -394,7 +398,7 @@
     }
     var exp = r.expectedSvara;
     say('Sunrise near ' + place.label + ' was at **' + E.formatTime(r.context.sunrise) + '**. By the text’s timing rule, **' + exp.name + '** (the ' + exp.side + (exp.side === 'both' ? ' sides' : ' side') + ') should be flowing now.');
-    if (r.alignment === 'aligned') say('And you noticed ' + obs.name + '. Your breath and the text agree right now.');
+    if (r.alignment === 'aligned') say('And you noticed ' + obs.name + '. Your breath and the text agree right now.', { mood: 'smile' });
     else if (r.alignment === 'sushumna' || side === 'sushumna') say('You noticed both sides, Sushumna, the moment of turning. The text says to sit quietly in it, not to begin worldly work.');
     else say('You noticed ' + obs.name + '. They differ. That is not a mistake, it is information. Here we are testing the text, not you.');
     say('What measurement shows: the switch takes about two hours on average and is irregular in most people, so the text’s hourly rule often misses.');
@@ -583,7 +587,7 @@
   function feel() {
     say('How do you feel now?');
     ask([
-      ['Calmer', function () { say('Good. Remember this feeling. It is always one slow breath away.'); offerEmail(function () { menu('Where next?'); }); }],
+      ['Calmer', function () { say('Good. Remember this feeling. It is always one slow breath away.', { mood: 'smile' }); offerEmail(function () { menu('Where next?'); }); }],
       ['About the same', function () { say('That is fine. The effect is often quiet, and it grows with practice, day after day.'); menu('Where next?'); }],
       ['Uneasy', function () { say('Then stop, and breathe normally. Not every practice suits every body on every day. If dizziness or discomfort continues, please see a doctor.'); menu('Where next?'); }]
     ]);
@@ -635,7 +639,7 @@
     });
     say('Ask me something else, or choose below.');
     askInput('ask', 'Ask another question…', null);
-    more();
+    ask([['What does new research say?', function () { researchFor(q); }, true], ['Check my breath', checkBreath], ['Lessons', function () { lesson(mem.lesson && mem.lesson < LESSONS.length ? mem.lesson : 0); }], ['Back to the start', function () { menu('Where shall we go?'); }]]);
   }
 
   /* ---------- 6. Morning reminder ---------- */
@@ -702,7 +706,7 @@
     say('Before we begin, what may I call you?');
     askInput('name', 'Your first name', function (n) {
       n = n.replace(/[^\p{L}\p{M} .'-]/gu, '').trim().slice(0, 24);
-      if (n) { remember('name', n); say('Namaste, ' + n + '. I will remember it, here in your browser only.'); }
+      if (n) { remember('name', n); say('Namaste, ' + n + '. I will remember it, here in your browser only.', { mood: 'smile' }); }
       then();
     });
     ask([['I’d rather not say', function () { remember('name', ''); formMode = 'ask'; then(); }]]);
@@ -814,7 +818,7 @@
             var body = new URLSearchParams(); body.append('email_address', em); if (mem.name) body.append('fields[first_name]', mem.name);
             fetch('https://app.kit.com/forms/9927031/subscriptions', { method: 'POST', mode: 'no-cors', body: body }).catch(function () {});
             remember('emailGiven', 1); count('email_given');
-            say('Thank you. Please click the confirmation link in the email from Kit, so the lessons can reach you.');
+            say('Thank you. Please click the confirmation link in the email from Kit, so the lessons can reach you.', { mood: 'smile' });
             next();
           });
         }, true],
@@ -823,7 +827,65 @@
     }, '');
   }
 
-  /* ---------- the open record, told as a story ---------- */
+  /* ---------- live research (Europe PMC) ----------
+     Real papers, fetched at the moment you ask, newest first. Listed, not
+     endorsed: a single new study is a clue, reviews weigh many studies. */
+  var EPMC = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
+  var TOPICS = [
+    ['The nasal cycle', '"nasal cycle"'],
+    ['Slow breathing and calm', '("slow breathing" OR "slow-paced breathing" OR "resonance breathing") AND (anxiety OR stress OR "heart rate variability")'],
+    ['One-nostril and alternate-nostril breathing', '("alternate nostril breathing" OR "unilateral nostril breathing" OR "nadi shodhana" OR "forced nostril breathing")'],
+    ['Nasal breathing and the brain', '("nasal breathing" OR "nasal respiration") AND (brain OR memory OR cognition OR "neural oscillations")'],
+    ['Breath and meditation', '("breath-focused" OR "breath awareness" OR "breath counting") AND meditation']
+  ];
+  function research() {
+    count('research_open');
+    say('Here is what scientists are publishing now. I look it up live, at this moment, from Europe PMC, a public library of medical research.');
+    say('Which topic?');
+    ask(TOPICS.map(function (t) { return [t[0], function () { papers(t[0], t[1], false); }]; }).concat([['Back', function () { menu('Where shall we go?'); }]]));
+  }
+  function isReview(p) { return /review|meta-analysis/i.test((p.pubType || '') + ' ' + (p.title || '')); }
+  function paperHtml(p) {
+    var link = p.doi ? 'https://doi.org/' + p.doi : (p.pmid ? 'https://europepmc.org/article/MED/' + p.pmid : 'https://europepmc.org/article/' + p.source + '/' + p.id);
+    var kind = isReview(p) ? 'Review' : (/trial/i.test(p.pubType || '') ? 'Trial' : 'Study');
+    var who = String(p.authorString || '').split(',')[0];
+    return '<a class="pp" href="' + esc(link) + '" target="_blank" rel="noopener">' +
+      '<span class="pp-kind pp-' + kind.toLowerCase() + '">' + kind + '</span>' +
+      '<b>' + esc(String(p.title || '').replace(/<[^>]+>/g, '').replace(/\.$/, '')) + '</b>' +
+      '<small>' + esc((who ? who + (String(p.authorString || '').indexOf(',') > -1 ? ' et al.' : '') + ' · ' : '') + (p.journalTitle || p.bookOrReportDetails && p.bookOrReportDetails.publisher || '') + ' · ' + (p.firstPublicationDate || p.pubYear || '')) + '</small></a>';
+  }
+  function papers(label, q, reviewsOnly) {
+    count(reviewsOnly ? 'research_reviews' : 'research_newest');
+    var query = '(' + q + ') AND SRC:MED' + (reviewsOnly ? ' AND (PUB_TYPE:"review" OR PUB_TYPE:"systematic-review" OR PUB_TYPE:"meta-analysis")' : '');
+    var url = EPMC + '?format=json&resultType=core&pageSize=5&sort=' + encodeURIComponent('P_PDATE_D desc') + '&query=' + encodeURIComponent(query);
+    var web = 'https://europepmc.org/search?query=' + encodeURIComponent(q);
+    enqueue(function () {
+      return typing(700).then(function () {
+        return fetch(url).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+          var list = (d && d.resultList && d.resultList.result) || [];
+          if (!list.length) { row('bot', md('I found nothing new on that just now.')); return; }
+          row('bot', '<span class="cm-tag">' + (reviewsOnly ? 'Latest reviews' : 'Newest papers') + ' · ' + esc(label) + ' · ' + fmtN(d.hitCount) + ' in total</span>' + list.map(paperHtml).join('')).classList.add('wide');
+        }).catch(function () {
+          row('bot', 'I could not reach the research library just now. You can <a href="' + esc(web) + '" target="_blank" rel="noopener">search Europe PMC directly ↗</a>.');
+        });
+      });
+    });
+    say(reviewsOnly ? 'Reviews weigh many studies together, so they are the safer place to start.' : 'These are listed live, not checked by me. A single new study is a clue, not a conclusion. Reviews, which weigh many studies, are steadier.', { mood: 'explain' });
+    ask([
+      [reviewsOnly ? 'Show the newest studies' : 'Show reviews only', function () { papers(label, q, !reviewsOnly); }, true],
+      ['Another topic', research],
+      ['Back to the start', function () { menu('Where shall we go?'); }]
+    ]);
+  }
+  // From "Ask the text": the same question, in live research
+  var STOP = /\b(what|which|who|whom|how|why|when|where|does|do|did|is|are|was|were|the|a|an|of|to|in|on|for|and|or|my|me|i|you|your|it|this|that|about|say|says|text|can|should|with|be|there|here|reduce|reduces|help|helps|work|works|make|makes|good|bad|really|true|best|better|any|really|effect|effects|affect|affects|improve|improves)\b/gi;
+  function researchFor(question) {
+    var words = question.toLowerCase().replace(/[^a-z\s-]/g, ' ').replace(STOP, ' ').split(/\s+/).filter(function (w) { return w.length > 2; }).slice(0, 3);
+    if (!words.length) { research(); return; }
+    papers('your question', words.map(function (w) { return '"' + w + '"'; }).join(' AND ') + ' AND (breathing OR breath OR nasal OR respiration)', false);
+  }
+
+
   function fmtN(n) { return Number(n || 0).toLocaleString('en-IN'); }
   function recordStory() {
     count('record_story');
@@ -926,7 +988,7 @@
     count('hello');
     var tl = timeLine();
     if (mem.met) {
-      say('Namaste' + (mem.name ? ', ' + mem.name : '') + '. Welcome back.');
+      say('Namaste' + (mem.name ? ', ' + mem.name : '') + '. Welcome back.', { mood: 'smile' });
       if (tl) say(tl);
       var w = weekly();
       if (w && w.top) {
@@ -940,7 +1002,7 @@
       menu('What would you like to do?');
     } else {
       remember('met', 1);
-      say('Namaste. I am ' + NAME + '.');
+      say('Namaste. I am ' + NAME + '.', { mood: 'smile' });
       if (tl) say(tl);
       say('Your breath is changing sides even now, and most people never notice it. I can help you watch it, understand it, and work with it, gently.');
       say('Everything I tell you comes from the Shiva Svarodaya and The Respiratory Codex, with the verse, and with an honest word on what science says.');

@@ -77,7 +77,7 @@ description: "What Neuroscience of Meditation collects, why, where it is stored,
         <li><b>Your settings for the guided practices</b>: whether the voice is on, which voice, how fast, and how the practice is shown.</li>
         <li><b>If you choose “Continue without saving”</b> in the open-record box: a note not to ask again, kept only until you close the tab.</li>
         <li><b>If you close the floating newsletter button</b>: a note to keep it closed.</li>
-        <li><b>What Swami Neurananda remembers</b>, the guide on the Swar Yoga page: your first name if you give it, the side and time of your checks (so he can tell you your pattern over the past week), how far you got in the lessons, and whether sound and music are on.</li>
+        <li><b>What Swami Neurananda remembers</b>, the guide on the Swar Yoga page: your first name if you give it, the side and time of your checks (so he can tell you your pattern over the past week), and how far you got in the lessons.</li>
         <li><b>If you join the open record</b>: the anonymous sign-in that links this browser to your record. It is kept by Supabase's code in your browser, and it is why a new browser or cleared data can't find your record without your code.</li>
       </ul>
       <p><b>The morning reminder</b> is a calendar file made on the page itself; nothing about it reaches us. If you choose Google Calendar instead, the link opens Google with the reminder's text and time filled in.</p>
@@ -90,6 +90,9 @@ description: "What Neuroscience of Meditation collects, why, where it is stored,
 {% endif %}        <li><b>Kit</b> (kit.com) provides the newsletter forms. Its script loads when you start using a signup form, or after the rest of the page has loaded.</li>
         <li><b>jsDelivr</b> (jsdelivr.com) serves the code library the Swar Yoga page uses to talk to the open record.</li>
         <li><b>Supabase</b> (supabase.com) holds the open record. The Swar Yoga page reads the public totals from it on each visit. It also receives <b>anonymous step counts</b> from the guide, such as “someone reached a result” or “someone opened a practice”: just the step’s name and the time, with no name, email, ID or device details, so we can see which parts help and which lose people. Browsers set to “Do Not Track” are not counted.</li>
+      </ul>
+      <ul>
+        <li><b>Europe PMC</b> (europepmc.org), a public library of medical research run by EMBL-EBI. Only when you ask Swami Neurananda for the latest research does your browser search it, sending the topic or the words of your question. Nothing else about you is sent.</li>
       </ul>
       <p>If you give your email to Swami Neurananda, it goes to Kit, the same as the newsletter forms (with your first name, if you gave one), and Kit sends you a confirmation email first.</p>
       <p>Fonts are served from this site itself, not from Google Fonts. There are no advertising trackers, and no analytics beyond the anonymous step counts above.</p>

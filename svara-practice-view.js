@@ -48,11 +48,21 @@
       '<div class="pv-guide-say"><b>' + esc(G.name) + '</b><p data-pv-gsay>Sit comfortably. I am here with you.</p></div>' +
     '</div>';
   }
+  // His expression: explaining while he gives a step, eyes closed while you practise.
+  var gMood = '';
+  function guideMood(m) {
+    var v = dlg && dlg.querySelector('[data-pv-guide] video');
+    var src = G && G.moods && G.moods[m];
+    if (!v || !src || m === gMood) return;
+    gMood = m;
+    v.innerHTML = '<source src="' + esc(src.replace(/\.mp4$/, '.webm')) + '" type="video/webm"><source src="' + esc(src) + '" type="video/mp4">';
+    v.load(); var p = v.play(); if (p && p.catch) p.catch(function () {});
+  }
   function guideSay(text) {
     var g = dlg && dlg.querySelector('[data-pv-guide]'); if (!g || !text) return;
     g.querySelector('[data-pv-gsay]').textContent = text;
-    g.classList.add('talking'); clearTimeout(talkT);
-    talkT = setTimeout(function () { g.classList.remove('talking'); }, Math.min(9000, 1500 + text.length * 55));
+    g.classList.add('talking'); clearTimeout(talkT); guideMood('explain');
+    talkT = setTimeout(function () { g.classList.remove('talking'); guideMood(run && run.phase === 'ready' ? 'listen' : 'meditate'); }, Math.min(9000, 1500 + text.length * 55));
   }
   function guideVideo(play) {
     var v = dlg && dlg.querySelector('[data-pv-guide] video'); if (!v) return;
@@ -145,6 +155,7 @@
   function open(o) {
     if (!o || !o.method) return;
     build();
+    gMood = ''; guideMood('listen');
     guideVideo(true);
     if (window.SadhuAmbient) window.SadhuAmbient.duck(true);
     opener = document.activeElement;

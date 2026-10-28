@@ -17,10 +17,10 @@ guide_name: Swami Neurananda
 # Extra video loops for his moods. Put the mp4 in img/guide/ and its path here.
 # Until a clip is set, his normal loop plays (slowed down while you settle).
 guide_moods:
-  meditate: ""   # eyes closed, slow breathing, used during the 15-second settle
-  listen: ""     # attentive, slight nod, used when he asks you something
-  explain: ""    # gentle hand gesture, used in lessons
-  smile: ""      # warm smile, used for good news
+  meditate: /img/guide/mood-meditate.mp4   # eyes closed: during the 15-second settle and timed practice
+  listen: /img/guide/mood-listen.mp4       # attentive: when he waits for your choice
+  explain: /img/guide/mood-explain.mp4     # hand gesture, talking: while he speaks
+  smile: /img/guide/mood-smile.mp4         # warm laugh: good moments
 
 # "How sure is this?" — evidence shown as a chip on a lesson. Grades follow
 # The Respiratory Codex: E established, S suggestive, X speculative,
