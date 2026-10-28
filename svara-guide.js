@@ -186,7 +186,7 @@
     last = k;
     var parts = k.split('|');
     // New step (not just a choice inside it): bring Sadhu ji back into view.
-    if (prevStep && parts[0].split('-')[0] !== prevStep) {
+    if (prevStep && parts[0].split('-')[0] !== prevStep && box.offsetParent !== null) {
       var top = box.getBoundingClientRect().top;
       if (top < 70 || top > window.innerHeight * 0.45)
         window.scrollTo({ top: Math.max(0, top + window.scrollY - 90), behavior: reduce ? 'auto' : 'smooth' });

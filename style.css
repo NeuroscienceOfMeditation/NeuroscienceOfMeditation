@@ -1054,81 +1054,9 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 }
 @media (prefers-reduced-motion:reduce){.sg.is-new .sg-bubble{animation:none}}
 
-/* ===== Sadhu ji: guided journey (svara-journey.js) ===== */
-.sj-start{display:inline-flex;align-items:center;gap:10px;padding-left:8px}
+/* "Talk with Sadhu ji" button in the Swar Yoga hero */
+.sj-start{display:inline-flex;align-items:center;gap:10px;padding-left:8px;text-decoration:none}
 .sj-start img{width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #C2611F;background:#E9DCC0}
-html.sj-lock{overflow:hidden}
-.sj{position:fixed;inset:0;z-index:1000;background:rgba(11,31,22,.62);display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(3px)}
-.sj[hidden]{display:none}
-.sj-card{position:relative;width:min(980px,100%);max-height:calc(100vh - 48px);display:flex;flex-direction:column;background:#FBF7EC;border-radius:24px;box-shadow:0 40px 100px rgba(0,0,0,.4);overflow:hidden}
-.sj-card.turn .sj-talk{animation:sj-in .4s ease-out}
-@keyframes sj-in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
-.sj-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px 12px}
-.sj-chap{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F}
-.sj-x{border:0;background:none;font:500 13px var(--sans);color:var(--ink-60);cursor:pointer;padding:6px 4px}
-.sj-x span{font-size:20px;vertical-align:-2px;margin-left:4px}
-.sj-x:hover{color:var(--forest)}
-.sj-progress{height:3px;background:rgba(194,97,31,.15)}
-.sj-progress i{display:block;height:100%;width:0;background:#C2611F;transition:width .45s ease}
-.sj-body{display:flex;gap:30px;padding:26px 30px 10px;min-height:0;flex:1}
-.sj-face{flex:none;width:240px;height:240px;border-radius:50%;overflow:hidden;background:#E9DCC0;border:3px solid #C2611F;box-shadow:0 14px 34px rgba(120,70,20,.25)}
-.sj-face video{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
-.sj-talk{flex:1;min-width:0;overflow-y:auto;padding-right:4px}
-.sj-count{font:500 12.5px var(--sans);color:var(--ink-60);margin-bottom:6px}
-.sj-title{font-size:clamp(24px,3vw,32px);line-height:1.15;margin:0 0 14px;color:#1B4332}
-.sj-bubble{position:relative;background:#fff;border-left:4px solid #C2611F;border-radius:16px;padding:14px 20px 16px;box-shadow:0 8px 24px rgba(20,24,15,.08);cursor:text}
-.sj-who{display:block;font:600 10.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F;margin-bottom:5px}
-.sj-say{margin:0;font-family:var(--serif);font-size:19px;line-height:1.55;color:#1B4332;min-height:3.1em}
-.sj-say.typing:after,.sc-say.typing:after{content:"";display:inline-block;width:2px;height:1em;background:#C2611F;margin-left:3px;vertical-align:-2px;animation:sg-caret .8s steps(1) infinite}
-.sj-points{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
-.sj-points li{position:relative;padding:9px 14px 9px 34px;background:rgba(194,97,31,.07);border-radius:10px;font:15px/1.5 var(--sans);color:#2a2f22;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
-.sj-points li:before{content:"";position:absolute;left:14px;top:16px;width:7px;height:7px;border-radius:50%;background:#C2611F}
-.sj-points.show li{opacity:1;transform:none}
-.sj-try{margin-top:16px;border-color:#C2611F;color:#8a420f}
-.sj-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 30px 20px;border-top:1px solid rgba(20,24,15,.08)}
-.sj-foot .btn{min-width:118px}
-.sj-back[disabled]{opacity:.35;pointer-events:none}
-.sj-dots{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
-.sj-dots i{width:7px;height:7px;border-radius:50%;background:rgba(27,67,50,.18);transition:background .3s,transform .3s}
-.sj-dots i.done{background:rgba(194,97,31,.55)}
-.sj-dots i.on{background:#C2611F;transform:scale(1.35)}
-@media (max-width:760px){
-  .sj{padding:0;align-items:stretch}
-  .sj-card{max-height:none;height:100%;border-radius:0}
-  .sj-top{padding:12px 16px 10px}
-  .sj-body{flex-direction:column;gap:14px;padding:16px 18px 8px;overflow-y:auto}
-  .sj-face{width:120px;height:120px;border-radius:50%;align-self:flex-start}
-  .sj-talk{overflow:visible}
-  .sj-say{font-size:17px}
-  .sj-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom))}
-  .sj-foot .btn{min-width:0;padding:11px 16px}
-  .sj-dots{display:none}
-}
-
-/* ===== Sadhu ji: corner companion ===== */
-.sc{position:fixed;left:22px;bottom:22px;z-index:900;display:flex;align-items:flex-end;gap:12px;max-width:min(400px,calc(100vw - 32px))}
-.sc[hidden]{display:none}
-.sc-face{flex:none;width:76px;height:76px;padding:0;border-radius:50%;overflow:hidden;border:3px solid #C2611F;background:#E9DCC0;box-shadow:0 10px 26px rgba(0,0,0,.25);cursor:pointer;order:-1}
-.sc-face video{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
-.sc-bubble{position:relative;background:#FBF7EC;border-left:4px solid #C2611F;border-radius:16px;padding:12px 16px 14px;box-shadow:0 14px 40px rgba(0,0,0,.22);margin-bottom:8px;animation:sg-pop .3s ease-out}
-.sc-who{display:block;font:600 10.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#C2611F;margin-bottom:4px}
-.sc-say{margin:0;font-family:var(--serif);font-size:15.5px;line-height:1.5;color:#1B4332}
-.sc-min{position:absolute;top:6px;right:8px;border:0;background:none;font-size:20px;line-height:1;color:var(--ink-60);cursor:pointer;padding:2px 6px}
-.sc-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.sc-acts:empty{display:none}
-.sc-acts .btn{padding:8px 14px;font-size:13px}
-.sc.min .sc-bubble{display:none}
-.sc.min .sc-face{width:62px;height:62px}
-@media (max-width:700px){
-  .sc{right:12px;bottom:12px;left:12px;max-width:none}
-  .sc.min{right:auto}
-  html.sc-open .fab-wrap{opacity:0;visibility:hidden}
-  .sc-face{width:60px;height:60px}
-  .sc-bubble{flex:1;padding:10px 14px 12px}
-  .sc-say{font-size:14.5px}
-}
-@media (prefers-reduced-motion:reduce){.sj-card.turn .sj-talk,.sc-bubble{animation:none}.sj-points li{transition:none}}
-@media print{.sj,.sc{display:none!important}}
 
 /* Sadhu ji leading the breath tool step by step */
 .sg{align-items:flex-start}
@@ -1151,3 +1079,82 @@ html.sj-lock{overflow:hidden}
   .sg-todo li{font-size:14px}
 }
 @media (prefers-reduced-motion:reduce){.sg-hl{animation:none}.sg-todo li{transition:none}}
+
+/* ===== Sadhu ji: the conversation (sadhu-chat.js) ===== */
+.chat{--sf:#C2611F;display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;max-width:1180px;margin:0 auto;padding:24px 34px 28px;height:calc(100vh - 74px);height:calc(100svh - 74px);min-height:560px;box-sizing:border-box}
+.chat-side{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:26px}
+.chat-video{width:250px;height:250px;border-radius:50%;overflow:hidden;border:4px solid var(--sf);background:#E9DCC0;box-shadow:0 18px 44px rgba(120,70,20,.28)}
+.chat-video video{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
+.chat-name{font-family:var(--serif);font-size:30px;font-weight:600;color:#1B4332;margin:18px 0 2px}
+.chat-role{margin:0;font:500 13px var(--sans);color:var(--ink-60);display:flex;align-items:center;gap:7px;justify-content:center}
+.chat-role i{width:8px;height:8px;border-radius:50%;background:#3E9B5F;box-shadow:0 0 0 3px rgba(62,155,95,.2)}
+.chat-about{font:13.5px/1.6 var(--sans);color:var(--ink-60);margin:16px 6px 0;max-width:260px}
+.chat-links{margin-top:auto;display:flex;flex-direction:column;gap:10px;align-items:center;padding-bottom:6px}
+.chat-links a,.chat-links button{font:600 13.5px var(--sans);color:#1B4332;background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:2px}
+.chat-links button{font-weight:500;color:var(--ink-60)}
+.chat-main{display:flex;flex-direction:column;min-height:0;background:#FBF7EC;border-radius:24px;box-shadow:0 20px 60px rgba(20,24,15,.12);border:1px solid rgba(20,24,15,.06);overflow:hidden}
+.chat-log{flex:1;overflow-y:auto;padding:26px 26px 12px;display:flex;flex-direction:column;gap:6px;scroll-behavior:smooth;overscroll-behavior:contain}
+.cm{display:flex;gap:10px;align-items:flex-end;max-width:86%;animation:cm-in .3s ease-out}
+@keyframes cm-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cm.bot{align-self:flex-start}
+.cm.bot:not(.cont){margin-top:10px}
+.cm-face{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--sf);background:#E9DCC0}
+.cm.cont .cm-face{visibility:hidden}
+.cm-b{background:#fff;border-radius:18px 18px 18px 6px;padding:11px 16px;font:15.5px/1.6 var(--sans);color:#24291f;box-shadow:0 2px 10px rgba(20,24,15,.06);border:1px solid rgba(194,97,31,.14)}
+.cm-b b{color:#1B4332}
+.cm.me{align-self:flex-end;margin-top:10px}
+.cm.me .cm-b{background:#1B4332;color:#F4F0E2;border:0;border-radius:18px 18px 6px 18px}
+.cm-b.warn{background:#FFF4E8;border-color:rgba(194,97,31,.4)}
+.cm-b.src{background:transparent;box-shadow:none;border:1px dashed rgba(194,97,31,.35);padding:9px 14px}
+.cm-src{display:flex;flex-direction:column;gap:3px;font:13px/1.5 var(--sans);color:#6b5a48}
+.cm-tag{display:block;font:600 10.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--sf);margin-bottom:4px}
+.cm-list{margin:6px 0 2px;padding-left:22px}
+.cm-list li{margin:3px 0}
+.cm-ans{margin:0}
+.cm-from{margin:8px 0 0;font:12.5px var(--sans);color:#8a6a4f;font-style:italic}
+.cm.typing .cm-b{display:flex;gap:5px;padding:14px 16px}
+.cm.typing .cm-b i{width:7px;height:7px;border-radius:50%;background:#C9A88A;animation:cm-dot 1.2s infinite}
+.cm.typing .cm-b i:nth-child(2){animation-delay:.15s}.cm.typing .cm-b i:nth-child(3){animation-delay:.3s}
+@keyframes cm-dot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.cm-orb{display:flex;flex-direction:column;align-items:center;gap:10px;padding:8px 18px}
+.cm-orb .orb{position:relative;width:130px;height:130px;display:flex;align-items:center;justify-content:center}
+.cm-orb .orb i{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(194,97,31,.28),rgba(194,97,31,.06) 70%);animation:cm-breathe 10s ease-in-out infinite}
+.cm-orb .orb b{position:relative;font:600 30px var(--serif);color:#1B4332}
+.cm-orb.done .orb i{animation:none;opacity:.5}
+.cm-orb p{margin:0;font:13px var(--sans);color:var(--ink-60);text-align:center}
+@keyframes cm-breathe{0%,100%{transform:scale(.7)}50%{transform:scale(1)}}
+.chat-dock{border-top:1px solid rgba(20,24,15,.08);padding:12px 18px 10px;background:#FBF7EC}
+.chat-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chat-chips:empty{display:none}
+.chip{font:500 14px var(--sans);padding:9px 16px;border-radius:99px;border:1.5px solid #1B4332;background:#fff;color:#1B4332;cursor:pointer;transition:background .15s,color .15s;animation:cm-in .25s ease-out}
+.chip:hover,.chip:focus-visible{background:#1B4332;color:#F4F0E2}
+.chip.p{background:var(--sf);border-color:var(--sf);color:#fff}
+.chip.p:hover{background:#A9521A;border-color:#A9521A}
+.chat-form{display:flex;gap:8px}
+.chat-form input{flex:1;min-width:0;font:15px var(--sans);padding:12px 16px;border-radius:99px;border:1px solid rgba(20,24,15,.18);background:#fff;color:inherit}
+.chat-form input:focus{outline:2px solid var(--sf);outline-offset:1px}
+.chat-form button{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:#1B4332;color:#F4F0E2;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.chat-fine{margin:7px 0 0;font:11.5px var(--sans);color:var(--ink-60);text-align:center}
+.full-head{background:#1B4332;color:#F4F0E2;position:sticky;top:0;z-index:30}
+.full-head .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:12px;padding-bottom:12px;font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.full-head a{color:#D6F53B;text-transform:none;letter-spacing:0;font-size:14px}
+@media (max-width:900px){
+  .chat{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr);gap:0;padding:0;height:calc(100svh - 64px);min-height:480px}
+  .chat-side{flex-direction:row;align-items:center;text-align:left;gap:12px;padding:10px 14px;border-bottom:1px solid rgba(20,24,15,.08);background:#F4EDDC}
+  .chat-video{width:56px;height:56px;border-width:2px;flex:none;box-shadow:none}
+  .chat-name{font-size:19px;margin:0}
+  .chat-role{font-size:12px;justify-content:flex-start}
+  .chat-about{display:none}
+  .chat-links{margin:0 0 0 auto;gap:4px;align-items:flex-end}
+  .chat-links a,.chat-links button{font-size:12.5px}
+  .chat-main{border-radius:0;box-shadow:none;border:0}
+  .chat-log{padding:16px 12px 8px}
+  .cm{max-width:92%}
+  .cm-b{font-size:15px}
+  .chat-dock{padding:10px 10px calc(8px + env(safe-area-inset-bottom))}
+  .chat-chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -10px 10px;padding:0 10px 2px;scrollbar-width:none}
+  .chat-chips::-webkit-scrollbar{display:none}
+  .chip{flex:none}
+}
+@media (prefers-reduced-motion:reduce){.cm,.chip{animation:none}.cm-orb .orb i{animation:none}}
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

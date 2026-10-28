@@ -1,0 +1,39 @@
+{% comment %}
+  The Swar Yoga page as a conversation with Sadhu ji. Behaviour: sadhu-chat.js.
+  Lessons: _data/sadhu_journey.yml. The full page sits below in #full-page.
+{% endcomment %}
+{% assign sv = '/img/guide/sadhu-loop' | relative_url %}
+<section class="chat" data-chat data-face="{{ '/img/guide/sadhu-face.jpg' | relative_url }}" data-corpus="{{ '/svara-corpus.js' | relative_url }}" aria-label="Conversation with Sadhu ji">
+  <aside class="chat-side">
+    <div class="chat-video">
+      <video autoplay muted loop playsinline preload="auto" poster="{{ sv }}.jpg" aria-hidden="true">
+        <source src="{{ sv }}.webm" type="video/webm"><source src="{{ sv }}.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="chat-id">
+      <h1 class="vh">Swar Yoga with Sadhu ji: which nostril is flowing, and what the texts claim</h1>
+      <p class="chat-name">Sadhu ji</p>
+      <p class="chat-role"><i aria-hidden="true"></i> Your Swar Yoga guide</p>
+    </div>
+    <p class="chat-about">I answer only from the Shiva Svarodaya and The Respiratory Codex, with the verse, and I tell you honestly what science says.</p>
+    <div class="chat-links">
+      <a href="#full-page" data-open-full>Read the full page ↓</a>
+      <button type="button" data-chat-restart>Start again</button>
+    </div>
+  </aside>
+  <div class="chat-main">
+    <div class="chat-log" data-chat-log aria-live="polite"></div>
+    <div class="chat-dock">
+      <div class="chat-chips" data-chat-chips></div>
+      <form class="chat-form" data-chat-form autocomplete="off">
+        <label class="vh" for="chat-in">Message Sadhu ji</label>
+        <input id="chat-in" data-chat-input type="text" placeholder="Type a question for Sadhu ji…" maxlength="300">
+        <button type="submit" aria-label="Send">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z" fill="currentColor"/></svg>
+        </button>
+      </form>
+      <p class="chat-fine">A contemplative practice, not medical advice. Nothing you type is sent anywhere.</p>
+    </div>
+  </div>
+</section>
+<script>window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};</script>
