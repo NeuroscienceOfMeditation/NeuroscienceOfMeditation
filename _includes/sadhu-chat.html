@@ -42,5 +42,5 @@
 window.SADHU_JOURNEY = {{ site.data.sadhu_journey | jsonify }};
 window.SVARA_GUIDE = { name: {{ gname | jsonify }}, poster: {{ sv | append: '.jpg' | jsonify }}, webm: {{ sv | append: '.webm' | jsonify }}, mp4: {{ sv | append: '.mp4' | jsonify }},
   // Extra mood loops (mp4). Leave empty until a clip exists: meditate (eyes closed), listen, explain, smile
-  moods: {{ site.data.sadhu_journey.guide_moods | default: '{}' | jsonify }} };
+  moods: {% if site.data.sadhu_journey.guide_moods %}{{ site.data.sadhu_journey.guide_moods | jsonify }}{% else %}{}{% endif %} };
 </script>
