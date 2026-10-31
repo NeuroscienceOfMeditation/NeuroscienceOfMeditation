@@ -1220,3 +1220,100 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 @media (max-width:900px){.hero-image.hero-motion{height:460px}}
 .hero-motion .hero-vid{position:absolute;inset:0;width:100%;height:100%;border-radius:24px;opacity:0;transition:opacity .2s}
 .hero-motion .hero-vid.on{opacity:1}
+
+/* =========================================
+   MOBILE PALETTE BALANCE (Nov 2026)
+   Dark green reads as a confident stripe at desktop width, but
+   every horizontal band becomes a vertical slab on a phone. These
+   rules keep green as punctuation — header, buttons, one section,
+   a closing strip — instead of a surface.
+   Uses the theme variables, so dark mode follows automatically.
+   ========================================= */
+
+/* 1. The band behind the hero photos has nothing to sit behind
+      once they stack, so it becomes a slab. Drop it. */
+@media (max-width:640px){
+  .bandgreen{display:none}
+}
+
+/* 2. Hero photos: 2-up grid -> side-scrolling rail. Keeps the
+      band one image tall, and all three get seen rather than two
+      being scrolled past. The -20px bleed matches .wrap's mobile
+      padding so the next card peeks in and signals "scroll me". */
+@media (max-width:640px){
+  .trip{
+    display:flex;
+    grid-template-columns:none;
+    gap:10px;
+    margin:32px -20px 0;
+    padding:0 20px 6px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .trip::-webkit-scrollbar{display:none}
+  .trip > *{flex:0 0 76%;scroll-snap-align:start;min-width:0}
+  .trip .ph{height:190px}
+  .trip .trip-quote{grid-column:auto;height:190px;min-height:0}
+  .trip-quote blockquote{padding:18px 20px}
+}
+
+/* 3. Footer moves off --canopy onto the panel colour, and the
+      legal line becomes a full-bleed green strip so the page
+      still ends in brand colour. */
+@media (max-width:640px){
+  footer{
+    background:var(--cream-2);
+    color:var(--ink-60);
+    padding:44px 0 0;
+    /* sections above the footer are also --cream-2, so the footer
+       needs a hairline or the boundary disappears */
+    border-top:1px solid var(--line);
+  }
+  footer .foot-h,
+  footer h6{color:var(--ink)}
+  footer a{color:var(--ink-60)}
+  footer a:hover{color:var(--forest-ink)}
+  footer p{color:var(--ink-60)}
+  footer .signup-note{color:var(--ink-60)}
+
+  /* the signup is the main conversion on every page — it can't
+     disappear against the lighter panel */
+  footer .sub-form input,
+  footer .sub-form .formkit-input{
+    background:var(--surface);
+    border:1px solid var(--line);
+    color:var(--ink);
+  }
+  footer .sub-form input::placeholder{color:var(--ink-60)}
+  footer .formkit-powered-by-convertkit{color:var(--ink-60)}
+
+  footer .legal{
+    display:block;
+    background:var(--forest);
+    color:var(--paper);
+    border-top:0;
+    margin:28px -20px 0;
+    padding:16px 20px;
+    font-size:11px;
+    line-height:1.6;
+  }
+  footer .legal > *{display:block}
+}
+
+/* 4. 74px of sticky green on every screen is a lot on a phone.
+      Also moves the tagline hide up from 420px. */
+@media (max-width:640px){
+  .topbar .wrap{height:58px}
+  .brand small{display:none}
+  .brand b{font-size:15px}
+  .brand img{width:32px;height:32px}
+}
+
+/* 5. Cap any full-green section so one can never fill a screen
+      on its own. */
+@media (max-width:640px){
+  .sec.green{padding:48px 0}
+}
