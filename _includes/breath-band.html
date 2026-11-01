@@ -1,0 +1,23 @@
+{% comment %}
+  "Every breath leaves a trace" band on the homepage, under the hero.
+  As it scrolls into view: a breath leaves the nose as mist, becomes a slow
+  breathing wave, then a heartbeat that speeds up on the in-breath and slows on
+  the out-breath (respiratory sinus arrhythmia). Drawing: breath-band.js.
+{% endcomment %}
+<section class="bb" aria-labelledby="bb-title" data-bb>
+  <div class="wrap bb-wrap">
+    <div class="bb-copy">
+      <div class="eyebrow">What we study</div>
+      <h2 id="bb-title">Every breath leaves a trace. <em data-bb-follow>We follow it.</em></h2>
+    </div>
+    <div class="bb-art">
+      <canvas data-bb-canvas aria-hidden="true"></canvas>
+      <div class="bb-labels">
+        <p data-bb-l1><b>Breath</b>about 6 slow breaths a minute</p>
+        <p data-bb-l2><b>Heart</b>beats speed up as you breathe in, slow as you breathe out</p>
+      </div>
+    </div>
+    <p class="bb-note">Heart rate rising and falling with the breath is called respiratory sinus arrhythmia. <span class="bb-grade">How sure: established</span></p>
+  </div>
+</section>
+<script src="{{ '/breath-band.js' | relative_url }}" defer></script>
