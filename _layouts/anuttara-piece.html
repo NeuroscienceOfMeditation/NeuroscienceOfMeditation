@@ -37,13 +37,20 @@
         <div class="eyebrow">{{ page.section }} · {{ words | divided_by: 220 | plus: 1 }} min</div>
         <h1 style="font-size:clamp(34px,5vw,54px);line-height:1.04">{{ page.title }}</h1>
         {% if page.description %}<p class="lede" style="margin-top:22px">{{ page.description }}</p>{% endif %}
-        <div class="post-meta"><span>By {{ page.author }}</span>{% if page.sources %}<span>{{ page.sources }} studies cited</span>{% endif %}</div>
+        <div class="post-meta"><span>By {{ page.author }}</span>{% if page.first_published %}<span>First published {{ page.first_published | date: '%-d %B %Y' }} on <a href="{{ page.original_url | relative_url }}">Words of Yoga</a></span>{% endif %}{% if page.sources %}<span>{{ page.sources }} studies cited</span>{% endif %}</div>
       </div>
     </div>
   </section>
 
   <section class="sec" style="padding-top:0">
     <div class="wrap">
+      {% if page.takeaway %}
+      <aside class="takeaway" aria-label="The short version">
+        <div class="k">The short version</div>
+        <p>{{ page.takeaway }}</p>
+      </aside>
+      {% endif %}
+
       <article class="prose">
         {{ content }}
       </article>

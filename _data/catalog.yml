@@ -75,6 +75,13 @@ books:
     blurb: "Where the old texts and current research agree — and where they don't."
     price: "₹649"
 
+  - title: "Aṇūṭṭara · Issue 02"
+    cover: "Aṇūṭṭara<br>Issue 02"
+    blurb: "Our free magazine. Issue 02: eleven articles on the Śiva Svarodaya, the nasal cycle, how meditation research measures what it claims, and Abhinavagupta."
+    price: "Free"
+    link: /anuttara/issue-02/
+    button: "Read now"
+
   - title: "Aṇūṭṭara · Issue 01"
     cover: "Aṇūṭṭara<br>Issue 01"
     blurb: "Our free magazine. Issue 01: the breath's clock in the Śiva Svarodaya, six recent studies, an essay and two practices."
