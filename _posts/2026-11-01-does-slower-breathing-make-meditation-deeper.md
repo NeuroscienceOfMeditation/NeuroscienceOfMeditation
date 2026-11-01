@@ -1,7 +1,7 @@
 ---
 title: "Does Slower Breathing Make Meditation Deeper?"
 description: "The advice bundles two claims together. One of them is among the best-evidenced things in the field. The other has barely been tested, because nobody agrees how to measure it."
-date: 2026-11-02 06:00:00 +0530
+date: 2026-11-01 14:21:01 +0530
 pillar: Claim check
 cover: breath
 image: /img/og-slower-breathing.jpg
