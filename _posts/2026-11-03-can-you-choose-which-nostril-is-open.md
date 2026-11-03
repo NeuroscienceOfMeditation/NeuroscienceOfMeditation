@@ -1,7 +1,7 @@
 ---
 title: "Can You Choose Which Nostril Is Open?"
 description: "The Shiva Svarodaya does not only claim you can read which nostril is flowing. It claims you can change it. That is the part of the system I had never properly checked, and it is the part that mostly survives."
-date: 2026-11-02 08:04:13 +0530
+date: 2026-11-03 06:00:18 +0530
 pillar: Claim check
 cover: breath
 image: /img/og-choose-nostril.jpg
