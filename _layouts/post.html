@@ -57,6 +57,12 @@
 
       {% include author-card.html %}
 
+      <a class="atlas-promo" href="{{ '/brain-atlas.html' | relative_url }}">
+        <img src="{{ '/brain-atlas/brain-thumb.webp' | relative_url }}" alt="" width="120" height="120" loading="lazy">
+        <span><small>Explore</small><b>The Meditation Brain Atlas</b>Turn a real 3D brain. Click a region to see what it does and what meditation research shows, with every claim graded.</span>
+        <i aria-hidden="true">→</i>
+      </a>
+
       {% comment %} Only research pieces cite studies; reflections skip this note. {% endcomment %}
       {% if page.sources %}
       <div class="card post-note">

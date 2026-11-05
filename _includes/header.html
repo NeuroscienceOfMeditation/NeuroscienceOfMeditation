@@ -1,7 +1,7 @@
 {% comment %}
   Site header. Use on every page:
     {% include header.html active="home" %}
-  active: home | swar | mind | courses | words | anuttara | contact (leave out on other pages)
+  active: home | swar | atlas | mind | courses | words | anuttara | contact (leave out on other pages)
 {% endcomment %}
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -20,6 +20,7 @@
       <a href="{{ '/' | relative_url }}"{% if include.active == 'home' %} class="on" aria-current="page"{% endif %}>Home</a>
       <a href="{{ '/words-of-yoga.html' | relative_url }}"{% if include.active == 'words' %} class="on" aria-current="page"{% endif %}>Articles</a>
       <a href="{{ '/swar-yoga.html' | relative_url }}"{% if include.active == 'swar' %} class="on" aria-current="page"{% endif %}>Swar Yoga</a>
+      <a href="{{ '/brain-atlas.html' | relative_url }}"{% if include.active == 'atlas' %} class="on" aria-current="page"{% endif %}>Brain Atlas</a>
       <a href="{{ '/courses-books.html' | relative_url }}"{% if include.active == 'courses' %} class="on" aria-current="page"{% endif %}>Courses &amp; Books</a>
       <a href="{{ '/anuttara.html' | relative_url }}"{% if include.active == 'anuttara' %} class="on" aria-current="page"{% endif %}>Magazine</a>
       <a href="{{ '/my-mind-and-me.html' | relative_url }}"{% if include.active == 'mind' %} class="on" aria-current="page"{% endif %}>About</a>

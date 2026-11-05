@@ -1312,7 +1312,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 }
 
 /* Homepage breath band (breath-band.js) */
-.bb{background:var(--cream);padding:70px 0 60px;border-top:1px solid rgba(20,24,15,.06)}
+.bb{background:var(--cream);padding:70px 0 175px;border-top:1px solid rgba(20,24,15,.06)}
 .bb-wrap{position:relative}
 .bb-copy{position:absolute;left:calc(34px + 33%);top:24px;z-index:1;max-width:620px}
 .bb h2{font-family:var(--serif);font-size:clamp(30px,4vw,50px);line-height:1.12;color:#1B4332;margin:10px 0 0}
@@ -1334,3 +1334,15 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
   .bb-note{margin:14px 0 0}
 }
 @media (prefers-reduced-motion:reduce){.bb h2 em,.bb-labels p{opacity:1;transform:none;transition:none}}
+
+/* Links to the Meditation Brain Atlas */
+.bb-atlas,.atlas-promo{display:flex;align-items:center;gap:18px;text-decoration:none;color:#1B4332;background:#FBF7EC;border:1px solid rgba(20,24,15,.1);border-radius:18px;padding:16px 20px;transition:border-color .15s,transform .15s}
+.bb-atlas:hover,.atlas-promo:hover{border-color:#C2611F;transform:translateY(-2px)}
+.bb-atlas{margin:22px 0 0 33%;max-width:560px}
+.bb-atlas span,.atlas-promo span{flex:1;font:14.5px/1.5 var(--sans);color:#5a5a4a}
+.bb-atlas b,.atlas-promo b{display:block;font:600 18px var(--serif);color:#1B4332;margin-bottom:2px}
+.bb-atlas i,.atlas-promo i{font-style:normal;font-size:22px;color:#C2611F}
+.atlas-promo{margin:28px 0}
+.atlas-promo img{width:96px;height:96px;border-radius:14px;object-fit:cover;flex:none;background:#EDE4CF}
+.atlas-promo small{display:block;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#C2611F;margin-bottom:2px}
+@media (max-width:900px){.bb-atlas{margin:18px 0 0}.atlas-promo img{width:72px;height:72px}}
