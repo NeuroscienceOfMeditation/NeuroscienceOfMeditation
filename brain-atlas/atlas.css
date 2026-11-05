@@ -1,0 +1,51 @@
+/* The Meditation Brain Atlas (brain-atlas.html) */
+.ba{display:grid;grid-template-columns:400px minmax(0,1fr);gap:24px;max-width:1400px;margin:0 auto;padding:24px 28px 40px;min-height:calc(100svh - 74px);box-sizing:border-box;background:radial-gradient(ellipse at 65% 45%,#FBF7EC 0%,#EDE4CF 70%)}
+.ba-panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.ba-search{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:0 16px;box-shadow:0 4px 18px rgba(20,24,15,.08);color:#7a6a58}
+.ba-search input{flex:1;min-width:0;border:0;background:none;font:16px var(--sans);padding:15px 0;color:#1d2a20;outline:none}
+.ba-hits{position:absolute;left:0;right:0;top:calc(100% + 6px);list-style:none;margin:0;padding:6px;background:#fff;border-radius:12px;box-shadow:0 12px 30px rgba(20,24,15,.15);z-index:5}
+.ba-hits button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;padding:10px 12px;border-radius:8px;font:15px var(--sans);color:#1B4332;cursor:pointer}
+.ba-hits button:hover{background:#F4EDDC}
+.ba-hits i,.ba-chips i,.ba-dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}
+.ba-none{padding:10px 12px;color:#7a6a58;font-size:14px}
+.ba-card{background:rgba(251,247,236,.94);border-radius:18px;padding:22px 24px 22px;box-shadow:0 10px 30px rgba(20,24,15,.08);overflow-y:auto;max-height:calc(100svh - 300px)}
+.ba-card h1,.ba-card h2{font-family:var(--serif);color:#1B4332;line-height:1.15;margin:4px 0 12px}
+.ba-card h1{font-size:30px}.ba-card h2{font-size:27px}
+.ba-card h3{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#C2611F;margin:18px 0 6px}
+.ba-card p{font:15.5px/1.6 var(--sans);color:#2a2f22;margin:0 0 10px}
+.ba-kicker{display:flex;align-items:center;gap:8px;font:600 11.5px var(--sans)!important;letter-spacing:.14em;text-transform:uppercase;color:#7a6a58!important;margin:0!important}
+.ba-hint{color:#6b6b5a!important;font-size:14px!important;margin-top:12px!important}
+.ba-claim{background:#fff;border-radius:12px;padding:12px 14px;margin:8px 0;border:1px solid rgba(20,24,15,.07)}
+.ba-claim p{margin:0 0 6px}
+.ba-grade{display:inline-flex;align-items:center;gap:7px;font:500 13px var(--sans)!important;color:#3b3a2e!important;background:#fff;border:1px solid rgba(20,24,15,.12);border-radius:99px;padding:5px 12px;margin:2px 0 8px!important}
+.ba-grade i{width:9px;height:9px;border-radius:50%;background:#999}
+.ba-g-E i{background:#2F8F5B}.ba-g-S i{background:#D9A520}.ba-g-X i{background:#9A8F80}.ba-g-C i{background:#C8432B}
+.ba-refs{display:flex;flex-direction:column;gap:4px;margin:0!important}
+.ba-refs a{font:13px/1.45 var(--sans);color:#1B4332;font-weight:600}
+.ba-back{margin-top:12px;border:1.5px solid rgba(27,67,50,.3);background:none;border-radius:99px;padding:8px 16px;font:600 13.5px var(--sans);color:#1B4332;cursor:pointer}
+.ba-list-h{font:600 11.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#7a6a58;margin:4px 0 8px}
+.ba-chips{display:flex;flex-wrap:wrap;gap:7px}
+.ba-chips button{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(20,24,15,.12);background:#fff;border-radius:99px;padding:7px 13px;font:500 13.5px var(--sans);color:#1B4332;cursor:pointer}
+.ba-chips button[aria-pressed="true"]{border-color:#1B4332;box-shadow:0 0 0 2px #1B4332 inset}
+.ba-stage{position:relative;min-height:560px;border-radius:22px;overflow:hidden}
+.ba-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none}
+.ba-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:15px var(--sans);color:#7a6a58;margin:0}
+.ba-tip{position:absolute;pointer-events:none;background:#1B4332;color:#F4F0E2;font:600 13px var(--sans);padding:6px 11px;border-radius:8px;white-space:nowrap;z-index:3}
+.ba-tools{position:absolute;right:16px;top:16px;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.ba-seg{display:flex;background:rgba(255,255,255,.85);border-radius:99px;padding:4px;box-shadow:0 4px 14px rgba(20,24,15,.1)}
+.ba-seg button{border:0;background:none;border-radius:99px;padding:8px 14px;font:600 13px var(--sans);color:#1B4332;cursor:pointer}
+.ba-seg button[aria-pressed="true"]{background:#1B4332;color:#F4F0E2}
+.ba-seg button:hover{background:rgba(27,67,50,.08)}
+.ba-seg button[aria-pressed="true"]:hover{background:#1B4332}
+.ba-zoom{display:flex;gap:8px}
+.ba-zoom button{width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font:600 22px var(--sans);color:#1B4332;cursor:pointer;box-shadow:0 4px 14px rgba(20,24,15,.1)}
+.ba-credit{margin:4px 0 0;font:12px/1.5 var(--sans);color:#7a6a58}
+.ba-credit a{color:#1B4332}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:900px){
+  .ba{grid-template-columns:1fr;padding:12px 12px 30px;gap:12px}
+  .ba-stage{order:-1;min-height:0;height:62svh}
+  .ba-card{max-height:none}
+  .ba-tools{top:10px;right:10px;left:10px;flex-direction:row;flex-wrap:wrap;justify-content:flex-end}
+  .ba-seg button{padding:7px 10px;font-size:12px}
+}

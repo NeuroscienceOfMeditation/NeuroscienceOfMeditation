@@ -1,0 +1,134 @@
+# The Meditation Brain Atlas (brain-atlas.html).
+# Regions are groups of parcels from the Schaefer 2018 400-parcel, 7-network map
+# on the fsaverage5 surface (MIT licence). The id must match brain-atlas/brain.bin.
+# Grades: E established, S suggestive, X speculative, C contradicted.
+# Only cite studies that have been checked to say what the claim says.
+
+refs:
+  fox2014:
+    label: "Fox et al. 2014, meta-analysis of brain structure in meditators (Neuroscience & Biobehavioral Reviews)"
+    url: "https://pesquisa.bvsalud.org/portal/resource/en/mdl-24705269"
+  fox2016:
+    label: "Fox et al. 2016, meta-analysis of 78 functional neuroimaging studies of meditation (Neuroscience & Biobehavioral Reviews)"
+    url: "https://arxiv.org/abs/1603.06342"
+  brewer2011:
+    label: "Brewer et al. 2011, default mode network in experienced meditators (PNAS)"
+    url: "https://doi.org/10.1073/pnas.1112029108"
+  kral2022:
+    label: "Kral et al. 2022, two randomised trials of MBSR, 218 adults (Science Advances)"
+    url: "https://doi.org/10.1126/sciadv.abk3316"
+  schaefer2018:
+    label: "Schaefer et al. 2018, the brain map used here (Cerebral Cortex)"
+    url: "https://pubmed.ncbi.nlm.nih.gov/28981612/"
+
+big_question:
+  title: "Does meditation change the brain?"
+  grade: C
+  grade_label: "Contested"
+  text: "Studies comparing long-term meditators with non-meditators find differences in several regions, with a medium effect overall. But those studies can't tell cause from effect, and the authors flag publication bias as a strong concern. The largest randomised trial so far found no structural change after an 8-week mindfulness course."
+  refs: [fox2014, kral2022]
+
+regions:
+  - id: 1
+    name: "Medial prefrontal cortex"
+    network: "Default mode network"
+    colour: "#C2611F"
+    does: "Thinking about yourself and other people, and replaying the past or imagining the future. A hub of the default mode network, which is most active when the mind wanders."
+    claims:
+      - text: "Experienced meditators showed less activity here while meditating than people new to it, in one small study."
+        grade: S
+        refs: [brewer2011]
+
+  - id: 2
+    name: "Posterior cingulate and precuneus"
+    network: "Default mode network"
+    colour: "#D98E3A"
+    does: "The other core hub of the default mode network: self-related thought, memory and mind-wandering."
+    claims:
+      - text: "Less active in experienced meditators during meditation, alongside the medial prefrontal cortex. Small study, cross-sectional."
+        grade: S
+        refs: [brewer2011]
+
+  - id: 3
+    name: "Insula"
+    network: "Salience network"
+    colour: "#2E7FA8"
+    does: "Senses the inside of the body: heartbeat, breath, hunger, tension. Often called the seat of interoception."
+    claims:
+      - text: "One of the regions recruited across several meditation styles, though results across studies converge less than often claimed."
+        grade: S
+        refs: [fox2016]
+      - text: "Differs in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+      - text: "Grows after an 8-week mindfulness course."
+        grade: C
+        refs: [kral2022]
+
+  - id: 4
+    name: "Anterior and mid cingulate cortex"
+    network: "Salience network"
+    colour: "#5B9BC4"
+    does: "Notices conflict and errors, and helps decide where attention should go next, such as noticing the mind has wandered."
+    claims:
+      - text: "The dorsal anterior cingulate is recruited across several meditation styles."
+        grade: S
+        refs: [fox2016]
+      - text: "Differs in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+
+  - id: 5
+    name: "Lateral and frontopolar prefrontal cortex"
+    network: "Control network"
+    colour: "#1B4332"
+    does: "Holding a goal in mind, planning and steering attention on purpose. The frontopolar part, at the very front, is linked to meta-awareness: knowing what your mind is doing."
+    claims:
+      - text: "The frontopolar cortex is recruited across several meditation styles."
+        grade: S
+        refs: [fox2016]
+      - text: "The frontopolar cortex differs in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+
+  - id: 6
+    name: "Orbitofrontal cortex"
+    network: "Limbic and control networks"
+    colour: "#8A6BB0"
+    does: "Weighing what things are worth, and adjusting emotional responses as situations change."
+    claims:
+      - text: "Among the regions that differ in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+
+  - id: 7
+    name: "Somatosensory and motor cortex"
+    network: "Somatomotor network"
+    colour: "#3E9B5F"
+    does: "Feeling touch and body position, and planning and making movements."
+    claims:
+      - text: "Premotor and supplementary motor areas are recruited across several meditation styles."
+        grade: S
+        refs: [fox2016]
+      - text: "Sensory cortices differ in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+
+  - id: 8
+    name: "Visual cortex"
+    network: "Visual network"
+    colour: "#9A8F80"
+    does: "Turning light from the eyes into what you see."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+networks:
+  - { id: 1, name: "Visual", colour: "#7B3C9E", does: "Seeing." }
+  - { id: 2, name: "Somatomotor", colour: "#4682B4", does: "Touch, body position and movement." }
+  - { id: 3, name: "Dorsal attention", colour: "#00A05A", does: "Pointing attention at things on purpose." }
+  - { id: 4, name: "Salience", colour: "#C43AFA", does: "Noticing what matters right now, inside the body and outside it. Includes the insula and anterior cingulate." }
+  - { id: 5, name: "Limbic", colour: "#C8C46C", does: "Value and emotion; this map shows its cortical parts only." }
+  - { id: 6, name: "Control", colour: "#E69422", does: "Holding goals and steering thought. Includes the lateral prefrontal cortex." }
+  - { id: 7, name: "Default mode", colour: "#CD3E4E", does: "Mind-wandering and thinking about yourself. Includes the medial prefrontal and posterior cingulate cortex." }

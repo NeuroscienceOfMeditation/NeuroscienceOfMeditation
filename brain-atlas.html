@@ -1,0 +1,73 @@
+---
+title: "The Meditation Brain Atlas: a 3D brain, graded by the evidence"
+description: "Turn a real 3D brain, click a region, and see what it does and what meditation research actually shows about it, with every claim graded and sourced."
+---
+{% assign A = site.data.brain_atlas %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <link rel="stylesheet" href="{{ '/brain-atlas/atlas.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+{% include header.html active="research" %}
+
+<main id="main" class="ba">
+  <div class="ba-panel">
+    <div class="ba-search">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <label class="vh" for="ba-q">Find an area of the brain</label>
+      <input id="ba-q" type="search" placeholder="Find an area of the brain" autocomplete="off" data-ba-q>
+      <ul class="ba-hits" data-ba-hits hidden></ul>
+    </div>
+
+    <div class="ba-card" data-ba-card aria-live="polite">
+      <!-- filled by atlas.js; this is what shows before anything is chosen -->
+      <p class="ba-kicker">The Meditation Brain Atlas</p>
+      <h1>{{ A.big_question.title }}</h1>
+      <p class="ba-grade ba-g-{{ A.big_question.grade }}"><i></i>How sure is this? <b>{{ A.big_question.grade_label }}</b></p>
+      <p>{{ A.big_question.text }}</p>
+      <p class="ba-refs">{% for r in A.big_question.refs %}<a href="{{ A.refs[r].url }}" target="_blank" rel="noopener">{{ A.refs[r].label }} ↗</a>{% endfor %}</p>
+      <p class="ba-hint">Turn the brain, then click a coloured region to see what it does and what meditation research shows.</p>
+    </div>
+
+    <div class="ba-list">
+      <p class="ba-list-h">Regions</p>
+      <div class="ba-chips" data-ba-chips></div>
+    </div>
+    <p class="ba-credit">Brain surface: fsaverage5. Regions grouped from the <a href="{{ A.refs.schaefer2018.url }}" target="_blank" rel="noopener">Schaefer 2018 map</a> (MIT licence). Shows the outer cortex only; deeper structures such as the amygdala and hippocampus are not on this surface.</p>
+  </div>
+
+  <div class="ba-stage">
+    <canvas data-ba-canvas aria-label="3D brain. Drag to turn, scroll or pinch to zoom, click a region to learn about it." role="img"></canvas>
+    <p class="ba-loading" data-ba-loading>Loading the brain…</p>
+    <div class="ba-tip" data-ba-tip hidden></div>
+    <div class="ba-tools">
+      <div class="ba-seg" role="group" aria-label="Colour by">
+        <button type="button" aria-pressed="true" data-ba-mode="regions">Regions</button>
+        <button type="button" aria-pressed="false" data-ba-mode="networks">Networks</button>
+      </div>
+      <div class="ba-seg" role="group" aria-label="View from">
+        <button type="button" data-ba-view="left">Left</button>
+        <button type="button" data-ba-view="right">Right</button>
+        <button type="button" data-ba-view="top">Top</button>
+        <button type="button" data-ba-view="front">Front</button>
+        <button type="button" data-ba-view="inside">Inside</button>
+      </div>
+      <div class="ba-zoom">
+        <button type="button" data-ba-zoom="-1" aria-label="Zoom out">−</button>
+        <button type="button" data-ba-zoom="1" aria-label="Zoom in">+</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include footer.html %}
+
+<script>window.BRAIN_ATLAS = {{ A | jsonify }};</script>
+<script type="importmap">{ "imports": { "three": "{{ '/brain-atlas/vendor/three.module.min.js' | relative_url }}" } }</script>
+<script type="module" src="{{ '/brain-atlas/atlas.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+</body>
+</html>
