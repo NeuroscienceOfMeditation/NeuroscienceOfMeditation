@@ -1,6 +1,6 @@
 ---
 title: "The Meditation Brain Atlas: a 3D brain, graded by the evidence"
-description: "Turn a real 3D brain, click a region, and see what it does and what meditation research actually shows about it, with every claim graded and sourced."
+description: "Turn a real 3D brain, click a region, compare meditation practices, and see what it does and what meditation research actually shows about it, with every claim graded and sourced."
 ---
 {% assign A = site.data.brain_atlas %}
 <!DOCTYPE html>
@@ -30,7 +30,8 @@ description: "Turn a real 3D brain, click a region, and see what it does and wha
       <p class="ba-grade ba-g-{{ A.big_question.grade }}"><i></i>How sure is this? <b>{{ A.big_question.grade_label }}</b></p>
       <p>{{ A.big_question.text }}</p>
       <p class="ba-refs">{% for r in A.big_question.refs %}<a href="{{ A.refs[r].url }}" target="_blank" rel="noopener">{{ A.refs[r].label }} ↗</a>{% endfor %}</p>
-      <button type="button" class="ba-next ba-tourbtn" data-ba-tour>▶ Take the guided tour: one sitting, four moments</button>
+      <p class="ba-kicker ba-tours-h">Guided tours</p>
+      {% for t in A.tours %}<button type="button" class="ba-next ba-tourbtn" data-ba-tour="{{ t.id }}">▶ {{ t.button }}</button>{% endfor %}
       <p class="ba-hint">Or turn the brain and click a coloured region. Slide <b>Glass</b> to see the deep structures inside.</p>
     </div>
 
@@ -38,7 +39,7 @@ description: "Turn a real 3D brain, click a region, and see what it does and wha
       <p class="ba-list-h">Regions</p>
       <div class="ba-chips" data-ba-chips></div>
     </div>
-    <p class="ba-credit">Brain surface: fsaverage5. Regions grouped from the <a href="{{ A.refs.schaefer2018.url }}" target="_blank" rel="noopener">Schaefer 2018 map</a> (MIT licence). Deep structures from the <a href="{{ A.refs.tian2020.url }}" target="_blank" rel="noopener">Melbourne Subcortex Atlas</a> (Tian et al. 2020). Positions are a population average, not any one person's brain.</p>
+    <p class="ba-credit">Brain surface: fsaverage5. Regions grouped from the <a href="{{ A.refs.schaefer2018.url }}" target="_blank" rel="noopener">Schaefer 2018 map</a> (MIT licence). Deep structures from the <a href="{{ A.refs.tian2020.url }}" target="_blank" rel="noopener">Melbourne Subcortex Atlas</a> (Tian et al. 2020). Brainstem and cerebellum from the <a href="{{ A.refs.cerebatlas.url }}" target="_blank" rel="noopener">Diedrichsen lab cerebellar template</a> (CC BY). Positions are a population average, not any one person's brain.</p>
   </div>
 
   <div class="ba-stage">
@@ -49,6 +50,7 @@ description: "Turn a real 3D brain, click a region, and see what it does and wha
       <div class="ba-seg" role="group" aria-label="Colour by">
         <button type="button" aria-pressed="true" data-ba-mode="regions">Regions</button>
         <button type="button" aria-pressed="false" data-ba-mode="networks">Networks</button>
+        <button type="button" aria-pressed="false" data-ba-mode="practices">Practices</button>
       </div>
       <div class="ba-seg" role="group" aria-label="View from">
         <button type="button" data-ba-view="left">Left</button>

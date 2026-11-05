@@ -26,6 +26,21 @@ refs:
   tian2020:
     label: "Tian et al. 2020, the Melbourne Subcortex Atlas used for the deep structures (Nature Neuroscience)"
     url: "https://doi.org/10.1038/s41593-020-00711-6"
+  smith1991:
+    label: "Smith et al. 1991, the preBötzinger complex, a brainstem region that may generate breathing rhythm, in rats (Science)"
+    url: "https://doi.org/10.1126/science.1683005"
+  schwarzacher2011:
+    label: "Schwarzacher et al. 2011, identifying the preBötzinger complex in the human medulla (Brain)"
+    url: "https://doi.org/10.1093/brain/awq327"
+  zelano2016:
+    label: "Zelano et al. 2016, nasal breathing and rhythms in the human amygdala and hippocampus, 7 people with intracranial electrodes plus behavioural tests (Journal of Neuroscience)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5148230"
+  farb2013:
+    label: "Farb et al. 2013, attention to the breath and the insula, before and after mindfulness training (Social Cognitive and Affective Neuroscience)"
+    url: "https://doi.org/10.1093/scan/nss066"
+  cerebatlas:
+    label: "Diedrichsen lab cerebellar atlases, the template used for the brainstem and cerebellum (CC BY)"
+    url: "https://github.com/DiedrichsenLab/cerebellar_atlases"
   schaefer2018:
     label: "Schaefer et al. 2018, the brain map used here (Cerebral Cortex)"
     url: "https://pubmed.ncbi.nlm.nih.gov/28981612/"
@@ -210,28 +225,139 @@ regions:
         grade: X
         refs: [fox2014, fox2016]
 
-tour:
-  title: "One sitting, four moments"
-  intro: "In a 2012 study, 14 meditators focused on the breath inside a brain scanner and pressed a button each time they noticed their mind had wandered. Here is what the brain did around each press."
+  - id: 15
+    name: "Brainstem"
+    network: "Deep structure"
+    deep: true
+    colour: "#A0674B"
+    does: "Runs the body's automatic work: it starts every automatic breath, helps set heart rate and blood pressure, and connects the brain to the spinal cord. It is made of the midbrain, pons and medulla."
+    related:
+      - { label: "Watch your own breath: the Swar Yoga tool", url: "/swar-yoga.html" }
+    claims:
+      - text: "Generates the automatic rhythm of breathing, from a small network in the medulla called the preBötzinger complex. Found in rats in 1991; a matching area has been identified in the human medulla."
+        grade: E
+        refs: [smith1991, schwarzacher2011]
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+  - id: 16
+    name: "Cerebellum"
+    network: "Deep structure"
+    deep: true
+    colour: "#B7A27C"
+    does: "Coordinates and times movement and balance, and also takes part in some thinking and emotional processes."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+tours:
+  - id: sitting
+    button: "One sitting, four moments"
+    title: "One sitting, four moments"
+    intro: "In a 2012 study, 14 meditators focused on the breath inside a brain scanner and pressed a button each time they noticed their mind had wandered. Here is what the brain did around each press."
+    grade: S
+    refs: [hasenkamp2012]
+    steps:
+      - title: "1. The mind wanders"
+        text: "You set out to follow the breath, and drift into a plan or a memory. Default mode network regions are most active here."
+        regions: [1, 2]
+        view: inside
+      - title: "2. You notice"
+        text: "The moment you realise you've drifted. Salience network regions, the insula and anterior cingulate, are most active."
+        regions: [3, 4]
+        view: right
+      - title: "3. You come back"
+        text: "Choosing to return to the breath. Parts of the executive (control) network take over."
+        regions: [5]
+        view: right
+      - title: "4. You stay"
+        text: "Holding attention on the breath. The executive network remains engaged, until the next drift. Noticing and returning is the practice."
+        regions: [5]
+        view: front
+
+  - id: breath
+    button: "How a breath is made"
+    title: "How a breath is made"
+    intro: "Breathing is the one automatic body rhythm you can also steer on purpose. Here is the path of a breath through the brain."
+    steps:
+      - title: "1. The rhythm starts deep down"
+        text: "Each automatic breath is started by a small network of neurons in the medulla, the lowest part of the brainstem, called the preBötzinger complex. It keeps you breathing while you sleep."
+        regions: [15]
+        view: front
+        glass: 0.3
+        grade: E
+        refs: [smith1991, schwarzacher2011]
+      - title: "2. You can take over"
+        text: "Unlike your heartbeat, you can slow your breath, deepen it or hold it on purpose. That voluntary control comes from the motor cortex, which can override the brainstem's rhythm for a while. Pranayama works through this route."
+        regions: [7]
+        view: left
+      - title: "3. You feel it"
+        text: "Paying attention to the sensations of breathing engages the insula, the area that maps the inside of the body. In one study, this response changed after an 8-week mindfulness course."
+        regions: [3]
+        view: right
+        grade: S
+        refs: [farb2013]
+      - title: "4. It reaches emotion and memory"
+        text: "In 7 people with electrodes inside the brain for epilepsy care, rhythms in the amygdala and hippocampus followed the breath when they breathed through the nose, much less through the mouth. In tests, fearful faces were recognised faster during an in-breath. A small study, so far."
+        regions: [10, 9]
+        view: right
+        glass: 0.3
+        grade: S
+        refs: [zelano2016]
+
+practices:
+  intro: "A 2016 meta-analysis pooled 78 brain-imaging studies and found that different kinds of meditation light up different areas. Choose a practice to see where. Each ball sits at the centre of a reported cluster and has the same volume."
   grade: S
-  refs: [hasenkamp2012]
-  steps:
-    - title: "1. The mind wanders"
-      text: "You set out to follow the breath, and drift into a plan or a memory. Default mode network regions are most active here."
-      regions: [1, 2]
-      view: inside
-    - title: "2. You notice"
-      text: "The moment you realise you've drifted. Salience network regions, the insula and anterior cingulate, are most active."
-      regions: [3, 4]
-      view: right
-    - title: "3. You come back"
-      text: "Choosing to return to the breath. Parts of the executive (control) network take over."
-      regions: [5]
-      view: right
-    - title: "4. You stay"
-      text: "Holding attention on the breath. The executive network remains engaged, until the next drift. Noticing and returning is the practice."
-      regions: [5]
-      view: front
+  refs: [fox2016]
+  caveat: "Only 6 to 10 studies per practice, most of them small, so these maps may change as more research comes in. More active and less active are compared with rest or a control task, not with each other."
+  list:
+    - id: 1
+      name: "Focused attention"
+      colour: "#C2611F"
+      does: "Resting attention on one object, such as the breath, and bringing it back when it wanders."
+      studies: 7
+      clusters:
+        - { name: "Premotor cortex", hemi: L, at: [-36, 6, 56], vol: 712, up: true }
+        - { name: "Dorsal anterior and mid cingulate cortex", hemi: M, at: [2, 12, 32], vol: 280, up: true }
+        - { name: "Posterior cingulate cortex", hemi: M, at: [-6, -60, 18], vol: 152, up: false }
+        - { name: "Inferior parietal lobule", hemi: L, at: [-48, -72, 30], vol: 144, up: false }
+    - id: 2
+      name: "Mantra"
+      colour: "#8A6BB0"
+      does: "Repeating a word, sound or phrase, silently or aloud."
+      studies: 8
+      clusters:
+        - { name: "Premotor cortex", hemi: L, at: [-30, 4, 60], vol: 896, up: true }
+        - { name: "Supplementary motor area", hemi: M, at: [0, 12, 54], vol: 584, up: true }
+        - { name: "Supplementary motor area", hemi: M, at: [-4, 2, 68], vol: 112, up: true }
+        - { name: "Putamen and globus pallidus", hemi: R, at: [28, -16, -6], vol: 368, up: true }
+        - { name: "Fusiform gyrus", hemi: R, at: [40, -26, -30], vol: 248, up: true }
+        - { name: "Cuneus", hemi: R, at: [24, -86, 26], vol: 160, up: true }
+        - { name: "Precuneus", hemi: L, at: [-14, -56, 54], vol: 152, up: true }
+        - { name: "Anterior insula", hemi: L, at: [-28, 25, -7], vol: 192, up: false }
+    - id: 3
+      name: "Open monitoring"
+      colour: "#2E7FA8"
+      does: "Noticing whatever arises, sounds, sensations, thoughts, without settling on any one."
+      studies: 10
+      clusters:
+        - { name: "Supplementary motor area", hemi: M, at: [-6, 4, 60], vol: 824, up: true }
+        - { name: "Dorsal anterior cingulate and pre-supplementary motor area", hemi: M, at: [-6, 18, 44], vol: 368, up: true }
+        - { name: "Mid and anterior insula", hemi: L, at: [-44, 10, 4], vol: 360, up: true }
+        - { name: "Inferior frontal gyrus", hemi: L, at: [-50, 16, 14], vol: 200, up: true }
+        - { name: "Premotor cortex", hemi: L, at: [-44, 10, 46], vol: 104, up: true }
+        - { name: "Thalamus (pulvinar)", hemi: R, at: [17, -24, 11], vol: 112, up: false }
+    - id: 4
+      name: "Loving-kindness and compassion"
+      colour: "#3E9B5F"
+      does: "Wishing yourself and others well, and feeling with their suffering."
+      studies: 6
+      clusters:
+        - { name: "Anterior insula", hemi: R, at: [38, 22, 14], vol: 512, up: true }
+        - { name: "Parieto-occipital sulcus", hemi: R, at: [24, -60, 18], vol: 344, up: true }
+        - { name: "Somatosensory cortex and inferior parietal lobule", hemi: R, at: [54, -26, 30], vol: 320, up: true }
 
 networks:
   - { id: 1, name: "Visual", colour: "#7B3C9E", does: "Seeing." }

@@ -81,3 +81,13 @@
   .ba-stage{position:sticky;top:90px;height:calc(100svh - 110px);min-height:520px}
   .ba-card{max-height:none}
 }
+
+/* v3: practice maps, several tours */
+.ba-clusters{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:6px}
+.ba-clusters li{display:flex;align-items:center;gap:9px;font:15px/1.4 var(--sans);color:#2a2f22}
+.ba-clusters span{color:#7a6a58;font-size:13px}
+.ba-legend{display:flex;gap:16px;font:600 13.5px var(--sans)!important;color:#1B4332!important}
+.ba-legend span{display:inline-flex;align-items:center;gap:7px}
+.ba-tours-h{margin:18px 0 0!important}
+.ba-tourbtn{margin:8px 0 0}
+.ba-step .ba-grade{margin-top:6px!important}
