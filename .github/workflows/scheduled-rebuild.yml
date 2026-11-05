@@ -1,0 +1,31 @@
+## Make future-dated posts appear on their own.
+##
+## Jekyll will not build a post whose date is in the future, and GitHub Pages
+## only rebuilds the site when something is pushed. So a post dated next Monday
+## would stay invisible until the next push happened to come along.
+##
+## This asks GitHub Pages to rebuild three times a day. Nothing else changes:
+## if no new post is due, the rebuild produces exactly the same site.
+##
+## Times are UTC. 01:12, 07:12 and 13:12 UTC are 06:42, 12:42 and 18:42 IST.
+## You can also run it by hand: Actions -> "Scheduled rebuild" -> Run workflow.
+
+name: Scheduled rebuild
+
+on:
+  schedule:
+    - cron: "12 1,7,13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask GitHub Pages to rebuild the site
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh api --method POST "repos/${{ github.repository }}/pages/builds"

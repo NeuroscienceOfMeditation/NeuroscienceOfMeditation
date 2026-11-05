@@ -3,12 +3,14 @@ title: "Aṇūṭṭara: a yoga research magazine"
 description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Meditation."
 ---
 {% comment %}
-  Issue 01 goes live when the files in _anuttara/issue-01/ say published: true.
-  Until then this page says it is in preparation; afterwards it links to it.
+  Shows the newest published issue (the highest issue: number whose index.md
+  is published) and lists every published issue in the archive. A new issue
+  appears here on its own once its files say published: true.
 {% endcomment %}
-{% assign issue1 = site.anuttara | where: "issue", 1 | sort: "order" %}
-{% assign issue1_home = issue1 | where: "order", 0 | first %}
-{% assign issue1_pieces = issue1 | where_exp: "d", "d.order > 0" %}
+{% assign issue_homes = site.anuttara | where: "order", 0 | sort: "issue" | reverse %}
+{% assign issue1_home = issue_homes | first %}
+{% assign issue1_pieces = site.anuttara | where: "issue", issue1_home.issue | where_exp: "d", "d.order > 0" | sort: "order" %}
+{% assign latest_no = issue1_home.issue | prepend: '0' | slice: -2, 2 %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,8 +34,8 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
     <div class="cover">
 
       <div class="top">
-        <span>2026</span>
-        <span>Issue 01</span>
+        <span>{{ issue1_home.cover_date | default: '2026' }}</span>
+        <span>Issue {{ latest_no | default: '01' }}</span>
       </div>
 
       <p class="cover-t" aria-hidden="true">Aṇūṭṭara</p>
@@ -88,7 +90,7 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
 
         {% if issue1_home %}
         <a class="btn p" href="{{ issue1_home.url | relative_url }}" style="text-decoration:none">
-          Read Issue 01, free
+          Read Issue {{ latest_no }}, free
         </a>
 
         <a class="btn s" href="#newsletter" data-open-signup style="text-decoration:none">
@@ -110,7 +112,7 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
       <ol class="qlist">
         {% if issue1_home %}
         {% for p in issue1_pieces %}
-        <li><a href="{{ p.url | relative_url }}"><b>{{ p.title }}.</b></a> {{ p.section }}.</li>
+        <li><a href="{{ p.url | relative_url }}"><b>{{ p.title | remove: '?' | remove: '.' }}.</b></a> {{ p.section }}.</li>
         {% endfor %}
         {% else %}
         <li><b>The breath's clock.</b> What the Śiva Svarodaya got right about the rhythm of the breath, with the Sanskrit alongside.</li>
@@ -140,23 +142,26 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
     <div class="issue">
 
       {% if issue1_home %}
-      <a class="it" href="{{ issue1_home.url | relative_url }}" style="text-decoration:none;color:inherit">
-        <div class="c">
-          Issue 01
-        </div>
-        <small>
-          2026 · Free
-        </small>
-      </a>
-
+      {% assign next_no = issue1_home.issue | plus: 1 | prepend: '0' | slice: -2, 2 %}
       <div class="it it-next">
         <div class="c">
-          Issue 02
+          Issue {{ next_no }}
         </div>
         <small>
           In preparation
         </small>
       </div>
+
+      {% for h in issue_homes %}
+      <a class="it" href="{{ h.url | relative_url }}" style="text-decoration:none;color:inherit">
+        <div class="c">
+          Issue {{ h.issue | prepend: '0' | slice: -2, 2 }}
+        </div>
+        <small>
+          {{ h.cover_date | default: '2026' }} · Free
+        </small>
+      </a>
+      {% endfor %}
       {% else %}
       <div class="it it-next">
         <div class="c">
