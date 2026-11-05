@@ -30,14 +30,15 @@ description: "Turn a real 3D brain, click a region, and see what it does and wha
       <p class="ba-grade ba-g-{{ A.big_question.grade }}"><i></i>How sure is this? <b>{{ A.big_question.grade_label }}</b></p>
       <p>{{ A.big_question.text }}</p>
       <p class="ba-refs">{% for r in A.big_question.refs %}<a href="{{ A.refs[r].url }}" target="_blank" rel="noopener">{{ A.refs[r].label }} ↗</a>{% endfor %}</p>
-      <p class="ba-hint">Turn the brain, then click a coloured region to see what it does and what meditation research shows.</p>
+      <button type="button" class="ba-next ba-tourbtn" data-ba-tour>▶ Take the guided tour: one sitting, four moments</button>
+      <p class="ba-hint">Or turn the brain and click a coloured region. Slide <b>Glass</b> to see the deep structures inside.</p>
     </div>
 
     <div class="ba-list">
       <p class="ba-list-h">Regions</p>
       <div class="ba-chips" data-ba-chips></div>
     </div>
-    <p class="ba-credit">Brain surface: fsaverage5. Regions grouped from the <a href="{{ A.refs.schaefer2018.url }}" target="_blank" rel="noopener">Schaefer 2018 map</a> (MIT licence). Shows the outer cortex only; deeper structures such as the amygdala and hippocampus are not on this surface.</p>
+    <p class="ba-credit">Brain surface: fsaverage5. Regions grouped from the <a href="{{ A.refs.schaefer2018.url }}" target="_blank" rel="noopener">Schaefer 2018 map</a> (MIT licence). Deep structures from the <a href="{{ A.refs.tian2020.url }}" target="_blank" rel="noopener">Melbourne Subcortex Atlas</a> (Tian et al. 2020). Positions are a population average, not any one person's brain.</p>
   </div>
 
   <div class="ba-stage">
@@ -56,9 +57,20 @@ description: "Turn a real 3D brain, click a region, and see what it does and wha
         <button type="button" data-ba-view="front">Front</button>
         <button type="button" data-ba-view="inside">Inside</button>
       </div>
+      <div class="ba-panelctl">
+        <label class="ba-slider"><span>Glass</span><input type="range" min="0" max="100" value="100" data-ba-glass aria-label="Make the outer brain see-through"></label>
+        <div class="ba-cuts" role="group" aria-label="Slice the brain">
+          <span>Slice</span>
+          <button type="button" aria-pressed="false" data-ba-cut="sagittal">Side</button>
+          <button type="button" aria-pressed="false" data-ba-cut="coronal">Front</button>
+          <button type="button" aria-pressed="false" data-ba-cut="horizontal">Top</button>
+        </div>
+        <label class="ba-slider"><span>Depth</span><input type="range" min="0" max="100" value="50" data-ba-slice disabled aria-label="Where to slice"></label>
+      </div>
       <div class="ba-zoom">
         <button type="button" data-ba-zoom="-1" aria-label="Zoom out">−</button>
         <button type="button" data-ba-zoom="1" aria-label="Zoom in">+</button>
+        <button type="button" class="ba-shot" data-ba-shot aria-label="Download an image">⤓</button>
       </div>
     </div>
   </div>

@@ -17,6 +17,15 @@ refs:
   kral2022:
     label: "Kral et al. 2022, two randomised trials of MBSR, 218 adults (Science Advances)"
     url: "https://doi.org/10.1126/sciadv.abk3316"
+  holzel2010:
+    label: "Hölzel et al. 2010, amygdala and stress after MBSR, 26 adults, no control group (Social Cognitive and Affective Neuroscience)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2840837"
+  hasenkamp2012:
+    label: "Hasenkamp et al. 2012, mind wandering and attention during breath meditation, 14 meditators (NeuroImage)"
+    url: "https://pesquisa.bvsalud.org/ses/resource/pt/mdl-21782031"
+  tian2020:
+    label: "Tian et al. 2020, the Melbourne Subcortex Atlas used for the deep structures (Nature Neuroscience)"
+    url: "https://doi.org/10.1038/s41593-020-00711-6"
   schaefer2018:
     label: "Schaefer et al. 2018, the brain map used here (Cerebral Cortex)"
     url: "https://pubmed.ncbi.nlm.nih.gov/28981612/"
@@ -54,6 +63,9 @@ regions:
     network: "Salience network"
     colour: "#2E7FA8"
     does: "Senses the inside of the body: heartbeat, breath, hunger, tension. Often called the seat of interoception."
+    related:
+      - { label: "Watch your own breath: the Swar Yoga tool", url: "/swar-yoga.html" }
+      - { label: "Does slower breathing make meditation deeper?", url: "/does-slower-breathing-make-meditation-deeper.html" }
     claims:
       - text: "One of the regions recruited across several meditation styles, though results across studies converge less than often claimed."
         grade: S
@@ -123,6 +135,103 @@ regions:
       - text: "No consistent meditation finding in the meta-analyses used here."
         grade: X
         refs: [fox2014, fox2016]
+
+
+  # ---------- deep structures (Melbourne Subcortex Atlas, Tian 2020) ----------
+  - id: 9
+    name: "Hippocampus"
+    network: "Deep structure"
+    deep: true
+    colour: "#B5531C"
+    does: "Forming new memories, holding the context of where and when things happened, and mapping places."
+    claims:
+      - text: "Among the regions that differ in structure in long-term meditators, in cross-sectional studies."
+        grade: S
+        refs: [fox2014]
+      - text: "Grows after an 8-week mindfulness course."
+        grade: C
+        refs: [kral2022]
+
+  - id: 10
+    name: "Amygdala"
+    network: "Deep structure"
+    deep: true
+    colour: "#C8432B"
+    does: "Detecting threat and emotional significance, and learning what to fear."
+    claims:
+      - text: "In one small study with no control group, people whose stress fell most after a mindfulness course showed the largest drop in amygdala grey-matter density. The group as a whole showed no change."
+        grade: X
+        refs: [holzel2010]
+      - text: "Shrinks after an 8-week mindfulness course."
+        grade: C
+        refs: [kral2022]
+
+  - id: 11
+    name: "Thalamus"
+    network: "Deep structure"
+    deep: true
+    colour: "#7D6BB0"
+    does: "A relay hub: passes signals from the senses to the cortex, and helps set alertness, sleep and attention."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+  - id: 12
+    name: "Caudate and putamen"
+    network: "Deep structure"
+    deep: true
+    colour: "#4F8A8B"
+    does: "Together the dorsal striatum: learning habits and skills, and selecting movements."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+  - id: 13
+    name: "Nucleus accumbens"
+    network: "Deep structure"
+    deep: true
+    colour: "#D9A520"
+    does: "Reward and motivation: wanting, and learning what is worth going after."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+  - id: 14
+    name: "Globus pallidus"
+    network: "Deep structure"
+    deep: true
+    colour: "#8C8C6A"
+    does: "Helps start and stop movements, as part of the basal ganglia loops."
+    claims:
+      - text: "No consistent meditation finding in the meta-analyses used here."
+        grade: X
+        refs: [fox2014, fox2016]
+
+tour:
+  title: "One sitting, four moments"
+  intro: "In a 2012 study, 14 meditators focused on the breath inside a brain scanner and pressed a button each time they noticed their mind had wandered. Here is what the brain did around each press."
+  grade: S
+  refs: [hasenkamp2012]
+  steps:
+    - title: "1. The mind wanders"
+      text: "You set out to follow the breath, and drift into a plan or a memory. Default mode network regions are most active here."
+      regions: [1, 2]
+      view: inside
+    - title: "2. You notice"
+      text: "The moment you realise you've drifted. Salience network regions, the insula and anterior cingulate, are most active."
+      regions: [3, 4]
+      view: right
+    - title: "3. You come back"
+      text: "Choosing to return to the breath. Parts of the executive (control) network take over."
+      regions: [5]
+      view: right
+    - title: "4. You stay"
+      text: "Holding attention on the breath. The executive network remains engaged, until the next drift. Noticing and returning is the practice."
+      regions: [5]
+      view: front
 
 networks:
   - { id: 1, name: "Visual", colour: "#7B3C9E", does: "Seeing." }
