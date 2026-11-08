@@ -1,0 +1,197 @@
+---
+title: "Measure your practice: an honest guide to heart-rate variability and wearables"
+description: "Which wearables measure heart-rate variability well, what the numbers mean, a simple self-experiment, and a free tool to look at your own heartbeat data. Every claim graded and sourced."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <link rel="stylesheet" href="{{ '/hrv/hrv.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+{% include header.html %}
+
+<main id="main" class="hv">
+
+<section class="sec tight">
+  <div class="wrap">
+    <div class="eyebrow">Measure your practice</div>
+    <h1 class="hv-h1">What your heart can, and can't, tell you about meditation</h1>
+    <p class="lede hv-lede">Many people now track their practice with a ring, a watch or a chest strap. Here is what the number means, which devices measure it well, and a simple way to test your own practice, with every claim graded by how sure the research is.</p>
+    <nav class="hv-toc" aria-label="On this page">
+      <a href="#what">What HRV is</a><a href="#meditation">During meditation</a><a href="#devices">Which device</a><a href="#tool">Look at your data</a><a href="#log">Morning log</a><a href="#experiment">Self-experiment</a><a href="#limits">Limits</a>
+    </nav>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="what">
+  <div class="wrap hv-cols">
+    <div>
+      <h2>What heart-rate variability is</h2>
+      <p>Your heart does not beat like a metronome. The gap between two beats, called the RR interval, changes a little with every beat. Heart-rate variability (HRV) measures how much it changes.</p>
+      <p>The number most apps show is <b>RMSSD</b>: how much each beat-to-beat gap differs from the next. It is the main short-term measure of the vagus nerve's influence on the heart, the "rest and digest" side of the nervous system.</p>
+      <div class="hv-claim"><span class="hv-g hv-g-E"><i></i>How sure is this? <b>Established</b></span>
+        <a href="https://doi.org/10.3389/fpubh.2017.00258" target="_blank" rel="noopener">Shaffer &amp; Ginsberg 2017, an overview of HRV measures (Frontiers in Public Health) ↗</a></div>
+    </div>
+    <aside class="hv-note">
+      <h3>The catch most apps skip</h3>
+      <p>How you breathe changes RMSSD directly. Breathing slower and deeper makes the heart speed up and slow down more with each breath, which raises RMSSD, even if the vagus nerve's underlying tone has not changed. So a higher number <i>during</i> slow breathing is expected. It is not proof of lasting change.</p>
+      <div class="hv-claim"><span class="hv-g hv-g-E"><i></i>How sure is this? <b>Established</b></span>
+        <a href="https://doi.org/10.3389/fpubh.2017.00258" target="_blank" rel="noopener">Shaffer &amp; Ginsberg 2017 ↗</a></div>
+    </aside>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="meditation">
+  <div class="wrap">
+    <h2>What happens to the heart during meditation</h2>
+    <div class="hv-cards">
+      <article class="hv-card">
+        <h3>The heart swings more, not less</h3>
+        <p>In a 1999 study, 8 people practising Chi meditation and 4 practising Kundalini yoga wore heart monitors. During meditation their heart rate rose and fell with each slow breath, sometimes by 30 beats a minute within seconds, far more than at rest beforehand. Meditation was not a "quiet" state for the heart.</p>
+        <div class="hv-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">12 people, no control group</span>
+          <a href="https://archive.physionet.org/physiobank/database/meditation/" target="_blank" rel="noopener">Peng et al. 1999, heart-rate oscillations during two meditation techniques (International Journal of Cardiology); data on PhysioNet ↗</a></div>
+      </article>
+      <article class="hv-card">
+        <h3>Slow breathing calms</h3>
+        <p>Breathing at around six breaths a minute is linked with higher HRV and with feeling calmer and more alert. Breathing between about 4.5 and 7.5 breaths a minute gathers the heart's swings into one strong rhythm of about one cycle every ten seconds.</p>
+        <div class="hv-claim"><span class="hv-g hv-g-E"><i></i>How sure is this? <b>Established</b></span><span class="hv-why">consistent, but most studies are small</span>
+          <a href="https://www.frontiersin.org/articles/10.3389/fnhum.2018.00353/full" target="_blank" rel="noopener">Zaccaro et al. 2018, systematic review of slow breathing (Frontiers in Human Neuroscience) ↗</a>
+          <a href="https://doi.org/10.3389/fpubh.2017.00258" target="_blank" rel="noopener">Shaffer &amp; Ginsberg 2017 ↗</a></div>
+      </article>
+      <article class="hv-card">
+        <h3>Does regular practice raise your resting HRV?</h3>
+        <p>That is the question most people really want answered, and it is not settled. Measuring it well means measuring at rest, at the same time each day, over weeks, and comparing averages, not single days. The self-experiment below is set up to do exactly that for one person: you.</p>
+        <div class="hv-claim"><span class="hv-g hv-g-X"><i></i>How sure is this? <b>Unsettled</b></span><span class="hv-why">test it yourself, below</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="devices">
+  <div class="wrap">
+    <h2>Which device measures it well?</h2>
+    <p class="hv-intro">A chest strap reads the heart's electrical signal, like a hospital ECG. Rings, watches and phone cameras read the pulse with light (photoplethysmography), which works well when you're still and much less well when you move.</p>
+    <div class="hv-table" role="table" aria-label="How well each kind of device measures HRV">
+      <div class="hv-row hv-head" role="row"><span role="columnheader">Device</span><span role="columnheader">How well it measures HRV</span><span role="columnheader">Best use</span><span role="columnheader">Evidence</span></div>
+      <div class="hv-row" role="row">
+        <span role="cell"><b>Chest strap</b><small>e.g. Polar H10</small></span>
+        <span role="cell"><em class="hv-q hv-q4">Very good</em>In 10 people moving at different intensities, a Polar H10 strap recorded clean beat-to-beat data 99.6% of the time, slightly better than a medical Holter ECG.</span>
+        <span role="cell">Any time, including during practice</span>
+        <span role="cell"><a href="https://doi.org/10.1007/s00421-019-04142-5" target="_blank" rel="noopener">Gilgen-Ammann et al. 2019 ↗</a></span>
+      </div>
+      <div class="hv-row" role="row">
+        <span role="cell"><b>Phone camera app</b><small>fingertip on the lens</small></span>
+        <span role="cell"><em class="hv-q hv-q3">Good at rest</em>In 29 people at rest, a phone-camera app agreed closely with an ECG for RMSSD.</span>
+        <span role="cell">A 1–2 minute morning reading, sitting or lying still</span>
+        <span role="cell"><a href="https://doi.org/10.1123/ijspp.2016-0668" target="_blank" rel="noopener">Plews et al. 2017 ↗</a></span>
+      </div>
+      <div class="hv-row" role="row">
+        <span role="cell"><b>Ring</b><small>e.g. Oura</small></span>
+        <span role="cell"><em class="hv-q hv-q3">Good for night-time trends</em>In 35 adults, nightly averages tracked an ECG closely (r = 0.96) but read RMSSD about 15 ms low on average.</span>
+        <span role="cell">Night-to-night trends; compare it only with itself</span>
+        <span role="cell"><a href="https://jmir.org/2022/1/e27487" target="_blank" rel="noopener">Cao et al. 2022 ↗</a></span>
+      </div>
+      <div class="hv-row" role="row">
+        <span role="cell"><b>Wristband or watch</b><small>e.g. WHOOP, Garmin</small></span>
+        <span role="cell"><em class="hv-q hv-q2">Heart rate good, HRV weaker</em>A WHOOP band matched ECG heart rate well, but its HRV error was about as large as the day-to-day changes you'd want to see.</span>
+        <span role="cell">Heart rate; HRV only as a rough trend while still</span>
+        <span role="cell"><a href="https://doi.org/10.3390/s21103571" target="_blank" rel="noopener">Bellenger et al. 2021 ↗</a></span>
+      </div>
+    </div>
+    <p class="hv-small">Devices are named only as examples from the studies; we don't sell or recommend any brand. Each model and firmware version can differ, and one study per device is a small base.</p>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="tool">
+  <div class="wrap">
+    <h2>Look at your own heartbeat data</h2>
+    <p class="hv-intro">Most chest-strap and HRV apps can export your <b>RR intervals</b>, the time between beats, as a text or CSV file. Paste or open it here to see your heart rate beat by beat. Load a second recording to compare, for example normal breathing against slow breathing. <b>Nothing leaves your device.</b></p>
+    <div class="hv-slots">
+      {% for s in (1..2) %}
+      <div class="hv-slot" data-slot="{{ s }}">
+        <div class="hv-slot-top">
+          <input class="hv-label" data-label value="{% if s == 1 %}Recording A{% else %}Recording B{% endif %}" aria-label="Name for this recording">
+          <label class="hv-file">Open file<input type="file" accept=".txt,.csv,.tsv" data-file hidden></label>
+        </div>
+        <textarea data-paste rows="4" placeholder="Paste RR intervals here: one per line, in milliseconds (e.g. 812) or seconds (0.812)"></textarea>
+        <div class="hv-stats" data-stats></div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="hv-chart" data-chart aria-live="polite"><p class="hv-empty">Your heart rate will appear here, beat by beat.</p></div>
+    <p class="hv-small"><button type="button" class="hv-linkbtn" data-demo>Try a simulated example</button> · This example is made up to show what slow breathing looks like. It is not anyone's real data.</p>
+    <details class="hv-how"><summary>How the numbers are worked out</summary>
+      <p>Beats shorter than 250 ms or longer than 2,500 ms are dropped, and so is any beat more than 25% away from both the last clean beat and the median of the five beats before it. A missed or extra beat changes the interval by 40% or more, while breathing changes it by much less from one beat to the next. RMSSD uses only pairs of clean beats next to each other. If more than 5% of beats are dropped, treat the result with care. Recordings shorter than about 5 minutes are fine for comparing yourself with yourself, but not with published norms.</p>
+    </details>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="log">
+  <div class="wrap hv-cols">
+    <div>
+      <h2>Your morning log</h2>
+      <p>One morning's HRV says very little: sleep, a late meal, alcohol or a cold can move it more than meditation does. What matters is the trend. Studies of athletes track a <b>7-day rolling average</b> of the log of RMSSD, and how much it varies from day to day.</p>
+      <div class="hv-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">developed in athletes, a small case study</span>
+        <a href="https://doi.org/10.1007/s00421-012-2354-4" target="_blank" rel="noopener">Plews et al. 2012, HRV in elite triathletes (European Journal of Applied Physiology) ↗</a></div>
+      <form class="hv-logform" data-logform>
+        <label>Date<input type="date" data-ldate required></label>
+        <label>RMSSD (ms)<input type="number" min="3" max="400" step="0.1" data-lval required></label>
+        <label class="hv-check"><input type="checkbox" data-lprac> Practised yesterday</label>
+        <button type="submit" class="btn hv-btn">Add</button>
+      </form>
+      <p class="hv-small">Saved only in this browser. <button type="button" class="hv-linkbtn" data-lcsv>Download as CSV</button> · <button type="button" class="hv-linkbtn" data-lclear>Clear the log</button></p>
+    </div>
+    <div>
+      <div class="hv-chart hv-chart-log" data-logchart><p class="hv-empty">Add a few mornings to see your trend.</p></div>
+      <div class="hv-logsum" data-logsum></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="experiment">
+  <div class="wrap">
+    <h2>A simple self-experiment</h2>
+    <p class="hv-intro">Does your practice change your resting HRV? You can't answer that from a feeling or a single reading, but six weeks of steady mornings can show you a pattern.</p>
+    <ol class="hv-steps">
+      <li><b>Measure the same way every morning.</b> After waking and using the bathroom, before coffee or your phone. Same position each day, sitting or lying. Breathe normally, not slowly, for 1–2 minutes with a chest strap or phone-camera app. Write down the RMSSD.</li>
+      <li><b>Two weeks of baseline.</b> Live as usual. This shows how much your number moves on its own.</li>
+      <li><b>Four weeks with practice.</b> Add your practice every day at another time of day, for example 10 minutes of breath meditation in the evening. Tick "Practised yesterday" in the log.</li>
+      <li><b>Compare averages, not days.</b> Look at the 7-day average in the last week of practice against the baseline weeks. A shift smaller than your normal day-to-day spread is probably noise.</li>
+      <li><b>Note what else changed.</b> Sleep, illness, alcohol, travel, hard exercise and stress all move HRV. If one of these changed too, it may explain the shift.</li>
+    </ol>
+    <div class="hv-note hv-note-wide">
+      <h3>Want to see the slow-breathing effect today?</h3>
+      <p>Record 3 minutes breathing normally, then 5 minutes at about six breaths a minute (in for 4–5 seconds, out for 5–6), then 3 minutes normally again. Load it into the tool above and you'll see the heart's swings grow and settle. Remember the catch: this shows breathing working on the heart in the moment, not a change in your baseline.</p>
+      <p><a href="{{ '/swar-yoga.html' | relative_url }}">Practise slow breathing with the Swar Yoga tool →</a></p>
+    </div>
+    <p class="hv-small">One person, no blinding, no control: this shows what happens for you, not proof that meditation causes it.</p>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="limits">
+  <div class="wrap hv-cols">
+    <div>
+      <h2>Please keep in mind</h2>
+      <ul class="hv-list">
+        <li>These devices and this page are not medical tools. A wearable cannot diagnose anything.</li>
+        <li>With an irregular heartbeat such as atrial fibrillation, or many extra beats, HRV numbers are not meaningful. If your device often warns about an irregular rhythm, see a doctor.</li>
+        <li>Higher is not always better, and numbers differ a lot between people. Compare yourself only with yourself, on the same device.</li>
+        <li>If tracking makes you anxious about your body, stop. The practice matters more than the number.</li>
+      </ul>
+    </div>
+    <aside class="hv-note">
+      <h3>What we left out, for now</h3>
+      <p>Closed-loop systems that change a sound, a light or a VR scene in real time from your brain or heart signals are an active research area. The studies are early and done in labs, so we don't suggest them as a home method yet. We'll add them when the evidence is stronger.</p>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+<script src="{{ '/hrv/hrv.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</body>
+</html>

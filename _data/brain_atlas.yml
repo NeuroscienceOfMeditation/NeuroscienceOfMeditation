@@ -233,6 +233,7 @@ regions:
     does: "Runs the body's automatic work: it starts every automatic breath, helps set heart rate and blood pressure, and connects the brain to the spinal cord. It is made of the midbrain, pons and medulla."
     related:
       - { label: "Watch your own breath: the Swar Yoga tool", url: "/swar-yoga.html" }
+      - { label: "Measure your practice: heart-rate variability and wearables", url: "/measure-your-practice.html" }
     claims:
       - text: "Generates the automatic rhythm of breathing, from a small network in the medulla called the preBötzinger complex. Found in rats in 1991; a matching area has been identified in the human medulla."
         grade: E

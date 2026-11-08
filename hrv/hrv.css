@@ -1,0 +1,75 @@
+/* Measure your practice (measure-your-practice.html) */
+.hv{--up:#E0702A;--a:#1B4332;--b:#C2611F;--card:var(--surface)}
+@media (prefers-color-scheme:dark){.hv{--a:#9CD3AC;--b:#F0A386}}
+.hv-h1{font-size:clamp(34px,5vw,58px);line-height:1.04;max-width:880px}
+.hv-lede{max-width:720px;margin-top:20px}
+.hv-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.hv-toc a{border:1px solid var(--line);border-radius:99px;padding:8px 14px;font:600 13px var(--sans);color:var(--forest-ink);text-decoration:none;background:var(--card)}
+.hv-toc a:hover{border-color:var(--forest-ink)}
+.hv-sec{padding:64px 0}
+.hv-alt{background:var(--cream-2)}
+.hv h2{font-size:clamp(26px,3.2vw,38px);line-height:1.1;margin-bottom:16px;color:var(--forest-ink)}
+.hv h3{font-size:20px;line-height:1.2;margin-bottom:10px;color:var(--forest-ink)}
+.hv p{line-height:1.7;margin:0 0 12px}
+.hv-intro{max-width:780px;color:var(--ink-60)}
+.hv-cols{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;align-items:start}
+.hv-note{background:var(--card);border-left:4px solid var(--b);border-radius:14px;padding:20px 22px}
+.hv-note-wide{margin:26px 0 10px;max-width:860px}
+.hv-note a{color:var(--forest-ink);font-weight:600}
+.hv-claim{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:12px}
+.hv-claim a{flex-basis:100%;font:600 13px/1.45 var(--sans);color:var(--forest-ink)}
+.hv-g{display:inline-flex;align-items:center;gap:7px;font:500 13px var(--sans);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+.hv-g i{width:9px;height:9px;border-radius:50%;background:#999}
+.hv-g-E i{background:#2F8F5B}.hv-g-S i{background:#D9A520}.hv-g-X i{background:#9A8F80}
+.hv-why{font:13px var(--sans);color:var(--ink-60)}
+.hv-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:10px}
+.hv-card{background:var(--card);border-radius:18px;padding:22px;border:1px solid var(--line)}
+.hv-table{margin-top:22px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+.hv-row{display:grid;grid-template-columns:1.1fr 2.4fr 1.4fr 1fr;gap:18px;padding:16px 20px;border-top:1px solid var(--line);font-size:15px;line-height:1.55}
+.hv-row:first-child{border-top:0}
+.hv-head{font:600 11.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--sage);background:var(--cream-2)}
+.hv-row small{display:block;color:var(--ink-60);font-size:13px}
+.hv-row a{color:var(--forest-ink);font-weight:600;font-size:13.5px}
+.hv-q{display:block;font-style:normal;font-weight:700;margin-bottom:4px}
+.hv-q::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;vertical-align:1px}
+.hv-q4::before{background:#2F8F5B}.hv-q3::before{background:#7DAA4E}.hv-q2::before{background:#D9A520}
+.hv-small{font-size:13.5px;color:var(--ink-60);margin-top:12px}
+.hv-linkbtn{border:0;background:none;padding:0;font:600 13.5px var(--sans);color:var(--forest-ink);text-decoration:underline;cursor:pointer}
+.hv-slots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.hv-slot{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.hv-slot[data-slot="1"]{border-top:4px solid var(--a)}.hv-slot[data-slot="2"]{border-top:4px solid var(--b)}
+.hv-slot-top{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.hv-label{flex:1;min-width:0;border:0;border-bottom:1px dashed var(--line);background:none;font:600 16px var(--serif);color:var(--ink);padding:4px 0}
+.hv-file{border:1px solid var(--line);border-radius:99px;padding:7px 14px;font:600 13px var(--sans);color:var(--forest-ink);cursor:pointer;white-space:nowrap}
+.hv-slot textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--cream);color:var(--ink);font:13.5px/1.5 ui-monospace,Menlo,monospace;padding:10px;resize:vertical}
+.hv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.hv-stats:empty{display:none}
+.hv-stat{background:var(--cream);border-radius:10px;padding:8px 10px}
+.hv-stat b{display:block;font:700 20px var(--serif);color:var(--forest-ink)}
+.hv-stat span{font-size:11.5px;color:var(--ink-60);letter-spacing:.04em}
+.hv-warn{grid-column:1/-1;font-size:13px;color:#B5531C;margin:0}
+.hv-chart{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;min-height:200px}
+.hv-chart svg{display:block;width:100%;height:auto}
+.hv-chart text{font:12px var(--sans);fill:var(--ink-60)}
+.hv-empty{color:var(--ink-60);text-align:center;margin:70px 0!important}
+.hv-how{margin-top:14px;font-size:14.5px}
+.hv-how summary{cursor:pointer;font-weight:600;color:var(--forest-ink)}
+.hv-logform{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:18px}
+.hv-logform label{display:flex;flex-direction:column;gap:4px;font:600 12.5px var(--sans);color:var(--ink-60)}
+.hv-logform input[type=date],.hv-logform input[type=number]{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:15px var(--sans);background:var(--card);color:var(--ink);width:160px}
+.hv-logform .hv-check{flex-direction:row;align-items:center;gap:8px;padding-bottom:10px}
+.hv-btn{background:var(--forest);color:var(--paper);padding:12px 22px}
+.hv-chart-log{margin-top:0}
+.hv-logsum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.hv-steps{counter-reset:s;list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px;max-width:860px}
+.hv-steps li{counter-increment:s;position:relative;background:var(--card);border-radius:14px;padding:16px 18px 16px 62px;line-height:1.65}
+.hv-steps li::before{content:counter(s);position:absolute;left:18px;top:14px;width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--paper);font:700 15px/30px var(--serif);text-align:center}
+.hv-list{padding-left:20px;line-height:1.7}
+.hv-list li{margin-bottom:8px}
+@media (max-width:900px){
+  .hv-cols,.hv-cards,.hv-slots{grid-template-columns:1fr}
+  .hv-row{grid-template-columns:1fr;gap:6px}
+  .hv-head{display:none}
+  .hv-stats{grid-template-columns:repeat(2,1fr)}
+  .hv-sec{padding:48px 0}
+}
