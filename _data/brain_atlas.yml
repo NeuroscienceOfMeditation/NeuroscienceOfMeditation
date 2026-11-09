@@ -50,6 +50,15 @@ refs:
   kalyani2011:
     label: "Kalyani et al. 2011, pilot fMRI study of OM chanting, 12 volunteers (International Journal of Yoga)"
     url: "https://doi.org/10.4103/0973-6131.78171"
+  lutz2004:
+    label: "Lutz et al. 2004, gamma brain waves in 8 long-term Buddhist practitioners and 10 students (PNAS)"
+    url: "https://doi.org/10.1073/pnas.0407401101"
+  hagerty2013:
+    label: "Hagerty et al. 2013, fMRI and EEG case study of jhāna, one practitioner (Neural Plasticity)"
+    url: "https://doi.org/10.1155/2013/653572"
+  chowdhury2025:
+    label: "Chowdhury et al. 2025, intensively sampled case study of jhāna, one practitioner (NeuroImage)"
+    url: "https://doaj.org/article/7d8eb6cb8e1043869f2799510ad92c7d"
   cerebatlas:
     label: "Diedrichsen lab cerebellar atlases, the template used for the brainstem and cerebellum (CC BY)"
     url: "https://github.com/DiedrichsenLab/cerebellar_atlases"
@@ -484,6 +493,37 @@ practices:
       grade: X
       refs: [kalyani2011]
       caveat: "A pilot fMRI study of 12 volunteers, compared with rest. It has not been repeated by an independent team."
+    - id: 12
+      set: claims
+      name: "Jhāna absorption"
+      kicker: "Popular claim · single-person studies"
+      colour: "#B5531C"
+      does: "Deep concentration states from the Buddhist tradition, described as waves of joy and bliss that grow quieter and more still with each stage."
+      up_label: "More active during jhāna than at rest"
+      down_label: "Less active"
+      regions:
+        - { id: 13, hemi: B, up: true, name: "Nucleus accumbens (reward)" }
+        - { id: 6, hemi: B, up: true, name: "Medial orbitofrontal cortex" }
+        - { id: 4, hemi: B, up: true, name: "Anterior cingulate" }
+        - { id: 8, hemi: B, up: false, name: "Visual cortex" }
+        - { id: 7, hemi: B, up: false, name: "Somatosensory and motor cortex" }
+        - { id: 16, hemi: B, up: false, name: "Cerebellum" }
+      also: ["Less active: hearing cortex, language areas, and parietal areas for orienting in space"]
+      finding: "One practitioner with about 6,000 hours of training appeared to switch on part of his reward system from the inside, with the senses turned down. A second, more recent case study of a different practitioner found broad network changes rather than region-by-region ones."
+      grade: X
+      refs: [hagerty2013, chowdhury2025]
+      caveat: "Each study scanned one person, in a fixed order of stages. The reward area was located only roughly. Interesting, but it tells us what is possible for one trained person, not what jhāna does in general."
+    - id: 13
+      set: claims
+      name: "Gamma waves in long-term practitioners"
+      kicker: "Famous claim · brain waves"
+      colour: "#2E7FA8"
+      does: "Objectless compassion: resting in an unconditional readiness to help any living being, without a particular person in mind."
+      regions: []
+      finding: "Eight Buddhist practitioners with 10,000 to 50,000 hours of practice produced unusually strong, synchronised gamma brain waves (25–42 cycles a second) while meditating, far more than 10 students given a week of training. Their gamma was already higher at rest, and more hours of practice went with higher gamma. Nothing is coloured on the brain: EEG measures from the scalp, and the strongest differences were at electrodes over the front and sides of the head."
+      grade: S
+      refs: [lutz2004]
+      caveat: "Small groups that also differed in age, culture and lifestyle, so practice may not be the cause. Gamma recorded from the scalp can be mixed with muscle signals; the authors ran checks, but treat raw gamma with care."
 
 networks:
   - { id: 1, name: "Visual", colour: "#7B3C9E", does: "Seeing." }
