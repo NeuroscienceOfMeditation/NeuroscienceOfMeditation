@@ -59,6 +59,9 @@ refs:
   chowdhury2025:
     label: "Chowdhury et al. 2025, intensively sampled case study of jhāna, one practitioner (NeuroImage)"
     url: "https://doaj.org/article/7d8eb6cb8e1043869f2799510ad92c7d"
+  zeidan2011:
+    label: "Zeidan et al. 2011, mindfulness meditation and pain after 4 days of training (Journal of Neuroscience)"
+    url: "https://doi.org/10.1523/JNEUROSCI.5791-10.2011"
   cerebatlas:
     label: "Diedrichsen lab cerebellar atlases, the template used for the brainstem and cerebellum (CC BY)"
     url: "https://github.com/DiedrichsenLab/cerebellar_atlases"
@@ -461,6 +464,24 @@ practices:
       grade: S
       refs: [klimecki2014]
       caveat: "One small fMRI study; everyone did empathy training first, so the order was not varied."
+    - id: 14
+      set: training
+      name: "Mindfulness and pain"
+      kicker: "Training study · 4 days"
+      colour: "#C8432B"
+      does: "Four short sessions of mindfulness training, then meditating while a hot probe touched the skin."
+      up_label: "More active, linked with bigger pain relief"
+      down_label: "Quieter"
+      regions:
+        - { id: 4, hemi: B, up: true, name: "Anterior cingulate cortex" }
+        - { id: 3, hemi: B, up: true, name: "Anterior insula" }
+        - { id: 6, hemi: B, up: true, name: "Orbitofrontal cortex" }
+        - { id: 11, hemi: B, up: false, name: "Thalamus" }
+      also: ["Quieter: the body-sensing cortex area that receives the pain signal"]
+      finding: "While meditating, people rated the same heat as 40% less intense and 57% less unpleasant than at rest. People with bigger drops in pain had more activity in the cingulate, insula and orbitofrontal cortex."
+      grade: S
+      refs: [zeidan2011]
+      caveat: "One small study in healthy volunteers, testing brief lab pain, not chronic pain. It compared meditation with rest in the same people."
 
     # ---------- popular claims ----------
     - id: 10
