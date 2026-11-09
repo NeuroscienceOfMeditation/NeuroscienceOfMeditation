@@ -1168,7 +1168,7 @@ html.pv-lock { overflow: hidden; }
    Dark mode (follows the phone or computer setting). The morning check
    happens straight after waking, when a bright screen is harshest.
    ========================================================================== */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) and (max-width: 0px) {
   #svara {
     --sv-ink:    #E8E3D2;
     --sv-muted:  #A9B6AE;

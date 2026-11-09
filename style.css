@@ -773,7 +773,7 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
    The page colours flip; green panels, neon buttons and the newsletter
    popup keep their own colours (see --paper, --char, --forest-ink above).
    ========================================= */
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark) and (max-width: 0px){
   :root{
     color-scheme:dark;
     --cream:#0F1A14;--cream-2:#15231B;--ink:#E8E3D2;--ink-60:rgba(232,227,210,.72);--sage:#9DBBA4;
@@ -825,10 +825,10 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .prose .study p{margin:0 0 10px}
 .prose .study .ref{font-size:13.5px;line-height:1.6;color:var(--ink-60);margin:0}
 @media (max-width:640px){.mag-next{grid-template-columns:1fr}.mag-next a:only-child{grid-column:auto}}
-@media (prefers-color-scheme:dark){.mag-draft{background:#4A3B10;color:#F6E7B8}}
+@media (prefers-color-scheme: dark) and (max-width: 0px){.mag-draft{background:#4A3B10;color:#F6E7B8}}
 .grade.g-en{background:rgba(228,116,79,.15);color:#8A3C1E}
 .prose .verse .ref{font-family:var(--sans);font-size:13px;color:var(--ink-60);white-space:nowrap}
-@media (prefers-color-scheme:dark){.grade.g-en{color:#F0A386}}
+@media (prefers-color-scheme: dark) and (max-width: 0px){.grade.g-en{color:#F0A386}}
 
 /* =========================================
    RESEARCH-LED HOMEPAGE AND TRUST ELEMENTS
@@ -1346,3 +1346,6 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .atlas-promo img{width:96px;height:96px;border-radius:14px;object-fit:cover;flex:none;background:#EDE4CF}
 .atlas-promo small{display:block;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#C2611F;margin-bottom:2px}
 @media (max-width:900px){.bb-atlas{margin:18px 0 0}.atlas-promo img{width:72px;height:72px}}
+
+/* The site is light-only: phones in dark mode get the same cream pages */
+:root{color-scheme:light only}

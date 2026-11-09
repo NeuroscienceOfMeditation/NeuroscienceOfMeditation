@@ -1,6 +1,6 @@
 /* Measure your practice (measure-your-practice.html) */
 .hv{--up:#E0702A;--a:#1B4332;--b:#C2611F;--card:var(--surface)}
-@media (prefers-color-scheme:dark){.hv{--a:#9CD3AC;--b:#F0A386}}
+@media (prefers-color-scheme: dark) and (max-width: 0px){.hv{--a:#9CD3AC;--b:#F0A386}}
 .hv-h1{font-size:clamp(34px,5vw,58px);line-height:1.04;max-width:880px}
 .hv-lede{max-width:720px;margin-top:20px}
 .hv-toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}

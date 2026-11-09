@@ -1,6 +1,6 @@
 /* The Meditation Lab (meditation-lab.html); builds on /hrv/hrv.css */
 .lab{--pre:#7E8E7A;--med:#C2611F;--ctl:#B9AE98}
-@media (prefers-color-scheme:dark){.lab{--pre:#9FAE9A;--med:#F0A386;--ctl:#6F6A5E}}
+@media (prefers-color-scheme: dark) and (max-width: 0px){.lab{--pre:#9FAE9A;--med:#F0A386;--ctl:#6F6A5E}}
 .lab-kicker{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--clay,#C2611F);margin:0 0 8px!important}
 .lab-people{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:22px 0 18px}
 .lab-grp{font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);margin:0 4px 0 6px}
