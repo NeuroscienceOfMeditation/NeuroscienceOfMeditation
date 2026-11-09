@@ -1,7 +1,7 @@
 ---
 title: "Was That Prana, or Was It Carbon Dioxide?"
 description: "Tingling hands, light-headedness, the edges of the body going soft, waves of emotion. In breathwork these are taught as energy moving. They are also what happens when you blow off half your carbon dioxide, and somebody has now measured it."
-date: 2026-11-09 22:29:20 +0530
+date: 2026-11-09 22:33:15 +0530
 pillar: Claim check
 cover: breath
 image: /img/og-prana-or-carbon-dioxide.jpg
