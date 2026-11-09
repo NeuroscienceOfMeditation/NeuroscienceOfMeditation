@@ -41,3 +41,20 @@
   .lab-panel{padding:12px}
 }
 .lab-h3{margin-top:26px!important}
+/* brain section */
+.lab-divide{border-top:1px solid var(--line)}
+.lab-cols-top{margin-top:24px;align-items:center}
+.lab-toggles{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-bottom:10px}
+.lab-seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:var(--cream-2);border-radius:99px;padding:4px}
+.lab-seg button{border:0;background:none;border-radius:99px;padding:8px 14px;font:600 13px var(--sans);color:var(--forest-ink);cursor:pointer}
+.lab-seg button:hover{background:rgba(27,67,50,.08)}
+.lab-seg button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
+.lab-maps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.lab-maps figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;text-align:center}
+.lab-maps img{width:100%;height:auto;display:block}
+.lab-maps figcaption{font:600 13.5px var(--sans);color:var(--forest-ink);margin-top:6px}
+.lab-legend{display:grid;grid-template-columns:1fr 1fr 1fr;max-width:520px;margin:14px auto 0!important;font-size:12.5px;color:var(--ink-60);text-align:center}
+.lab-legend .lab-grad{grid-column:1/-1;height:10px;border-radius:99px;background:linear-gradient(90deg,#2166ac,#92c5de,#f7f7f7,#f4a582,#b2182b);margin-bottom:6px}
+.lab-legend span:nth-child(2){text-align:left}.lab-legend span:nth-child(4){text-align:right}
+.lab-cards{margin-top:28px}
+@media (max-width:900px){.lab-maps{grid-template-columns:1fr 1fr}}

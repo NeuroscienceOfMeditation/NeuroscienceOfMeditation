@@ -20,9 +20,9 @@ description: "Look at real heartbeat recordings from people before and during me
   <div class="wrap">
     <div class="eyebrow">The Meditation Lab</div>
     <h1 class="hv-h1">Real recordings from meditators. Look for yourself.</h1>
-    <p class="lede hv-lede">Most articles tell you what a study found. Here you can open the actual data behind one, the beat-by-beat heart rate of 12 meditators, and see what their hearts did before and during practice.</p>
+    <p class="lede hv-lede">Most articles tell you what a study found. Here you can open the actual data behind two: the beat-by-beat heart rate of 12 meditators, and the brain waves of 24 meditators in the moments before they noticed their mind had wandered.</p>
     <nav class="hv-toc" aria-label="On this page">
-      <a href="#person">One meditator</a><a href="#rhythm">The hidden rhythm</a><a href="#everyone">Everyone</a><a href="#means">What it means</a><a href="#data">About the data</a>
+      <a href="#person">Heart: one meditator</a><a href="#rhythm">The hidden rhythm</a><a href="#everyone">Everyone</a><a href="#means">What it means</a><a href="#brain">Brain: mind wandering</a><a href="#brain-waves">Brain waves</a><a href="#data">About the data</a>
     </nav>
   </div>
 </section>
@@ -102,13 +102,86 @@ description: "Look at real heartbeat recordings from people before and during me
   </div>
 </section>
 
+<section class="sec hv-sec lab-divide" id="brain">
+  <div class="wrap">
+    <p class="lab-kicker">Brain · Brandmeyer &amp; Delorme 2018</p>
+    <h2>Meditating, or mind wandering? The brain, ten seconds before the bell</h2>
+    <p class="hv-intro">24 practitioners of the Himalayan Yoga tradition repeated a mantra in silence for 45 to 90 minutes, wearing a 64-electrode EEG cap. Every two minutes or so a voice interrupted them and asked three questions: how deep was your meditation, how much was your mind wandering, and how drowsy are you, each from 0 to 3. Twelve were experts, meditating at least two hours a day for a year or more; twelve practised less.</p>
+    <div class="hv-cols lab-cols-top">
+      <div class="lab-panel lab-panel-flat"><div class="lab-chart" data-eeg-wander></div></div>
+      <div>
+        <h3>Experts wandered less</h3>
+        <p>Each dot is one person. Leaving out check-ins where the two ratings were equal, experts rated their mind as wandering more than meditating about <b>25%</b> of the time; the less experienced, about <b>57%</b>. Our count from the experiment's own logs matches the paper's (24.6% and 57.3%).</p>
+        <div class="hv-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">24 people, self-reports, one tradition</span>
+          <a href="https://doi.org/10.1007/s00221-016-4811-5" target="_blank" rel="noopener">Brandmeyer &amp; Delorme 2018, Experimental Brain Research ↗</a></div>
+      </div>
+    </div>
+
+    <div class="lab-panel">
+      <div class="lab-panel-h"><h3>Ten seconds of brain waves</h3><p class="hv-small">The raw EEG from six electrodes, front to back, just before one check-in rated "meditating" and one rated "mind wandering".</p></div>
+      <div class="lab-people" role="group" aria-label="Choose a meditator" data-eeg-people></div>
+      <p class="hv-small" data-eeg-who aria-live="polite"></p>
+      <div class="lab-zoom">
+        <div class="lab-chart" data-eeg-tr-med></div>
+        <div class="lab-chart" data-eeg-tr-mw></div>
+      </div>
+      <p class="hv-small">Each row is one electrode: Fz at the front of the head, C3 and C4 over the left and right body-sensing (somatosensory) cortex, Cz on top, Pz behind it, Oz at the back. Brain waves are tiny, a few millionths of a volt, and raw recordings always look busy; the patterns show up when many windows are averaged, below.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="brain-waves">
+  <div class="wrap">
+    <h2>Which brain waves changed</h2>
+    <p class="hv-intro">Brain waves are named by speed. <b>Theta</b> (4–7 cycles a second) over the front of the head is linked with focused, effortful attention. <b>Alpha</b> (9–11 cycles a second) is often read as the brain turning down incoming signals, here over the body-sensing cortex. Compare the two states below.</p>
+    <div class="lab-panel lab-panel-flat">
+      <div class="lab-toggles">
+        <div class="lab-seg" role="group" aria-label="Whose data"><button type="button" aria-pressed="true" data-eeg-view="expert">Experts</button><button type="button" aria-pressed="false" data-eeg-view="novice">Less experienced</button><button type="button" aria-pressed="false" data-eeg-view="person">Chosen person</button></div>
+        <div class="lab-seg" role="group" aria-label="Part of the head"><button type="button" aria-pressed="false" data-eeg-roi="front">Front</button><button type="button" aria-pressed="true" data-eeg-roi="centre">Centre</button><button type="button" aria-pressed="false" data-eeg-roi="back">Back</button></div>
+      </div>
+      <div class="lab-chart" data-eeg-spec></div>
+      <p class="hv-small" data-eeg-specnote aria-live="polite"></p>
+    </div>
+
+    <h3 class="lab-h3">Where on the head</h3>
+    <p class="hv-intro">Seen from above, nose at the top. Red means more power when meditating than when mind wandering; blue means less. Same colour scale in all four maps.</p>
+    <div class="lab-maps">
+      <figure><img src="{{ '/lab/eeg/map-expert-theta.png' | relative_url }}" alt="Scalp map: theta, experts, meditating minus mind wandering" loading="lazy" width="300" height="300"><figcaption>Theta · experts</figcaption></figure>
+      <figure><img src="{{ '/lab/eeg/map-expert-alpha.png' | relative_url }}" alt="Scalp map: alpha, experts, meditating minus mind wandering" loading="lazy" width="300" height="300"><figcaption>Alpha · experts</figcaption></figure>
+      <figure><img src="{{ '/lab/eeg/map-novice-theta.png' | relative_url }}" alt="Scalp map: theta, less experienced, meditating minus mind wandering" loading="lazy" width="300" height="300"><figcaption>Theta · less experienced</figcaption></figure>
+      <figure><img src="{{ '/lab/eeg/map-novice-alpha.png' | relative_url }}" alt="Scalp map: alpha, less experienced, meditating minus mind wandering" loading="lazy" width="300" height="300"><figcaption>Alpha · less experienced</figcaption></figure>
+    </div>
+    <p class="lab-legend"><span class="lab-grad"></span><span>more when mind wandering</span><span>no difference</span><span>more when meditating</span></p>
+
+    <div class="hv-cards lab-cards">
+      <article class="hv-card">
+        <h3>Agrees with the study</h3>
+        <p>In experts, <b>theta over the front of the head was higher when meditating</b> than when the mind had wandered: about 14% on average, in 7 of 9 people. This is the paper's main finding, and our simpler re-analysis finds it too.</p>
+      </article>
+      <article class="hv-card">
+        <h3>Doesn't fully agree</h3>
+        <p>The paper also found more alpha over the body-sensing cortex in experts. We found only a small rise, about 6%, too small to be sure of. And in the less experienced group we found <b>less</b> alpha when meditating, 25% lower at the front of the head in all 9 people, where the paper found no difference.</p>
+      </article>
+      <article class="hv-card">
+        <h3>Keep in mind</h3>
+        <p>Mind-wandering moments were also the drowsy ones: about 0.9 out of 3 against 0.4–0.5 when meditating. Sleepiness changes alpha and theta too. After cleaning, 9 experts and 9 others had enough data. And the paper found no significant difference between the groups, so these data can't show that experts' brains work differently.</p>
+      </article>
+    </div>
+    <div class="hv-claim lab-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">small groups, self-reports, one tradition; drowsiness not separated out</span>
+      <a href="https://doi.org/10.1007/s00221-016-4811-5" target="_blank" rel="noopener">Brandmeyer &amp; Delorme 2018, Experimental Brain Research ↗</a></div>
+  </div>
+</section>
+
 <section class="sec hv-sec" id="data">
   <div class="wrap hv-cols">
     <div>
       <h2>About the data</h2>
-      <p>These are the original heart-rate recordings from the study, shared openly on PhysioNet under the Open Data Commons Attribution licence. Each person's instantaneous heart rate was measured from a Holter ECG, beat by beat.</p>
-      <p>We removed values outside 30–200 beats a minute and the rare beat that jumped more than 45% from its neighbours (under 1% in every recording), then resampled at 2 Hz. Nothing else was changed. The analysis code is public.</p>
-      <p class="hv-small"><a href="https://github.com/NeuroscienceOfMeditation/NeuroscienceOfMeditation/blob/main/lab/analysis/heart_physionet.py" target="_blank" rel="noopener">Analysis code ↗</a></p>
+      <p>Everything on this page comes from data the researchers shared openly. We changed nothing except the cleaning described here.</p>
+      <h3>Heart</h3>
+      <p>The original heart-rate recordings from Peng et al., shared on PhysioNet under the Open Data Commons Attribution licence, measured beat by beat from a Holter ECG. We removed values outside 30–200 beats a minute and the rare beat that jumped more than 45% from its neighbours (under 1% in every recording), then resampled at 2 Hz.</p>
+      <h3>Brain</h3>
+      <p>The EEG recordings from Brandmeyer and Delorme, shared on OpenNeuro under CC0 (public domain), with the experiment's own log of every button press. Our analysis is simpler than the paper's: we filtered 1–40 Hz, repaired noisy electrodes, removed eye-movement signals with ICA, and dropped any 10-second window with a swing over 200 microvolts. The authors cleaned their data by hand and used cluster statistics, so our numbers can differ from theirs.</p>
+      <p class="hv-small">The analysis code is public: <a href="https://github.com/NeuroscienceOfMeditation/NeuroscienceOfMeditation/blob/main/lab/analysis/heart_physionet.py" target="_blank" rel="noopener">heart ↗</a> · <a href="https://github.com/NeuroscienceOfMeditation/NeuroscienceOfMeditation/tree/main/lab/analysis" target="_blank" rel="noopener">brain ↗</a></p>
     </div>
     <aside class="hv-note">
       <h3>Sources</h3>
@@ -117,6 +190,8 @@ description: "Look at real heartbeat recordings from people before and during me
         <a href="https://doi.org/10.13026/C2B880" target="_blank" rel="noopener">Heart Rate Oscillations during Meditation, v1.0.0, PhysioNet ↗</a>
         <a href="https://doi.org/10.1038/s44360-026-00096-z" target="_blank" rel="noopener">Pollard T et al. PhysioNet as a global platform for biomedical research. Nature Health, 2026 ↗</a>
         <a href="https://opendatacommons.org/licenses/by/1-0/" target="_blank" rel="noopener">Open Data Commons Attribution License v1.0 ↗</a>
+        <a href="https://doi.org/10.1007/s00221-016-4811-5" target="_blank" rel="noopener">Brandmeyer T, Delorme A. Reduced mind wandering in experienced meditators and associated EEG correlates. Experimental Brain Research 236:2519–2528, 2018 ↗</a>
+        <a href="https://doi.org/10.18112/openneuro.ds001787.v1.1.1" target="_blank" rel="noopener">Delorme A, Brandmeyer T. EEG meditation study, OpenNeuro ds001787 v1.1.1 (CC0) ↗</a>
       </p>
     </aside>
   </div>
@@ -127,5 +202,6 @@ description: "Look at real heartbeat recordings from people before and during me
 {% include footer.html %}
 <script>window.LAB_BASE = "{{ '/lab/data/' | relative_url }}";</script>
 <script src="{{ '/lab/lab.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/lab/eeg.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </body>
 </html>
