@@ -1,0 +1,43 @@
+/* The Meditation Lab (meditation-lab.html); builds on /hrv/hrv.css */
+.lab{--pre:#7E8E7A;--med:#C2611F;--ctl:#B9AE98}
+@media (prefers-color-scheme:dark){.lab{--pre:#9FAE9A;--med:#F0A386;--ctl:#6F6A5E}}
+.lab-kicker{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--clay,#C2611F);margin:0 0 8px!important}
+.lab-people{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:22px 0 18px}
+.lab-grp{font:600 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);margin:0 4px 0 6px}
+.lab-grp:first-child{margin-left:0}
+.lab-people button{min-width:46px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:8px 12px;font:600 14px var(--sans);color:var(--forest-ink);cursor:pointer}
+.lab-people button[aria-pressed="true"]{background:var(--forest);color:var(--paper);border-color:var(--forest)}
+.lab-stats{display:grid;grid-template-columns:auto repeat(4,1fr);gap:10px;align-items:stretch}
+.lab-stats .hv-stat{background:var(--surface);border:1px solid var(--line);padding:12px 14px}
+.lab-stats .hv-stat b{font-size:22px}
+.lab-who{display:flex;flex-direction:column;justify-content:center;padding:0 10px 0 0}
+.lab-who b{font:700 34px var(--serif);color:var(--forest-ink);line-height:1}
+.lab-who span{font-size:13px;color:var(--ink-60)}
+.lab-verdict{grid-column:1/-1;margin:2px 0 0!important;font-weight:600;color:var(--forest-ink)}
+.lab-panel{margin-top:20px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.lab-panel-flat{margin-top:0}
+.lab-panel-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 20px;margin-bottom:6px}
+.lab-panel-h h3{margin:0!important}
+.lab-panel-h .hv-small{margin:0}
+.lab-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.lab-chart text{font:12px var(--sans);fill:var(--ink-60)}
+.lab-chart .lab-rowlabel{font-weight:700;fill:var(--forest-ink)}
+.lab-brush{fill:rgba(194,97,31,.12);stroke:var(--med);stroke-width:1.5}
+.lab-band{fill:rgba(194,97,31,.09)}
+.lab-chart .lab-bandlabel{fill:var(--med);font-weight:600}
+.lab-zoom{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.lab-range{display:flex;align-items:center;gap:10px;font:600 13px var(--sans);color:var(--forest-ink)}
+.lab-range output{min-width:28px}
+.lab-range input{width:220px;accent-color:var(--med)}
+.lab-claim{margin-top:20px}
+.lab-next{margin-top:18px!important}
+.lab-next a,.lab-refs a{color:var(--forest-ink);font-weight:600}
+.lab-refs{display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.5}
+@media (max-width:900px){
+  .lab-stats{grid-template-columns:1fr 1fr}
+  .lab-who{grid-column:1/-1;flex-direction:row;align-items:baseline;justify-content:flex-start;gap:10px;padding:0}
+  .lab-zoom{grid-template-columns:1fr}
+  .lab-range input{width:150px}
+  .lab-panel{padding:12px}
+}
+.lab-h3{margin-top:26px!important}

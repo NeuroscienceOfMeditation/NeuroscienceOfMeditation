@@ -1,0 +1,131 @@
+---
+title: "The Meditation Lab: real recordings from meditators, explored"
+description: "Look at real heartbeat recordings from people before and during meditation, the open data behind a published study, and see what the heart actually does. Every claim graded and sourced."
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  <link rel="stylesheet" href="{{ '/hrv/hrv.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="stylesheet" href="{{ '/lab/lab.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+{% include header.html %}
+
+<main id="main" class="hv lab">
+
+<section class="sec tight">
+  <div class="wrap">
+    <div class="eyebrow">The Meditation Lab</div>
+    <h1 class="hv-h1">Real recordings from meditators. Look for yourself.</h1>
+    <p class="lede hv-lede">Most articles tell you what a study found. Here you can open the actual data behind one, the beat-by-beat heart rate of 12 meditators, and see what their hearts did before and during practice.</p>
+    <nav class="hv-toc" aria-label="On this page">
+      <a href="#person">One meditator</a><a href="#rhythm">The hidden rhythm</a><a href="#everyone">Everyone</a><a href="#means">What it means</a><a href="#data">About the data</a>
+    </nav>
+  </div>
+</section>
+
+<section class="sec hv-sec lab-heart" id="person">
+  <div class="wrap">
+    <p class="lab-kicker">Heart · Peng et al. 1999</p>
+    <h2>What one meditator's heart did</h2>
+    <p class="hv-intro">Choose a person. Each was recorded before meditating and then during it. <b>Chi</b> meditators (C) practised a guided visualisation and breathed as they liked; most had been practising for only 1–3 months. <b>Kundalini Yoga</b> meditators (Y) were advanced, and their session was a sequence of breathing and chanting exercises.</p>
+
+    <div class="lab-people" role="group" aria-label="Choose a meditator" data-people></div>
+
+    <div class="lab-stats" data-stats aria-live="polite"></div>
+
+    <div class="lab-panel">
+      <div class="lab-panel-h"><h3>The whole session</h3><p class="hv-small">Heart rate in beats per minute. Tap or drag on the chart to choose the two minutes shown below.</p></div>
+      <div class="lab-chart" data-overview></div>
+    </div>
+
+    <div class="lab-panel">
+      <div class="lab-panel-h"><h3>Two minutes, close up</h3>
+        <label class="lab-range">Minute <output data-minout>0</output><input type="range" min="0" max="50" value="10" step="0.5" data-minute aria-label="Which two minutes to show"></label></div>
+      <div class="lab-zoom">
+        <div class="lab-chart" data-zoom-pre></div>
+        <div class="lab-chart" data-zoom-med></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="rhythm">
+  <div class="wrap hv-cols">
+    <div>
+      <h2>The hidden rhythm</h2>
+      <p>Breaking a heart-rate recording into its rhythms shows which speeds of rise-and-fall are strongest. During meditation most of these people developed one dominant rhythm, a slow swing of roughly <b>2.5 to 6.5 cycles a minute</b>, one every 9 to 23 seconds.</p>
+      <p>The study estimated breathing from the ECG itself and found that these swings closely tracked it: they were the heart following very slow breaths. This is respiratory sinus arrhythmia, the heart speeding up as you breathe in and slowing as you breathe out, made unusually large.</p>
+      <div class="hv-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">breathing was estimated from the ECG, not measured directly</span>
+        <a href="https://doi.org/10.1016/S0167-5273(99)00066-2" target="_blank" rel="noopener">Peng et al. 1999, International Journal of Cardiology ↗</a></div>
+      <h3 class="lab-h3">Why a wearable might miss it</h3>
+      <p>RMSSD, the number most HRV apps show, measures how much the heart changes from one beat to the very next. Slow, smooth swings change it only a little per beat. So while the swings grew in 10 of these 12 people, RMSSD actually fell in 7 of them. One number never tells the whole story.</p>
+    </div>
+    <div class="lab-panel lab-panel-flat">
+      <div class="lab-chart" data-spectrum></div>
+      <p class="hv-small" data-spec-note></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="everyone">
+  <div class="wrap">
+    <h2>Everyone, side by side</h2>
+    <p class="hv-intro">Each dot is one person: the typical size of their heart-rate swing, up or down from the middle, in beats per minute. Lines join each meditator's before and during. The three groups on the right never meditated: sleeping adults, adults breathing to a metronome at 15 breaths a minute, and elite triathletes asleep.</p>
+    <div class="lab-panel lab-panel-flat"><div class="lab-chart" data-everyone></div></div>
+    <p class="hv-small">Calculated by us from the open recordings, following the paper's method: heart rate resampled at 2 Hz, filtered to the 0.025–0.35 Hz band, and the median of its Hilbert amplitude. Our numbers are our own and may differ slightly from the paper's table.</p>
+  </div>
+</section>
+
+<section class="sec hv-sec hv-alt" id="means">
+  <div class="wrap">
+    <h2>What this shows, and what it doesn't</h2>
+    <div class="hv-cards">
+      <article class="hv-card">
+        <h3>It shows</h3>
+        <p>In 10 of these 12 people, the heart swung harder during meditation than before. On average the swings were about three times those of the 34 non-meditators, and 6 of the 12 swung harder than any non-meditator, fit athletes included. Meditation here was not a quiet, flat state for the heart. It was rhythmic and lively.</p>
+      </article>
+      <article class="hv-card">
+        <h3>Look closer</h3>
+        <p>The Kundalini session was active work. Breathing exercises and chanting pushed average heart rate from about 61 to 92. The Chi meditators' "before" was recorded during an ordinary day, not quiet rest. And two Chi meditators showed no rise at all.</p>
+      </article>
+      <article class="hv-card">
+        <h3>It doesn't show</h3>
+        <p>Whether this is good for you, whether it lasts after the session, or whether meditation itself, rather than slow breathing, causes it. Twelve people, two traditions, one session each. The paper asks these questions; it does not answer them.</p>
+      </article>
+    </div>
+    <div class="hv-claim lab-claim"><span class="hv-g hv-g-S"><i></i>How sure is this? <b>Suggestive</b></span><span class="hv-why">12 meditators, 34 non-meditators, one study</span></div>
+    <p class="lab-next"><a href="{{ '/measure-your-practice.html' | relative_url }}">Try it on your own heart: load your own recording →</a></p>
+  </div>
+</section>
+
+<section class="sec hv-sec" id="data">
+  <div class="wrap hv-cols">
+    <div>
+      <h2>About the data</h2>
+      <p>These are the original heart-rate recordings from the study, shared openly on PhysioNet under the Open Data Commons Attribution licence. Each person's instantaneous heart rate was measured from a Holter ECG, beat by beat.</p>
+      <p>We removed values outside 30–200 beats a minute and the rare beat that jumped more than 45% from its neighbours (under 1% in every recording), then resampled at 2 Hz. Nothing else was changed. The analysis code is public.</p>
+      <p class="hv-small"><a href="https://github.com/NeuroscienceOfMeditation/NeuroscienceOfMeditation/blob/main/lab/analysis/heart_physionet.py" target="_blank" rel="noopener">Analysis code ↗</a></p>
+    </div>
+    <aside class="hv-note">
+      <h3>Sources</h3>
+      <p class="lab-refs">
+        <a href="https://doi.org/10.1016/S0167-5273(99)00066-2" target="_blank" rel="noopener">Peng C-K, Mietus JE, Liu Y, Khalsa G, Douglas PS, Benson H, Goldberger AL. Exaggerated heart rate oscillations during two meditation techniques. International Journal of Cardiology 70:101–107, 1999 ↗</a>
+        <a href="https://doi.org/10.13026/C2B880" target="_blank" rel="noopener">Heart Rate Oscillations during Meditation, v1.0.0, PhysioNet ↗</a>
+        <a href="https://doi.org/10.1038/s44360-026-00096-z" target="_blank" rel="noopener">Pollard T et al. PhysioNet as a global platform for biomedical research. Nature Health, 2026 ↗</a>
+        <a href="https://opendatacommons.org/licenses/by/1-0/" target="_blank" rel="noopener">Open Data Commons Attribution License v1.0 ↗</a>
+      </p>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+{% include footer.html %}
+<script>window.LAB_BASE = "{{ '/lab/data/' | relative_url }}";</script>
+<script src="{{ '/lab/lab.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</body>
+</html>
