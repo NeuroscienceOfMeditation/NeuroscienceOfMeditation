@@ -1,7 +1,7 @@
 ---
 title: "Is the Nasal Cycle Even a Cycle?"
 description: "Last week I wrote that lying on one side opens the other nostril. That creates a problem for the thing I have been calling a rhythm — and it turns out two rhinologists asked the same question in 1989, and answered it with one woman whose nose ignored posture."
-date: 2026-11-09 08:06:02 +0530
+date: 2026-11-09 10:30:26 +0530
 pillar: Claim check
 cover: cycle
 image: /img/og-nasal-cycle-even-a-cycle.jpg
