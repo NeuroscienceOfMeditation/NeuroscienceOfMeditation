@@ -87,6 +87,9 @@ const isSel = id => selected.indexOf(id) > -1;
 
 /* ---------- colouring ---------- */
 const BONE = new THREE.Color('#EADFC6'), DEEPBASE = new THREE.Color('#D9CBB0');
+const UP = new THREE.Color('#E0702A'), DOWN = new THREE.Color('#2E7FA8');
+let pracSel = null;
+const pracGroup = new THREE.Group();
 const RC = {}; REGIONS.forEach(r => RC[r.id] = new THREE.Color(r.colour));
 const NC = {}; NETWORKS.forEach(n => NC[n.id] = new THREE.Color(n.colour));
 const tmp = new THREE.Color();
@@ -95,28 +98,36 @@ function paint() {
   for (let i = 0; i < NV; i++) {
     const r = regionOf[i], n = netOf[i]; let c = BONE, k = 0;
     if (mode === 'networks' && NC[n]) { c = NC[n]; k = any ? (isSel(n) ? 0.95 : 0.25) : 0.85; }
-    else if (mode === 'practices') { k = 0; }
+    else if (mode === 'practices') { const m = pracHit(r, pos[i * 3]); if (m) { c = m.up ? UP : DOWN; k = 0.85; } }
     else if (mode === 'regions' && RC[r]) { c = RC[r]; k = any ? (isSel(r) ? 0.95 : 0.1) : (r === hovered ? 0.95 : 0.7); }
     tmp.copy(BONE).lerp(c, k).multiplyScalar(shade[i]);
     colors[i * 3] = tmp.r; colors[i * 3 + 1] = tmp.g; colors[i * 3 + 2] = tmp.b;
   }
   geo.attributes.color.needsUpdate = true;
   for (let i = 0; i < DNV; i++) {
-    const r = deepOf[i]; const c = RC[r] || DEEPBASE;
-    const k = mode !== 'regions' ? 0.15 : (any ? (isSel(r) ? 1 : 0.15) : (r === hovered ? 1 : 0.8));
+    const r = deepOf[i]; let c = RC[r] || DEEPBASE;
+    const pm = mode === 'practices' ? pracHit(r, dpos[i * 3]) : null; if (pm) c = pm.up ? UP : DOWN;
+    const k = pm ? 1 : mode !== 'regions' ? 0.15 : (any ? (isSel(r) ? 1 : 0.15) : (r === hovered ? 1 : 0.8));
     tmp.copy(DEEPBASE).lerp(c, k);
     dcolors[i * 3] = tmp.r; dcolors[i * 3 + 1] = tmp.g; dcolors[i * 3 + 2] = tmp.b;
   }
   dgeo.attributes.color.needsUpdate = true;
 }
 
-/* practice maps: one ball per reported cluster, same volume as the cluster */
-const pracGroup = new THREE.Group(); scene.add(pracGroup);
-const UP = new THREE.Color('#E0702A'), DOWN = new THREE.Color('#2E7FA8');
+/* practice maps: one ball per reported cluster (same volume as the cluster), or, for studies
+   without coordinates, the atlas regions that contain the reported change, on the reported side */
+function pracHit(r, x) {
+  if (!pracSel || !pracSel.regions || !r) return null;
+  return pracSel.regions.find(q => q.id === r && (q.hemi === 'R' ? x > 0 : q.hemi === 'L' ? x < 0 : true)) || null;
+}
+scene.add(pracGroup);
 const ballGeo = new THREE.SphereGeometry(1, 28, 20);
 function showPractice(p) {
   while (pracGroup.children.length) { const m = pracGroup.children.pop(); m.material.dispose(); }
+  pracSel = p || null; paint();
   if (!p) return;
+  if (p.regions) { const deep = p.regions.some(q => (REGIONS.find(r => r.id === q.id) || {}).deep); setGlass(deep ? 0.35 : 1); }
+  else setGlass(0.25);
   (p.clusters || []).forEach(cl => {
     const rmm = Math.cbrt(3 * cl.vol / (4 * Math.PI));
     const col = cl.up ? UP : DOWN;
@@ -258,13 +269,19 @@ function select(ids, opts) {
   if (mode === 'practices') {
     const p = PR.list.find(x => x.id === id); if (!p) return;
     showPractice(p);
-    const row = cl => `<li><i class="ba-dot" style="background:${cl.up ? '#E0702A' : '#2E7FA8'}"></i>${esc(cl.name)} <span>${cl.hemi === 'M' ? 'midline' : cl.hemi === 'L' ? 'left' : 'right'}</span></li>`;
-    const up = p.clusters.filter(c => c.up), down = p.clusters.filter(c => !c.up);
-    card.innerHTML = `<p class="ba-kicker"><i class="ba-dot" style="background:${esc(p.colour)}"></i>Practice map</p><h2>${esc(p.name)}</h2>
+    const side = h => h === 'M' ? 'midline' : h === 'L' ? 'left' : h === 'R' ? 'right' : 'both sides';
+    const row = cl => `<li><i class="ba-dot" style="background:${cl.up ? '#E0702A' : '#2E7FA8'}"></i>${esc(cl.name)} <span>${side(cl.hemi)}</span></li>`;
+    const items = p.clusters || p.regions || [];
+    const up = items.filter(c => c.up), down = items.filter(c => !c.up);
+    const upL = p.up_label || 'More active during this practice', downL = p.down_label || 'Less active';
+    card.innerHTML = `<p class="ba-kicker"><i class="ba-dot" style="background:${esc(p.colour)}"></i>${esc(p.kicker || 'Practice map')}</p><h2>${esc(p.name)}</h2>
       <p>${esc(p.does)}</p>
-      <h3>More active during this practice</h3><ul class="ba-clusters">${up.map(row).join('')}</ul>
-      <h3>Less active</h3>${down.length ? `<ul class="ba-clusters">${down.map(row).join('')}</ul>` : '<p>No area reached significance.</p>'}
-      <div class="ba-claim"><p>Pooled from ${p.studies} studies of this practice. ${esc(PR.caveat || '')}</p>${gradeHTML(PR.grade)}${refsHTML(PR.refs)}</div>
+      ${up.length ? `<h3>${esc(upL)}</h3><ul class="ba-clusters">${up.map(row).join('')}</ul>` : ''}
+      ${down.length ? `<h3>${esc(downL)}</h3><ul class="ba-clusters">${down.map(row).join('')}</ul>` : (p.clusters ? '<h3>Less active</h3><p>No area reached significance.</p>' : '')}
+      ${p.also && p.also.length ? `<h3>Also reported, not drawn here</h3><ul class="ba-clusters">${p.also.map(a => `<li><i class="ba-dot" style="background:transparent;border:2px solid #E0702A"></i>${esc(a)}</li>`).join('')}</ul>` : ''}
+      ${p.finding ? `<p>${esc(p.finding)}</p>` : ''}
+      <div class="ba-claim"><p>${p.studies ? `Pooled from ${p.studies} studies of this practice. ${esc(PR.caveat || '')}` : esc(p.caveat || '')}</p>${gradeHTML(p.grade || PR.grade)}${refsHTML(p.refs || PR.refs)}</div>
+      ${p.related ? `<h3>Read and try</h3><p class="ba-related">${p.related.map(x => `<a href="${esc(x.url)}">${esc(x.label)} →</a>`).join('')}</p>` : ''}
       <button type="button" class="ba-back" data-ba-back>← All practices</button>`;
     setHash('practice-' + slug(p.name)); bindBack();
     if (innerWidth < 900) card.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
@@ -294,7 +311,9 @@ function chips() {
   const box = $('[data-ba-chips]');
   const list = mode === 'networks' ? NETWORKS : mode === 'practices' ? PR.list : REGIONS;
   $('.ba-list-h').textContent = mode === 'networks' ? 'Networks' : mode === 'practices' ? 'Practices' : 'Regions';
-  const groups = mode !== 'regions' ? [['', list]] : [['On the surface', list.filter(r => !r.deep)], ['Deep inside', list.filter(r => r.deep)]];
+  const SETS = PR.sets || {};
+  const groups = mode === 'practices' ? Object.keys(SETS).map(k => [SETS[k], list.filter(p => (p.set || 'meta') === k)]).filter(g => g[1].length) :
+    mode !== 'regions' ? [['', list]] : [['On the surface', list.filter(r => !r.deep)], ['Deep inside', list.filter(r => r.deep)]];
   box.innerHTML = groups.map(([h, l]) => (h ? `<p class="ba-sub">${h}</p>` : '') + l.map(x => `<button type="button" data-ba-chip="${x.id}" aria-pressed="false"><i style="background:${esc(x.colour)}"></i>${esc(x.name)}</button>`).join('')).join('');
   box.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
     stopTour(); const id = +b.dataset.baChip;

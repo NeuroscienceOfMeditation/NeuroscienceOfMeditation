@@ -38,6 +38,18 @@ refs:
   farb2013:
     label: "Farb et al. 2013, attention to the breath and the insula, before and after mindfulness training (Social Cognitive and Affective Neuroscience)"
     url: "https://doi.org/10.1093/scan/nss066"
+  valk2017:
+    label: "Valk et al. 2017, the ReSource Project: cortical thickness after three kinds of mental training, over 300 adults (Science Advances)"
+    url: "https://doi.org/10.1126/sciadv.1700489"
+  klimecki2014:
+    label: "Klimecki et al. 2014, brain changes after empathy training and after compassion training (Social Cognitive and Affective Neuroscience)"
+    url: "https://doi.org/10.1093/scan/nst060"
+  kjaer2002:
+    label: "Kjaer et al. 2002, dopamine during Yoga Nidra, PET study of experienced yoga teachers (Cognitive Brain Research)"
+    url: "https://research.regionh.dk/en/publications/increased-dopamine-tone-during-meditation-induced-change-of-consc/"
+  kalyani2011:
+    label: "Kalyani et al. 2011, pilot fMRI study of OM chanting, 12 volunteers (International Journal of Yoga)"
+    url: "https://doi.org/10.4103/0973-6131.78171"
   cerebatlas:
     label: "Diedrichsen lab cerebellar atlases, the template used for the brainstem and cerebellum (CC BY)"
     url: "https://github.com/DiedrichsenLab/cerebellar_atlases"
@@ -309,7 +321,11 @@ tours:
         refs: [zelano2016]
 
 practices:
-  intro: "A 2016 meta-analysis pooled 78 brain-imaging studies and found that different kinds of meditation light up different areas. Choose a practice to see where. Each ball sits at the centre of a reported cluster and has the same volume."
+  intro: "Different practices, different brain patterns. The practice types come from a 2016 meta-analysis of 78 brain-imaging studies; each ball sits at the centre of a reported cluster and has the same volume. The training programmes and popular claims come from single studies that report areas rather than exact points, so the whole atlas region on that side is coloured. Every study is graded."
+  sets:
+    meta: "Practice types · meta-analysis"
+    training: "Training programmes"
+    claims: "Popular claims · small studies"
   grade: S
   refs: [fox2016]
   caveat: "Only 6 to 10 studies per practice, most of them small, so these maps may change as more research comes in. More active and less active are compared with rest or a control task, not with each other."
@@ -359,6 +375,115 @@ practices:
         - { name: "Anterior insula", hemi: R, at: [38, 22, 14], vol: 512, up: true }
         - { name: "Parieto-occipital sulcus", hemi: R, at: [24, -60, 18], vol: 344, up: true }
         - { name: "Somatosensory cortex and inferior parietal lobule", hemi: R, at: [54, -26, 30], vol: 320, up: true }
+
+    # ---------- training programmes ----------
+    - id: 5
+      set: training
+      name: "ReSource: Presence"
+      kicker: "Training programme · 3 months"
+      colour: "#1B4332"
+      does: "Three months of breath meditation and body scan: training attention and awareness of the body. The first module of the 9-month ReSource Project."
+      up_label: "Thicker cortex after this module"
+      regions:
+        - { id: 5, hemi: R, up: true, name: "Prefrontal cortex" }
+        - { id: 4, hemi: R, up: true, name: "Anterior cingulate cortex" }
+        - { id: 8, hemi: B, up: true, name: "Occipital cortex, extending to the lower temporal lobe" }
+      finding: "People whose attention improved most during this module showed more thickening in the left middle temporal cortex."
+      grade: S
+      refs: [valk2017]
+      caveat: "Compared with the other modules, in over 300 adults followed for 9 months. The coloured areas are this atlas's broad regions that contain the reported changes; the real changes were smaller patches. Other studies, including a large trial of an 8-week mindfulness course, found no structural change, so this is not settled."
+    - id: 6
+      set: training
+      name: "ReSource: Affect"
+      kicker: "Training programme · 3 months"
+      colour: "#C2611F"
+      does: "Three months of loving-kindness and compassion practice, gratitude, and learning to accept difficult feelings, including daily practice with a partner."
+      up_label: "Thicker cortex after this module"
+      regions:
+        - { id: 3, hemi: R, up: true, name: "Insula and nearby operculum" }
+        - { id: 5, hemi: R, up: true, name: "Dorsolateral prefrontal cortex" }
+        - { id: 2, hemi: L, up: true, name: "Mid and posterior cingulate" }
+      also: ["Right supramarginal gyrus", "Parahippocampal areas, both sides"]
+      finding: "People whose compassion grew most during this module showed more thickening of the right insula."
+      grade: S
+      refs: [valk2017]
+      caveat: "Compared with the other modules, in over 300 adults. The coloured areas are broad atlas regions containing the reported changes. Other studies of short courses found no structural change, so this is not settled."
+    - id: 7
+      set: training
+      name: "ReSource: Perspective"
+      kicker: "Training programme · 3 months"
+      colour: "#5B9BC4"
+      does: "Three months of observing your own thoughts and taking other people's point of view, including daily practice with a partner."
+      up_label: "Thicker cortex after this module"
+      regions:
+        - { id: 5, hemi: L, up: true, name: "Ventrolateral prefrontal cortex" }
+        - { id: 8, hemi: L, up: true, name: "Occipital cortex" }
+      also: ["Right middle temporal gyrus"]
+      finding: "People who got better at understanding others' thoughts showed more thickening in left parietal areas and the right temporo-parietal junction."
+      grade: S
+      refs: [valk2017]
+      caveat: "Compared with the other modules, in over 300 adults. The coloured areas are broad atlas regions containing the reported changes. Not settled: other studies of short courses found no structural change."
+    - id: 8
+      set: training
+      name: "Empathy training"
+      kicker: "Training study"
+      colour: "#8A6BB0"
+      does: "Training to resonate with other people's suffering: to feel with them."
+      up_label: "More active when watching others suffer, after training"
+      regions:
+        - { id: 3, hemi: B, up: true, name: "Anterior insula" }
+        - { id: 4, hemi: B, up: true, name: "Anterior mid-cingulate cortex" }
+      finding: "These are the areas linked with feeling pain yourself. Empathy training also increased negative feelings."
+      grade: S
+      refs: [klimecki2014]
+      caveat: "One small fMRI study. The same people then did compassion training, which reversed the rise in negative feelings."
+    - id: 9
+      set: training
+      name: "Compassion training"
+      kicker: "Training study"
+      colour: "#3E9B5F"
+      does: "Training to meet suffering with warmth and the wish to help, rather than sharing the pain."
+      up_label: "More active when watching others suffer, after training"
+      regions:
+        - { id: 6, hemi: B, up: true, name: "Medial orbitofrontal cortex" }
+        - { id: 4, hemi: B, up: true, name: "Pregenual anterior cingulate" }
+        - { id: 13, hemi: B, up: true, name: "Ventral striatum" }
+      finding: "A different set of areas from empathy, linked with reward and caring. Compassion training reversed the rise in negative feelings that empathy training had caused, and increased positive feelings."
+      grade: S
+      refs: [klimecki2014]
+      caveat: "One small fMRI study; everyone did empathy training first, so the order was not varied."
+
+    # ---------- popular claims ----------
+    - id: 10
+      set: claims
+      name: "Yoga Nidra"
+      kicker: "Popular claim · one small study"
+      colour: "#D9A520"
+      does: "Guided 'yogic sleep': lying still and moving attention through the body while staying awake."
+      up_label: "More dopamine released during practice"
+      regions:
+        - { id: 13, hemi: B, up: true, name: "Ventral striatum" }
+      finding: "During Yoga Nidra, a dopamine tracer bound 7.9% less in the ventral striatum, which the authors estimated as a 65% rise in dopamine release. The '65% more dopamine' you may have read comes from that estimate."
+      grade: X
+      refs: [kjaer2002]
+      caveat: "A PET study of a small group of experienced yoga teachers, with no separate control group, and not yet repeated. It measured dopamine, not brain activity."
+    - id: 11
+      set: claims
+      name: "Chanting Om"
+      kicker: "Popular claim · one pilot study"
+      colour: "#7D6BB0"
+      does: "Chanting the syllable Om aloud, with attention on the sound and its vibration."
+      down_label: "Quieter during Om chanting than at rest"
+      regions:
+        - { id: 6, hemi: B, up: false, name: "Orbitofrontal cortex" }
+        - { id: 4, hemi: B, up: false, name: "Anterior cingulate" }
+        - { id: 9, hemi: B, up: false, name: "Hippocampus" }
+        - { id: 11, hemi: B, up: false, name: "Thalamus" }
+        - { id: 10, hemi: R, up: false, name: "Amygdala" }
+      also: ["Parahippocampal gyri, both sides"]
+      grade: X
+      refs: [kalyani2011]
+      caveat: "A pilot fMRI study of 12 volunteers, compared with rest. It has not been repeated by an independent team."
 
 networks:
   - { id: 1, name: "Visual", colour: "#7B3C9E", does: "Seeing." }
