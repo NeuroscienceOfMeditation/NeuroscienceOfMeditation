@@ -184,6 +184,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--new", action="store_true",
                     help="print only rows not already in citations.csv")
+    ap.add_argument("--sheets", action="store_true",
+                    help="also write citations-sheets.csv, in which a locator "
+                         "like 323:121602 is quoted so Google Sheets does not "
+                         "import it as a duration")
     args = ap.parse_args()
 
     rows = collect()
@@ -202,6 +206,18 @@ def main():
         w = csv.DictWriter(fh, fieldnames=COLUMNS)
         w.writeheader()
         w.writerows(rows)
+
+    if args.sheets:
+        safe = REPO / "citations-sheets.csv"
+        with safe.open("w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=COLUMNS)
+            w.writeheader()
+            for r in rows:
+                r = dict(r)
+                if re.fullmatch(r"[\d]+:[\d]+", r["Volume/pages"]):
+                    r["Volume/pages"] = "'" + r["Volume/pages"]
+                w.writerow(r)
+        print(f"{safe.relative_to(REPO)}: written for upload to Google Sheets")
 
     unique = len({key(r["Authors"], r["Year"], r["Title"]) for r in rows})
     posts = len({r["Cited in"] for r in rows})
