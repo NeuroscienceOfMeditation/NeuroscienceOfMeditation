@@ -59,6 +59,7 @@ books:
 
   - title: "The Respiratory Codex"
     cover: "The Respiratory Codex"
+    cover_image: /img/books/respiratory-codex-cover.jpg
     tag: "New · Complete edition"
     blurb: "All 313 verses of the Śiva Svarodaya, each translated and graded against current physiology: what the text got right, what it got wrong, and what is still worth doing."
     price: "₹549"

@@ -155,11 +155,15 @@ description: "Physical and theory classes on yoga, meditation and the breath, pl
 
         <div class="cov" aria-hidden="true">
 
+          {% if bk.cover_image %}
+          <img class="cov-img" src="{{ bk.cover_image | relative_url }}" alt="" loading="lazy" width="98" height="157">
+          {% else %}
           <svg class="morris" preserveAspectRatio="xMidYMid slice">
             <rect width="100%" height="100%" fill="url(#morris)"/>
           </svg>
 
           <span class="lbl">{{ bk.cover | default: bk.title }}</span>
+          {% endif %}
 
         </div>
 
