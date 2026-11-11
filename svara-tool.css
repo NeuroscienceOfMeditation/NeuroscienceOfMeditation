@@ -1222,3 +1222,5 @@ html.pv-lock { overflow: hidden; }
 .vb-verse h3 span{font:600 12px var(--sans);color:#C2611F;min-width:28px}
 .vb-verse p{margin:0 0 6px;line-height:1.65}
 .grade.g-t{background:rgba(198,161,91,.18);color:#7A5C1E}
+.ch-brand{font:600 12px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#C2611F;margin:14px 0 4px;text-align:center}
+@media (max-width:900px){.ch-brand{text-align:left;margin:0 0 2px;font-size:11px}}

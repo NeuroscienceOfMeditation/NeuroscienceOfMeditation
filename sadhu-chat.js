@@ -271,7 +271,7 @@
       ['Morning reminder', reminder],
       ['What everyone’s breath shows', recordStory],
       ['The latest research, live', research],
-      ['Learn Tantra instead', function () { tantraMenu('The Vijñāna Bhairava. Where shall we start?'); }]
+      ['Learn meditation instead', function () { tantraMenu('Meditation, from the Vijñāna Bhairava. Where shall we start?'); }]
     ]);
   }
   function more() {
@@ -287,8 +287,8 @@
   function choosePath(prompt) {
     say(prompt || 'What would you like to learn today?');
     ask([
-      ['Breath · Swar Yoga', function () { remember('path', 'breath'); menu('The breath, then. What would you like to do?'); }, mem.path !== 'tantra'],
-      ['Tantra · the Vijñāna Bhairava', function () { tantraMenu(mem.vbtSeen && mem.vbtSeen.length ? 'Welcome back to the Vijñāna Bhairava. Where shall we go?' : 'The Vijñāna Bhairava. The goddess asks what reality is, and Bhairava answers not with an idea but with 112 ways to look. Where shall we start?'); }, mem.path === 'tantra']
+      ['Yoga', function () { remember('path', 'breath'); menu('Yoga, then: the breath, as the Shiva Svarodaya teaches it. What would you like to do?'); }, mem.path !== 'tantra'],
+      ['Meditation', function () { tantraMenu(mem.vbtSeen && mem.vbtSeen.length ? 'Welcome back to the Vijñāna Bhairava. Where shall we go?' : 'Meditation, from the Vijñāna Bhairava. The goddess asks what reality is, and Bhairava answers not with an idea but with 112 ways to look. Where shall we start?'); }, mem.path === 'tantra']
     ]);
   }
   function vRefs(keys) { return (keys || []).map(function (k) { return VBT.refs[k]; }).filter(Boolean); }
@@ -301,7 +301,7 @@
     return t[k % t.length];
   }
   function tantraMenu(prompt) {
-    if (!VBT) { say('The Tantra lessons did not load. Please refresh the page.'); return; }
+    if (!VBT) { say('The meditation lessons did not load. Please refresh the page.'); return; }
     remember('path', 'tantra'); count('tantra_menu');
     if (prompt) say(prompt);
     ask([
@@ -310,7 +310,7 @@
       ['What is this text?', tIntro],
       ['What does science say about it?', tResearch],
       ['Read all of it, verse by verse', function () { say('I have opened the whole text below our conversation, door by door.'); enqueue(function () { openFull('#vbt-all'); }); tantraMore(); }],
-      ['Learn the breath instead', function () { remember('path', 'breath'); menu('The breath, then. What would you like to do?'); }]
+      ['Learn yoga instead', function () { remember('path', 'breath'); menu('Yoga, then: the breath. What would you like to do?'); }]
     ]);
   }
   function tantraMore() {
@@ -368,7 +368,7 @@
     var opts = [];
     if (x.try && !x.caution) opts.push(['Try it with me', function () { tryIt(x); }, true]);
     if (i < vs.length - 1) opts.push(['Next in this door →', function () { dharana(vs[i + 1]); }]);
-    opts.push(['Other doors', doors], ['Back to Tantra', function () { tantraMenu('Where shall we go?'); }]);
+    opts.push(['Other doors', doors], ['Back to meditation', function () { tantraMenu('Where shall we go?'); }]);
     ask(opts);
   }
   var FEEL = {
@@ -382,7 +382,7 @@
     list(x.try.steps);
     if (!(x.try.seconds > 0)) {
       say('This one is for another moment, not now. Come back and tell me how it went.', { mood: 'smile' });
-      ask([['Other doors', doors, true], ['Back to Tantra', function () { tantraMenu('Where shall we go?'); }]]);
+      ask([['Other doors', doors, true], ['Back to meditation', function () { tantraMenu('Where shall we go?'); }]]);
       return;
     }
     say('I will keep time. Begin when you are ready.');
@@ -1118,7 +1118,7 @@
       remember('met', 1);
       say('Namaste. I am ' + NAME + '.', { mood: 'smile' });
       if (tl) say(tl);
-      say('I teach two things. The breath, from the Shiva Svarodaya: which nostril is flowing, and what that might mean. And Tantra: the 112 meditations of the Vijñāna Bhairava.');
+      say('I teach two things. Yoga of the breath, from the Shiva Svarodaya: which nostril is flowing, and what that might mean. And meditation: the 112 practices of the Vijñāna Bhairava.');
       say('With each, I give you the verse, and an honest word on what science says.');
       askName(function () { choosePath('What would you like to learn today' + (mem.name ? ', ' + mem.name : '') + '?'); });
     }
