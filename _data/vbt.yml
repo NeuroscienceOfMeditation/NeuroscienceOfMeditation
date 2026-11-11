@@ -1,0 +1,738 @@
+# The Vijñāna Bhairava Tantra, for Swami Neurananda's Tantra path (swar-yoga.html, sadhu-chat.js).
+#
+# Sanskrit: IAST as given in the published verse-by-verse translation concordance
+# (hareesh.org, 2023), which follows the verse numbering of the Kashmir Series of
+# Texts and Studies edition (1918). Translations: our own plain renderings from the
+# Sanskrit, not copied from any published translation. Where scholars read a verse
+# differently, the note says so.
+#
+# Grades follow the rest of the site: E established, S suggestive, X speculative or
+# untested, C contradicted, T tradition (stated by the text, not tested).
+# Only cite studies that have been checked to say what the note says.
+
+about:
+  name: "Vijñāna Bhairava Tantra"
+  short: "Vijñāna Bhairava"
+  facts:
+    - "A Sanskrit text from Kashmir, usually dated to roughly the 7th–8th century CE."
+    - "163 verses, in the form of a conversation between the goddess Bhairavī and the god Bhairava."
+    - "She asks what reality truly is. He does not give a doctrine. He gives about 112 practices, called dhāraṇās, ways of fixing attention, in verses 24 to 138."
+    - "It belongs to the Trika tradition of Kashmir Shaivism. Abhinavagupta quoted it with great respect."
+    - "Many practices are only one or two lines long. Some are simple enough to try in a minute; some assume a teacher and a lineage."
+  numbering: "Verse numbers follow the 1918 Kashmir Series edition, which most modern translations use."
+  translation: "The English here is our own plain rendering of the Sanskrit. For study, compare the translations of Jaideva Singh (1979), Christopher Wallis (2018) and Mark Dyczkowski."
+
+research:
+  grade: X
+  summary: "We searched for studies of the Vijñāna Bhairava itself and found none that tested its practices with brain scans, physiology or a controlled trial. There is scholarship on the text, and one short 2024 article in the journal Yoga-Mimamsa discussing its meditations in the context of mental health. So the science here works differently: for each family of practices, we show what research says about the closest thing that has been studied, and we say plainly when nothing has."
+  refs: [bhogal2024]
+
+refs:
+  bhogal2024:
+    label: "Bhogal 2024, Meditational processes in Vijnana Bhairava in the context of mental health (Yoga-Mimamsa)"
+    url: "https://doi.org/10.4103/ym.ym_34_24"
+  concordance:
+    label: "Verse-by-verse translation concordance of the Vijñāna Bhairava (hareesh.org, 2023)"
+    url: "https://hareesh.org/blog/2023/9/27/vijaana-bhairava-tantra-translation-concordance"
+  farb2013:
+    label: "Farb et al. 2013, attention to the breath and the insula, before and after mindfulness training (Social Cognitive and Affective Neuroscience)"
+    url: "https://doi.org/10.1093/scan/nss066"
+  zaccaro2018:
+    label: "Zaccaro et al. 2018, systematic review of slow breathing (Frontiers in Human Neuroscience)"
+    url: "https://www.frontiersin.org/articles/10.3389/fnhum.2018.00353/full"
+  fox2016:
+    label: "Fox et al. 2016, meta-analysis of 78 brain-imaging studies of meditation (Neuroscience & Biobehavioral Reviews)"
+    url: "https://arxiv.org/abs/1603.06342"
+  kalyani2011:
+    label: "Kalyani et al. 2011, pilot fMRI study of Om chanting, 12 volunteers (International Journal of Yoga)"
+    url: "https://doi.org/10.4103/0973-6131.78171"
+  valk2017:
+    label: "Valk et al. 2017, the ReSource Project, over 300 adults (Science Advances)"
+    url: "https://doi.org/10.1126/sciadv.1700489"
+  hagerty2013:
+    label: "Hagerty et al. 2013, case study of jhāna and the reward system, one practitioner (Neural Plasticity)"
+    url: "https://doi.org/10.1155/2013/653572"
+  hasenkamp2012:
+    label: "Hasenkamp et al. 2012, mind wandering and noticing during breath meditation, 14 meditators (NeuroImage)"
+    url: "https://pesquisa.bvsalud.org/ses/resource/pt/mdl-21782031"
+  lieberman2007:
+    label: "Lieberman et al. 2007, putting feelings into words calms the amygdala, 30 adults (Psychological Science)"
+    url: "https://sites.lifesci.ucla.edu/psych-sanlab/wp-content/uploads/sites/31/2016/03/Lieberman_2007_PsychScience.pdf"
+  zeidan2011:
+    label: "Zeidan et al. 2011, mindfulness meditation and pain (Journal of Neuroscience)"
+    url: "https://doi.org/10.1523/JNEUROSCI.5791-10.2011"
+
+# Families of practice. Grouping is ours, made for finding your way in; the
+# tradition groups them by method (āṇava, śākta, śāmbhava) instead.
+doors:
+  - id: breath
+    name: "Breath"
+    blurb: "The opening practices. Notice where the breath turns, and rest in the pause."
+    science:
+      grade: S
+      note: "Paying attention to the sensations of breathing engages the insula, the body-mapping area of the brain (one study). Slow, smooth breathing is reliably linked with calmer physiology. The pause itself, at the top and bottom of the breath, has not been studied as a practice."
+      refs: [farb2013, zaccaro2018]
+  - id: sound
+    name: "Sound and mantra"
+    blurb: "Follow a sound until it fades, chant a syllable into silence, listen to the inner hum."
+    science:
+      grade: S
+      note: "Mantra meditation recruits motor and planning areas linked with speech, in a meta-analysis of brain-imaging studies. A single small pilot study found deep emotional areas quieter while chanting Om. Listening a sound out to its very end has not been studied."
+      refs: [fox2016, kalyani2011]
+  - id: space
+    name: "Space"
+    blurb: "Feel the body as space, the world as empty, the sky as your own head."
+    science:
+      grade: S
+      note: "These are close cousins of open-awareness meditation, which has a measurable brain pattern of its own in meta-analyses. The text's specific images of space inside the body have not been tested."
+      refs: [fox2016]
+  - id: body
+    name: "Body and energy"
+    blurb: "Channels, light rising through the centre, the heart, the point above the head."
+    science:
+      grade: T
+      note: "Attention trained on the body is studied, and three months of body-scan practice was linked with brain changes in one large training study. But the channels, centres and rising energy these verses describe are a map of experience, not of anatomy. No study has found them as physical structures."
+      refs: [valk2017]
+  - id: senses
+    name: "Pleasure and the senses"
+    blurb: "The taste of food, music, meeting a friend, desire: turn the moment of delight into meditation."
+    science:
+      grade: X
+      note: "Almost untested. The nearest evidence is a case study of one practitioner who appeared to switch on his own reward system in deep concentration. Savouring a pleasure fully is a familiar idea in psychology, but these practices themselves have not been studied."
+      refs: [hagerty2013]
+  - id: gaze
+    name: "Gazing and darkness"
+    blurb: "Look at the open sky, into a well, into darkness, without a story."
+    science:
+      grade: X
+      note: "Not studied as such. The open-gaze practices resemble open-awareness meditation; gazing into darkness and still, fixed staring have no research to speak of."
+      refs: [fox2016]
+  - id: edges
+    name: "Edges and intense moments"
+    blurb: "The moment before sleep, the end of a sneeze, sudden fear, a jolt of wonder."
+    science:
+      grade: X
+      note: "These moments are real and familiar, but using them as gateways has not been studied. Some verses here describe things not to try at home, and we say so where they do."
+      refs: []
+  - id: mind
+    name: "Thought and emotion"
+    blurb: "The gap between two thoughts, desire dissolving where it arose, anger met with a still mind."
+    science:
+      grade: S
+      note: "Noticing that the mind has drifted has a brain signature of its own (one small study). Naming a feeling quietly calms the amygdala (one study of 30 adults). These are close relatives of these verses, not tests of them."
+      refs: [hasenkamp2012, lieberman2007]
+  - id: insight
+    name: "Insight and equanimity"
+    blurb: "Equal towards friend and enemy, the world like a painting, no bondage and no release."
+    science:
+      grade: T
+      note: "These are teachings about what reality is, offered as contemplations. They cannot be tested the way a breathing method can. Training in equanimity and compassion has been studied in its own right."
+      refs: [valk2017]
+
+# The practices. try: optional, a short guided version Neurananda can lead (seconds = timer).
+# caution: shown instead of a guided try when a verse should not be done casually.
+verses:
+  - v: 24
+    door: breath
+    title: "The two points where breath turns"
+    iast: "ūrdhve prāṇo hy adho jīvo visargātmā paroccaret | utpatti-dvitaya-sthāne bharaṇād bharitā sthitiḥ ||"
+    tr: "The out-breath rises, the in-breath descends: this is the supreme power, ever flowing. By resting in the two places where each breath is born, you arrive at fullness."
+    try: { seconds: 60, steps: ["Breathe naturally. Don't control it.", "Notice the instant the in-breath turns into the out-breath.", "Then the instant the out-breath turns into the in-breath.", "Rest your attention at each turning point."] }
+  - v: 25
+    door: breath
+    title: "Resting in the pauses"
+    iast: "maruto 'ntar bahir vāpi viyad-yugmānivartanāt | bhairavyā bhairavasyetthaṃ bhairavī vyajyate vapuḥ ||"
+    tr: "Where the breath does not return, in the two empty spaces, inside and outside, the true form of Bhairava is revealed through this practice, O Bhairavī."
+    try: { seconds: 60, steps: ["Breathe gently.", "After breathing out, notice the small natural pause before the next breath.", "After breathing in, notice the pause at the top.", "Don't hold the breath. Just notice the stillness that is already there."] }
+  - v: 26
+    door: breath
+    title: "When breath neither goes nor comes"
+    iast: "na vrajen na viśec chaktir marud-rūpā vikāsite | nirvikalpatayā madhye tayā bhairava-rūpatā ||"
+    tr: "When the energy in the form of breath neither goes out nor comes in, and the centre opens, then, free of thought in that middle, one takes on the nature of Bhairava."
+  - v: 27
+    door: breath
+    title: "Peace at the end of holding or releasing"
+    iast: "kumbhitā recitā vāpi pūritā vā yadā bhavet | tad-ante śānta-nāmāsau śaktyā śāntaḥ prakāśate ||"
+    tr: "Whether the breath is held, released or filled, at the end of it a peace appears, and through that power the peaceful one shines."
+    caution: "Breath-holding is not for everyone: avoid it with high blood pressure, heart rhythm problems, glaucoma, or in pregnancy. Never strain."
+  - v: 28
+    door: body
+    title: "Light rising from the base"
+    iast: "āmūlāt kiraṇābhāsāṃ sūkṣmāt sūkṣmatarātmikām | cintayet tāṃ dviṣaṭkānte śāmyantīṃ bhairavodayaḥ ||"
+    tr: "Imagine energy rising from the base like a ray of light, growing ever subtler, and dissolving at the point twelve finger-widths above the head. There Bhairava dawns."
+  - v: 29
+    door: body
+    title: "Lightning through the centres"
+    iast: "udgacchantīṃ taḍid-rūpāṃ prati-cakraṃ kramāt kramam | urddhvaṃ muṣṭi-trayaṃ yāvat tāvad ante mahodayaḥ ||"
+    tr: "Imagine it rising like lightning, from centre to centre, up to three fists above the head. At the end there is a great awakening."
+  - v: 30
+    door: body
+    title: "Twelve stages"
+    iast: "krama-dvādaśakaṃ samyag dvādaśākṣara-bheditam | sthūla-sūkṣma-para-sthityā muktvā muktvāntataḥ śivaḥ ||"
+    tr: "Move through the twelve stages, each marked by one of twelve sounds, from gross to subtle to supreme, letting each go in turn. At the end is Śiva."
+  - v: 31
+    door: body
+    title: "Crossing the bridge of the brows"
+    iast: "tayāpūryāśu mūrdhāntaṃ bhaṅktvā bhrū-kṣepa-setunā | nirvikalpaṃ manaḥ kṛtvā sarvordhve sarvagodgamaḥ ||"
+    tr: "Filling up to the crown with that energy, break through the bridge between the eyebrows. With the mind free of thought, above everything, the all-pervading arises."
+  - v: 32
+    door: space
+    title: "Five voids like a peacock's feather"
+    iast: "śikhi-pakṣaiś citra-rūpair maṇḍalaiḥ śūnya-pañcakam | dhyāyato 'nuttare śūnye praveśo hṛdaye bhavet ||"
+    tr: "Contemplate the five voids, like the coloured circles on a peacock's feather. Then you enter the heart, the supreme void."
+  - v: 33
+    door: space
+    title: "Anywhere at all"
+    iast: "īdṛśena krameṇaiva yatra kutrāpi cintanā | śūnye kuḍye pare pātre svayaṃ līnā vara-pradā ||"
+    tr: "In the same way, let attention rest anywhere at all: on empty space, on a wall, on a worthy person. It dissolves by itself and gives its gift."
+  - v: 34
+    door: body
+    title: "Attention inside the skull"
+    iast: "kapālāntar-mano nyasya tiṣṭhan mīlita-locanaḥ | krameṇa manaso dārḍhyāl lakṣayel lakṣyam uttamam ||"
+    tr: "With eyes closed, place the mind inside the skull. As the mind steadies, gradually you perceive the highest aim."
+  - v: 35
+    door: body
+    title: "The central channel"
+    iast: "madhya-nāḍī madhya-saṃsthā bisa-sūtrābha-rūpayā | dhyātāntar-vyomayā devyā tayā devaḥ prakāśate ||"
+    tr: "The central channel stands in the middle, as fine as a lotus fibre. Meditate on its inner space, and through that goddess the god shines."
+  - v: 36
+    door: body
+    title: "Closing the gates"
+    iast: "kara-ruddha-dṛg-astreṇa bhrū-bhedād dvāra-rodhanāt | dṛṣṭe bindau kramāl līne tan-madhye paramā sthitiḥ ||"
+    tr: "Closing the openings of the face with the hands, and piercing between the brows, a point of light appears. As it slowly fades, in its midst is the highest state."
+    caution: "Some teachers do this by covering the eyes. If you try it, touch lightly. Never press on the eyeballs."
+  - v: 37
+    door: body
+    title: "A spark of subtle fire"
+    iast: "dhāmāntaḥ-kṣobha-saṃbhūta-sūkṣmāgni-tilakākṛtim | binduṃ śikhānte hṛdaye layānte dhyāyato layaḥ ||"
+    tr: "Meditate on a point like a tiny mark of fire, born of a stirring within, at the crown or in the heart. As it dissolves, you dissolve."
+  - v: 38
+    door: sound
+    title: "The unstruck sound"
+    iast: "anāhate pātra-karṇe ’bhagna-śabde sarid-drute | śabda-brahmaṇi niṣṇātaḥ param brahmādhigacchati ||"
+    tr: "Listen with the inner ear to the unstruck sound, unbroken, rushing like a river. Steeped in sound as Brahman, you reach the supreme Brahman."
+  - v: 39
+    door: sound
+    title: "Om, into emptiness"
+    iast: "praṇavādi-samuccārāt plutānte śūnya-bhāvanāt | śūnyayā parayā śaktyā śūnyatām eti bhairavi ||"
+    tr: "Chant Om or a similar syllable, and at the end of its long sound, feel emptiness. By that empty, supreme power, one becomes emptiness, O Bhairavī."
+    try: { seconds: 60, steps: ["Breathe in comfortably.", "Chant a long, soft Om on the out-breath, aloud or silently.", "Follow the sound to its very end.", "Rest in the silence after it. Repeat three times."] }
+  - v: 40
+    door: sound
+    title: "Before and after a sound"
+    iast: "yasya kasyāpi varṇasya pūrvāntāv anubhāvayet | śūnyayā śūnya-bhūto 'sau śūnyākāraḥ pumān bhavet ||"
+    tr: "Feel the silence before any sound begins and after it ends. Through that emptiness one becomes empty, taking the form of space."
+  - v: 41
+    door: sound
+    title: "Following a long note"
+    iast: "tantryādi-vādya-śabdeṣu dīrgheṣu krama-saṃsthiteḥ | ananya-cetāḥ pratyante para-vyoma-vapur bhavet ||"
+    tr: "Listen to the long notes of a stringed instrument as they fade away, with undivided attention. At the end of the sound you become the supreme space."
+    try: { seconds: 60, steps: ["Play a long sound: a singing bowl, a tanpura, a held note, a bell.", "Follow it with complete attention.", "Notice the exact moment you can no longer hear it.", "Stay there, in what remains."] }
+  - v: 42
+    door: sound
+    title: "A mantra dissolving"
+    iast: "piṇḍa-mantrasya sarvasya sthūla-varṇa-krameṇa tu | ardhendu-bindu-nādāntaḥ śūnyoccārād bhavec chivaḥ ||"
+    tr: "Sound a seed mantra through its stages, from the solid letters to the subtle crescent, point and resonance. Chanting it into emptiness, you become Śiva."
+  - v: 43
+    door: space
+    title: "Space in every direction"
+    iast: "nija-dehe sarva-dikkaṃ yugapad bhāvayed viyat | nirvikalpa-manās tasya viyat sarvaṃ pravartate ||"
+    tr: "Feel your own body as space, extending in every direction at once. When the mind is free of thought, everything becomes space."
+    try: { seconds: 60, steps: ["Sit still, eyes closed.", "Feel the space in front of you, behind, on both sides, above and below, all at once.", "Let the body feel as open as that space.", "When a thought comes, let it pass through like a bird through the sky."] }
+  - v: 44
+    door: space
+    title: "Empty behind, empty below"
+    iast: "pṛṣṭha-śūnyaṃ mūla-śūnyaṃ yugapad bhāvayec ca yaḥ | śarīra-nirapekṣiṇyā śaktyā śūnya-manā bhavet ||"
+    tr: "Whoever feels at the same time the space behind and the space below becomes empty-minded, by a power that no longer leans on the body."
+  - v: 45
+    door: space
+    title: "Three spaces at once"
+    iast: "pṛṣṭha-śūnyaṃ mūla-śūnyaṃ hṛc-chūnyaṃ bhāvayet sthiram | yugapan nirvikalpatvān nirvikalpodayas tataḥ ||"
+    tr: "Hold steadily, all at once, the space behind, the space below and the space in the heart. From that freedom from thought, thought-free awareness rises."
+  - v: 46
+    door: space
+    title: "A moment of space anywhere in the body"
+    iast: "tanūdeśe śūnyataiva kṣaṇa-mātraṃ vibhāvayet | nirvikalpaṃ nirvikalpo nirvikalpa-svarūpa-bhāk ||"
+    tr: "For just a moment, feel any part of the body as empty. Free of thought, you share in the thought-free nature."
+    try: { seconds: 30, steps: ["Choose one part of the body: a hand, the chest, the belly.", "For a few breaths, feel it as open space rather than solid.", "Notice what happens to the mind."] }
+  - v: 47
+    door: space
+    title: "Space filling the body"
+    iast: "sarvaṃ dehagataṃ dravyaṃ viyad-vyāptaṃ mṛgekṣaṇe | vibhāvayet tatas tasya bhāvanā sā sthirā bhavet ||"
+    tr: "Feel all the substance of the body pervaded by space, O doe-eyed one. Then that contemplation becomes steady."
+  - v: 48
+    door: space
+    title: "Skin like a wall"
+    iast: "dehāntare tvag-vibhāgaṃ bhitti-bhūtaṃ vicintayet | na kiñcid antare tasya dhyāyan adhyeya-bhāg bhavet ||"
+    tr: "Imagine the skin as a thin wall, with nothing inside it. Meditating so, you reach what cannot be meditated upon."
+  - v: 49
+    door: body
+    title: "The lotus of the heart"
+    iast: "hṛdyākāśe nilīnākṣaḥ padma-saṃpuṭa-madhyagaḥ | ananya-cetāḥ subhage paraṃ saubhāgyam āpnuyāt ||"
+    tr: "With the senses dissolved into the space of the heart, in the centre of its closed lotus, with undivided attention, you find the highest good fortune."
+    try: { seconds: 60, steps: ["Close the eyes. Let your attention settle into the middle of the chest.", "Imagine a small space there, like the inside of a closed flower.", "Rest your whole attention there.", "If it wanders, come back to the heart."] }
+  - v: 50
+    door: body
+    title: "Above the head (1)"
+    iast: "sarvataḥ sva-śarīrasya dvādaśānte mano-layāt | dṛḍha-buddher dṛḍhī-bhūtaṃ tattva-lakṣyaṃ pravartate ||"
+    tr: "When the mind dissolves into the point twelve finger-widths beyond the body, for someone of steady understanding the goal becomes steady."
+  - v: 51
+    door: body
+    title: "Above the head (2)"
+    iast: "yathā tathā yatra tatra dvādaśānte manaḥ kṣipet | pratikṣaṇaṃ kṣīṇa-vṛtter vailakṣaṇyaṃ dinair bhavet ||"
+    tr: "However and wherever you are, throw the mind to that point beyond the body. Moment by moment the mind's movements thin, and within days something unusual happens."
+  - v: 52
+    door: body
+    title: "Burning the body in imagination"
+    iast: "kālāgninā kāla-padād utthitena svakaṃ puram | pluṣṭaṃ vicintayed ante śāntābhāsas tadā bhavet ||"
+    tr: "Imagine the fire of time rising from the right foot and burning your whole body. At the end, a calm light appears."
+  - v: 53
+    door: body
+    title: "Burning the world"
+    iast: "evam eva jagat-sarvaṃ dagdhaṃ dhyātvā vikalpataḥ | ananya-cetasaḥ puṃsaḥ pumbhāvaḥ paramo bhavet ||"
+    tr: "In the same way, imagine the whole world burned away, with undivided attention. Then one's true humanity becomes supreme."
+  - v: 54
+    door: body
+    title: "Dissolving the elements"
+    iast: "sva-dehe jagato vāpi sūkṣma-sūkṣmatarāṇi ca | tattvāni yāni nilayaṃ dhyātvānte vyajyate parā ||"
+    tr: "Contemplate the elements of your body, or of the world, dissolving into ever subtler ones. At the end, the supreme goddess is revealed."
+  - v: 55
+    door: body
+    title: "Freedom, even in dreams"
+    iast: "pīnāṃ ca durbalāṃ śaktiṃ dhyātvā dvādaśa-gocare | praviśya hṛdaye dhyāyan svapna-svātantryam āpnuyāt ||"
+    tr: "Meditate on the energy, strong or faint, in the region beyond the body, then enter the heart and meditate there. You gain freedom, even in dreams. (Some manuscripts read 'liberated' instead of 'in dreams'.)"
+  - v: 56
+    door: body
+    title: "The whole cosmos, stage by stage (1)"
+    iast: "bhuvanādhvādi-rūpeṇa cintayet kramaśo ’khilam | sthūla-sūkṣma-para-sthityā yāvad ante mano-layaḥ ||"
+    tr: "Contemplate everything, step by step, as the paths of the worlds and the rest, from gross to subtle to supreme, until at last the mind dissolves."
+  - v: 57
+    door: body
+    title: "The whole cosmos, stage by stage (2)"
+    iast: "asya sarvasya viśvasya paryanteṣu samantataḥ | adhva-prakriyayā tattvaṃ śaivaṃ dhyātvā mahodayaḥ ||"
+    tr: "Contemplating Śiva's reality at the furthest edges of this whole universe, through the method of the paths, a great awakening comes."
+  - v: 58
+    door: space
+    title: "The universe as empty"
+    iast: "viśvam etan mahādevi śūnya-bhūtaṃ vicintayet | tatraiva ca mano līnaṃ tatas tal-laya-bhājanam ||"
+    tr: "Contemplate this universe as empty, great goddess. The mind dissolves into it, and one becomes a vessel of that dissolution."
+  - v: 59
+    door: space
+    title: "Space in a pot"
+    iast: "ghaṭādi-bhājane dṛṣṭiṃ bhittīs tyaktvā vinikṣipet | tal-layaṃ tat-kṣaṇād gatvā tal-layāt tan-mayo bhavet ||"
+    tr: "Look into a pot or any vessel, but leave out its walls and see only the space inside. Dissolving into it at once, you become that space."
+    try: { seconds: 45, steps: ["Look into a cup, a bowl or a jar.", "Ignore the walls. See only the space inside it.", "Let your attention merge with that space."] }
+  - v: 60
+    door: gaze
+    title: "An open landscape"
+    iast: "nirvṛkṣagiribhittyādideśe dṛṣṭiṃ vinikṣipet | vilīne mānase bhāve vṛttikṣīṇaḥ prajāyate ||"
+    tr: "Let your gaze rest on a place without trees, hills or walls. As the mind dissolves, its movements cease."
+  - v: 61
+    door: mind
+    title: "The space between two things"
+    iast: "ubhayor bhāvayor jñāne dhyātvā madhyaṃ samāśrayet | yugapac ca dvayaṃ tyaktvā madhye tattvaṃ prakāśate ||"
+    tr: "When you are aware of two things, rest in the space between them. Letting go of both at once, reality shines in the middle."
+    try: { seconds: 60, steps: ["Let one thought come. Then another.", "Notice the gap between them, however short.", "Rest in the gap rather than in either thought.", "When a new thought comes, look for the next gap."] }
+  - v: 62
+    door: mind
+    title: "When a perception is let go"
+    iast: "bhāve tyakte niruddhā cin naiva bhāvāntaraṃ vrajet | tadā tan-madhya-bhāvena vikasaty ati-bhāvanā ||"
+    tr: "When awareness has let go of one thing and is held back from moving to another, it expands, through being in between, into the highest state."
+  - v: 63
+    door: insight
+    title: "Body and world as awareness"
+    iast: "sarvaṃ dehaṃ cin-mayaṃ hi jagad vā paribhāvayet | yugapan nirvikalpena manasā paramodayaḥ ||"
+    tr: "Feel your whole body, or the world, as made of awareness, all at once, with a mind free of thought. The highest awakening follows."
+  - v: 64
+    door: breath
+    title: "Where the two breaths meet"
+    iast: "vāyu-dvayasya saṃghaṭṭād antar vā bahir antataḥ | yogī samatva-vijñāna-samudgamana-bhājanam ||"
+    tr: "Where the two breaths meet, inside or outside, the yogi becomes a vessel for the rising of the knowledge of sameness."
+  - v: 65
+    door: body
+    title: "Filled with bliss"
+    iast: "sarvaṃ jagat svadehaṃ vā svānandabharitaṃ smaret | yugapat svāmṛtenaiva parānandamayo bhavet ||"
+    tr: "Remember the whole world, or your own body, as filled with your own bliss. All at once, through that inner nectar, you become supreme joy."
+  - v: 66
+    door: senses
+    title: "A sudden trick"
+    iast: "kuhanena prayogena sadya eva mṛgekṣaṇe | samudeti mahānando yena tattvaṃ prakāśate ||"
+    tr: "By a surprising technique, O doe-eyed one, great bliss rises at once and reality shines. (Commentators disagree on what the technique is; one reading is tickling.)"
+  - v: 67
+    door: body
+    title: "The crawling of ants"
+    iast: "sarva-sroto-nibandhena prāṇa-śaktyordhvayā śanaiḥ | pipīla-sparśa-velāyāṃ prathate paramaṃ sukham ||"
+    tr: "Closing all the openings, as the breath-energy slowly rises, at the moment it feels like ants crawling, the highest happiness spreads."
+    caution: "Tingling during breathing practices often comes from breathing too fast or too hard, which lowers carbon dioxide in the blood. If you feel dizzy, tingly or numb, stop and breathe normally."
+    related: { label: "Was that prana, or was it carbon dioxide?", url: "/was-that-prana-or-carbon-dioxide.html" }
+  - v: 68
+    door: senses
+    title: "Between fire and poison"
+    iast: "vahner viṣasya madhye tu cittaṃ sukha-mayaṃ kṣipet | kevalaṃ vāyu-pūrṇaṃ vā smarānandena yujyate ||"
+    tr: "Place the mind, full of pleasure, between fire and poison, or simply filled with breath, and you are joined with the joy of love. (Commentators read 'fire and poison' as the beginning and end of sexual arousal.)"
+  - v: 69
+    door: senses
+    title: "The bliss of union"
+    iast: "śakti-saṃgama-saṃkṣubdha-śaktyāveśāvasānikam | yat sukhaṃ brahma-tattvasya tat sukhaṃ svākyam ucyate ||"
+    tr: "The joy at the culmination of union with a partner is the joy of Brahman itself. That joy is said to be one's own."
+  - v: 70
+    door: senses
+    title: "Remembering pleasure"
+    iast: "lehanā-manthanā-koṭaiḥ strī-sukhasya bharāt smṛteḥ | śakty-abhāve 'pi deveśi bhaved ānanda-samplavaḥ ||"
+    tr: "Even without a partner, O goddess, a flood of joy can come from fully remembering the pleasure of kissing and embracing."
+  - v: 71
+    door: senses
+    title: "Meeting a friend after a long time"
+    iast: "ānande mahati prāpte dṛṣṭe vā bāndhave cirāt | ānandam udgataṃ dhyātvā tallayas tanmanā bhavet ||"
+    tr: "When great joy comes, or when you see a dear one after a long time, meditate on the joy itself as it rises. Dissolve into it, and your mind becomes that joy."
+    try: { seconds: 45, steps: ["Remember a moment of real joy: seeing someone you love after a long time.", "Don't follow the story. Feel the joy itself in the body.", "Let your attention dissolve into that feeling."] }
+  - v: 72
+    door: senses
+    title: "The taste of food and drink"
+    iast: "jagdhi-pāna-kṛtollāsa-rasānanda-vijṛmbhaṇāt | bhāvayed bharitāvasthāṃ mahānandas tato bhavet ||"
+    tr: "As the delight of eating and drinking expands, contemplate that state of fullness. Great joy follows."
+    try: { seconds: 60, steps: ["Take one bite of something you enjoy, or a sip of something warm.", "Eat it slowly. Let the taste fill your whole attention.", "Notice the pleasure itself, as it spreads.", "Rest in that fullness before the next bite."] }
+  - v: 73
+    door: senses
+    title: "Music and song"
+    iast: "gītādi-viṣayāsvādāsama-saukhyaikatātmanaḥ | yoginas tan-mayatvena mano-rūḍhes tad-ātmatā ||"
+    tr: "When a yogi becomes one with the incomparable joy of music and song, absorbed in it, the mind rises and becomes that."
+  - v: 74
+    door: senses
+    title: "Wherever the mind finds delight"
+    iast: "yatra yatra manas tuṣṭir manas tatraiva dhārayet | tatra tatra parānanda-svarūpaṃ sampravartate ||"
+    tr: "Wherever the mind finds satisfaction, hold it right there. There, supreme joy shows its nature."
+  - v: 75
+    door: edges
+    title: "On the edge of sleep"
+    iast: "anāgatāyāṃ nidrāyāṃ praṇaṣṭe bāhya-gocare | sāvasthā manasā gamyā parā devī prakāśate ||"
+    tr: "When sleep has not yet come and the outer world has already faded, the mind can reach that state. There, the supreme goddess shines."
+    try: { seconds: 0, steps: ["Try this tonight, in bed.", "As you drift off, notice the moment the room fades but sleep has not yet come.", "Stay aware in that in-between for as long as it lasts, without forcing anything."] }
+  - v: 76
+    door: gaze
+    title: "Light in space"
+    iast: "tejasā sūrya-dīpāder ākāśe śabalīkṛte | dṛṣṭir niveśyā tatraiva svātma-rūpaṃ prakāśate ||"
+    tr: "Where space is dappled with the light of the sun or a lamp, fix your gaze there. Your own nature shines."
+    caution: "Never look at the sun, even briefly. Look at light falling on things, not at its source."
+  - v: 77
+    door: body
+    title: "Five seals of the gaze"
+    iast: "karaṅkiṇyā krodhanayā bhairavyā lelihānayā | khecaryā dṛṣṭi-kāle ca parā-vāptiḥ prakāśate ||"
+    tr: "Through the seals called Karaṅkiṇī, Krodhanā, Bhairavī, Lelihānā and Khecarī, practised while gazing, the supreme attainment is revealed. (These are lineage practices, taught by a teacher.)"
+  - v: 78
+    door: body
+    title: "Sitting without support"
+    iast: "mṛdv-āsane sphijaikena hasta-pādau nirāśrayam | nidhāya tat-prasaṅgena parā pūrṇā matir bhavet ||"
+    tr: "Sit on a soft seat on one buttock, with hands and feet unsupported. Through this, the mind becomes supremely full."
+  - v: 79
+    door: body
+    title: "Space in the armpits"
+    iast: "upaviśyāsane samyag bāhū kṛtvārdha-kuñcitau | kakṣa-vyomni manaḥ kurvañ śamam āyāti tal-layāt ||"
+    tr: "Sit well, with the arms half-bent. Placing the mind in the space of the armpits, you become calm as it dissolves there."
+  - v: 80
+    door: gaze
+    title: "Looking without a story"
+    iast: "sthūla-rūpasya bhāvasya stabdhāṃ dṛṣṭiṃ nipātya ca | acireṇa nirādhāraṃ manaḥ kṛtvā śivaṃ vrajet ||"
+    tr: "Let your gaze rest, motionless, on any solid object. Soon, with the mind unsupported, you reach Śiva."
+    try: { seconds: 60, steps: ["Choose a simple object in front of you: a stone, a cup, a leaf.", "Rest your eyes on it without naming or judging it.", "Let it just be shape, colour and light.", "Blink when you need to. Keep the gaze soft."] }
+  - v: 81
+    door: sound
+    title: "Ha, sounded in the mind"
+    iast: "madhya-jihve sphāritāsye madhye nikṣipya cetanām | hoccāraṃ manasā kurvaṃs tataḥ śānte pralīyate ||"
+    tr: "With the mouth wide open and attention in the middle of the tongue, sound 'ha' in the mind. Then you dissolve into peace."
+  - v: 82
+    door: body
+    title: "Floating without support"
+    iast: "āsane śayane sthitvā nirādhāraṃ vibhāvayan | sva-dehaṃ manasi kṣīṇe kṣaṇāt kṣīṇāśayo bhavet ||"
+    tr: "Sitting or lying down, feel your body as unsupported, floating. As the mind fades, in a moment its habits fade too."
+    try: { seconds: 60, steps: ["Lie down or sit back comfortably.", "Feel the support beneath you, then imagine it is gone.", "Feel the body as if floating in space.", "Let the mind become as light as the body."] }
+  - v: 83
+    door: body
+    title: "A gently moving seat"
+    iast: "calāsane sthitasyātha śanair vā deha-cālanāt | praśānte mānase bhāve devi divyaugham āpnuyāt ||"
+    tr: "Sitting on something that moves, or gently rocking the body, as the mind becomes peaceful, O goddess, you reach the divine flow."
+  - v: 84
+    door: gaze
+    title: "Gazing at a clear sky"
+    iast: "ākāśaṃ vimalaṃ paśyan kṛtvā dṛṣṭiṃ nirantarām | stabdhātmā tatkṣaṇād devi bhairavaṃ vapur āpnuyāt ||"
+    tr: "Gaze steadily at a clear sky, without moving. Becoming still, in that instant, O goddess, you take on the form of Bhairava."
+    try: { seconds: 60, steps: ["Go outside, or to a window, and find open sky. Not the sun.", "Let your gaze rest in the blue, with nothing to focus on.", "Stay still. Let the mind become as open as the sky."] }
+  - v: 85
+    door: space
+    title: "The sky in your head"
+    iast: "līnaṃ mūrdhni viyat sarvaṃ bhairavatvena bhāvayet | tat-sarvaṃ bhairavākāra-tejas-tattvaṃ samāviśet ||"
+    tr: "Feel the whole sky dissolved in your head, as Bhairava. Then all of it enters the radiant reality that has Bhairava's form."
+  - v: 86
+    door: gaze
+    title: "Three kinds of light"
+    iast: "kiṃcij jñātaṃ dvaita-dāyi bāhyālokas tamaḥ punaḥ | viśvādi bhairavaṃ rūpaṃ jñātvānanta-prakāśa-bhṛt ||"
+    tr: "Limited knowing that brings duality, outer light, and darkness: knowing all of these as Bhairava's form, from the universe onward, you hold endless light."
+  - v: 87
+    door: gaze
+    title: "A dark night"
+    iast: "evameva dur-niśāyāṃ kṛṣṇa-pakṣāgame ciram | taimiraṃ bhāvayan rūpaṃ bhairavaṃ rūpam eṣyati ||"
+    tr: "On a dark night in the waning moon, contemplate the darkness for a long time. You will take on Bhairava's form."
+  - v: 88
+    door: gaze
+    title: "Darkness with eyes closed"
+    iast: "evameva nimīlyādau netre kṛṣṇābham agrataḥ | prasārya bhairavaṃ rūpaṃ bhāvayaṃs tan-mayo bhavet ||"
+    tr: "Close your eyes and see the darkness in front of you. Then open them, spread that darkness outward as Bhairava's form, and become one with it."
+    try: { seconds: 45, steps: ["Close the eyes and look at the darkness in front of you.", "Notice it has no edges.", "Open the eyes slowly, and imagine that darkness still filling the space around you."] }
+  - v: 89
+    door: senses
+    title: "When a sense is blocked"
+    iast: "yasya kasyendriyasyāpi vyāghātāc ca nirodhataḥ | praviṣṭasyādvaye śūnye tatraivātmā prakāśate ||"
+    tr: "When any sense is blocked or stopped, you enter the one void. There, the Self shines."
+  - v: 90
+    door: sound
+    title: "Repeating 'a'"
+    iast: "abindum avisargaṃ ca a-kāraṃ japato mahān | udeti devi sahasā jñānaughaḥ parameśvaraḥ ||"
+    tr: "Repeating the sound 'a', without the nasal and without the breathy ending, a great flood of knowledge suddenly rises, O goddess: the supreme Lord."
+  - v: 91
+    door: sound
+    title: "The end of the breathy sound"
+    iast: "varṇasya sa-visargasya visargāntaṃ citiṃ kuru | nirādhāreṇa cittena spṛśed brahma sanātanam ||"
+    tr: "Put your awareness at the end of a syllable that closes with a breathy 'h'. With a mind that has no support, you touch the eternal Brahman."
+  - v: 92
+    door: space
+    title: "Yourself as sky"
+    iast: "vyomākāraṃ svam ātmānaṃ dhyāyed digbhir anāvṛtam | nirāśrayā citiḥ śaktiḥ svarūpaṃ darśayet tadā ||"
+    tr: "Meditate on yourself as having the form of sky, unbounded in any direction. Then awareness, resting on nothing, shows its own nature."
+  - v: 93
+    door: edges
+    title: "A sharp sensation"
+    iast: "kiṃcid aṅgaṃ vibhidyādau tīkṣṇa-sūcy-ādinā tataḥ | tatraiva cetanāṃ yuktvā bhairave nirmalā gatiḥ ||"
+    tr: "When a part of the body is pierced by a sharp needle or the like, join your awareness to that very spot. There is a pure path to Bhairava."
+    caution: "Not taught here. Please don't hurt yourself to practise this. If pain happens anyway, at a doctor's or by accident, you can rest your attention on the sensation itself, without the story around it."
+  - v: 94
+    door: mind
+    title: "There is no mind"
+    iast: "cittādy-antaḥ-kṛtir nāsti mamāntar bhāvayed iti | vikalpānām abhāvena vikalpair ujjhito bhavet ||"
+    tr: "Contemplate: 'Inside me there is no mind or inner faculty.' Without thoughts to hold, you are freed from thoughts."
+  - v: 95
+    door: insight
+    title: "Māyā, the bewilderer"
+    iast: "māyā vimohinī nāma kalāyāḥ kalanaṃ sthitam | ity ādi-dharmaṃ tattvānāṃ kalayan na pṛthag bhavet ||"
+    tr: "Māyā is the bewilderer; limited agency is its working. Seeing the principles of reality this way, one no longer feels separate. (Not usually counted as one of the 112 practices.)"
+  - v: 96
+    door: mind
+    title: "Let desire dissolve where it arose"
+    iast: "jhagitīcchāṃ samutpannām avalokya śamaṃ nayet | yata eva samudbhūtā tatas tatraiva līyate ||"
+    tr: "As soon as a desire arises, look at it and let it settle. It dissolves right back into the place it came from."
+    try: { seconds: 60, steps: ["Sit for a minute and wait for any small want to appear: to move, to check your phone, to scratch.", "Don't act on it. Look at it.", "Watch where it came from, and watch it fade back there."] }
+  - v: 97
+    door: mind
+    title: "Before desire, who am I?"
+    iast: "yadā mamecchā notpannā jñānaṃ vā kas tadāsmi vai | tattvato ’haṃ tathā bhūtas tal-līnas tan-manā bhavet ||"
+    tr: "Before any desire or knowledge arose in me, who was I then? In truth I am that. Dissolved in it, the mind becomes it."
+  - v: 98
+    door: mind
+    title: "Where a thought arises"
+    iast: "icchāyām athavā jñāne jāte cittaṃ niveśayet | ātma-buddhyānanya-cetās tatas tattvārtha-darśanam ||"
+    tr: "When a desire or a thought arises, place your attention on it, regarding it as the Self, undistracted. Then you see the meaning of reality."
+  - v: 99
+    door: mind
+    title: "Thoughts belong to no one"
+    iast: "ninirmittaṃ bhavej jñānaṃ nirādhāraṃ bhramātmakam | tattvataḥ kasyacin naitad evaṃbhāvī śivaḥ priye ||"
+    tr: "Every thought is without cause, without support, deceptive. In truth it belongs to no one. Seeing this, dear one, you are Śiva."
+  - v: 100
+    door: insight
+    title: "The same awareness in every body"
+    iast: "cid-dharmā sarva-deheṣu viśeṣo nāsti kutracit | ataś ca tan-mayaṃ sarvaṃ bhāvayan bhavajij janaḥ ||"
+    tr: "Awareness is the same in all bodies; there is no difference anywhere. Feeling everything as made of it, a person conquers the round of becoming."
+  - v: 101
+    door: mind
+    title: "When anger or desire arises"
+    iast: "kāma-krodha-lobha-moha-mada-mātsarya-gocare | buddhiṃ nistimitāṃ kṛtvā tat tattvam avaśiṣyate ||"
+    tr: "When desire, anger, greed, delusion, pride or envy appear, make the mind perfectly still. What remains is reality."
+    try: { seconds: 60, steps: ["Remember a small recent irritation. Not a big one.", "Feel where it sits in the body.", "Name it silently: 'anger', 'envy', 'wanting'.", "Keep the mind still and watch what remains as the feeling moves."] }
+  - v: 102
+    door: insight
+    title: "Like a magic show, or a painting"
+    iast: "indra-jāla-mayaṃ viśvaṃ vyastaṃ vā citra-karmavat | bhramad vā dhyāyataḥ sarvaṃ paśyataś ca sukhodgamaḥ ||"
+    tr: "See the world as a magic show, or as a painting, or as whirling. Contemplating and seeing everything this way, happiness rises."
+  - v: 103
+    door: insight
+    title: "Neither in pain nor in pleasure"
+    iast: "na cittaṃ nikṣiped duḥkhe na sukhe vā parikṣipet | bhairavi jñāyatāṃ madhye kiṃ tattvam avaśiṣyate ||"
+    tr: "Don't throw the mind into pain, or into pleasure. O Bhairavī, find out what reality remains in the middle."
+  - v: 104
+    door: insight
+    title: "I am everywhere"
+    iast: "vihāya nija-dehasthāṃ sarvatrāsmīti bhāvayan | dṛḍhena manasā dṛṣṭyā nānyekṣiṇyā sukhī bhavet ||"
+    tr: "Letting go of identifying with your body, feel 'I am everywhere', with a firm mind and a gaze that looks at nothing else. You become happy."
+  - v: 105
+    door: insight
+    title: "Awareness in everything"
+    iast: "ghaṭādau yac ca vijñānam icchādyaṃ vā mamāntare | naiva sarvagataṃ jātaṃ bhāvayann iti sarvagaḥ ||"
+    tr: "The knowing of a pot, or the desire within me: these are not mine alone, they are everywhere. Contemplating so, one becomes all-pervading."
+  - v: 106
+    door: insight
+    title: "Attention to the meeting of knower and known"
+    iast: "grāhya-grāhaka-saṃvittiḥ sāmānyā sarva-dehinām | yogināṃ tu viśeṣo 'sti sambandhe sāvadhānatā ||"
+    tr: "Awareness of a perceiver and a perceived is common to all beings. The yogi's difference is attentiveness to the connection between them."
+  - v: 107
+    door: insight
+    title: "Feeling awareness in another body"
+    iast: "svavad anya-śarīre 'pi saṃvittim anubhāvayet | apekṣāṃ sva-śarīrasya tyaktvā vyāpī dinair bhavet ||"
+    tr: "Feel awareness in another's body as in your own. Letting go of attachment to your own body, in days you become all-pervading."
+  - v: 108
+    door: mind
+    title: "Don't build thoughts"
+    iast: "nirādhāraṃ manaḥ kṛtvā vikalpān na vikalpayet | tadātma-paramātmatve bhairavo mṛga-locane ||"
+    tr: "Freeing the mind from any support, don't construct thoughts. Then, O doe-eyed one, the self is the supreme Self: Bhairava."
+  - v: 109
+    door: insight
+    title: "I have Śiva's nature"
+    iast: "sarvajñaḥ sarvakartā ca vyāpakaḥ parameśvaraḥ | sa evāhaṃ śaiva-dharmā iti dārḍhyād bhavec chivaḥ ||"
+    tr: "'The supreme Lord knows all, does all, pervades all. I am that, with Śiva's nature.' Holding this firmly, one becomes Śiva."
+  - v: 110
+    door: insight
+    title: "Waves of one ocean"
+    iast: "jalasyevormayo vahner jvālā-bhaṅgyaḥ prabhā raveḥ | mamaiva bhairavasyaitā viśva-bhaṅgyo vibheditāḥ ||"
+    tr: "Like waves of water, flames of fire, rays of the sun: these waves of the universe are mine, Bhairava's, arising in variety."
+  - v: 111
+    door: edges
+    title: "Spinning until you fall"
+    iast: "bhrāntvā bhrāntvā śarīreṇa tvaritaṃ bhuvi pātanāt | kṣobha-śakti-virāmeṇa parā saṃjāyate daśā ||"
+    tr: "Whirling the body round and round, then falling quickly to the ground: as the energy of agitation stops, the supreme state arises."
+    caution: "Not taught here: spinning and falling can cause injury. The point to notice is the stillness after strong movement, which you can also find after dancing or a run."
+  - v: 112
+    door: edges
+    title: "When strength runs out"
+    iast: "ādhāreṣv athavāśaktyājñānāc citta-layena vā | jāta-śakti-samāveśa-kṣobhānte bhairavaṃ vapuḥ ||"
+    tr: "When the mind dissolves through incapacity, or not knowing, at the end of the agitation, an influx of power comes, and Bhairava's form appears. (One of the most obscure verses; readings differ.)"
+  - v: 113
+    door: gaze
+    title: "Eyes held still"
+    iast: "sampradāyam imaṃ devi śṛṇu samyag vadāmy aham | kaivalyaṃ jāyate sadyo netrayoḥ stabdha-mātrayoḥ ||"
+    tr: "Listen, goddess, I will tell you this lineage teaching fully: freedom arises at once when the eyes are simply held still."
+  - v: 114
+    door: sound
+    title: "Ears closed, the inner sound"
+    iast: "saṃkocaṃ karṇayoḥ kṛtvā hy adhodvāre tathaiva ca | anackam ahalaṃ dhyāyan viśed brahma sanātanam ||"
+    tr: "Closing the ears, and the lower opening too, meditate on the sound without vowel or consonant. You enter the eternal Brahman."
+    try: { seconds: 60, steps: ["Close your ears gently with your thumbs or fingers.", "Listen to the soft inner hum.", "Rest your whole attention in it, without naming it."] }
+  - v: 115
+    door: gaze
+    title: "Looking down a well"
+    iast: "kūpādike mahā-garte sthitvopari nirīkṣaṇāt | avikalpa-mateḥ samyak sadyaś citta-layaḥ sphuṭam ||"
+    tr: "Standing above a well or a deep chasm and looking down, with a mind free of thought, the mind clearly dissolves at once."
+    caution: "Only somewhere completely safe, behind a railing. Never lean over an edge."
+  - v: 116
+    door: mind
+    title: "Wherever the mind goes"
+    iast: "yatra yatra mano yāti bāhye vābhyantare 'pi vā | tatra tatra śivāvasthā vyāpakatvāt kva yāsyati ||"
+    tr: "Wherever the mind goes, outward or inward, there is the state of Śiva. Since it pervades everything, where could the mind go?"
+  - v: 117
+    door: senses
+    title: "Through any sense"
+    iast: "yatra yatrākṣa-mārgeṇa caitanyaṃ vyajyate vibhoḥ | tasya tan-mātra-dharmitvāc cil-layād bharitātmatā ||"
+    tr: "Wherever awareness shows itself through a sense, since it is nothing but awareness, dissolving into it brings fullness."
+  - v: 118
+    door: edges
+    title: "The intensity of the moment"
+    iast: "kṣutādy-ante bhaye śoke gahvare vā raṇād drute | kutūhale kṣudhādy-ante brahma-sattā-mayī daśā ||"
+    tr: "At the end of a sneeze, in fear or grief, at the edge of an abyss, fleeing from battle, in curiosity, at the start or end of hunger: there is a state full of the presence of Brahman."
+    try: { seconds: 0, steps: ["No exercise now. Just a noticing for the week.", "The next time you sneeze, are startled, or feel sudden wonder, notice the instant just after.", "For a moment, thought stops. Notice what is there."] }
+  - v: 119
+    door: mind
+    title: "Letting go of memories"
+    iast: "vastuṣu smaryamāṇeṣu dṛṣṭe deśe manas tyajet | sva-śarīraṃ nirādhāraṃ kṛtvā prasarati prabhuḥ ||"
+    tr: "When remembering things or a place you have seen, let go of the mind there. Making your body feel unsupported, the Lord expands."
+  - v: 120
+    door: gaze
+    title: "Looking, then withdrawing the gaze"
+    iast: "kvacid vastuni vinyasya śanair dṛṣṭiṃ nivartayet | taj jñānaṃ citta-sahitaṃ devi śūnyālayo bhavet ||"
+    tr: "Place your gaze on some object, then slowly withdraw it, along with the knowing of it and the mind. O goddess, you become a dwelling of emptiness."
+  - v: 121
+    door: edges
+    title: "Devotion"
+    iast: "bhakty-udrekād viraktasya yā dṛśī jāyate matiḥ | sā śaktiḥ śāṃkarī nityaṃ bhāvayet tāṃ tataḥ śivaḥ ||"
+    tr: "The understanding that arises in someone detached through overflowing devotion is the eternal power of Śiva. Contemplate it, and you are Śiva."
+  - v: 122
+    door: insight
+    title: "Emptiness in things"
+    iast: "vastv-antare vedyamāne śanair vastuṣu śūnyatā | tām eva manasā dhyātvā vidito 'pi praśāmyati ||"
+    tr: "When one object is known, emptiness slowly appears in the others. Meditating on that emptiness, even what is known becomes peaceful."
+  - v: 123
+    door: insight
+    title: "Beyond pure and impure"
+    iast: "kiṃcij jñair yā smṛtā śuddhiḥ sāśuddhiḥ śambhu-darśane | na śucir hy aśucis tasmān nirvikalpaḥ sukhī bhavet ||"
+    tr: "The purity taught by those of limited understanding is impurity in Śiva's view. Nothing is pure or impure; so, free of such thoughts, be happy."
+  - v: 124
+    door: insight
+    title: "Bhairava everywhere"
+    iast: "sarvatra bhairavo bhāvaḥ sāmānyeṣv api gocaraḥ | na ca tad-vyatirekeṇa paro 'stīty advayā gatiḥ ||"
+    tr: "Bhairava is present everywhere, even in ordinary things. Nothing exists apart from it. This is the way of non-duality."
+  - v: 125
+    door: insight
+    title: "Equal towards friend and enemy"
+    iast: "samaḥ śatrau ca mitre ca samo mānāvamānayoḥ | brahmaṇaḥ paripūrṇatvād iti jñātvā sukhī bhavet ||"
+    tr: "Be the same towards enemy and friend, the same in honour and dishonour. Knowing that Brahman is complete, be happy."
+  - v: 126
+    door: insight
+    title: "Neither hatred nor craving"
+    iast: "na dveṣaṃ bhāvayet kvāpi na rāgaṃ bhāvayet kvacit | rāga-dveṣa-vinirmuktau madhye brahma prasarpati ||"
+    tr: "Cultivate hatred nowhere, and craving nowhere. Free of both, in the middle, Brahman spreads."
+  - v: 127
+    door: insight
+    title: "The unknowable"
+    iast: "yad avedyaṃ yad agrāhyaṃ yac chūnyaṃ yad abhāva-gam | tat sarvaṃ bhairavaṃ bhāvyaṃ tad-ante bodha-sambhavaḥ ||"
+    tr: "Whatever cannot be known, cannot be grasped, is empty, or belongs to non-being: contemplate all of it as Bhairava. At the end, awakening is born."
+  - v: 128
+    door: space
+    title: "Outer space"
+    iast: "nitye nirāśraye śūnye vyāpake kalanojjhite | bāhyākāśe manaḥ kṛtvā nirākāśaṃ samāviśet ||"
+    tr: "Place the mind in outer space, eternal, without support, empty, pervading, free of limits. You enter what is beyond even space."
+  - v: 129
+    door: mind
+    title: "Nothing to hold on to"
+    iast: "yatra yatra mano yāti tat tat tenaiva tat-kṣaṇam | parityajyānavasthityā nistaraṅgas tato bhavet ||"
+    tr: "Wherever the mind goes, let that go, in that very moment, by not settling anywhere. Then you become waveless."
+    try: { seconds: 60, steps: ["Sit and watch the mind.", "Each time it lands on something, a sound, a thought, a feeling, let it go at once.", "Don't settle anywhere.", "Notice the stillness that grows."] }
+  - v: 130
+    door: sound
+    title: "The word 'Bhairava'"
+    iast: "bhayā sarvaṃ ravayati sarvado vyapako 'khile | iti bhairava-sabdasya saṃtatoccāraṇāc chivaḥ ||"
+    tr: "'He makes all things resound with fear, he gives everything, he pervades all': repeating the word 'Bhairava' continuously with this meaning, one becomes Śiva."
+  - v: 131
+    door: mind
+    title: "No 'I', no 'mine'"
+    iast: "ahaṃ mamedam ityādi-pratipatti-prasaṅgataḥ | nirādhāre mano yāti tad-dhyāna-preraṇāc chamī ||"
+    tr: "Whenever thoughts like 'I', 'mine', 'this' arise, the mind goes to what has no support. Moved by that contemplation, one becomes peaceful."
+  - v: 132
+    door: sound
+    title: "Words of the Lord"
+    iast: "nityo vibhur nirādhāro vyāpakaś cākhilādhipaḥ | śabdān pratikṣaṇaṃ dhyāyan kṛtārtho 'rthānurūpataḥ ||"
+    tr: "Eternal, all-present, without support, pervading, lord of all: contemplating these words moment by moment, according to their meaning, one is fulfilled."
+  - v: 133
+    door: insight
+    title: "All this is a magic show"
+    iast: "atattvam indrajālābham idaṃ sarvam avasthitam | kiṃ tattvam indrajālasya iti dārḍhyāc chamaṃ vrajet ||"
+    tr: "All of this is unreal, like a magic show. 'What reality does a magic show have?' Holding this firmly, you reach peace."
+  - v: 134
+    door: insight
+    title: "The world is empty"
+    iast: "ātmano nirvikārasya kva jñānaṃ kva ca vā kriyā | jñānāyattā bahirbhāvā ataḥ śūnyam idaṃ jagat ||"
+    tr: "For the unchanging Self, where is knowing, where is acting? Outer things depend on knowing, so this world is empty. (Not usually counted as one of the 112 practices.)"
+  - v: 135
+    door: insight
+    title: "No bondage, no release"
+    iast: "na me bandho na mokṣo me bhītasyaitā vibhīṣikāḥ | pratibimbam idaṃ buddher jaleṣv iva vivasvataḥ ||"
+    tr: "For me there is no bondage and no liberation. These are frights for the fearful. This world is a reflection in the mind, like the sun reflected in water."
+  - v: 136
+    door: mind
+    title: "Abiding in yourself"
+    iast: "indriya-dvārakaṃ sarvaṃ sukha-duḥkhādi-saṃgamam | itīndriyāṇi saṃtyajya svasthaḥ svātmani vartate ||"
+    tr: "All contact with pleasure and pain comes through the senses. So, letting go of the senses, one rests in oneself, at ease."
+  - v: 137
+    door: insight
+    title: "One nature"
+    iast: "jñāna-prakāśakaṃ sarvaṃ sarveṇātmā prakāśakaḥ | ekam eka-svabhāvatvāj jñānaṃ jñeyaṃ vibhāvyate ||"
+    tr: "Everything is revealed by knowing, and the Self is revealed through everything. Because they share one nature, knowing and the known are seen as one."
+  - v: 138
+    door: insight
+    title: "When the four dissolve"
+    iast: "mānasaṃ cetanā śaktir ātmā ceti catuṣṭayam | yadā priye parikṣīṇaṃ tadā tad bhairavaṃ vapuḥ ||"
+    tr: "Mind, awareness, energy and the individual self: when these four dissolve, dear one, then there is the form of Bhairava."

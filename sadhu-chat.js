@@ -156,7 +156,7 @@
     if (s.opts) renderChoices(s.opts);
     backBtn.disabled = hist.length === 0;
   });
-  homeBtn.addEventListener('click', function () { go(function () { menu('Where shall we go?'); }, ''); });
+  homeBtn.addEventListener('click', function () { go(function () { choosePath('Where shall we go?'); }, ''); });
 
   /* ---------- "How sure is this?" ----------
      A small chip on a claim. Tap it for two lines on the evidence and, where
@@ -270,7 +270,8 @@
       ['Ask the text', askPrompt],
       ['Morning reminder', reminder],
       ['What everyone’s breath shows', recordStory],
-      ['The latest research, live', research]
+      ['The latest research, live', research],
+      ['Learn Tantra instead', function () { tantraMenu('The Vijñāna Bhairava. Where shall we start?'); }]
     ]);
   }
   function more() {
@@ -278,6 +279,119 @@
       ['Check my breath', checkBreath], ['Lessons', function () { lesson(mem.lesson && mem.lesson < LESSONS.length ? mem.lesson : 0); }],
       ['Tattva', tattva], ['A practice', practiceMenu], ['Ask the text', askPrompt]
     ]);
+  }
+
+
+  /* ---------- the Tantra path: the Vijñāna Bhairava (_data/vbt.yml) ---------- */
+  var VBT = window.VBT || null;
+  function choosePath(prompt) {
+    say(prompt || 'What would you like to learn today?');
+    ask([
+      ['Breath · Swar Yoga', function () { remember('path', 'breath'); menu('The breath, then. What would you like to do?'); }, mem.path !== 'tantra'],
+      ['Tantra · the Vijñāna Bhairava', function () { tantraMenu(mem.vbtSeen && mem.vbtSeen.length ? 'Welcome back to the Vijñāna Bhairava. Where shall we go?' : 'The Vijñāna Bhairava. The goddess asks what reality is, and Bhairava answers not with an idea but with 112 ways to look. Where shall we start?'); }, mem.path === 'tantra']
+    ]);
+  }
+  function vRefs(keys) { return (keys || []).map(function (k) { return VBT.refs[k]; }).filter(Boolean); }
+  function vChip(sci, about) { enqueue(function () { row('bot', evChip(gradeKey(sci.grade), about || null, sci.note, vRefs(sci.refs))).classList.add('ev-line'); }); }
+  function vDoor(id) { return VBT.doors.filter(function (d) { return d.id === id; })[0]; }
+  function vSeen(v) { var s = (mem.vbtSeen || []).slice(); if (s.indexOf(v) < 0) { s.push(v); remember('vbtSeen', s); } }
+  function vToday() {
+    var d = new Date(), k = d.getFullYear() * 372 + d.getMonth() * 31 + d.getDate();
+    var t = VBT.verses.filter(function (x) { return x.try && !x.caution && x.try.seconds > 0; });
+    return t[k % t.length];
+  }
+  function tantraMenu(prompt) {
+    if (!VBT) { say('The Tantra lessons did not load. Please refresh the page.'); return; }
+    remember('path', 'tantra'); count('tantra_menu');
+    if (prompt) say(prompt);
+    ask([
+      ['A practice for today', function () { dharana(vToday(), true); }, true],
+      ['Choose a door', doors],
+      ['What is this text?', tIntro],
+      ['What does science say about it?', tResearch],
+      ['Read all of it, verse by verse', function () { say('I have opened the whole text below our conversation, door by door.'); enqueue(function () { openFull('#vbt-all'); }); tantraMore(); }],
+      ['Learn the breath instead', function () { remember('path', 'breath'); menu('The breath, then. What would you like to do?'); }]
+    ]);
+  }
+  function tantraMore() {
+    ask([['A practice for today', function () { dharana(vToday(), true); }, true], ['Choose a door', doors], ['Back', function () { tantraMenu('Where shall we go?'); }]]);
+  }
+  function tIntro() {
+    count('tantra_intro');
+    say('<span class="cm-tag">The text</span><b>' + esc(VBT.about.name) + '</b>', { html: true });
+    list(VBT.about.facts);
+    say(VBT.about.numbering + ' ' + VBT.about.translation);
+    say('Many verses are only a line or two. Read slowly. Try one, not ten.', { mood: 'smile' });
+    ask([['Choose a door', doors, true], ['A practice for today', function () { dharana(vToday(), true); }], ['What does science say about it?', tResearch], ['Back', function () { tantraMenu('Where shall we go?'); }]]);
+  }
+  function tResearch() {
+    count('tantra_research');
+    say('I looked for studies of this text, and I want to be honest about what I found.');
+    vChip({ grade: VBT.research.grade, note: VBT.research.summary, refs: VBT.research.refs }, 'Research on the Vijñāna Bhairava itself');
+    say('So inside each door I show you the nearest research there is, with a grade. Where there is nothing, I say so.');
+    ask([['Choose a door', doors, true], ['A practice for today', function () { dharana(vToday(), true); }], ['Back', function () { tantraMenu('Where shall we go?'); }]]);
+  }
+  function doors() {
+    say('I have grouped the practices into doors, so you can find one that suits you. The grouping is mine; the tradition sorts them differently, by method.');
+    ask(VBT.doors.map(function (d) {
+      var n = VBT.verses.filter(function (x) { return x.door === d.id; }).length;
+      return [d.name + ' · ' + n, function () { door(d.id); }];
+    }).concat([['Back', function () { tantraMenu('Where shall we go?'); }]]));
+  }
+  function door(id) {
+    var d = vDoor(id), vs = VBT.verses.filter(function (x) { return x.door === id; });
+    count('door_' + id);
+    say('<span class="cm-tag">Door</span><b>' + esc(d.name) + '</b><br>' + md(d.blurb), { html: true });
+    vChip(d.science, 'What science says about this door');
+    var g = vs.some(function (x) { return x.try && !x.caution; });
+    say('Choose a verse.' + (g ? ' The ones marked ◦ I can guide you through now.' : ''));
+    ask(vs.map(function (x) { return [(x.try && !x.caution ? '◦ ' : '') + x.title + ' · ' + x.v, function () { dharana(x); }]; })
+      .concat([['Other doors', doors]]));
+  }
+  function dharana(x, isToday) {
+    if (!x) { tantraMenu(); return; }
+    vSeen(x.v); count('vbt_' + x.v);
+    var d = vDoor(x.door), vs = VBT.verses.filter(function (y) { return y.door === x.door; }), i = vs.indexOf(x);
+    say('<span class="cm-tag">' + (isToday ? 'For today · ' : '') + 'Verse ' + x.v + ' · ' + esc(d.name) + '</span><b>' + esc(x.title) + '</b>', { html: true });
+    say('<span class="vb-skt" lang="sa-Latn">' + esc(x.iast) + '</span>', { html: true, cls: 'vb-line' });
+    say(x.tr);
+    if (x.caution) say('<span class="vb-caution">' + esc(x.caution) + '</span>', { html: true, mood: 'listen' });
+    var opts = [];
+    if (x.try && !x.caution) opts.push([x.try.seconds > 0 ? 'Try it with me' : 'How do I try it?', function () { tryIt(x); }, true]);
+    if (x.related) opts.push([x.related.label, function () { location.href = x.related.url; }]);
+    opts.push(['What does science say?', function () { vChip(d.science, 'The nearest research'); afterVerse(x, vs, i); }]);
+    if (i < vs.length - 1) opts.push(['Next in this door →', function () { dharana(vs[i + 1]); }]);
+    opts.push(['Other doors', doors]);
+    ask(opts);
+  }
+  function afterVerse(x, vs, i) {
+    var opts = [];
+    if (x.try && !x.caution) opts.push(['Try it with me', function () { tryIt(x); }, true]);
+    if (i < vs.length - 1) opts.push(['Next in this door →', function () { dharana(vs[i + 1]); }]);
+    opts.push(['Other doors', doors], ['Back to Tantra', function () { tantraMenu('Where shall we go?'); }]);
+    ask(opts);
+  }
+  var FEEL = {
+    quiet: 'Good. Notice that the quiet was there within a minute. The text would say it was never absent.',
+    shift: 'Notice what shifted, without needing to name it. Try this same verse tomorrow and see whether it comes again.',
+    nothing: 'That is a real result too. These practices often need repetition, and not every door suits every person. Another door may fit you better.',
+    hard: 'Then stop, and breathe normally. Not every practice suits every person, or every day. If strong feelings or old memories came up, it can help to talk them through with someone you trust, or with a therapist.'
+  };
+  function tryIt(x) {
+    count('vbt_try_' + x.v);
+    list(x.try.steps);
+    if (!(x.try.seconds > 0)) {
+      say('This one is for another moment, not now. Come back and tell me how it went.', { mood: 'smile' });
+      ask([['Other doors', doors, true], ['Back to Tantra', function () { tantraMenu('Where shall we go?'); }]]);
+      return;
+    }
+    say('I will keep time. Begin when you are ready.');
+    enqueue(function () { breatheWith(true); mood = ''; moodClip = '__'; setMoodNow('meditate'); });
+    widget(function (done) { return orb(x.try.seconds, done); });
+    enqueue(function () { breatheWith(false); });
+    say('How was that?', { mood: 'listen' });
+    function feel(k) { return function () { say(FEEL[k], { mood: k === 'hard' ? 'listen' : 'smile' }); var vs = VBT.verses.filter(function (y) { return y.door === x.door; }); afterVerse(x, vs, vs.indexOf(x)); }; }
+    ask([['Quiet', feel('quiet')], ['Something shifted', feel('shift')], ['Nothing much', feel('nothing')], ['Uncomfortable', feel('hard')]]);
   }
 
   /* ---------- 1. Check my breath (the Svara tool) ---------- */
@@ -999,14 +1113,14 @@
         var days = Math.round((Date.now() - (mem.lastTime || 0)) / 864e5);
         say('Last time' + (days >= 1 ? ', ' + (days === 1 ? 'yesterday' : days + ' days ago') : '') + ', your ' + E.SVARAS[mem.lastSide].side + (mem.lastSide === 'sushumna' ? ' sides were' : ' side was') + ' flowing. Shall we see what it is doing now?');
       }
-      menu('What would you like to do?');
+      choosePath('What would you like to learn today' + (mem.name ? ', ' + mem.name : '') + '?');
     } else {
       remember('met', 1);
       say('Namaste. I am ' + NAME + '.', { mood: 'smile' });
       if (tl) say(tl);
-      say('Your breath is changing sides even now, and most people never notice it. I can help you watch it, understand it, and work with it, gently.');
-      say('Everything I tell you comes from the Shiva Svarodaya and The Respiratory Codex, with the verse, and with an honest word on what science says.');
-      askName(function () { menu('Where shall we begin' + (mem.name ? ', ' + mem.name : '') + '?'); });
+      say('I teach two things. The breath, from the Shiva Svarodaya: which nostril is flowing, and what that might mean. And Tantra: the 112 meditations of the Vijñāna Bhairava.');
+      say('With each, I give you the verse, and an honest word on what science says.');
+      askName(function () { choosePath('What would you like to learn today' + (mem.name ? ', ' + mem.name : '') + '?'); });
     }
   }
 

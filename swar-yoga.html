@@ -1,6 +1,6 @@
 ---
 title: "Swar Yoga: which nostril is flowing, and what the texts claim"
-description: "Observe which nostril is flowing, check it against the Shiva Swarodaya rules, try the practices the text contains, and add your observation to an open record."
+description: "Learn with Swami Neurananda: the breath from the Shiva Swarodaya, or the 112 meditations of the Vijñāna Bhairava Tantra, verse by verse, with an honest word on what science says."
 image: /img/og-swar-yoga.jpg
 ---
 <!DOCTYPE html>
@@ -893,6 +893,32 @@ image: /img/og-swar-yoga.jpg
 </section>
 
 
+
+{% assign V = site.data.vbt %}
+<section class="sec vb-all" id="vbt-all">
+  <div class="wrap">
+    <div class="eyebrow">Tantra · {{ V.about.name }}</div>
+    <h2>The 112 ways in, verse by verse</h2>
+    <ul class="vb-facts">{% for f in V.about.facts %}<li>{{ f }}</li>{% endfor %}</ul>
+    <p class="vb-note">{{ V.about.numbering }} {{ V.about.translation }}</p>
+    <div class="vb-research"><span class="grade g-x">Untested</span><p>{{ V.research.summary }}</p></div>
+    {% for d in V.doors %}
+    <details class="vb-door"{% if forloop.first %} open{% endif %}>
+      <summary><b>{{ d.name }}</b><span>{{ d.blurb }}</span></summary>
+      <div class="vb-sci"><span class="grade g-{{ d.science.grade | downcase }}">{% case d.science.grade %}{% when 'E' %}Established{% when 'S' %}Suggestive{% when 'T' %}Tradition{% else %}Untested{% endcase %}</span><p>{{ d.science.note }}{% for r in d.science.refs %} <a href="{{ V.refs[r].url }}" target="_blank" rel="noopener">{{ V.refs[r].label }} ↗</a>{% endfor %}</p></div>
+      {% for x in V.verses %}{% if x.door == d.id %}
+      <article class="vb-verse" id="vbt-{{ x.v }}">
+        <h3><span>{{ x.v }}</span>{{ x.title }}</h3>
+        <p class="vb-skt" lang="sa-Latn">{{ x.iast }}</p>
+        <p>{{ x.tr }}</p>
+        {% if x.caution %}<p class="vb-caution">{{ x.caution }}</p>{% endif %}
+      </article>
+      {% endif %}{% endfor %}
+    </details>
+    {% endfor %}
+    <p class="vb-note">Sanskrit as given in the <a href="{{ V.refs.concordance.url }}" target="_blank" rel="noopener">verse-by-verse translation concordance</a>; verses 24 to 37 checked against a scan of the 1918 Kashmir Series edition.</p>
+  </div>
+</section>
 </div><!-- /full-page -->
 
 </main>

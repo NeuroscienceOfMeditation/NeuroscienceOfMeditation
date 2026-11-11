@@ -1201,3 +1201,24 @@ html.pv-lock { overflow: hidden; }
 .pv-guide-say p { margin: 0; font-family: var(--serif, serif); font-size: 16.5px; line-height: 1.5; }
 @media (max-width: 700px) { .pv-guide-face { width: 64px; height: 64px; } .pv-guide-say p { font-size: 15px; } }
 @media (prefers-reduced-motion: reduce) { .pv-guide.talking .pv-guide-face { animation: none; } }
+
+/* Tantra path: the Vijñāna Bhairava */
+.vb-skt{display:block;font-family:"Noto Serif","Times New Roman",Times,serif;font-style:italic;font-size:15px;line-height:1.6;color:var(--ink-60)}
+.vb-caution{display:block;border-left:3px solid #C2611F;padding:6px 0 6px 12px;color:#8A3C1E;font-size:15px}
+.vb-all h2{font-size:clamp(28px,3.6vw,42px);margin-bottom:14px}
+.vb-facts{padding-left:20px;line-height:1.7;max-width:820px}
+.vb-note{font-size:14px;color:var(--ink-60);max-width:820px}
+.vb-research{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:18px 0 26px;max-width:860px}
+.vb-research p,.vb-sci p{margin:0;font-size:15px;line-height:1.6}
+.vb-door{border:1px solid var(--line);border-radius:16px;margin:12px 0;background:var(--surface);max-width:900px}
+.vb-door summary{cursor:pointer;padding:16px 20px;display:flex;flex-direction:column;gap:2px;list-style:none}
+.vb-door summary::-webkit-details-marker{display:none}
+.vb-door summary b{font-family:var(--serif);font-size:21px;color:var(--forest-ink)}
+.vb-door summary span{font-size:14px;color:var(--ink-60)}
+.vb-sci{display:flex;gap:12px;align-items:flex-start;padding:0 20px 12px}
+.vb-sci a{font-weight:600;color:var(--forest-ink);font-size:13.5px}
+.vb-verse{padding:14px 20px;border-top:1px solid var(--line)}
+.vb-verse h3{font-size:18px;margin:0 0 6px;display:flex;gap:10px;align-items:baseline}
+.vb-verse h3 span{font:600 12px var(--sans);color:#C2611F;min-width:28px}
+.vb-verse p{margin:0 0 6px;line-height:1.65}
+.grade.g-t{background:rgba(198,161,91,.18);color:#7A5C1E}
