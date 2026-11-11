@@ -68,6 +68,7 @@ books:
 
   - title: "Breath & Brain"
     cover: "Breath & Brain"
+    cover_image: /img/books/breath-and-brain-cover.jpg
     blurb: "Pranayama read through respiratory physiology. 148 pages, PDF + EPUB."
     price: "₹499"
 
