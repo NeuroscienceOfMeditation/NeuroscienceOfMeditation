@@ -89,7 +89,8 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px">
 
         {% if issue1_home %}
-        <a class="btn p" href="{{ issue1_home.url | relative_url }}" style="text-decoration:none">
+        {% assign latest_book = issue1_home.url | replace: 'index.html', '' | append: 'read.html' %}
+        <a class="btn p" href="{{ latest_book | relative_url }}" style="text-decoration:none">
           Read Issue {{ latest_no }}, free
         </a>
 
@@ -153,7 +154,8 @@ description: "Aṇūṭṭara, a yoga research magazine from Neuroscience of Med
       </div>
 
       {% for h in issue_homes %}
-      <a class="it" href="{{ h.url | relative_url }}" style="text-decoration:none;color:inherit">
+      {% assign h_book = h.url | replace: 'index.html', '' | append: 'read.html' %}
+      <a class="it" href="{{ h_book | relative_url }}" style="text-decoration:none;color:inherit">
         <div class="c">
           Issue {{ h.issue | prepend: '0' | slice: -2, 2 }}
         </div>

@@ -59,7 +59,11 @@
           {% endfor %}
         </ol>
 
-        <a class="btn p" href="{{ pieces.first.url | relative_url }}" style="text-decoration:none">Start reading</a>
+        {% assign book_url = page.url | replace: 'index.html', '' | append: 'read.html' %}
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn p" href="{{ book_url | relative_url }}" style="text-decoration:none">Open the magazine</a>
+          <a class="btn s" href="{{ pieces.first.url | relative_url }}" style="text-decoration:none">Read on the web</a>
+        </div>
       </div>
     </div>
   </section>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head.html %}
+  {% comment %}
+    One Aṇūṭṭara issue as a book with turning pages. Each issue has a page
+    like anuttara/issue-02/read.html with `layout: anuttara-reader` and
+    `issue: 2`. The pieces come from _anuttara/issue-02/ in their `order:`.
+
+    Colours follow the issue's cover. To give a future issue its own palette,
+    add any of these to its index.md (the values below are the defaults):
+      theme:
+        cover_from: "#DAD5B4"   cover_to: "#C3BC94"   cover_ink: "#2A2716"
+        accent: "#C6A15B"       paper: "#F5F1E1"      desk: "#23211A"
+  {% endcomment %}
+  {% assign issue_docs = site.anuttara | where: "issue", page.issue | sort: "order" %}
+  {% assign home = issue_docs | where: "order", 0 | first %}
+  {% assign pieces = issue_docs | where_exp: "d", "d.order > 0" %}
+  {% assign t = home.theme %}
+  {% assign issue_no = page.issue | prepend: '0' | slice: -2, 2 %}
+  <link rel="stylesheet" href="{{ '/anuttara-reader.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <style>
+    :root{
+      --m-cover-from:{{ t.cover_from | default: '#DAD5B4' }};
+      --m-cover-to:{{ t.cover_to | default: '#C3BC94' }};
+      --m-cover-ink:{{ t.cover_ink | default: '#2A2716' }};
+      --m-cover-muted:#5E5834;
+      --m-accent:{{ t.accent | default: '#C6A15B' }};
+      --m-paper:{{ t.paper | default: '#F5F1E1' }};
+      --m-ink:#2A2716;
+      --m-ink-2:#4A4530;
+      --m-muted:#6B6440;
+      --m-link:#7A5E22;
+      --m-rule:rgba(42,39,22,.18);
+      --m-tint:rgba(198,161,91,.14);
+      --m-desk:{{ t.desk | default: '#23211A' }};
+      --m-desk-2:#3A3726;
+    }
+  </style>
+</head>
+
+<body class="mag-reader">
+
+<a class="skip-link" href="{{ home.url | relative_url }}">Skip to the web version of this issue</a>
+
+<header id="mag-bar">
+  <a href="{{ '/anuttara.html' | relative_url }}">← All issues</a>
+  <div class="mag-title">Aṇūṭṭara<span>Issue {{ issue_no }}</span></div>
+  <div class="mag-ctrls">
+    <button id="mag-toc" type="button">Contents</button>
+    <button id="mag-prev" type="button" aria-label="Previous page">‹</button>
+    <span id="mag-count" aria-live="polite"></span>
+    <button id="mag-next" type="button" aria-label="Next page">›</button>
+    <a href="{{ home.url | relative_url }}" style="margin-left:6px">Web version</a>
+  </div>
+</header>
+
+<main id="main">
+  <div id="mag-stage" role="region" aria-label="Aṇūṭṭara Issue {{ issue_no }}, as a book">
+    <p id="mag-loading">Setting the pages…</p>
+  </div>
+  <noscript>
+    <p class="mag-noscript">The book view needs JavaScript. <a href="{{ home.url | relative_url }}">Read this issue on the web</a>.</p>
+  </noscript>
+</main>
+
+<script type="application/json" id="mag-meta">{
+  "no": {{ issue_no | jsonify }},
+  "date": {{ home.cover_date | default: '2026' | jsonify }},
+  "title": {{ home.title | jsonify }},
+  "description": {{ home.description | jsonify }},
+  "coverLine": {{ home.cover_line | default: 'Where you find your answers.' | jsonify }},
+  "home": {{ '/anuttara.html' | relative_url | jsonify }},
+  "newsletter": {{ '/newsletter.html' | relative_url | jsonify }}
+}</script>
+
+<template id="mag-src">
+{% for p in pieces %}
+  <section class="piece" data-section="{{ p.section | escape }}" data-title="{{ p.title | escape }}" data-url="{{ p.url | relative_url }}">
+    <div class="opener">
+      <p class="op-k">{{ p.section }}</p>
+      <h1 class="op-t">{{ p.title }}</h1>
+      {% if p.description %}<p class="op-d">{{ p.description }}</p>{% endif %}
+      <p class="op-by">By {{ p.author | default: 'Aditi' }}{% if p.first_published %} · First published {{ p.first_published | date: '%-d %B %Y' }}{% endif %}{% if p.sources %} · {{ p.sources }} studies cited{% endif %}</p>
+      {% if p.takeaway %}<div class="op-tk"><div class="k">The short version</div><p>{{ p.takeaway }}</p></div>{% endif %}
+    </div>
+    <div class="flow">
+{{ p.content }}
+    </div>
+  </section>
+{% endfor %}
+</template>
+
+<script src="{{ '/vendor/page-flip.browser.js' | relative_url }}"></script>
+<script src="{{ '/anuttara-reader.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+
+</body>
+</html>

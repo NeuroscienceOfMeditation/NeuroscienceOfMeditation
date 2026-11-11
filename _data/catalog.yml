@@ -83,7 +83,7 @@ books:
     cover_image: /img/books/anuttara-issue-02-cover.jpg
     blurb: "Our free magazine. Issue 02: eleven articles on the Śiva Svarodaya, the nasal cycle, how meditation research measures what it claims, and Abhinavagupta."
     price: "Free"
-    link: /anuttara/issue-02/
+    link: /anuttara/issue-02/read.html
     button: "Read now"
 
   - title: "Aṇūṭṭara · Issue 01"
@@ -91,7 +91,7 @@ books:
     cover_image: /img/books/anuttara-issue-01-cover.jpg
     blurb: "Our free magazine. Issue 01: the breath's clock in the Śiva Svarodaya, six recent studies, an essay and two practices."
     price: "Free"
-    link: /anuttara/issue-01/
+    link: /anuttara/issue-01/read.html
     button: "Read now"
 
 # Recommended reading: books by other authors that we suggest, shown on the
