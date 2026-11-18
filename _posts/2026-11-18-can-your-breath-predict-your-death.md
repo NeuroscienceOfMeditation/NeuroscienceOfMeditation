@@ -1,7 +1,7 @@
 ---
 title: "Can Your Breath Tell You When You Are Going to Die?"
 description: "The last quarter of the Shiva Svarodaya is a death-prediction manual, and it is almost never translated. The intervals it gives are invented. Several of the signs it names are real clinical emergencies, which is a stranger result than either dismissal or belief."
-date: 2026-11-18 11:40:00 +0530
+date: 2026-11-18 17:13:10 +0530
 pillar: Swar Yoga
 cover: breath
 image: /img/og-svarodaya.jpg
