@@ -1,7 +1,7 @@
 ---
 title: "I Said Nobody Had Tested the Mirror. They Had."
 description: "Three weeks ago I wrote that the Svarodaya's mirror test had never been validated. That was wrong — it has a name, the Glatzel mirror, and a small literature. What that literature found is more awkward than the gap I thought I was reporting."
-date: 2026-11-23 08:30:00 +0530
+date: 2026-11-23 23:44:03 +0530
 pillar: Claim check
 cover: ripple
 image: /img/og-seven-things-to-measure.jpg
