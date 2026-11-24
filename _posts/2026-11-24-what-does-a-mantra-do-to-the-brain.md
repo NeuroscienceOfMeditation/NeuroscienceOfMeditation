@@ -1,7 +1,7 @@
 ---
 title: "What Does a Mantra Do to the Brain?"
 description: "Repeating a word quiets large parts of the cortex, and mantra practice eases anxiety about as much as other forms of meditation. The newer brain-wave studies are more interesting as methods than as proof."
-date: 2026-11-23 10:00:00 +0530
+date: 2026-11-24 10:00:00 +0530
 pillar: Research
 cover: ripple
 sources: 11
