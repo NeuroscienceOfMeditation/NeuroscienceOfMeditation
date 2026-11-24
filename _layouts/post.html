@@ -33,7 +33,10 @@
       <div class="post-meta">
         <span>Published {{ page.date | date: '%-d %B %Y' }}</span>
         {% if page.updated %}<span>Updated {{ page.updated | date: '%-d %B %Y' }}</span>{% endif %}
-        {% if page.sources %}<span>{{ page.sources }} studies cited</span>{% endif %}
+        {% if page.sources %}<span>{{ page.sources }} studies cited</span>
+        {% comment %} Sources are checked before publishing. When a piece is re-checked later, add reviewed: YYYY-MM-DD to its front matter. {% endcomment %}
+        {% assign checked = page.reviewed | default: page.updated | default: page.date %}
+        <span>Sources checked {{ checked | date: '%-d %B %Y' }}</span>{% endif %}
       </div>
 
       </div>
@@ -67,7 +70,7 @@
       {% if page.sources %}
       <div class="card post-note">
         <h3>How this article was checked</h3>
-        <p>Every study cited here was checked against its PubMed record before publishing. This is educational content, not medical advice. If you have a health condition, keep following your doctor's guidance.</p>
+        <p>Every study cited here was checked against its PubMed or publisher record before publishing. This is educational content, not medical advice. If you have a health condition, keep following your doctor's guidance.</p>
       </div>
       {% endif %}
 
