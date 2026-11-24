@@ -321,7 +321,8 @@ footer p{font-size:13px;line-height:1.7;margin:0 0 18px;max-width:34ch}
 .topbar :focus-visible,footer :focus-visible,.sec.green :focus-visible,.sec.deep :focus-visible,
 .ccard :focus-visible,.wcheck :focus-visible,.e-dark :focus-visible,.skip-link:focus-visible{outline-color:var(--neon)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-/* Mobile navigation (the full nav needs ~1180px) */
+/* Mobile navigation (the full nav needs ~1180px; tightened between 1181 and 1340px) */
+@media (min-width:1181px) and (max-width:1340px){.nav a{padding:9px 6px;font-size:12.5px}.nav{gap:0}}
 @media (max-width:1180px){
   .topbar .wrap{position:relative}
   .burger{display:grid}
