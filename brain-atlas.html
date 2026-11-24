@@ -1,5 +1,5 @@
 ---
-title: "The Meditation Brain Atlas: a 3D brain, graded by the evidence"
+title: "The Living Atlas of Meditation Neuroscience: a 3D brain that learns from research"
 description: "Turn a real 3D brain, click a region, compare meditation practices, and see what it does and what meditation research actually shows about it, with every claim graded and sourced."
 ---
 {% assign A = site.data.brain_atlas %}
@@ -30,6 +30,9 @@ description: "Turn a real 3D brain, click a region, compare meditation practices
       <p class="ba-grade ba-g-{{ A.big_question.grade }}"><i></i>How sure is this? <b>{{ A.big_question.grade_label }}</b></p>
       <p>{{ A.big_question.text }}</p>
       <p class="ba-refs">{% for r in A.big_question.refs %}<a href="{{ A.refs[r].url }}" target="_blank" rel="noopener">{{ A.refs[r].label }} ↗</a>{% endfor %}</p>
+      <p class="ba-kicker ba-tours-h">Explore</p>
+      <button type="button" class="ba-next ba-tourbtn ba-alt" data-ba-transitions>⇄ Transitions: how the nervous system shifts</button>
+      <button type="button" class="ba-next ba-tourbtn ba-alt" data-ba-learn>◎ How this atlas learns · v{{ site.data.atlas_evidence.version }}</button>
       <p class="ba-kicker ba-tours-h">Guided tours</p>
       {% for t in A.tours %}<button type="button" class="ba-next ba-tourbtn" data-ba-tour="{{ t.id }}">▶ {{ t.button }}</button>{% endfor %}
       <p class="ba-hint">Or turn the brain and click a coloured region. Slide <b>Glass</b> to see the deep structures inside.</p>
@@ -80,7 +83,8 @@ description: "Turn a real 3D brain, click a region, compare meditation practices
 
 {% include footer.html %}
 
-<script>window.BRAIN_ATLAS = {{ A | jsonify }};</script>
+<script>window.BRAIN_ATLAS = {{ A | jsonify }};
+window.ATLAS_EVIDENCE = {{ site.data.atlas_evidence | jsonify }};</script>
 <script type="importmap">{ "imports": { "three": "{{ '/brain-atlas/vendor/three.module.min.js' | relative_url }}" } }</script>
 <script type="module" src="{{ '/brain-atlas/atlas.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>

@@ -1,7 +1,8 @@
 # The Meditation Brain Atlas (brain-atlas.html).
 # Regions are groups of parcels from the Schaefer 2018 400-parcel, 7-network map
 # on the fsaverage5 surface (MIT licence). The id must match brain-atlas/brain.bin.
-# Grades: E established, S suggestive, X speculative, C contradicted.
+# Grades (v4 scale): E established, V converging, P preliminary, H hypothesis requiring testing,
+# C contradictory or unresolved, T tradition. See _data/atlas_evidence.yml.
 # Only cite studies that have been checked to say what the claim says.
 
 refs:
@@ -84,7 +85,7 @@ regions:
     does: "Thinking about yourself and other people, and replaying the past or imagining the future. A hub of the default mode network, which is most active when the mind wanders."
     claims:
       - text: "Experienced meditators showed less activity here while meditating than people new to it, in one small study."
-        grade: S
+        grade: P
         refs: [brewer2011]
 
   - id: 2
@@ -94,7 +95,7 @@ regions:
     does: "The other core hub of the default mode network: self-related thought, memory and mind-wandering."
     claims:
       - text: "Less active in experienced meditators during meditation, alongside the medial prefrontal cortex. Small study, cross-sectional."
-        grade: S
+        grade: P
         refs: [brewer2011]
 
   - id: 3
@@ -107,10 +108,10 @@ regions:
       - { label: "Does slower breathing make meditation deeper?", url: "/does-slower-breathing-make-meditation-deeper.html" }
     claims:
       - text: "One of the regions recruited across several meditation styles, though results across studies converge less than often claimed."
-        grade: S
+        grade: P
         refs: [fox2016]
       - text: "Differs in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
       - text: "Grows after an 8-week mindfulness course."
         grade: C
@@ -123,10 +124,10 @@ regions:
     does: "Notices conflict and errors, and helps decide where attention should go next, such as noticing the mind has wandered."
     claims:
       - text: "The dorsal anterior cingulate is recruited across several meditation styles."
-        grade: S
+        grade: P
         refs: [fox2016]
       - text: "Differs in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
 
   - id: 5
@@ -136,10 +137,10 @@ regions:
     does: "Holding a goal in mind, planning and steering attention on purpose. The frontopolar part, at the very front, is linked to meta-awareness: knowing what your mind is doing."
     claims:
       - text: "The frontopolar cortex is recruited across several meditation styles."
-        grade: S
+        grade: P
         refs: [fox2016]
       - text: "The frontopolar cortex differs in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
 
   - id: 6
@@ -149,7 +150,7 @@ regions:
     does: "Weighing what things are worth, and adjusting emotional responses as situations change."
     claims:
       - text: "Among the regions that differ in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
 
   - id: 7
@@ -159,10 +160,10 @@ regions:
     does: "Feeling touch and body position, and planning and making movements."
     claims:
       - text: "Premotor and supplementary motor areas are recruited across several meditation styles."
-        grade: S
+        grade: P
         refs: [fox2016]
       - text: "Sensory cortices differ in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
 
   - id: 8
@@ -172,7 +173,7 @@ regions:
     does: "Turning light from the eyes into what you see."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
 
@@ -185,7 +186,7 @@ regions:
     does: "Forming new memories, holding the context of where and when things happened, and mapping places."
     claims:
       - text: "Among the regions that differ in structure in long-term meditators, in cross-sectional studies."
-        grade: S
+        grade: P
         refs: [fox2014]
       - text: "Grows after an 8-week mindfulness course."
         grade: C
@@ -199,7 +200,7 @@ regions:
     does: "Detecting threat and emotional significance, and learning what to fear."
     claims:
       - text: "In one small study with no control group, people whose stress fell most after a mindfulness course showed the largest drop in amygdala grey-matter density. The group as a whole showed no change."
-        grade: X
+        grade: H
         refs: [holzel2010]
       - text: "Shrinks after an 8-week mindfulness course."
         grade: C
@@ -213,7 +214,7 @@ regions:
     does: "A relay hub: passes signals from the senses to the cortex, and helps set alertness, sleep and attention."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
   - id: 12
@@ -224,7 +225,7 @@ regions:
     does: "Together the dorsal striatum: learning habits and skills, and selecting movements."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
   - id: 13
@@ -235,7 +236,7 @@ regions:
     does: "Reward and motivation: wanting, and learning what is worth going after."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
   - id: 14
@@ -246,7 +247,7 @@ regions:
     does: "Helps start and stop movements, as part of the basal ganglia loops."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
   - id: 15
@@ -263,7 +264,7 @@ regions:
         grade: E
         refs: [smith1991, schwarzacher2011]
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
   - id: 16
@@ -274,7 +275,7 @@ regions:
     does: "Coordinates and times movement and balance, and also takes part in some thinking and emotional processes."
     claims:
       - text: "No consistent meditation finding in the meta-analyses used here."
-        grade: X
+        grade: H
         refs: [fox2014, fox2016]
 
 tours:
@@ -282,7 +283,7 @@ tours:
     button: "One sitting, four moments"
     title: "One sitting, four moments"
     intro: "In a 2012 study, 14 meditators focused on the breath inside a brain scanner and pressed a button each time they noticed their mind had wandered. Here is what the brain did around each press."
-    grade: S
+    grade: P
     refs: [hasenkamp2012]
     steps:
       - title: "1. The mind wanders"
@@ -322,14 +323,14 @@ tours:
         text: "Paying attention to the sensations of breathing engages the insula, the area that maps the inside of the body. In one study, this response changed after an 8-week mindfulness course."
         regions: [3]
         view: right
-        grade: S
+        grade: P
         refs: [farb2013]
       - title: "4. It reaches emotion and memory"
         text: "In 7 people with electrodes inside the brain for epilepsy care, rhythms in the amygdala and hippocampus followed the breath when they breathed through the nose, much less through the mouth. In tests, fearful faces were recognised faster during an in-breath. A small study, so far."
         regions: [10, 9]
         view: right
         glass: 0.3
-        grade: S
+        grade: P
         refs: [zelano2016]
 
 practices:
@@ -338,12 +339,13 @@ practices:
     meta: "Practice types · meta-analysis"
     training: "Training programmes"
     claims: "Popular claims · small studies"
-  grade: S
+  grade: P
   refs: [fox2016]
   caveat: "Only 6 to 10 studies per practice, most of them small, so these maps may change as more research comes in. More active and less active are compared with rest or a control task, not with each other."
   list:
     - id: 1
       name: "Focused attention"
+      update: "2026 update: a larger whole-brain meta-analysis (Baten et al., 17 studies of this practice) found the insula, supplementary motor area, hippocampus and superior frontal gyrus more active, and the mid-cingulate LESS active. It disagrees with this map on the cingulate; both are kept until more studies settle it."
       colour: "#C2611F"
       does: "Resting attention on one object, such as the breath, and bringing it back when it wanders."
       studies: 7
@@ -354,6 +356,7 @@ practices:
         - { name: "Inferior parietal lobule", hemi: L, at: [-48, -72, 30], vol: 144, up: false }
     - id: 2
       name: "Mantra"
+      update: "2026 update: a larger whole-brain meta-analysis (Baten et al., 8 studies) found only one consistent area for mantra: the right putamen and insula, close to the putamen cluster shown here."
       colour: "#8A6BB0"
       does: "Repeating a word, sound or phrase, silently or aloud."
       studies: 8
@@ -368,6 +371,7 @@ practices:
         - { name: "Anterior insula", hemi: L, at: [-28, 25, -7], vol: 192, up: false }
     - id: 3
       name: "Open monitoring"
+      update: "2026 update: a larger whole-brain meta-analysis (Baten et al., 8 studies) found the operculum and insula, middle temporal, inferior frontal and superior frontal gyri more active, and the thalamus less active, agreeing with this map on the insula and the thalamus."
       colour: "#2E7FA8"
       does: "Noticing whatever arises, sounds, sensations, thoughts, without settling on any one."
       studies: 10
@@ -380,6 +384,7 @@ practices:
         - { name: "Thalamus (pulvinar)", hemi: R, at: [17, -24, 11], vol: 112, up: false }
     - id: 4
       name: "Loving-kindness and compassion"
+      update: "2026 update: a larger review (Baten et al.) found loving-kindness studies too inconsistent to pool, with reports across prefrontal, cingulate, cerebellar and temporal areas."
       colour: "#3E9B5F"
       does: "Wishing yourself and others well, and feeling with their suffering."
       studies: 6
@@ -401,7 +406,7 @@ practices:
         - { id: 4, hemi: R, up: true, name: "Anterior cingulate cortex" }
         - { id: 8, hemi: B, up: true, name: "Occipital cortex, extending to the lower temporal lobe" }
       finding: "People whose attention improved most during this module showed more thickening in the left middle temporal cortex."
-      grade: S
+      grade: P
       refs: [valk2017]
       caveat: "Compared with the other modules, in over 300 adults followed for 9 months. The coloured areas are this atlas's broad regions that contain the reported changes; the real changes were smaller patches. Other studies, including a large trial of an 8-week mindfulness course, found no structural change, so this is not settled."
     - id: 6
@@ -417,7 +422,7 @@ practices:
         - { id: 2, hemi: L, up: true, name: "Mid and posterior cingulate" }
       also: ["Right supramarginal gyrus", "Parahippocampal areas, both sides"]
       finding: "People whose compassion grew most during this module showed more thickening of the right insula."
-      grade: S
+      grade: P
       refs: [valk2017]
       caveat: "Compared with the other modules, in over 300 adults. The coloured areas are broad atlas regions containing the reported changes. Other studies of short courses found no structural change, so this is not settled."
     - id: 7
@@ -432,7 +437,7 @@ practices:
         - { id: 8, hemi: L, up: true, name: "Occipital cortex" }
       also: ["Right middle temporal gyrus"]
       finding: "People who got better at understanding others' thoughts showed more thickening in left parietal areas and the right temporo-parietal junction."
-      grade: S
+      grade: P
       refs: [valk2017]
       caveat: "Compared with the other modules, in over 300 adults. The coloured areas are broad atlas regions containing the reported changes. Not settled: other studies of short courses found no structural change."
     - id: 8
@@ -446,7 +451,7 @@ practices:
         - { id: 3, hemi: B, up: true, name: "Anterior insula" }
         - { id: 4, hemi: B, up: true, name: "Anterior mid-cingulate cortex" }
       finding: "These are the areas linked with feeling pain yourself. Empathy training also increased negative feelings."
-      grade: S
+      grade: P
       refs: [klimecki2014]
       caveat: "One small fMRI study. The same people then did compassion training, which reversed the rise in negative feelings."
     - id: 9
@@ -461,7 +466,7 @@ practices:
         - { id: 4, hemi: B, up: true, name: "Pregenual anterior cingulate" }
         - { id: 13, hemi: B, up: true, name: "Ventral striatum" }
       finding: "A different set of areas from empathy, linked with reward and caring. Compassion training reversed the rise in negative feelings that empathy training had caused, and increased positive feelings."
-      grade: S
+      grade: P
       refs: [klimecki2014]
       caveat: "One small fMRI study; everyone did empathy training first, so the order was not varied."
     - id: 14
@@ -479,7 +484,7 @@ practices:
         - { id: 11, hemi: B, up: false, name: "Thalamus" }
       also: ["Quieter: the body-sensing cortex area that receives the pain signal"]
       finding: "While meditating, people rated the same heat as 40% less intense and 57% less unpleasant than at rest. People with bigger drops in pain had more activity in the cingulate, insula and orbitofrontal cortex."
-      grade: S
+      grade: P
       refs: [zeidan2011]
       caveat: "One small study in healthy volunteers, testing brief lab pain, not chronic pain. It compared meditation with rest in the same people."
 
@@ -494,7 +499,7 @@ practices:
       regions:
         - { id: 13, hemi: B, up: true, name: "Ventral striatum" }
       finding: "During Yoga Nidra, a dopamine tracer bound 7.9% less in the ventral striatum, which the authors estimated as a 65% rise in dopamine release. The '65% more dopamine' you may have read comes from that estimate."
-      grade: X
+      grade: H
       refs: [kjaer2002]
       caveat: "A PET study of a small group of experienced yoga teachers, with no separate control group, and not yet repeated. It measured dopamine, not brain activity."
     - id: 11
@@ -511,7 +516,7 @@ practices:
         - { id: 11, hemi: B, up: false, name: "Thalamus" }
         - { id: 10, hemi: R, up: false, name: "Amygdala" }
       also: ["Parahippocampal gyri, both sides"]
-      grade: X
+      grade: H
       refs: [kalyani2011]
       caveat: "A pilot fMRI study of 12 volunteers, compared with rest. It has not been repeated by an independent team."
     - id: 12
@@ -531,7 +536,7 @@ practices:
         - { id: 16, hemi: B, up: false, name: "Cerebellum" }
       also: ["Less active: hearing cortex, language areas, and parietal areas for orienting in space"]
       finding: "One practitioner with about 6,000 hours of training appeared to switch on part of his reward system from the inside, with the senses turned down. A second, more recent case study of a different practitioner found broad network changes rather than region-by-region ones."
-      grade: X
+      grade: H
       refs: [hagerty2013, chowdhury2025]
       caveat: "Each study scanned one person, in a fixed order of stages. The reward area was located only roughly. Interesting, but it tells us what is possible for one trained person, not what jhāna does in general."
     - id: 13
@@ -542,7 +547,7 @@ practices:
       does: "Objectless compassion: resting in an unconditional readiness to help any living being, without a particular person in mind."
       regions: []
       finding: "Eight Buddhist practitioners with 10,000 to 50,000 hours of practice produced unusually strong, synchronised gamma brain waves (25–42 cycles a second) while meditating, far more than 10 students given a week of training. Their gamma was already higher at rest, and more hours of practice went with higher gamma. Nothing is coloured on the brain: EEG measures from the scalp, and the strongest differences were at electrodes over the front and sides of the head."
-      grade: S
+      grade: P
       refs: [lutz2004]
       caveat: "Small groups that also differed in age, culture and lifestyle, so practice may not be the cause. Gamma recorded from the scalp can be mixed with muscle signals; the authors ran checks, but treat raw gamma with care."
 

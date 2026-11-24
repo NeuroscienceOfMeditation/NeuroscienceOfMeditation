@@ -14,7 +14,9 @@ const $ = (s, r = document) => r.querySelector(s);
 const canvas = $('[data-ba-canvas]'), card = $('[data-ba-card]'), tip = $('[data-ba-tip]');
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const GRADE = { E: 'Established', S: 'Suggestive', X: 'Speculative', C: 'Contradicted' };
+const GRADE = { E: 'Established', V: 'Converging', P: 'Preliminary', H: 'Hypothesis requiring testing', C: 'Contradictory or unresolved', T: 'Tradition', S: 'Preliminary', X: 'Hypothesis requiring testing' };
+const EV = window.ATLAS_EVIDENCE || { records: [], transitions: [], changelog: [], refs: {}, scale: [] };
+const COND = EV.conditions || {}, TSCALE = EV.timescales || {};
 const BASE = (document.querySelector('link[href*="atlas.css"]') || {}).href ? '' : '';
 
 /* ---------- scene ---------- */
@@ -280,6 +282,7 @@ function select(ids, opts) {
       ${down.length ? `<h3>${esc(downL)}</h3><ul class="ba-clusters">${down.map(row).join('')}</ul>` : (p.clusters ? '<h3>Less active</h3><p>No area reached significance.</p>' : '')}
       ${p.also && p.also.length ? `<h3>Also reported, not drawn here</h3><ul class="ba-clusters">${p.also.map(a => `<li><i class="ba-dot" style="background:transparent;border:2px solid #E0702A"></i>${esc(a)}</li>`).join('')}</ul>` : ''}
       ${p.finding ? `<p>${esc(p.finding)}</p>` : ''}
+      ${p.update ? `<div class="ba-update"><b>What changed</b><p>${esc(p.update)}</p></div>` : ''}
       <div class="ba-claim"><p>${p.studies ? `Pooled from ${p.studies} studies of this practice. ${esc(PR.caveat || '')}` : esc(p.caveat || '')}</p>${gradeHTML(p.grade || PR.grade)}${refsHTML(p.refs || PR.refs)}</div>
       ${p.related ? `<h3>Read and try</h3><p class="ba-related">${p.related.map(x => `<a href="${esc(x.url)}">${esc(x.label)} →</a>`).join('')}</p>` : ''}
       <button type="button" class="ba-back" data-ba-back>← All practices</button>`;
@@ -297,6 +300,7 @@ function select(ids, opts) {
       <h3>What it does</h3><p>${esc(r.does)}</p>
       <h3>What meditation research shows</h3>
       ${(r.claims || []).map(c => `<div class="ba-claim"><p>${esc(c.text)}</p>${gradeHTML(c.grade)}${refsHTML(c.refs)}</div>`).join('')}
+      ${recsFor(r.id)}
       ${r.related ? `<h3>Read and try</h3><p class="ba-related">${r.related.map(x => `<a href="${esc(x.url)}">${esc(x.label)} →</a>`).join('')}</p>` : ''}
       <button type="button" class="ba-back" data-ba-back>← Back to the overview</button>`;
     setHash(slug(r.name));
@@ -338,25 +342,98 @@ qIn.addEventListener('input', () => {
 });
 document.addEventListener('click', e => { if (!e.target.closest('.ba-search')) hits.hidden = true; });
 
+
+/* ---------- living atlas: evidence records ---------- */
+function evRefs(keys) {
+  return '<p class="ba-refs">' + (keys || []).map(k => EV.refs[k] ? `<a href="${esc(EV.refs[k].url)}" target="_blank" rel="noopener">${esc(EV.refs[k].label)} ↗</a>` : '').join('') + '</p>';
+}
+function recHTML(rec, open) {
+  const med = rec.meditation === 'yes' ? 'Meditation studied' : rec.meditation === 'partly' ? 'Meditation-like task' : 'Not a meditation study';
+  return `<details class="ba-rec"${open ? ' open' : ''}><summary><span class="ba-rec-t">${esc(rec.title)}</span><span class="ba-pill ba-g-${esc(rec.grade)}"><i></i>${esc(GRADE[rec.grade] || rec.grade)}</span></summary>
+    <p>${esc(rec.claim)}</p>
+    <p class="ba-badges"><span>${esc(COND[rec.condition] || rec.condition)}</span><span>${esc(TSCALE[rec.timescale] || rec.timescale)}</span><span class="${rec.meditation === 'no' ? 'ba-warn' : ''}">${med}</span></p>
+    <p class="ba-meta"><b>How it was measured:</b> ${esc(rec.method)}${rec.not_on_map && rec.not_on_map.length ? `<br><b>Also reported, not on this map:</b> ${esc(rec.not_on_map.join(', '))}` : ''}</p>
+    ${evRefs(rec.refs)}
+    ${rec.open_question ? `<p class="ba-open"><b>Open question</b> ${esc(rec.open_question)}</p>` : ''}
+    ${rec.history && rec.history.length ? `<div class="ba-hist"><b>What changed</b><ol>${rec.history.map(h => `<li><span>v${esc(h.version)} · ${esc(h.date)}</span>${esc(h.change)}</li>`).join('')}</ol></div>` : ''}
+  </details>`;
+}
+function recsFor(id) {
+  const rs = (EV.records || []).filter(x => (x.regions || []).includes(id));
+  if (!rs.length) return '';
+  return `<h3>Evidence records · living atlas</h3><p class="ba-hint">Each record says what was actually studied, and whether it is a passing state or a lasting change.</p>${rs.map(x => recHTML(x)).join('')}`;
+}
+function showRecord(rid) {
+  const rec = EV.records.find(x => x.id === rid); if (!rec) return;
+  if (mode !== 'regions') setMode('regions');
+  select(rec.regions || [], { keepCard: true });
+  const deep = (rec.regions || []).some(i => (REGIONS.find(r => r.id === i) || {}).deep);
+  setGlass(deep ? 0.35 : 1);
+  if ((rec.regions || []).length) faceRegion(rec.regions[0]);
+  card.innerHTML = `<p class="ba-kicker">Evidence record · v${esc(EV.version)}</p>${recHTML(rec, true)}
+    <p class="ba-related">${(rec.regions || []).map(i => { const r = REGIONS.find(x => x.id === i); return r ? `<a href="#${slug(r.name)}" data-goreg="${i}">${esc(r.name)} →</a>` : ''; }).join('')}</p>
+    <button type="button" class="ba-back" data-ba-learn>← How this atlas learns</button>`;
+  card.querySelectorAll('[data-goreg]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); select([+a.dataset.goreg]); faceRegion(+a.dataset.goreg); }));
+  card.querySelector('[data-ba-learn]').addEventListener('click', showLearn);
+  setHash('record-' + rid); cardTop();
+}
+function cardTop() { const t = card.getBoundingClientRect().top; if (t < 0 || t > innerHeight * 0.6) scrollTo({ top: Math.max(0, t + scrollY - 90), behavior: reduce ? 'auto' : 'smooth' }); }
+function showLearn() {
+  stopTour(); if (mode !== 'regions') setMode('regions'); select([], { keepCard: true });
+  const by = g => (EV.records || []).filter(x => x.grade === g);
+  card.innerHTML = `<p class="ba-kicker">The living atlas · version ${esc(EV.version)} · updated ${esc(EV.updated)}</p>
+    <h2>How this atlas learns</h2>
+    <p>The atlas learns from research rather than piling it up. A new study can refine a record, add one, or challenge one. Nothing changes silently: each change is dated, and new studies are proposed for review before they go in.</p>
+    <h3>How sure is each record?</h3>
+    <ul class="ba-scale">${(EV.scale || []).map(s => `<li><span class="ba-pill ba-g-${s.key}"><i></i>${esc(s.name)}</span>${esc(s.note)}</li>`).join('')}</ul>
+    <h3>All evidence records</h3>
+    ${(EV.scale || []).map(s => by(s.key).length ? `<p class="ba-sub">${esc(s.name)}</p><p class="ba-reclist">${by(s.key).map(x => `<button type="button" data-rec="${x.id}">${esc(x.title)}</button>`).join('')}</p>` : '').join('')}
+    <h3>What changed, version by version</h3>
+    ${(EV.changelog || []).map(c => `<div class="ba-ver"><b>v${esc(c.version)}</b> <span>${esc(c.date)}</span><ul>${c.changes.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}
+    <button type="button" class="ba-back" data-ba-back>← Back to the overview</button>`;
+  card.querySelectorAll('[data-rec]').forEach(b => b.addEventListener('click', () => showRecord(b.dataset.rec)));
+  bindBack(); setHash('how-it-learns'); cardTop();
+}
+/* transitions: how the nervous system moves between modes */
+function transitionTour(t) {
+  return { id: t.id, title: `${t.from} → ${t.to}`, intro: t.summary, kicker: 'Transition', unknown: t.unknown,
+    steps: t.steps.map(s => Object.assign({}, s, { recs: s.records || [] })) };
+}
+function showTransitions() {
+  stopTour(); if (mode !== 'regions') setMode('regions'); select([], { keepCard: true });
+  card.innerHTML = `<p class="ba-kicker">Transitions</p><h2>How the nervous system shifts during meditation</h2>
+    <p>Not "meditation lights up the prefrontal cortex", but how the brain and body move from one mode to another. Each step shows its evidence, and whether that evidence comes from meditation itself.</p>
+    <div class="ba-trans">${(EV.transitions || []).map(t => `<button type="button" data-tr="${t.id}"><b>${esc(t.from)}</b><i>→</i><b>${esc(t.to)}</b><span>${esc(t.summary)}</span></button>`).join('')}</div>
+    <button type="button" class="ba-back" data-ba-back>← Back to the overview</button>`;
+  card.querySelectorAll('[data-tr]').forEach(b => b.addEventListener('click', () => { const t = EV.transitions.find(x => x.id === b.dataset.tr); TOUR = transitionTour(t); setGlass(1); tourStep(0); setHash('transition-' + t.id); }));
+  bindBack(); setHash('transitions'); cardTop();
+}
+
 /* ---------- guided tour ---------- */
 let tourAt = -1;
-function bindStart() { card.querySelectorAll('[data-ba-tour]').forEach(t => t.addEventListener('click', () => startTour(t.dataset.baTour))); }
+function bindStart() {
+  card.querySelectorAll('[data-ba-tour]').forEach(t => t.addEventListener('click', () => startTour(t.dataset.baTour)));
+  const tr = card.querySelector('[data-ba-transitions]'); tr && tr.addEventListener('click', showTransitions);
+  const le = card.querySelector('[data-ba-learn]'); le && le.addEventListener('click', showLearn);
+}
 function startTour(tid) { TOUR = TOURS.find(t => t.id === tid) || TOURS[0]; if (mode !== 'regions') setMode('regions'); setGlass(1); tourStep(0); }
 function stopTour() { tourAt = -1; }
 function tourStep(i) {
   if (!TOUR) return; tourAt = i;
   const s = TOUR.steps[i], last = i === TOUR.steps.length - 1;
   select(s.regions, { keepCard: true }); goView(s.view || 'right'); setGlass(s.glass != null ? s.glass : 1);
-  card.innerHTML = `<p class="ba-kicker">Guided tour · ${i + 1} of ${TOUR.steps.length}</p><h2>${esc(TOUR.title)}</h2>
+  const recs = (s.recs || []).map(id => (EV.records || []).find(x => x.id === id)).filter(Boolean);
+  card.innerHTML = `<p class="ba-kicker">${esc(TOUR.kicker || 'Guided tour')} · ${i + 1} of ${TOUR.steps.length}</p><h2>${esc(TOUR.title)}</h2>
     ${i === 0 ? `<p>${esc(TOUR.intro)}</p>` : ''}
-    <div class="ba-step"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p>${s.grade ? gradeHTML(s.grade) + refsHTML(s.refs) : ''}</div>
+    <div class="ba-step"><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p>${s.grade ? gradeHTML(s.grade) + refsHTML(s.refs) : ''}${recs.map(x => recHTML(x)).join('')}</div>
+    ${last && TOUR.unknown ? `<p class="ba-open"><b>What we don't know yet</b> ${esc(TOUR.unknown)}</p>` : ''}
     <p class="ba-dots">${TOUR.steps.map((_, k) => `<i class="${k === i ? 'on' : k < i ? 'done' : ''}"></i>`).join('')}</p>
     <div class="ba-tour-nav">${i > 0 ? '<button type="button" class="ba-back" data-t="-1">← Back</button>' : ''}<button type="button" class="ba-next" data-t="1">${last ? 'Finish' : 'Next →'}</button></div>
     ${last && TOUR.grade ? gradeHTML(TOUR.grade) + refsHTML(TOUR.refs) : ''}`;
   card.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => {
     const k = i + (+b.dataset.t);
-    if (k >= TOUR.steps.length) { stopTour(); select([]); return; }
-    tourStep(k);
+    if (k >= TOUR.steps.length) { const wasT = TOUR.kicker === 'Transition'; stopTour(); if (wasT) showTransitions(); else select([]); return; }
+    tourStep(k); cardTop();
   }));
 }
 
@@ -403,5 +480,9 @@ if (fromHash) { select([fromHash.id]); faceRegion(fromHash.id); }
 else if (pracHash) { setMode('practices'); select([pracHash.id]); }
 else if (H === 'practices') setMode('practices');
 else if (H === 'breath-tour' || H === 'tour') startTour(H === 'tour' ? 'sitting' : 'breath');
+else if (H === 'how-it-learns') showLearn();
+else if (H === 'transitions') showTransitions();
+else if (H.indexOf('record-') === 0) showRecord(H.slice(7));
+else if (H.indexOf('transition-') === 0) { const t = (EV.transitions || []).find(x => x.id === H.slice(11)); if (t) { TOUR = transitionTour(t); tourStep(0); } }
 renderer.setAnimationLoop(t => { if (anim) anim(t); controls.update(); renderer.render(scene, camera); });
-window.__atlas = { select, setMode, goView, setGlass, startTour, faceRegion };
+window.__atlas = { select, setMode, goView, setGlass, startTour, faceRegion, showLearn, showTransitions, showRecord };

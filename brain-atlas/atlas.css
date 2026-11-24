@@ -91,3 +91,40 @@
 .ba-tours-h{margin:18px 0 0!important}
 .ba-tourbtn{margin:8px 0 0}
 .ba-step .ba-grade{margin-top:6px!important}
+
+/* v4: living atlas */
+.ba-g-V i{background:#5FA05A}.ba-g-P i{background:#D9A520}.ba-g-H i{background:#9A8F80}.ba-g-T i{background:#C6A15B}
+.ba-alt{background:#1B4332}.ba-alt:hover{background:#2A5A45}
+.ba-pill{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--sans);color:#3b3a2e;background:#fff;border:1px solid rgba(20,24,15,.12);border-radius:99px;padding:3px 9px;white-space:nowrap}
+.ba-pill i{width:8px;height:8px;border-radius:50%;background:#999}
+.ba-rec{background:#fff;border:1px solid rgba(20,24,15,.08);border-radius:12px;margin:8px 0;padding:0}
+.ba-rec summary{cursor:pointer;list-style:none;display:flex;gap:10px;justify-content:space-between;align-items:flex-start;padding:11px 14px}
+.ba-rec summary::-webkit-details-marker{display:none}
+.ba-rec-t{font:600 14.5px/1.35 var(--sans);color:#1B4332}
+.ba-rec[open] summary{border-bottom:1px solid rgba(20,24,15,.07)}
+.ba-rec > p,.ba-rec > div{margin:10px 14px!important}
+.ba-badges{display:flex;flex-wrap:wrap;gap:6px}
+.ba-badges span{font:600 11.5px var(--sans);background:#EEF3EA;color:#1B4332;border-radius:6px;padding:4px 8px}
+.ba-badges span.ba-warn{background:#F8E9DF;color:#8A3C1E}
+.ba-meta{font-size:13.5px!important;color:#4a4a3c!important}
+.ba-open{background:#FBF4E4;border-left:3px solid #C6A15B;border-radius:8px;padding:9px 12px;font-size:14px!important}
+.ba-open b{display:block;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#7A5C1E;margin-bottom:2px}
+.ba-hist b,.ba-update b{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#C2611F}
+.ba-hist ol{margin:6px 0 0;padding-left:18px;font-size:13.5px;line-height:1.5}
+.ba-hist li{margin-bottom:5px}
+.ba-hist li span{display:block;font-weight:600;color:#7a6a58;font-size:12px}
+.ba-update{background:#F8E9DF;border-radius:10px;padding:10px 12px;margin:10px 0}
+.ba-update p{font-size:14.5px!important;margin:4px 0 0!important}
+.ba-scale{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.5}
+.ba-scale li{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.ba-reclist{display:flex;flex-wrap:wrap;gap:6px}
+.ba-reclist button{border:1px solid rgba(20,24,15,.14);background:#fff;border-radius:99px;padding:6px 11px;font:500 13px var(--sans);color:#1B4332;cursor:pointer;text-align:left}
+.ba-ver{font-size:14px;margin:8px 0}
+.ba-ver span{color:#7a6a58;font-size:12.5px}
+.ba-ver ul{margin:4px 0 0;padding-left:18px;line-height:1.5}
+.ba-trans{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.ba-trans button{display:grid;grid-template-columns:1fr auto 1fr;gap:4px 8px;align-items:center;text-align:left;background:#fff;border:1px solid rgba(20,24,15,.1);border-radius:12px;padding:12px 14px;cursor:pointer;font:15px var(--sans);color:#1B4332}
+.ba-trans button i{font-style:normal;color:#C2611F;font-weight:700}
+.ba-trans button span{grid-column:1/-1;font-size:13px;color:#6b6b5a}
+.ba-trans button:hover{border-color:#1B4332}
+.ba-pill.ba-g-E i{background:#2F8F5B}.ba-pill.ba-g-V i{background:#5FA05A}.ba-pill.ba-g-P i{background:#D9A520}.ba-pill.ba-g-H i{background:#9A8F80}.ba-pill.ba-g-C i{background:#C8432B}.ba-pill.ba-g-T i{background:#C6A15B}

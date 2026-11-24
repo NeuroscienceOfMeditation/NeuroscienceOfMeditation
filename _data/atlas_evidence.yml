@@ -1,0 +1,371 @@
+# The Living Atlas: evidence records (brain-atlas.html, brain-atlas/atlas.js).
+#
+# Principle: the atlas learns from research rather than piling it up. A new study can
+# refine a record, add one, or challenge one, but nothing changes silently: every change
+# gets a dated line in that record's history, and the weekly research watch only ever
+# PROPOSES changes as a pull request for Aditi to review.
+#
+# Each record states what was actually studied, because a finding in ordinary breathing
+# is not a finding about meditation:
+#   condition: spontaneous_breathing | controlled_breathing | breath_attention |
+#              meditation | sleep | mechanical_ventilation
+#   timescale: state (during the practice, acute) | trait (lasting change, long-term)
+#   meditation: yes | partly | no   (was meditation itself studied?)
+# regions: ids from _data/brain_atlas.yml. not_on_map: reported areas the 3D map does not have.
+# grade: E established · V converging · P preliminary · H hypothesis requiring testing ·
+#        C contradictory or unresolved
+
+version: "4.0"
+updated: "2026-11-24"
+
+scale:
+  - { key: E, name: "Established", note: "Replicated across methods and groups; textbook physiology or anatomy." }
+  - { key: V, name: "Converging", note: "Several independent studies or a meta-analysis point the same way, with known gaps." }
+  - { key: P, name: "Preliminary", note: "One or a few small studies. Promising, not settled." }
+  - { key: H, name: "Hypothesis requiring testing", note: "Plausible, but not yet tested directly." }
+  - { key: C, name: "Contradictory or unresolved", note: "Studies disagree, or a larger study failed to confirm a smaller one." }
+
+conditions:
+  spontaneous_breathing: "Ordinary, automatic breathing"
+  controlled_breathing: "Breathing paced or shaped on purpose"
+  breath_attention: "Paying attention to the breath without changing it"
+  meditation: "Meditation practice"
+  sleep: "Sleep"
+  mechanical_ventilation: "Breathing driven by a ventilator"
+
+timescales:
+  state: "During the practice (a passing state)"
+  trait: "Lasting change (long-term)"
+
+refs:
+  tort2025:
+    label: "Tort, Laplagne, Draguhn & González 2025, Global coordination of brain activity by the breathing cycle (Nature Reviews Neuroscience)"
+    url: "https://doi.org/10.1038/s41583-025-00920-7"
+    date: "2025-04-09"
+  mowla2026:
+    label: "Mowla et al. 2026, human forebrain synchronisation and entrainment to breathing in wakefulness, sleep and mechanical ventilation, intracranial recordings in 9 people (Nature Communications)"
+    url: "https://doi.org/10.1038/s41467-026-73828-0"
+    date: "2026-05-28"
+  herrero2018:
+    label: "Herrero et al. 2018, Breathing above the brain stem: volitional control and attentional modulation in humans, intracranial recordings (Journal of Neurophysiology)"
+    url: "https://doi.org/10.1152/jn.00551.2017"
+    date: "2017-09-27"
+  zelano2016:
+    label: "Zelano et al. 2016, nasal breathing entrains rhythms in the human amygdala and hippocampus, 7 people with intracranial electrodes (Journal of Neuroscience)"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5148230"
+    date: "2016-12-07"
+  karjalainen2025:
+    label: "Karjalainen, Kujala & Parviainen 2025, neural activity is modulated by spontaneous and volitionally controlled breathing, MEG in 33 adults (Biological Psychology)"
+    url: "https://doi.org/10.1016/j.biopsycho.2025.109026"
+    date: "2025"
+  kluger2026:
+    label: "Kluger et al. 2026, Respiration as a dynamic modulator of sensory sampling, MEG (Nature Communications)"
+    url: "https://www.nature.com/articles/s41467-026-71604-8"
+    date: "2026"
+  baten2026:
+    label: "Baten, Keller, Miller & Sacchet 2026, whole-brain meta-analysis of meditation fMRI, 34 studies, 700 people (Neuroscience & Biobehavioral Reviews)"
+    url: "https://doi.org/10.1016/j.neubiorev.2026.106709"
+    date: "2026-07"
+  fox2016:
+    label: "Fox et al. 2016, meta-analysis of 78 brain-imaging studies of meditation (Neuroscience & Biobehavioral Reviews)"
+    url: "https://arxiv.org/abs/1603.06342"
+    date: "2016"
+  brewer2011:
+    label: "Brewer et al. 2011, default mode network in experienced meditators (PNAS)"
+    url: "https://doi.org/10.1073/pnas.1112029108"
+    date: "2011"
+  hasenkamp2012:
+    label: "Hasenkamp et al. 2012, mind wandering and noticing during breath meditation, 14 meditators (NeuroImage)"
+    url: "https://pesquisa.bvsalud.org/ses/resource/pt/mdl-21782031"
+    date: "2012"
+  farb2013:
+    label: "Farb et al. 2013, attention to the breath and the insula, before and after mindfulness training (Social Cognitive and Affective Neuroscience)"
+    url: "https://doi.org/10.1093/scan/nss066"
+    date: "2013"
+  smith1991:
+    label: "Smith et al. 1991, the preBötzinger complex in rats (Science)"
+    url: "https://doi.org/10.1126/science.1683005"
+    date: "1991"
+  schwarzacher2011:
+    label: "Schwarzacher et al. 2011, the preBötzinger complex in the human medulla (Brain)"
+    url: "https://doi.org/10.1093/brain/awq327"
+    date: "2011"
+  ansreview2025:
+    label: "Advanced and long-term meditation and the autonomic nervous system: a review and synthesis (preprint, OSF)"
+    url: "https://doi.org/10.31219/osf.io/sftdq"
+    date: "2025"
+  peng1999:
+    label: "Peng et al. 1999, heart-rate oscillations during two meditation techniques (International Journal of Cardiology); explore the data in our Meditation Lab"
+    url: "/meditation-lab.html"
+    date: "1999"
+  kral2022:
+    label: "Kral et al. 2022, two randomised trials of MBSR, 218 adults (Science Advances)"
+    url: "https://doi.org/10.1126/sciadv.abk3316"
+    date: "2022"
+  valk2017:
+    label: "Valk et al. 2017, the ReSource Project, over 300 adults (Science Advances)"
+    url: "https://doi.org/10.1126/sciadv.1700489"
+    date: "2017"
+  fox2014:
+    label: "Fox et al. 2014, meta-analysis of brain structure in meditators (Neuroscience & Biobehavioral Reviews)"
+    url: "https://pesquisa.bvsalud.org/portal/resource/en/mdl-24705269"
+    date: "2014"
+
+records:
+  - id: breath-rhythm-global
+    title: "Breathing is a rhythm that coordinates the brain"
+    claim: "Neural activity locks to the breathing cycle in many brain areas, not only those that control breathing or smell, and breathing modulates faster brain rhythms and communication between areas."
+    regions: [3, 4, 7, 9, 10]
+    condition: spontaneous_breathing
+    timescale: state
+    meditation: "no"
+    method: "Review of animal and human studies"
+    grade: V
+    refs: [tort2025, zelano2016, mowla2026]
+    open_question: "Does a meditative way of breathing strengthen or reorganise this coordination, and does that matter for experience?"
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added as a central theme of the atlas: breathing studied as a rhythm that coordinates the brain, not only as something the brain controls." }
+
+  - id: forebrain-locks-to-breath
+    title: "The insula, cingulate, body-sensing cortex and amygdala follow the breath"
+    claim: "In people with electrodes inside the brain, sites in the insula, somatosensory cortex, anterior cingulate and amygdala synchronised with breathing while awake. In sleep the synchrony shifted towards the amygdala and hippocampus. When a ventilator imposed the rhythm, brain activity followed it, which points to breathing driving the brain rather than only accompanying it."
+    regions: [3, 4, 7, 10, 9]
+    condition: spontaneous_breathing
+    timescale: state
+    meditation: "no"
+    method: "Intracranial EEG in 9 people with epilepsy; wakefulness, sleep and mechanical ventilation"
+    grade: V
+    refs: [mowla2026, herrero2018, zelano2016]
+    open_question: "Electrodes are placed for epilepsy care, so coverage is patchy. Does the same pattern hold across the whole brain, and in healthy people?"
+    history:
+      - { version: "3.0", date: "2026-11-05", change: "Represented only by Zelano 2016 (amygdala and hippocampus, nasal breathing), graded Preliminary, in the 'How a breath is made' tour." }
+      - { version: "4.0", date: "2026-11-24", change: "Mowla 2026 adds insula, cingulate and body-sensing cortex, sleep, and a causal test with a ventilator. Three independent intracranial studies now agree, so the grade rises from Preliminary to Converging." }
+
+  - id: attention-to-breath
+    title: "Attending to the breath changes which areas follow it"
+    claim: "When people paid attention to their automatic breathing, the coupling between breath and brain increased in the anterior cingulate, premotor cortex, insula and hippocampus."
+    regions: [4, 7, 3, 9]
+    condition: breath_attention
+    timescale: state
+    meditation: "partly"
+    method: "Intracranial EEG; tasks adapted from meditative practice"
+    grade: P
+    refs: [herrero2018, farb2013]
+    open_question: "Do trained meditators show a stronger or different shift, and does it track how well they stay with the breath?"
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added. This is the closest direct evidence for what breath-focused meditation does in the brain, but it comes from a task, not from trained meditators." }
+
+  - id: voluntary-breathing
+    title: "Breathing on purpose recruits a frontal network"
+    claim: "Pacing the breath on purpose increased breath–brain coupling in a fronto-temporal-insular network. In MEG, breathing phase modulated sensorimotor rhythms in both spontaneous and deep breathing, and deep breathing raised alpha power across a frontal and temporal network."
+    regions: [5, 7, 3]
+    condition: controlled_breathing
+    timescale: state
+    meditation: "no"
+    method: "Intracranial EEG; MEG in 33 adults"
+    grade: P
+    refs: [herrero2018, karjalainen2025]
+    open_question: "Pranayama techniques differ a lot in rate, depth and holds. Which features drive which brain changes?"
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added. Note: mood and arousal ratings did not differ between breathing styles in the MEG study, so a brain change is not automatically a felt change." }
+
+  - id: breath-phase-sampling
+    title: "The phase of the breath shapes how we take in the world"
+    claim: "In MEG, connectivity in a network of insula, anterior and posterior cingulate, temporo-parietal junction, motor and visual areas changed with the phase of breathing, as if the brain samples the senses differently across the breath."
+    regions: [3, 4, 2, 7, 8]
+    not_on_map: ["Temporo-parietal junction"]
+    condition: spontaneous_breathing
+    timescale: state
+    meditation: "no"
+    method: "MEG"
+    grade: P
+    refs: [kluger2026, tort2025]
+    open_question: "Does attending to the breath, as in meditation, change this timing?"
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added." }
+
+  - id: brainstem-rhythm
+    title: "The brainstem generates the automatic breath"
+    claim: "A small network in the medulla, the preBötzinger complex, generates the automatic breathing rhythm. Found in rats in 1991; a matching area has been identified in the human medulla."
+    regions: [15]
+    condition: spontaneous_breathing
+    timescale: state
+    meditation: "no"
+    method: "Animal physiology; human post-mortem anatomy"
+    grade: E
+    refs: [smith1991, schwarzacher2011]
+    open_question: "How do forebrain areas engaged in voluntary breathing hand control back to the brainstem?"
+    history:
+      - { version: "3.0", date: "2026-11-05", change: "Added with the brainstem." }
+
+  - id: meditation-shared-network
+    title: "What meditation practices share in the brain"
+    claim: "Pooling 34 fMRI studies (700 people), meditation compared with control conditions consistently engaged the left insula, left supplementary motor area, right hippocampus and parahippocampal gyrus, right rolandic operculum and right superior temporal gyrus. No area was consistently less active."
+    regions: [3, 7, 9]
+    not_on_map: ["Rolandic operculum", "Superior temporal gyrus", "Parahippocampal gyrus"]
+    condition: meditation
+    timescale: state
+    meditation: "yes"
+    method: "Whole-brain coordinate meta-analysis (MKDA)"
+    grade: V
+    refs: [baten2026, fox2016]
+    open_question: "Control tasks varied, experienced meditators may meditate during 'rest', and blocks averaged about six minutes, so deeper states may look different."
+    history:
+      - { version: "3.0", date: "2026-11-05", change: "Practice maps built from Fox 2016 (78 studies)." }
+      - { version: "4.0", date: "2026-11-24", change: "Baten 2026 adds a pre-registered whole-brain meta-analysis. The insula stands out as the most consistent region across practices." }
+
+  - id: practice-specific
+    title: "Different practices, partly different brains"
+    claim: "Focused attention engaged the insula, supplementary motor area, hippocampus and superior frontal gyrus, with the mid-cingulate less active. Open monitoring engaged the operculum and insula, middle temporal and inferior frontal gyri, with the thalamus less active. Mantra engaged the right putamen and insula. Loving-kindness was too inconsistent to pool."
+    regions: [3, 7, 9, 5, 4, 11, 12]
+    condition: meditation
+    timescale: state
+    meditation: "yes"
+    method: "Whole-brain coordinate meta-analysis, sub-analyses by practice"
+    grade: P
+    refs: [baten2026, fox2016]
+    open_question: "Open monitoring and mantra had only 8 studies each, below the 17 the authors consider adequate. Where Fox 2016 and Baten 2026 differ, which holds?"
+    history:
+      - { version: "3.0", date: "2026-11-05", change: "Fox 2016: focused attention engaged premotor cortex and dorsal anterior/mid cingulate, with posterior cingulate and inferior parietal less active." }
+      - { version: "4.0", date: "2026-11-24", change: "Baten 2026 disagrees on the cingulate: it found the mid-cingulate LESS active in focused attention. Both maps are kept, and the practice cards now say so. Grade stays Preliminary because the sub-analyses are small." }
+
+  - id: dmn-quieting
+    title: "Does meditation quiet the default mode network?"
+    claim: "Often stated as fact. Early small studies found less activity in default mode hubs (medial prefrontal and posterior cingulate) in experienced meditators, and a 2016 meta-analysis found posterior cingulate deactivation in focused attention. But the 2026 whole-brain meta-analysis of 34 studies found no consistent deactivation anywhere."
+    regions: [1, 2]
+    condition: meditation
+    timescale: state
+    meditation: "yes"
+    method: "fMRI studies and meta-analyses"
+    grade: C
+    refs: [brewer2011, fox2016, baten2026]
+    open_question: "Did the variety of control tasks hide a real deactivation, or was the earlier finding partly publication bias?"
+    history:
+      - { version: "1.0", date: "2026-11-05", change: "Shown as Preliminary for the medial prefrontal and posterior cingulate (Brewer 2011)." }
+      - { version: "4.0", date: "2026-11-24", change: "Downgraded to Contradictory or unresolved: the largest whole-brain meta-analysis so far found no consistent deactivation." }
+
+  - id: wander-notice-return
+    title: "Mind wandering, noticing, returning"
+    claim: "Around the moment meditators noticed their mind had wandered, default mode areas were most active during the wandering, salience areas (insula and anterior cingulate) at the moment of noticing, and executive areas while returning and staying."
+    regions: [1, 2, 3, 4, 5]
+    condition: meditation
+    timescale: state
+    meditation: "yes"
+    method: "fMRI, 14 meditators, button press on noticing"
+    grade: P
+    refs: [hasenkamp2012]
+    open_question: "Is the sequence the same in beginners and experts, and can it be seen in EEG outside a scanner?"
+    history:
+      - { version: "2.0", date: "2026-11-05", change: "Added as the guided tour 'One sitting, four moments'." }
+
+  - id: autonomic-not-simple
+    title: "Meditation is not simply 'parasympathetic'"
+    claim: "Studies of meditators report both branches of the autonomic nervous system active together ('relaxed alertness'), only one, or changes over time. The pattern depends on the style of meditation, the meditator's expertise and how it is measured. In our Meditation Lab, Kundalini practice raised average heart rate from about 61 to 92 beats a minute."
+    regions: [15, 3, 4]
+    condition: meditation
+    timescale: state
+    meditation: "yes"
+    method: "Review of physiological studies; open heart-rate data"
+    grade: P
+    refs: [ansreview2025, peng1999]
+    open_question: "Which features of a practice (breathing rate, effort, posture, attention) push the system which way?"
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added. The review is still a preprint, so the grade stays Preliminary until it is peer-reviewed." }
+
+  - id: state-vs-trait
+    title: "Passing states versus lasting change"
+    claim: "Brain changes during a session are one thing; lasting structural change is another. Cross-sectional studies find differences in long-term meditators, and a 9-month training programme reported module-specific thickening, but two randomised trials of an 8-week course (218 adults) found no structural change."
+    regions: [3, 9, 10, 5]
+    condition: meditation
+    timescale: trait
+    meditation: "yes"
+    method: "Structural MRI: cross-sectional studies, a 9-month training study, randomised trials"
+    grade: C
+    refs: [fox2014, valk2017, kral2022]
+    open_question: "Does lasting change need far more practice than 8 weeks, or were earlier positive results partly bias?"
+    history:
+      - { version: "1.0", date: "2026-11-05", change: "Shown on the overview as 'Contested'." }
+      - { version: "4.0", date: "2026-11-24", change: "Made its own record so that every finding in the atlas is marked as a state (during practice) or a trait (lasting)." }
+
+  - id: alternate-nostril
+    title: "Alternate nostril breathing and the brain"
+    claim: "Widely said to 'balance the hemispheres'. We have not yet found brain-imaging evidence for this that we can rely on, so the atlas does not draw a circuit for it."
+    regions: []
+    condition: controlled_breathing
+    timescale: state
+    meditation: "partly"
+    method: "Not yet reviewed in detail"
+    grade: H
+    refs: [tort2025]
+    open_question: "A testable version: does breathing through one nostril change breath–brain coupling on one side more than the other? Nasal airflow is known to drive limbic rhythms."
+    history:
+      - { version: "4.0", date: "2026-11-24", change: "Added as an open hypothesis. The research watch is told to look for studies on it." }
+
+# The deeper question: how does the nervous system move between modes during meditation?
+transitions:
+  - id: outward-inward
+    from: "Attention outward"
+    to: "Attention to the inside of the body"
+    summary: "Turning from the world to the sensations of the body and breath."
+    steps:
+      - { title: "Outward", text: "Attention on sights and sounds engages sensory and attention networks.", regions: [8, 7], view: left }
+      - { title: "Turning inward", text: "Attending to the breath increases breath–brain coupling in the cingulate, insula and premotor cortex.", regions: [4, 3], records: [attention-to-breath], view: right }
+      - { title: "Inside", text: "The insula, which maps the inside of the body, is the most consistent region across meditation practices.", regions: [3], records: [meditation-shared-network], view: right }
+    unknown: "Whether trained meditators make this shift faster or more completely."
+  - id: automatic-voluntary
+    from: "Automatic breathing"
+    to: "Breathing on purpose"
+    summary: "From the brainstem's rhythm to deliberate control, as in pranayama."
+    steps:
+      - { title: "Automatic", text: "The brainstem generates each breath without you.", regions: [15], records: [brainstem-rhythm], view: front, glass: 0.3 }
+      - { title: "Taking over", text: "Pacing the breath recruits frontal, motor and insular areas.", regions: [5, 7, 3], records: [voluntary-breathing], view: right }
+    unknown: "How control hands back to the brainstem when you stop, and how different pranayama techniques differ."
+  - id: wander-monitor
+    from: "Mind wandering"
+    to: "Monitoring attention"
+    summary: "Drifting off, noticing, returning: the basic repetition of meditation."
+    steps:
+      - { title: "Wandering", text: "Default mode hubs are most active.", regions: [1, 2], records: [wander-notice-return, dmn-quieting], view: inside }
+      - { title: "Noticing", text: "Salience areas mark the moment you realise.", regions: [3, 4], records: [wander-notice-return], view: right }
+      - { title: "Returning", text: "Executive areas steer attention back and hold it.", regions: [5], records: [wander-notice-return], view: front }
+    unknown: "Whether 'meditation quiets the default mode network' holds up: the largest meta-analysis did not find it."
+  - id: breath-brain
+    from: "Changing the breath"
+    to: "Changing brain rhythms"
+    summary: "Breathing as a rhythm that organises the brain, not only something it controls."
+    steps:
+      - { title: "The rhythm spreads", text: "Activity across many areas locks to the breathing cycle.", regions: [3, 4, 7, 10, 9], records: [breath-rhythm-global, forebrain-locks-to-breath], view: right, glass: 0.4 }
+      - { title: "Timing the senses", text: "The phase of the breath changes how areas communicate, as if the brain samples the world in time with breathing.", regions: [3, 4, 2, 7, 8], records: [breath-phase-sampling], view: left }
+      - { title: "Slower, deeper", text: "Deliberate deep breathing shifts alpha rhythms across frontal and temporal areas.", regions: [5, 7], records: [voluntary-breathing], view: right }
+    unknown: "Whether these breath-driven rhythms explain any of what meditators feel. This is the frontier."
+  - id: state-trait
+    from: "A passing state"
+    to: "A lasting change"
+    summary: "What happens during a session is not the same as what changes over months."
+    steps:
+      - { title: "During a session", text: "Practices engage the insula, motor and memory areas while you meditate.", regions: [3, 7, 9], records: [meditation-shared-network], view: right }
+      - { title: "Over months", text: "Lasting structural change is contested: some studies find it, the largest trials of an 8-week course did not.", regions: [3, 9, 10], records: [state-vs-trait], view: right, glass: 0.4 }
+    unknown: "How much practice, of what kind, is needed before a state becomes a trait."
+
+changelog:
+  - version: "4.0"
+    date: "2026-11-24"
+    changes:
+      - "Became a living atlas: evidence records with sources, dates, what was studied (ordinary breathing, controlled breathing, attention to breath or meditation) and whether a finding is a passing state or a lasting change."
+      - "New five-level scale: Established, Converging, Preliminary, Hypothesis, Contradictory or unresolved."
+      - "New central theme: breathing as a rhythm that coordinates the brain (Tort 2025, Mowla 2026, Kluger 2026, Karjalainen 2025, Herrero 2018)."
+      - "New Transitions view: five shifts between modes of the nervous system."
+      - "Added the 2026 whole-brain meta-analysis (Baten et al.). 'Meditation quiets the default mode network' moved to Contradictory or unresolved."
+      - "A weekly research watch now proposes updates for review; nothing changes without approval."
+  - version: "3.1"
+    date: "2026-11-09"
+    changes: ["Training programmes (ReSource, empathy and compassion training, mindfulness and pain) and graded popular claims (Yoga Nidra, Om, jhāna, gamma waves)."]
+  - version: "3.0"
+    date: "2026-11-05"
+    changes: ["Brainstem and cerebellum, practice maps (Fox 2016), the breathing tour."]
+  - version: "2.0"
+    date: "2026-11-05"
+    changes: ["Deep structures, glass and slicing, the 'One sitting' tour."]
+  - version: "1.0"
+    date: "2026-11-05"
+    changes: ["First 3D atlas: eight cortical regions, graded claims."]
