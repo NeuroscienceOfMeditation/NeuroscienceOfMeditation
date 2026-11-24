@@ -4,7 +4,7 @@ description: "Three weeks ago I wrote that the Svarodaya's mirror test had never
 date: 2026-11-23 23:44:03 +0530
 pillar: Claim check
 cover: ripple
-image: /img/og-seven-things-to-measure.jpg
+image: /img/og-nobody-had-tested-the-mirror.jpg
 sources: 7
 takeaway: "The mirror test is a real clinical instrument and it repeats itself well. It just does not agree with how your nose feels, and it does not agree with a flow meter either — which means I was wrong to offer it as the thing that settles the argument."
 permalink: /nobody-had-tested-the-mirror.html
