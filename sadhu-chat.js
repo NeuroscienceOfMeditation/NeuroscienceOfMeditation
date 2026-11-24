@@ -271,13 +271,24 @@
       ['Morning reminder', reminder],
       ['What everyone’s breath shows', recordStory],
       ['The latest research, live', research],
-      ['Learn meditation instead', function () { tantraMenu('Meditation, from the Vijñāna Bhairava. Where shall we start?'); }]
+      ['Measure my practice (heart rate)', measurePractice],
+      ['Vijñāna Bhairava Tantra instead', function () { tantraMenu('The Vijñāna Bhairava Tantra, then. Where shall we start?'); }]
     ]);
   }
   function more() {
     ask([
       ['Check my breath', checkBreath], ['Lessons', function () { lesson(mem.lesson && mem.lesson < LESSONS.length ? mem.lesson : 0); }],
       ['Tattva', tattva], ['A practice', practiceMenu], ['Ask the text', askPrompt]
+    ]);
+  }
+  /* Measure your practice lives on its own page, as part of Mind Your Breath */
+  function measurePractice() {
+    count('measure_practice');
+    say('Your heart answers your breath. Breathe out slowly and it slows down; a ring, a watch or a chest strap can see this as heart-rate variability.');
+    say('I have a page on what those numbers can and cannot tell you, with a tool to look at your own heartbeat data and a six-week self-experiment. Shall I take you there?');
+    ask([
+      ['Yes, take me there', function () { location.href = '/measure-your-practice.html'; }, true],
+      ['Not now', function () { menu('Where shall we go?'); }]
     ]);
   }
 
@@ -287,8 +298,8 @@
   function choosePath(prompt) {
     say(prompt || 'What would you like to learn today?');
     ask([
-      ['Yoga', function () { remember('path', 'breath'); menu('Yoga, then: the breath, as the Shiva Svarodaya teaches it. What would you like to do?'); }, mem.path !== 'tantra'],
-      ['Meditation', function () { tantraMenu(mem.vbtSeen && mem.vbtSeen.length ? 'Welcome back to the Vijñāna Bhairava. Where shall we go?' : 'Meditation, from the Vijñāna Bhairava. The goddess asks what reality is, and Bhairava answers not with an idea but with 112 ways to look. Where shall we start?'); }, mem.path === 'tantra']
+      ['Breath', function () { remember('path', 'breath'); menu('The breath, then, as the Shiva Svarodaya teaches it. What would you like to do?'); }, mem.path !== 'tantra'],
+      ['Vijñāna Bhairava Tantra', function () { tantraMenu(mem.vbtSeen && mem.vbtSeen.length ? 'Welcome back to the Vijñāna Bhairava Tantra. Where shall we go?' : 'The Vijñāna Bhairava Tantra. The goddess asks what reality is, and Bhairava answers not with an idea but with 112 ways to look. Where shall we start?'); }, mem.path === 'tantra']
     ]);
   }
   function vRefs(keys) { return (keys || []).map(function (k) { return VBT.refs[k]; }).filter(Boolean); }
@@ -310,7 +321,7 @@
       ['What is this text?', tIntro],
       ['What does science say about it?', tResearch],
       ['Read all of it, verse by verse', function () { say('I have opened the whole text below our conversation, door by door.'); enqueue(function () { openFull('#vbt-all'); }); tantraMore(); }],
-      ['Learn yoga instead', function () { remember('path', 'breath'); menu('Yoga, then: the breath. What would you like to do?'); }]
+      ['Breath instead', function () { remember('path', 'breath'); menu('The breath, then. What would you like to do?'); }]
     ]);
   }
   function tantraMore() {
@@ -1118,7 +1129,7 @@
       remember('met', 1);
       say('Namaste. I am ' + NAME + '.', { mood: 'smile' });
       if (tl) say(tl);
-      say('I teach two things. Yoga of the breath, from the Shiva Svarodaya: which nostril is flowing, and what that might mean. And meditation: the 112 practices of the Vijñāna Bhairava.');
+      say('I teach two things. The breath, from the Shiva Svarodaya: which nostril is flowing, and what that might mean. And the Vijñāna Bhairava Tantra: its 112 ways of meditating.');
       say('With each, I give you the verse, and an honest word on what science says.');
       askName(function () { choosePath('What would you like to learn today' + (mem.name ? ', ' + mem.name : '') + '?'); });
     }
