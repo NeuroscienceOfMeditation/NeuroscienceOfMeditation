@@ -973,8 +973,48 @@
         '<span class="sv-vh">' + esc(label) + '</span>' +
         '<span class="sv-dow" aria-hidden="true">' + DOW[x.date.getDay()].charAt(0) + '</span></li>';
     }).join('');
+    var cmp = $('[data-mornings-compare]', box);
+    if (cmp) cmp.innerHTML = compareWithLab(entries);
     var clear = $('[data-log-clear]', box);
     if (clear) clear.hidden = !entries.length;
+  }
+
+  // Set the person's own same-day checks next to the best 24-hour recording,
+  // Kahana-Zweig et al. 2016 (PLoS ONE, n = 33): while awake, one side stayed
+  // dominant for 2.02 ± 1.7 h on average, from 15 min to 10.35 h. That figure
+  // is the time between switches, so compare it with the gap between checks.
+  // Spot checks can't measure a rhythm; they can only show whether switches
+  // happen on roughly that timescale.
+  var LAB_REF = '<a href="https://doi.org/10.1371/journal.pone.0162918" target="_blank" rel="noopener">Kahana-Zweig 2016</a>';
+  function fmtGap(min) {
+    var h = Math.floor(min / 60), m = Math.round(min % 60);
+    return h ? h + ' h' + (m ? ' ' + m + ' min' : '') : m + ' min';
+  }
+  function compareWithLab(entries) {
+    var lab = 'In a 24-hour lab recording of 33 people (' + LAB_REF + '), one side ' +
+      'stayed open for about <b>2 hours</b> on average while awake, but anywhere from ' +
+      '15 minutes (the shortest the study counted) to over 10 hours. ' +
+      '<a href="/is-the-nasal-cycle-even-a-cycle.html">More on that study</a>.';
+    var sorted = entries.map(function (e) { return { d: new Date(e.t), obs: e.obs }; })
+      .filter(function (x) { return !isNaN(x.d); })
+      .sort(function (a, b) { return a.d - b.d; });
+    var changed = [], same = [];
+    for (var i = 1; i < sorted.length; i++) {
+      var a = sorted[i - 1], b = sorted[i];
+      var gap = (b.d - a.d) / 60000;
+      if (dayKey(a.d) !== dayKey(b.d) || gap < 15 || gap > 12 * 60) continue;
+      (a.obs === b.obs ? same : changed).push(gap);
+    }
+    var n = changed.length + same.length;
+    if (!n) return 'Check twice on the same day, at least 15 minutes apart, to see how your ' +
+      'switches compare with the lab. ' + lab;
+    var out = 'Of your ' + n + ' pair' + (n > 1 ? 's' : '') + ' of same-day checks, the open side had ' +
+      '<b>changed in ' + changed.length + '</b>.';
+    if (changed.length) out += ' Shortest gap with a change: ' + fmtGap(Math.min.apply(null, changed)) + '.';
+    if (same.length) out += ' Longest gap with no change: ' + fmtGap(Math.max.apply(null, same)) +
+      ' (it may have switched and switched back in between).';
+    return out + ' ' + lab + ' Spot checks can’t measure your exact rhythm, only whether yours ' +
+      'sits in that range.';
   }
 
   if ($('[data-log-clear]')) $('[data-log-clear]').addEventListener('click', function () {
