@@ -15,8 +15,8 @@
 # grade: E established · V converging · P preliminary · H hypothesis requiring testing ·
 #        C contradictory or unresolved
 
-version: "4.0"
-updated: "2026-11-24"
+version: "4.1"
+updated: "2026-11-28"
 
 scale:
   - { key: E, name: "Established", note: "Replicated across methods and groups; textbook physiology or anatomy." }
@@ -110,6 +110,10 @@ refs:
     label: "Fox et al. 2014, meta-analysis of brain structure in meditators (Neuroscience & Biobehavioral Reviews)"
     url: "https://pesquisa.bvsalud.org/portal/resource/en/mdl-24705269"
     date: "2014"
+  hathaway2026:
+    label: "Hathaway & Coleman 2026, Respiratory phase orchestrates human olfactory cortical dynamics, scalp EEG in 17 healthy adults during natural breathing (PNAS)"
+    url: "https://doi.org/10.1073/pnas.2619920123"
+    date: "2026-11-06"
 
 records:
   - id: breath-rhythm-global
@@ -171,18 +175,19 @@ records:
 
   - id: breath-phase-sampling
     title: "The phase of the breath shapes how we take in the world"
-    claim: "In MEG, connectivity in a network of insula, anterior and posterior cingulate, temporo-parietal junction, motor and visual areas changed with the phase of breathing, as if the brain samples the senses differently across the breath."
+    claim: "In MEG, connectivity in a network of insula, anterior and posterior cingulate, temporo-parietal junction, motor and visual areas changed with the phase of breathing, as if the brain samples the senses differently across the breath. In scalp EEG, brain responses to smells were better described by where they fell in the breathing cycle than by clock time, with theta rising during inhalation and alpha–beta falling during exhalation."
     regions: [3, 4, 2, 7, 8]
     not_on_map: ["Temporo-parietal junction"]
     condition: spontaneous_breathing
     timescale: state
     meditation: "no"
-    method: "MEG"
+    method: "MEG; scalp EEG in 17 adults with odours timed to the breath"
     grade: P
-    refs: [kluger2026, tort2025]
+    refs: [kluger2026, hathaway2026, tort2025]
     open_question: "Does attending to the breath, as in meditation, change this timing?"
     history:
       - { version: "4.0", date: "2026-11-24", change: "Added." }
+      - { version: "4.1", date: "2026-11-28", change: "Added Hathaway & Coleman 2026 (PNAS): a second, independent method (scalp EEG, 17 people, ordinary breathing) showing sensory responses organised by breathing phase. Small sample and smell only, no meditation, so the grade stays Preliminary." }
 
   - id: brainstem-rhythm
     title: "The brainstem generates the automatic breath"
@@ -348,6 +353,10 @@ transitions:
     unknown: "How much practice, of what kind, is needed before a state becomes a trait."
 
 changelog:
+  - version: "4.1"
+    date: "2026-11-28"
+    changes:
+      - "Research watch: added Hathaway & Coleman 2026 (PNAS) to 'The phase of the breath shapes how we take in the world'. No grade changes."
   - version: "4.0"
     date: "2026-11-24"
     changes:
